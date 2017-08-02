@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pjmike.lundao.mapper.DebatetopicMapper" >
+  <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Debatetopicextend" >
+    <id column="topicId" property="topicid" jdbcType="INTEGER" />
+    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+    <result column="view" property="view" jdbcType="INTEGER" />
+    <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="attention" property="attention" jdbcType="INTEGER" />
+    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="thesis" property="thesis" jdbcType="INTEGER" />
+    <result column="debatelist" property="debatelist" jdbcType="INTEGER" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+    
+    <!-- 实现一对多查询，查询出一个辩题及该辩题下的所有论点 -->
+    <collection property="thesisList" ofType="com.pjmike.lundao.po.Thesis">
+	    	<id column="thesisId" property="thesisid" jdbcType="INTEGER" />
+	    <result column="description" property="description" jdbcType="VARCHAR" />
+	    <result column="view" property="view" jdbcType="INTEGER" />
+	    <result column="like" property="like" jdbcType="INTEGER" />
+	    <result column="attention" property="attention" jdbcType="INTEGER" />
+	    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+	    <result column="ask" property="ask" jdbcType="INTEGER" />
+	    <result column="question" property="question" jdbcType="INTEGER" />
+	    <result column="asklist" property="asklist" jdbcType="INTEGER" />
+	    <result column="questionlist" property="questionlist" jdbcType="INTEGER" />
+	    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+	    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+	    <result column="complete" property="complete" jdbcType="INTEGER" />
+	    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
+	    
+    </collection>
+    
+    
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Debatetopicextend" extends="BaseResultMap" >
+  
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  
+  <resultMap id="BaseResultMap1" type="com.pjmike.lundao.po.Debatetopic" >
+    <id column="topicId" property="topicid" jdbcType="INTEGER" />
+    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+    <result column="view" property="view" jdbcType="INTEGER" />
+    <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="attention" property="attention" jdbcType="INTEGER" />
+    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="thesis" property="thesis" jdbcType="INTEGER" />
+    <result column="debatelist" property="debatelist" jdbcType="INTEGER" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+    
+  </resultMap>
+   <resultMap id="ResultMapWithBLOBs1" type="com.pjmike.lundao.po.Debatetopic" extends="BaseResultMap1" >
+  
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  
+  <sql id="Base_Column_List" >
+    topicId, describtion, view, like, attention, dislike, clickcount, username, thesis, 
+    debatelist, publishTime, label, contentTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pjmike.lundao.po.DebatetopicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from debateTopic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.DebatetopicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from debateTopic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  
+  <!-- 根据id查询辩题 -->
+  <select id="selectByPrimaryKey" resultType="com.pjmike.lundao.po.Debatetopic" parameterType="java.lang.Integer" >
+    select * from debateTopic where topicId = #{topicid,jdbcType=INTEGER}
+  </select>
+  
+ <!--  查询全部辩题不带论点 -->
+  <select id="selectListby" resultMap="ResultMapWithBLOBs1" >
+    select * from debateTopic 
+  </select>
+  
+  <!-- 查询辩题数据 -->
+  <select id="selectList" resultMap="ResultMapWithBLOBs">
+  	select * from debateTopic d,thesis t where d.topicId = t.debateId or 1=1
+  </select>  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from debateTopic
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </delete>
+  
+  <delete id="deleteByExample" parameterType="com.pjmike.lundao.po.DebatetopicExample" >
+    delete from debateTopic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pjmike.lundao.po.Debatetopic" >
+    insert into debateTopic (topicId, describtion, view, 
+      like, attention, dislike, 
+      clickcount, username, thesis, 
+      debatelist, publishTime, label, 
+      contentTime, content)
+    values (#{topicid,jdbcType=INTEGER}, #{describtion,jdbcType=VARCHAR}, #{view,jdbcType=INTEGER}, 
+      #{like,jdbcType=INTEGER}, #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, 
+      #{clickcount,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{thesis,jdbcType=INTEGER}, 
+      #{debatelist,jdbcType=INTEGER}, #{publishtime,jdbcType=TIMESTAMP}, #{label,jdbcType=VARCHAR}, 
+      #{contenttime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Debatetopic" >
+    insert into debateTopic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicid != null" >
+        topicId,
+      </if>
+      <if test="describtion != null" >
+        describtion,
+      </if>
+      <if test="view != null" >
+        view,
+      </if>
+      <if test="like != null" >
+        like,
+      </if>
+      <if test="attention != null" >
+        attention,
+      </if>
+      <if test="dislike != null" >
+        dislike,
+      </if>
+      <if test="clickcount != null" >
+        clickcount,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="thesis != null" >
+        thesis,
+      </if>
+      <if test="debatelist != null" >
+        debatelist,
+      </if>
+      <if test="publishtime != null" >
+        publishTime,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+      <if test="contenttime != null" >
+        contentTime,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicid != null" >
+        #{topicid,jdbcType=INTEGER},
+      </if>
+      <if test="describtion != null" >
+        #{describtion,jdbcType=VARCHAR},
+      </if>
+      <if test="view != null" >
+        #{view,jdbcType=INTEGER},
+      </if>
+      <if test="like != null" >
+        #{like,jdbcType=INTEGER},
+      </if>
+      <if test="attention != null" >
+        #{attention,jdbcType=INTEGER},
+      </if>
+      <if test="dislike != null" >
+        #{dislike,jdbcType=INTEGER},
+      </if>
+      <if test="clickcount != null" >
+        #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="thesis != null" >
+        #{thesis,jdbcType=INTEGER},
+      </if>
+      <if test="debatelist != null" >
+        #{debatelist,jdbcType=INTEGER},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttime != null" >
+        #{contenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pjmike.lundao.po.DebatetopicExample" resultType="java.lang.Integer" >
+    select count(*) from debateTopic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update debateTopic
+    <set >
+      <if test="record.topicid != null" >
+        topicId = #{record.topicid,jdbcType=INTEGER},
+      </if>
+      <if test="record.describtion != null" >
+        describtion = #{record.describtion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.view != null" >
+        view = #{record.view,jdbcType=INTEGER},
+      </if>
+      <if test="record.like != null" >
+        like = #{record.like,jdbcType=INTEGER},
+      </if>
+      <if test="record.attention != null" >
+        attention = #{record.attention,jdbcType=INTEGER},
+      </if>
+      <if test="record.dislike != null" >
+        dislike = #{record.dislike,jdbcType=INTEGER},
+      </if>
+      <if test="record.clickcount != null" >
+        clickcount = #{record.clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thesis != null" >
+        thesis = #{record.thesis,jdbcType=INTEGER},
+      </if>
+      <if test="record.debatelist != null" >
+        debatelist = #{record.debatelist,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishtime != null" >
+        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.label != null" >
+        label = #{record.label,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contenttime != null" >
+        contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update debateTopic
+    set topicId = #{record.topicid,jdbcType=INTEGER},
+      describtion = #{record.describtion,jdbcType=VARCHAR},
+      view = #{record.view,jdbcType=INTEGER},
+      like = #{record.like,jdbcType=INTEGER},
+      attention = #{record.attention,jdbcType=INTEGER},
+      dislike = #{record.dislike,jdbcType=INTEGER},
+      clickcount = #{record.clickcount,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      thesis = #{record.thesis,jdbcType=INTEGER},
+      debatelist = #{record.debatelist,jdbcType=INTEGER},
+      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      label = #{record.label,jdbcType=VARCHAR},
+      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update debateTopic
+    set topicId = #{record.topicid,jdbcType=INTEGER},
+      describtion = #{record.describtion,jdbcType=VARCHAR},
+      view = #{record.view,jdbcType=INTEGER},
+      like = #{record.like,jdbcType=INTEGER},
+      attention = #{record.attention,jdbcType=INTEGER},
+      dislike = #{record.dislike,jdbcType=INTEGER},
+      clickcount = #{record.clickcount,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      thesis = #{record.thesis,jdbcType=INTEGER},
+      debatelist = #{record.debatelist,jdbcType=INTEGER},
+      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      label = #{record.label,jdbcType=VARCHAR},
+      contentTime = #{record.contenttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Debatetopic" >
+    update debateTopic
+    <set >
+      <if test="describtion != null" >
+        describtion = #{describtion,jdbcType=VARCHAR},
+      </if>
+      <if test="view != null" >
+        view = #{view,jdbcType=INTEGER},
+      </if>
+      <if test="like != null" >
+        like = #{like,jdbcType=INTEGER},
+      </if>
+      <if test="attention != null" >
+        attention = #{attention,jdbcType=INTEGER},
+      </if>
+      <if test="dislike != null" >
+        dislike = #{dislike,jdbcType=INTEGER},
+      </if>
+      <if test="clickcount != null" >
+        clickcount = #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="thesis != null" >
+        thesis = #{thesis,jdbcType=INTEGER},
+      </if>
+      <if test="debatelist != null" >
+        debatelist = #{debatelist,jdbcType=INTEGER},
+      </if>
+      <if test="publishtime != null" >
+        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="label != null" >
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="contenttime != null" >
+        contentTime = #{contenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where topicId = #{topicid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithLike" parameterType="com.pjmike.lundao.po.Debatetopic" >
+    update debateTopic set like =#{like} where topicId = #{topicid}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Debatetopic" >
+    update debateTopic set attention =#{attention} where topicId =#{topicid}
+  </update>
+</mapper>

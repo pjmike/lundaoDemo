@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pjmike.lundao.mapper.UserMapper2">
+	<select id="findUserBymobile" parameterType="String" resultType="com.pjmike.lundao.po.User">
+		select * from user where mobile =#{mobile}
+	</select>
+	<select id="findUserById" parameterType="int" resultType="com.pjmike.lundao.po.User">
+		select * from user where id =#{id}
+	</select>
+	<insert id="addUser" parameterType="com.pjmike.lundao.po.User">
+		insert into user(mobile,password) values(#{mobile},#{password})
+	</insert>
+	<update id="updateUserById" parameterType="com.pjmike.lundao.po.User">
+		update user set mobile=#{mobile},gender=#{gender},experience=#{experience},
+						educations=#{educations},locations=#{locations},nickname=#{nickname},birthday=#{birthday} where id =#{id}
+	</update>
+</mapper>
