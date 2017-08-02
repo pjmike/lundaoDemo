@@ -2,10 +2,10 @@ package com.pjmike.lundao.po;
 
 import java.util.Date;
 
-public class Reply {
-    private Integer replyid;
+public class Replyquestion {
+    private Integer replyquesid;
 
-    private Integer thesisid;
+    private Integer questionid;
 
     private Integer view;
 
@@ -29,20 +29,20 @@ public class Reply {
 
     private String describtion;
 
-    public Integer getReplyid() {
-        return replyid;
+    public Integer getReplyquesid() {
+        return replyquesid;
     }
 
-    public void setReplyid(Integer replyid) {
-        this.replyid = replyid;
+    public void setReplyquesid(Integer replyquesid) {
+        this.replyquesid = replyquesid;
     }
 
-    public Integer getThesisid() {
-        return thesisid;
+    public Integer getQuestionid() {
+        return questionid;
     }
 
-    public void setThesisid(Integer thesisid) {
-        this.thesisid = thesisid;
+    public void setQuestionid(Integer questionid) {
+        this.questionid = questionid;
     }
 
     public Integer getView() {

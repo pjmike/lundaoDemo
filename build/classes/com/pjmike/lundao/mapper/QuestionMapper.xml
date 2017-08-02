@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pjmike.lundao.mapper.ReplyMapper" >
-  <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Reply" >
-    <id column="replyId" property="replyid" jdbcType="INTEGER" />
-    <result column="thesisId" property="thesisid" jdbcType="INTEGER" />
+<mapper namespace="com.pjmike.lundao.mapper.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Question" >
+    <id column="questionId" property="questionid" jdbcType="INTEGER" />
+    <result column="debateId" property="debateid" jdbcType="INTEGER" />
+    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="view" property="view" jdbcType="INTEGER" />
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="attention" property="attention" jdbcType="INTEGER" />
     <result column="dislike" property="dislike" jdbcType="INTEGER" />
     <result column="reply" property="reply" jdbcType="INTEGER" />
     <result column="replylist" property="replylist" jdbcType="INTEGER" />
+    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
     <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-    <result column="floor" property="floor" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Reply" extends="BaseResultMap" >
-    <result column="describtion" property="describtion" jdbcType="LONGVARCHAR" />
+    <result column="condition" property="condition" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,21 +77,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    replyId, thesisId, view, like, attention, dislike, reply, replylist, username, debatelist, 
-    publishTime, contentTime, floor
+    questionId, debateId, describtion, content, view, like, attention, dislike, reply, 
+    replylist, clickcount, username, publishTime, contentTime, condition
   </sql>
-  <sql id="Blob_Column_List" >
-    describtion
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pjmike.lundao.po.ReplyExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.QuestionExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from reply
+    from question
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -99,64 +94,50 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.ReplyExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from reply
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-<!--   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from reply
-    where replyId = #{replyid,jdbcType=INTEGER}
-  </select> -->
-  
-  <!-- 按论点的id查询该论点下的所有回复 -->
-  <select id="selectByPrimaryKey" parameterType="int" resultMap="ResultMapWithBLOBs">
-  	select * from reply where thesisId = #{value}
+    from question
+    where questionId = #{questionid,jdbcType=INTEGER}
   </select>
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from reply
-    where replyId = #{replyid,jdbcType=INTEGER}
+    delete from question
+    where questionId = #{questionid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.pjmike.lundao.po.ReplyExample" >
-    delete from reply
+  <delete id="deleteByExample" parameterType="com.pjmike.lundao.po.QuestionExample" >
+    delete from question
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pjmike.lundao.po.Reply" >
-    insert into reply (replyId, thesisId, view, 
-      like, attention, dislike, 
-      reply, replylist, username, 
-      debatelist, publishTime, contentTime, 
-      floor, describtion)
-    values (#{replyid,jdbcType=INTEGER}, #{thesisid,jdbcType=INTEGER}, #{view,jdbcType=INTEGER}, 
-      #{like,jdbcType=INTEGER}, #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, 
-      #{reply,jdbcType=INTEGER}, #{replylist,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{debatelist,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}, 
-      #{floor,jdbcType=INTEGER}, #{describtion,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.pjmike.lundao.po.Question" >
+    insert into question (questionId, debateId, describtion, 
+      content, view, like, 
+      attention, dislike, reply, 
+      replylist, clickcount, username, 
+      publishTime, contentTime, condition
+      )
+    values (#{questionid,jdbcType=INTEGER}, #{debateid,jdbcType=INTEGER}, #{describtion,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{view,jdbcType=INTEGER}, #{like,jdbcType=INTEGER}, 
+      #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, #{reply,jdbcType=INTEGER}, 
+      #{replylist,jdbcType=INTEGER}, #{clickcount,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}, #{condition,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Reply" >
-    insert into reply
+  <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Question" >
+    insert into question
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="replyid != null" >
-        replyId,
+      <if test="questionid != null" >
+        questionId,
       </if>
-      <if test="thesisid != null" >
-        thesisId,
+      <if test="debateid != null" >
+        debateId,
+      </if>
+      <if test="describtion != null" >
+        describtion,
+      </if>
+      <if test="content != null" >
+        content,
       </if>
       <if test="view != null" >
         view,
@@ -176,11 +157,11 @@
       <if test="replylist != null" >
         replylist,
       </if>
+      <if test="clickcount != null" >
+        clickcount,
+      </if>
       <if test="username != null" >
         username,
-      </if>
-      <if test="debatelist != null" >
-        debatelist,
       </if>
       <if test="publishtime != null" >
         publishTime,
@@ -188,19 +169,22 @@
       <if test="contenttime != null" >
         contentTime,
       </if>
-      <if test="floor != null" >
-        floor,
-      </if>
-      <if test="describtion != null" >
-        describtion,
+      <if test="condition != null" >
+        condition,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="replyid != null" >
-        #{replyid,jdbcType=INTEGER},
+      <if test="questionid != null" >
+        #{questionid,jdbcType=INTEGER},
       </if>
-      <if test="thesisid != null" >
-        #{thesisid,jdbcType=INTEGER},
+      <if test="debateid != null" >
+        #{debateid,jdbcType=INTEGER},
+      </if>
+      <if test="describtion != null" >
+        #{describtion,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
       </if>
       <if test="view != null" >
         #{view,jdbcType=INTEGER},
@@ -220,11 +204,11 @@
       <if test="replylist != null" >
         #{replylist,jdbcType=INTEGER},
       </if>
+      <if test="clickcount != null" >
+        #{clickcount,jdbcType=INTEGER},
+      </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="debatelist != null" >
-        #{debatelist,jdbcType=VARCHAR},
       </if>
       <if test="publishtime != null" >
         #{publishtime,jdbcType=TIMESTAMP},
@@ -232,28 +216,31 @@
       <if test="contenttime != null" >
         #{contenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="floor != null" >
-        #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="describtion != null" >
-        #{describtion,jdbcType=LONGVARCHAR},
+      <if test="condition != null" >
+        #{condition,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pjmike.lundao.po.ReplyExample" resultType="java.lang.Integer" >
-    select count(*) from reply
+  <select id="countByExample" parameterType="com.pjmike.lundao.po.QuestionExample" resultType="java.lang.Integer" >
+    select count(*) from question
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update reply
+    update question
     <set >
-      <if test="record.replyid != null" >
-        replyId = #{record.replyid,jdbcType=INTEGER},
+      <if test="record.questionid != null" >
+        questionId = #{record.questionid,jdbcType=INTEGER},
       </if>
-      <if test="record.thesisid != null" >
-        thesisId = #{record.thesisid,jdbcType=INTEGER},
+      <if test="record.debateid != null" >
+        debateId = #{record.debateid,jdbcType=INTEGER},
+      </if>
+      <if test="record.describtion != null" >
+        describtion = #{record.describtion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
       <if test="record.view != null" >
         view = #{record.view,jdbcType=INTEGER},
@@ -273,11 +260,11 @@
       <if test="record.replylist != null" >
         replylist = #{record.replylist,jdbcType=INTEGER},
       </if>
+      <if test="record.clickcount != null" >
+        clickcount = #{record.clickcount,jdbcType=INTEGER},
+      </if>
       <if test="record.username != null" >
         username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.debatelist != null" >
-        debatelist = #{record.debatelist,jdbcType=VARCHAR},
       </if>
       <if test="record.publishtime != null" >
         publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
@@ -285,61 +272,46 @@
       <if test="record.contenttime != null" >
         contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.floor != null" >
-        floor = #{record.floor,jdbcType=INTEGER},
-      </if>
-      <if test="record.describtion != null" >
-        describtion = #{record.describtion,jdbcType=LONGVARCHAR},
+      <if test="record.condition != null" >
+        condition = #{record.condition,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update reply
-    set replyId = #{record.replyid,jdbcType=INTEGER},
-      thesisId = #{record.thesisid,jdbcType=INTEGER},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      reply = #{record.reply,jdbcType=INTEGER},
-      replylist = #{record.replylist,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      debatelist = #{record.debatelist,jdbcType=VARCHAR},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      floor = #{record.floor,jdbcType=INTEGER},
-      describtion = #{record.describtion,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByExample" parameterType="map" >
-    update reply
-    set replyId = #{record.replyid,jdbcType=INTEGER},
-      thesisId = #{record.thesisid,jdbcType=INTEGER},
+    update question
+    set questionId = #{record.questionid,jdbcType=INTEGER},
+      debateId = #{record.debateid,jdbcType=INTEGER},
+      describtion = #{record.describtion,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
       view = #{record.view,jdbcType=INTEGER},
       like = #{record.like,jdbcType=INTEGER},
       attention = #{record.attention,jdbcType=INTEGER},
       dislike = #{record.dislike,jdbcType=INTEGER},
       reply = #{record.reply,jdbcType=INTEGER},
       replylist = #{record.replylist,jdbcType=INTEGER},
+      clickcount = #{record.clickcount,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
-      debatelist = #{record.debatelist,jdbcType=VARCHAR},
       publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
       contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      floor = #{record.floor,jdbcType=INTEGER}
+      condition = #{record.condition,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Reply" >
-    update reply
+  <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Question" >
+    update question
     <set >
-      <if test="thesisid != null" >
-        thesisId = #{thesisid,jdbcType=INTEGER},
+      <if test="debateid != null" >
+        debateId = #{debateid,jdbcType=INTEGER},
+      </if>
+      <if test="describtion != null" >
+        describtion = #{describtion,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="view != null" >
         view = #{view,jdbcType=INTEGER},
@@ -359,11 +331,11 @@
       <if test="replylist != null" >
         replylist = #{replylist,jdbcType=INTEGER},
       </if>
+      <if test="clickcount != null" >
+        clickcount = #{clickcount,jdbcType=INTEGER},
+      </if>
       <if test="username != null" >
         username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="debatelist != null" >
-        debatelist = #{debatelist,jdbcType=VARCHAR},
       </if>
       <if test="publishtime != null" >
         publishTime = #{publishtime,jdbcType=TIMESTAMP},
@@ -371,46 +343,28 @@
       <if test="contenttime != null" >
         contentTime = #{contenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="floor != null" >
-        floor = #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="describtion != null" >
-        describtion = #{describtion,jdbcType=LONGVARCHAR},
+      <if test="condition != null" >
+        condition = #{condition,jdbcType=VARCHAR},
       </if>
     </set>
-    where replyId = #{replyid,jdbcType=INTEGER}
+    where questionId = #{questionid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pjmike.lundao.po.Reply" >
-    update reply
-    set thesisId = #{thesisid,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Question" >
+    update question
+    set debateId = #{debateid,jdbcType=INTEGER},
+      describtion = #{describtion,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
       view = #{view,jdbcType=INTEGER},
       like = #{like,jdbcType=INTEGER},
       attention = #{attention,jdbcType=INTEGER},
       dislike = #{dislike,jdbcType=INTEGER},
       reply = #{reply,jdbcType=INTEGER},
       replylist = #{replylist,jdbcType=INTEGER},
+      clickcount = #{clickcount,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
-      debatelist = #{debatelist,jdbcType=VARCHAR},
       publishTime = #{publishtime,jdbcType=TIMESTAMP},
       contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      floor = #{floor,jdbcType=INTEGER},
-      describtion = #{describtion,jdbcType=LONGVARCHAR}
-    where replyId = #{replyid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Reply" >
-    update reply
-    set thesisId = #{thesisid,jdbcType=INTEGER},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      reply = #{reply,jdbcType=INTEGER},
-      replylist = #{replylist,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      debatelist = #{debatelist,jdbcType=VARCHAR},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      floor = #{floor,jdbcType=INTEGER}
-    where replyId = #{replyid,jdbcType=INTEGER}
+      condition = #{condition,jdbcType=VARCHAR}
+    where questionId = #{questionid,jdbcType=INTEGER}
   </update>
 </mapper>

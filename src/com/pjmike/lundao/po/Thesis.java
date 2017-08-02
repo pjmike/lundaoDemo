@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Thesis {
     private Integer thesisid;
-
+    
     private String description;
     private Integer debateId;
    

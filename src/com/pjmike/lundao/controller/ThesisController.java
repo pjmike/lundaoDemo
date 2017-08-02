@@ -31,7 +31,7 @@ public class ThesisController {
 		session.setAttribute("thesislist",thesislist);
 			
 		
-		//将辩题列表进行排序,冒泡排序
+		//将论点列表进行排序,冒泡排序
 		for(int i=0;i<thesislist.size()-1;i++) {
 			for (int j = i+1; j <thesislist.size(); j++) {
 				int count = ThesisController.Count(thesislist.get(i));
@@ -50,19 +50,14 @@ public class ThesisController {
 	
 	
 	
-	//查询出一个论点下的所有评论
+	//查询出一个提问下的所有评论
 	@RequestMapping("/replyOfthesis")
 	public @ResponseBody List<Reply> replyOfthesis(HttpSession session,int id) {
 		//获取当前会话的thesis，
-		session.getAttribute("thesis");
+//		session.getAttribute("thesis");
 		
-		thesisServiceImpl.selectByPrimaryKey(id);
-		
-		
-		
-		
-		return null;
-		
+		List<Reply>  replylist = thesisServiceImpl.selectByPrimaryKey(id);
+		return replylist;
 	}
 	
 	

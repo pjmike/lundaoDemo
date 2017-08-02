@@ -19,20 +19,20 @@
     <!-- 实现一对多查询，查询出一个辩题及该辩题下的所有论点 -->
     <collection property="thesisList" ofType="com.pjmike.lundao.po.Thesis">
 	    	<id column="thesisId" property="thesisid" jdbcType="INTEGER" />
-	    <result column="description" property="description" jdbcType="VARCHAR" />
-	    <result column="view" property="view" jdbcType="INTEGER" />
-	    <result column="like" property="like" jdbcType="INTEGER" />
-	    <result column="attention" property="attention" jdbcType="INTEGER" />
-	    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-	    <result column="ask" property="ask" jdbcType="INTEGER" />
-	    <result column="question" property="question" jdbcType="INTEGER" />
-	    <result column="asklist" property="asklist" jdbcType="INTEGER" />
-	    <result column="questionlist" property="questionlist" jdbcType="INTEGER" />
-	    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-	    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-	    <result column="complete" property="complete" jdbcType="INTEGER" />
-	    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
-	    
+	    	<result column="debateId" property="debateId" jdbcType="INTEGER"/>
+		    <result column="description" property="description" jdbcType="VARCHAR" />
+		    <result column="view" property="view" jdbcType="INTEGER" />
+		    <result column="like" property="like" jdbcType="INTEGER" />
+		    <result column="attention" property="attention" jdbcType="INTEGER" />
+		    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+		    <result column="ask" property="ask" jdbcType="INTEGER" />
+		    <result column="question" property="question" jdbcType="INTEGER" />
+		    <result column="asklist" property="asklist" jdbcType="INTEGER" />
+		    <result column="questionlist" property="questionlist" jdbcType="INTEGER" />
+		    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+		    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+		    <result column="complete" property="complete" jdbcType="INTEGER" />
+		    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
     </collection>
     
     
@@ -161,9 +161,10 @@
   </select>
   
   
-  <!-- 根据id查询辩题 -->
-  <select id="selectByPrimaryKey" resultType="com.pjmike.lundao.po.Debatetopic" parameterType="java.lang.Integer" >
-    select * from debateTopic where topicId = #{topicid,jdbcType=INTEGER}
+  <!-- 根据id查询辩题并返回该论点下所有的论点 -->
+  <!-- 判断是否为空 -->
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select * from debateTopic d,thesis t where topicId = #{topicid} and  t.debateId = #{topicid}
   </select>
   
  <!--  查询全部辩题不带论点 -->
@@ -172,9 +173,11 @@
   </select>
   
   <!-- 查询辩题数据 -->
-  <select id="selectList" resultMap="ResultMapWithBLOBs">
+  <!-- <select id="selectList" resultMap="ResultMapWithBLOBs">
   	select * from debateTopic d,thesis t where d.topicId = t.debateId or 1=1
-  </select>  
+  </select>  --> 
+  
+  
   
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

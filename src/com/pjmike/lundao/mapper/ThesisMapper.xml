@@ -20,6 +20,75 @@
   <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Thesis" extends="BaseResultMap" >
     <result column="state" property="state" jdbcType="LONGVARCHAR" />
   </resultMap>
+  
+  
+  
+  
+  
+  <!-- 用于查找某一论点下所有的提问及回复 -->
+  <!-- 以下是提问 -->
+  <resultMap id="BaseResultMap1" type="com.pjmike.lundao.po.ThesisExtend" >
+    <id column="thesisId" property="thesisid" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="view" property="view" jdbcType="INTEGER" />
+    <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="attention" property="attention" jdbcType="INTEGER" />
+    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+    <result column="ask" property="ask" jdbcType="INTEGER" />
+    <result column="question" property="question" jdbcType="INTEGER" />
+    <result column="asklist" property="asklist" jdbcType="INTEGER" />
+    <result column="questionlist" property="questionlist" jdbcType="INTEGER" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+    <result column="complete" property="complete" jdbcType="INTEGER" />
+    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
+    
+      <!-- 以下是提问级联 -->
+    <collection property="asks" ofType="com.pjmike.lundao.po.Ask">
+    	
+	    <id column="askId" property="askid" jdbcType="INTEGER" />
+	    <result column="debateId" property="debateid" jdbcType="INTEGER" />
+	    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+	    <result column="content" property="content" jdbcType="VARCHAR" />
+	    <result column="view" property="view" jdbcType="INTEGER" />
+	    <result column="like" property="like" jdbcType="INTEGER" />
+	    <result column="attention" property="attention" jdbcType="INTEGER" />
+	    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+	    <result column="reply" property="reply" jdbcType="INTEGER" />
+	    <result column="replylist" property="replylist" jdbcType="INTEGER" />
+	    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
+	    <result column="username" property="username" jdbcType="VARCHAR" />
+	    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+	    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+	    <result column="askcondition" property="askcondition" jdbcType="VARCHAR" />
+    </collection>
+    
+    <!-- 以下是异议级联 -->
+    <collection property="questions" ofType="com.pjmike.lundao.po.Question">
+    	<id column="questionId" property="questionid" jdbcType="INTEGER" />
+	    <result column="debateId" property="debateid" jdbcType="INTEGER" />
+	    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+	    <result column="content" property="content" jdbcType="VARCHAR" />
+	    <result column="view" property="view" jdbcType="INTEGER" />
+	    <result column="like" property="like" jdbcType="INTEGER" />
+	    <result column="attention" property="attention" jdbcType="INTEGER" />
+	    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+	    <result column="reply" property="reply" jdbcType="INTEGER" />
+	    <result column="replylist" property="replylist" jdbcType="INTEGER" />
+	    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
+	    <result column="username" property="username" jdbcType="VARCHAR" />
+	    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+	    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+	    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    </collection>
+    
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs1" type="com.pjmike.lundao.po.ThesisExtend" extends="BaseResultMap1" >
+    <result column="state" property="state" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -132,7 +201,7 @@
   <select id="selectBykey" resultMap="ResultMapWithBLOBs">
   	select thesis.* from thesis,debateTopic where thesis.debateId = debateTopic.topicId 
   </select>
-  
+  <!-- 根据一个论点id查询出它下面所有的提问及异议 -->
   
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

@@ -2,10 +2,14 @@ package com.pjmike.lundao.po;
 
 import java.util.Date;
 
-public class Reply {
-    private Integer replyid;
+public class Question {
+    private Integer questionid;
 
-    private Integer thesisid;
+    private Integer debateid;
+
+    private String describtion;
+
+    private String content;
 
     private Integer view;
 
@@ -19,30 +23,46 @@ public class Reply {
 
     private Integer replylist;
 
+    private Integer clickcount;
+
     private String username;
 
     private Date publishtime;
 
     private Date contenttime;
 
-    private Integer floor;
+    private String condition;
 
-    private String describtion;
-
-    public Integer getReplyid() {
-        return replyid;
+    public Integer getQuestionid() {
+        return questionid;
     }
 
-    public void setReplyid(Integer replyid) {
-        this.replyid = replyid;
+    public void setQuestionid(Integer questionid) {
+        this.questionid = questionid;
     }
 
-    public Integer getThesisid() {
-        return thesisid;
+    public Integer getDebateid() {
+        return debateid;
     }
 
-    public void setThesisid(Integer thesisid) {
-        this.thesisid = thesisid;
+    public void setDebateid(Integer debateid) {
+        this.debateid = debateid;
+    }
+
+    public String getDescribtion() {
+        return describtion;
+    }
+
+    public void setDescribtion(String describtion) {
+        this.describtion = describtion == null ? null : describtion.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public Integer getView() {
@@ -93,6 +113,14 @@ public class Reply {
         this.replylist = replylist;
     }
 
+    public Integer getClickcount() {
+        return clickcount;
+    }
+
+    public void setClickcount(Integer clickcount) {
+        this.clickcount = clickcount;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -117,19 +145,11 @@ public class Reply {
         this.contenttime = contenttime;
     }
 
-    public Integer getFloor() {
-        return floor;
+    public String getCondition() {
+        return condition;
     }
 
-    public void setFloor(Integer floor) {
-        this.floor = floor;
-    }
-
-    public String getDescribtion() {
-        return describtion;
-    }
-
-    public void setDescribtion(String describtion) {
-        this.describtion = describtion == null ? null : describtion.trim();
+    public void setCondition(String condition) {
+        this.condition = condition == null ? null : condition.trim();
     }
 }

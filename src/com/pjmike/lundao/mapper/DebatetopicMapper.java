@@ -24,7 +24,9 @@ public interface DebatetopicMapper {
     
     List<Debatetopicextend> selectList();
     List<Debatetopic> selectListby();
-    Debatetopic selectByPrimaryKey(Integer topicid);
+    
+    //查找一个辩题下所有论点
+    Debatetopicextend selectByPrimaryKey(@Param("topicid") Integer id);
 
     int updateByExampleSelective(@Param("record") Debatetopic record, @Param("example") DebatetopicExample example);
 

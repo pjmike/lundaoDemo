@@ -11,7 +11,6 @@
     <result column="reply" property="reply" jdbcType="INTEGER" />
     <result column="replylist" property="replylist" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="debatelist" property="debatelist" jdbcType="VARCHAR" />
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
     <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
     <result column="floor" property="floor" jdbcType="INTEGER" />

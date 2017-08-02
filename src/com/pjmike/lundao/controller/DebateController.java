@@ -26,9 +26,9 @@ public class DebateController {
 	 * 按主键查找辩题，返回json辩题
 	 */
 	@RequestMapping("/debateFindbyId")
-	public  @ResponseBody Debatetopic debateFindbyId(HttpServletRequest request, int topicid,Debatetopic debatetopic) {
+	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request, int id,Debatetopicextend debatetopic) {
 		
-		debatetopic = debateServiceImpl.selectByPrimaryKey(topicid);
+		debatetopic = debateServiceImpl.selectByPrimaryKey(id);
 		HttpSession session = request.getSession();
 		session.setAttribute("debatetopic", debatetopic);
 		return debatetopic;
@@ -110,4 +110,12 @@ public class DebateController {
 		return debatetopic;
 	}
 	
+	
+	/*
+	 * 根据已登录用户是否点击关注按钮来
+	 * 返回给前端辩题的关注状态?????
+	 * 
+	 */
+//	 @RequestMapping("")
+	 
 }
