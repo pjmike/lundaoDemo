@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pjmike.lundao.mapper.QuestionMapper" >
   <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Question" >
-    <id column="questionId" property="questionid" jdbcType="INTEGER" />
-    <result column="debateId" property="debateid" jdbcType="INTEGER" />
-    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="view" property="view" jdbcType="INTEGER" />
-    <result column="like" property="like" jdbcType="INTEGER" />
-    <result column="attention" property="attention" jdbcType="INTEGER" />
-    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-    <result column="reply" property="reply" jdbcType="INTEGER" />
-    <result column="replylist" property="replylist" jdbcType="INTEGER" />
-    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    <id column="q_questionId" property="qQuestionid" jdbcType="INTEGER" />
+    <result column="q_debateId" property="qDebateid" jdbcType="INTEGER" />
+    <result column="q_describtion" property="qDescribtion" jdbcType="VARCHAR" />
+    <result column="q_content" property="qContent" jdbcType="VARCHAR" />
+    <result column="q_status" property="qStatus" jdbcType="VARCHAR" />
+    <result column="q_view" property="qView" jdbcType="INTEGER" />
+    <result column="q_like" property="qLike" jdbcType="INTEGER" />
+    <result column="q_attention" property="qAttention" jdbcType="INTEGER" />
+    <result column="q_dislike" property="qDislike" jdbcType="INTEGER" />
+    <result column="q_reply" property="qReply" jdbcType="INTEGER" />
+    <result column="q_replylist" property="qReplylist" jdbcType="INTEGER" />
+    <result column="q_clickcount" property="qClickcount" jdbcType="INTEGER" />
+    <result column="q_username" property="qUsername" jdbcType="VARCHAR" />
+    <result column="q_publishTime" property="qPublishtime" jdbcType="TIMESTAMP" />
+    <result column="q_contentTime" property="qContenttime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    questionId, debateId, describtion, content, view, like, attention, dislike, reply, 
-    replylist, clickcount, username, publishTime, contentTime, condition
+    q_questionId, q_debateId, q_describtion, q_content, q_status, q_view, q_like, q_attention, 
+    q_dislike, q_reply, q_replylist, q_clickcount, q_username, q_publishTime, q_contentTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.QuestionExample" >
     select
@@ -98,11 +98,11 @@
     select 
     <include refid="Base_Column_List" />
     from question
-    where questionId = #{questionid,jdbcType=INTEGER}
+    where q_questionId = #{qQuestionid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from question
-    where questionId = #{questionid,jdbcType=INTEGER}
+    where q_questionId = #{qQuestionid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.pjmike.lundao.po.QuestionExample" >
     delete from question
@@ -111,113 +111,113 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.pjmike.lundao.po.Question" >
-    insert into question (questionId, debateId, describtion, 
-      content, view, like, 
-      attention, dislike, reply, 
-      replylist, clickcount, username, 
-      publishTime, contentTime, condition
+    insert into question (q_questionId, q_debateId, q_describtion, 
+      q_content, q_status, q_view, 
+      q_like, q_attention, q_dislike, 
+      q_reply, q_replylist, q_clickcount, 
+      q_username, q_publishTime, q_contentTime
       )
-    values (#{questionid,jdbcType=INTEGER}, #{debateid,jdbcType=INTEGER}, #{describtion,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{view,jdbcType=INTEGER}, #{like,jdbcType=INTEGER}, 
-      #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, #{reply,jdbcType=INTEGER}, 
-      #{replylist,jdbcType=INTEGER}, #{clickcount,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}, #{condition,jdbcType=VARCHAR}
+    values (#{qQuestionid,jdbcType=INTEGER}, #{qDebateid,jdbcType=INTEGER}, #{qDescribtion,jdbcType=VARCHAR}, 
+      #{qContent,jdbcType=VARCHAR}, #{qStatus,jdbcType=VARCHAR}, #{qView,jdbcType=INTEGER}, 
+      #{qLike,jdbcType=INTEGER}, #{qAttention,jdbcType=INTEGER}, #{qDislike,jdbcType=INTEGER}, 
+      #{qReply,jdbcType=INTEGER}, #{qReplylist,jdbcType=INTEGER}, #{qClickcount,jdbcType=INTEGER}, 
+      #{qUsername,jdbcType=VARCHAR}, #{qPublishtime,jdbcType=TIMESTAMP}, #{qContenttime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Question" >
     insert into question
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="questionid != null" >
-        questionId,
+      <if test="qQuestionid != null" >
+        q_questionId,
       </if>
-      <if test="debateid != null" >
-        debateId,
+      <if test="qDebateid != null" >
+        q_debateId,
       </if>
-      <if test="describtion != null" >
-        describtion,
+      <if test="qDescribtion != null" >
+        q_describtion,
       </if>
-      <if test="content != null" >
-        content,
+      <if test="qContent != null" >
+        q_content,
       </if>
-      <if test="view != null" >
-        view,
+      <if test="qStatus != null" >
+        q_status,
       </if>
-      <if test="like != null" >
-        like,
+      <if test="qView != null" >
+        q_view,
       </if>
-      <if test="attention != null" >
-        attention,
+      <if test="qLike != null" >
+        q_like,
       </if>
-      <if test="dislike != null" >
-        dislike,
+      <if test="qAttention != null" >
+        q_attention,
       </if>
-      <if test="reply != null" >
-        reply,
+      <if test="qDislike != null" >
+        q_dislike,
       </if>
-      <if test="replylist != null" >
-        replylist,
+      <if test="qReply != null" >
+        q_reply,
       </if>
-      <if test="clickcount != null" >
-        clickcount,
+      <if test="qReplylist != null" >
+        q_replylist,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="qClickcount != null" >
+        q_clickcount,
       </if>
-      <if test="publishtime != null" >
-        publishTime,
+      <if test="qUsername != null" >
+        q_username,
       </if>
-      <if test="contenttime != null" >
-        contentTime,
+      <if test="qPublishtime != null" >
+        q_publishTime,
       </if>
-      <if test="condition != null" >
-        condition,
+      <if test="qContenttime != null" >
+        q_contentTime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="questionid != null" >
-        #{questionid,jdbcType=INTEGER},
+      <if test="qQuestionid != null" >
+        #{qQuestionid,jdbcType=INTEGER},
       </if>
-      <if test="debateid != null" >
-        #{debateid,jdbcType=INTEGER},
+      <if test="qDebateid != null" >
+        #{qDebateid,jdbcType=INTEGER},
       </if>
-      <if test="describtion != null" >
-        #{describtion,jdbcType=VARCHAR},
+      <if test="qDescribtion != null" >
+        #{qDescribtion,jdbcType=VARCHAR},
       </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
+      <if test="qContent != null" >
+        #{qContent,jdbcType=VARCHAR},
       </if>
-      <if test="view != null" >
-        #{view,jdbcType=INTEGER},
+      <if test="qStatus != null" >
+        #{qStatus,jdbcType=VARCHAR},
       </if>
-      <if test="like != null" >
-        #{like,jdbcType=INTEGER},
+      <if test="qView != null" >
+        #{qView,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        #{attention,jdbcType=INTEGER},
+      <if test="qLike != null" >
+        #{qLike,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        #{dislike,jdbcType=INTEGER},
+      <if test="qAttention != null" >
+        #{qAttention,jdbcType=INTEGER},
       </if>
-      <if test="reply != null" >
-        #{reply,jdbcType=INTEGER},
+      <if test="qDislike != null" >
+        #{qDislike,jdbcType=INTEGER},
       </if>
-      <if test="replylist != null" >
-        #{replylist,jdbcType=INTEGER},
+      <if test="qReply != null" >
+        #{qReply,jdbcType=INTEGER},
       </if>
-      <if test="clickcount != null" >
-        #{clickcount,jdbcType=INTEGER},
+      <if test="qReplylist != null" >
+        #{qReplylist,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="qClickcount != null" >
+        #{qClickcount,jdbcType=INTEGER},
       </if>
-      <if test="publishtime != null" >
-        #{publishtime,jdbcType=TIMESTAMP},
+      <if test="qUsername != null" >
+        #{qUsername,jdbcType=VARCHAR},
       </if>
-      <if test="contenttime != null" >
-        #{contenttime,jdbcType=TIMESTAMP},
+      <if test="qPublishtime != null" >
+        #{qPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="condition != null" >
-        #{condition,jdbcType=VARCHAR},
+      <if test="qContenttime != null" >
+        #{qContenttime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -230,50 +230,50 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update question
     <set >
-      <if test="record.questionid != null" >
-        questionId = #{record.questionid,jdbcType=INTEGER},
+      <if test="record.qQuestionid != null" >
+        q_questionId = #{record.qQuestionid,jdbcType=INTEGER},
       </if>
-      <if test="record.debateid != null" >
-        debateId = #{record.debateid,jdbcType=INTEGER},
+      <if test="record.qDebateid != null" >
+        q_debateId = #{record.qDebateid,jdbcType=INTEGER},
       </if>
-      <if test="record.describtion != null" >
-        describtion = #{record.describtion,jdbcType=VARCHAR},
+      <if test="record.qDescribtion != null" >
+        q_describtion = #{record.qDescribtion,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null" >
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.qContent != null" >
+        q_content = #{record.qContent,jdbcType=VARCHAR},
       </if>
-      <if test="record.view != null" >
-        view = #{record.view,jdbcType=INTEGER},
+      <if test="record.qStatus != null" >
+        q_status = #{record.qStatus,jdbcType=VARCHAR},
       </if>
-      <if test="record.like != null" >
-        like = #{record.like,jdbcType=INTEGER},
+      <if test="record.qView != null" >
+        q_view = #{record.qView,jdbcType=INTEGER},
       </if>
-      <if test="record.attention != null" >
-        attention = #{record.attention,jdbcType=INTEGER},
+      <if test="record.qLike != null" >
+        q_like = #{record.qLike,jdbcType=INTEGER},
       </if>
-      <if test="record.dislike != null" >
-        dislike = #{record.dislike,jdbcType=INTEGER},
+      <if test="record.qAttention != null" >
+        q_attention = #{record.qAttention,jdbcType=INTEGER},
       </if>
-      <if test="record.reply != null" >
-        reply = #{record.reply,jdbcType=INTEGER},
+      <if test="record.qDislike != null" >
+        q_dislike = #{record.qDislike,jdbcType=INTEGER},
       </if>
-      <if test="record.replylist != null" >
-        replylist = #{record.replylist,jdbcType=INTEGER},
+      <if test="record.qReply != null" >
+        q_reply = #{record.qReply,jdbcType=INTEGER},
       </if>
-      <if test="record.clickcount != null" >
-        clickcount = #{record.clickcount,jdbcType=INTEGER},
+      <if test="record.qReplylist != null" >
+        q_replylist = #{record.qReplylist,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.qClickcount != null" >
+        q_clickcount = #{record.qClickcount,jdbcType=INTEGER},
       </if>
-      <if test="record.publishtime != null" >
-        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      <if test="record.qUsername != null" >
+        q_username = #{record.qUsername,jdbcType=VARCHAR},
       </if>
-      <if test="record.contenttime != null" >
-        contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      <if test="record.qPublishtime != null" >
+        q_publishTime = #{record.qPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.condition != null" >
-        condition = #{record.condition,jdbcType=VARCHAR},
+      <if test="record.qContenttime != null" >
+        q_contentTime = #{record.qContenttime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -282,21 +282,21 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update question
-    set questionId = #{record.questionid,jdbcType=INTEGER},
-      debateId = #{record.debateid,jdbcType=INTEGER},
-      describtion = #{record.describtion,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      reply = #{record.reply,jdbcType=INTEGER},
-      replylist = #{record.replylist,jdbcType=INTEGER},
-      clickcount = #{record.clickcount,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      condition = #{record.condition,jdbcType=VARCHAR}
+    set q_questionId = #{record.qQuestionid,jdbcType=INTEGER},
+      q_debateId = #{record.qDebateid,jdbcType=INTEGER},
+      q_describtion = #{record.qDescribtion,jdbcType=VARCHAR},
+      q_content = #{record.qContent,jdbcType=VARCHAR},
+      q_status = #{record.qStatus,jdbcType=VARCHAR},
+      q_view = #{record.qView,jdbcType=INTEGER},
+      q_like = #{record.qLike,jdbcType=INTEGER},
+      q_attention = #{record.qAttention,jdbcType=INTEGER},
+      q_dislike = #{record.qDislike,jdbcType=INTEGER},
+      q_reply = #{record.qReply,jdbcType=INTEGER},
+      q_replylist = #{record.qReplylist,jdbcType=INTEGER},
+      q_clickcount = #{record.qClickcount,jdbcType=INTEGER},
+      q_username = #{record.qUsername,jdbcType=VARCHAR},
+      q_publishTime = #{record.qPublishtime,jdbcType=TIMESTAMP},
+      q_contentTime = #{record.qContenttime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -304,67 +304,67 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Question" >
     update question
     <set >
-      <if test="debateid != null" >
-        debateId = #{debateid,jdbcType=INTEGER},
+      <if test="qDebateid != null" >
+        q_debateId = #{qDebateid,jdbcType=INTEGER},
       </if>
-      <if test="describtion != null" >
-        describtion = #{describtion,jdbcType=VARCHAR},
+      <if test="qDescribtion != null" >
+        q_describtion = #{qDescribtion,jdbcType=VARCHAR},
       </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=VARCHAR},
+      <if test="qContent != null" >
+        q_content = #{qContent,jdbcType=VARCHAR},
       </if>
-      <if test="view != null" >
-        view = #{view,jdbcType=INTEGER},
+      <if test="qStatus != null" >
+        q_status = #{qStatus,jdbcType=VARCHAR},
       </if>
-      <if test="like != null" >
-        like = #{like,jdbcType=INTEGER},
+      <if test="qView != null" >
+        q_view = #{qView,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        attention = #{attention,jdbcType=INTEGER},
+      <if test="qLike != null" >
+        q_like = #{qLike,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        dislike = #{dislike,jdbcType=INTEGER},
+      <if test="qAttention != null" >
+        q_attention = #{qAttention,jdbcType=INTEGER},
       </if>
-      <if test="reply != null" >
-        reply = #{reply,jdbcType=INTEGER},
+      <if test="qDislike != null" >
+        q_dislike = #{qDislike,jdbcType=INTEGER},
       </if>
-      <if test="replylist != null" >
-        replylist = #{replylist,jdbcType=INTEGER},
+      <if test="qReply != null" >
+        q_reply = #{qReply,jdbcType=INTEGER},
       </if>
-      <if test="clickcount != null" >
-        clickcount = #{clickcount,jdbcType=INTEGER},
+      <if test="qReplylist != null" >
+        q_replylist = #{qReplylist,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="qClickcount != null" >
+        q_clickcount = #{qClickcount,jdbcType=INTEGER},
       </if>
-      <if test="publishtime != null" >
-        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      <if test="qUsername != null" >
+        q_username = #{qUsername,jdbcType=VARCHAR},
       </if>
-      <if test="contenttime != null" >
-        contentTime = #{contenttime,jdbcType=TIMESTAMP},
+      <if test="qPublishtime != null" >
+        q_publishTime = #{qPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="condition != null" >
-        condition = #{condition,jdbcType=VARCHAR},
+      <if test="qContenttime != null" >
+        q_contentTime = #{qContenttime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where questionId = #{questionid,jdbcType=INTEGER}
+    where q_questionId = #{qQuestionid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Question" >
     update question
-    set debateId = #{debateid,jdbcType=INTEGER},
-      describtion = #{describtion,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      reply = #{reply,jdbcType=INTEGER},
-      replylist = #{replylist,jdbcType=INTEGER},
-      clickcount = #{clickcount,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      condition = #{condition,jdbcType=VARCHAR}
-    where questionId = #{questionid,jdbcType=INTEGER}
+    set q_debateId = #{qDebateid,jdbcType=INTEGER},
+      q_describtion = #{qDescribtion,jdbcType=VARCHAR},
+      q_content = #{qContent,jdbcType=VARCHAR},
+      q_status = #{qStatus,jdbcType=VARCHAR},
+      q_view = #{qView,jdbcType=INTEGER},
+      q_like = #{qLike,jdbcType=INTEGER},
+      q_attention = #{qAttention,jdbcType=INTEGER},
+      q_dislike = #{qDislike,jdbcType=INTEGER},
+      q_reply = #{qReply,jdbcType=INTEGER},
+      q_replylist = #{qReplylist,jdbcType=INTEGER},
+      q_clickcount = #{qClickcount,jdbcType=INTEGER},
+      q_username = #{qUsername,jdbcType=VARCHAR},
+      q_publishTime = #{qPublishtime,jdbcType=TIMESTAMP},
+      q_contentTime = #{qContenttime,jdbcType=TIMESTAMP}
+    where q_questionId = #{qQuestionid,jdbcType=INTEGER}
   </update>
 </mapper>

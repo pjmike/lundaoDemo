@@ -2,8 +2,8 @@ package com.pjmike.lundao.service.Impl;
 
 import java.util.List;
 
-import com.pjmike.lundao.po.Reply;
+import com.pjmike.lundao.po.Thesis;
 
 public interface ThesisService {
-	public List<Reply> selectByPrimaryKey(Integer debateId);
+	public Thesis selectBythesisId(int id);
 }

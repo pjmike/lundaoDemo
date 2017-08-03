@@ -3,18 +3,23 @@ package com.pjmike.lundao.po;
 import java.util.List;
 
 public class ThesisExtend extends Thesis{
-	private List<Ask> asks ;
-	public List<Ask> getAsks() {
+	private List<AskExtend> asks ;
+	private List<QuestionExtend> questions;
+	
+	
+	
+	
+	public List<AskExtend> getAsks() {
 		return asks;
 	}
-	public void setAsks(List<Ask> asks) {
+	public void setAsks(List<AskExtend> asks) {
 		this.asks = asks;
 	}
-	private List<Question> questions;
-	public List<Question> getQuestions() {
+	public List<QuestionExtend> getQuestions() {
 		return questions;
 	}
-	public void setQuestions(List<Question> questions) {
+	public void setQuestions(List<QuestionExtend> questions) {
 		this.questions = questions;
 	}
 }
+

@@ -165,673 +165,733 @@ public class ThesisExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionIsNull() {
-            addCriterion("description is null");
+        public Criteria andTDebateidIsNull() {
+            addCriterion("t_debateId is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionIsNotNull() {
-            addCriterion("description is not null");
+        public Criteria andTDebateidIsNotNull() {
+            addCriterion("t_debateId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionEqualTo(String value) {
-            addCriterion("description =", value, "description");
+        public Criteria andTDebateidEqualTo(Integer value) {
+            addCriterion("t_debateId =", value, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotEqualTo(String value) {
-            addCriterion("description <>", value, "description");
+        public Criteria andTDebateidNotEqualTo(Integer value) {
+            addCriterion("t_debateId <>", value, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionGreaterThan(String value) {
-            addCriterion("description >", value, "description");
+        public Criteria andTDebateidGreaterThan(Integer value) {
+            addCriterion("t_debateId >", value, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
-            addCriterion("description >=", value, "description");
+        public Criteria andTDebateidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_debateId >=", value, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLessThan(String value) {
-            addCriterion("description <", value, "description");
+        public Criteria andTDebateidLessThan(Integer value) {
+            addCriterion("t_debateId <", value, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLessThanOrEqualTo(String value) {
-            addCriterion("description <=", value, "description");
+        public Criteria andTDebateidLessThanOrEqualTo(Integer value) {
+            addCriterion("t_debateId <=", value, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionLike(String value) {
-            addCriterion("description like", value, "description");
+        public Criteria andTDebateidIn(List<Integer> values) {
+            addCriterion("t_debateId in", values, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotLike(String value) {
-            addCriterion("description not like", value, "description");
+        public Criteria andTDebateidNotIn(List<Integer> values) {
+            addCriterion("t_debateId not in", values, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionIn(List<String> values) {
-            addCriterion("description in", values, "description");
+        public Criteria andTDebateidBetween(Integer value1, Integer value2) {
+            addCriterion("t_debateId between", value1, value2, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotIn(List<String> values) {
-            addCriterion("description not in", values, "description");
+        public Criteria andTDebateidNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_debateId not between", value1, value2, "tDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionBetween(String value1, String value2) {
-            addCriterion("description between", value1, value2, "description");
+        public Criteria andTDescriptionIsNull() {
+            addCriterion("t_description is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescriptionNotBetween(String value1, String value2) {
-            addCriterion("description not between", value1, value2, "description");
+        public Criteria andTDescriptionIsNotNull() {
+            addCriterion("t_description is not null");
             return (Criteria) this;
         }
 
-        public Criteria andViewIsNull() {
-            addCriterion("view is null");
+        public Criteria andTDescriptionEqualTo(String value) {
+            addCriterion("t_description =", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewIsNotNull() {
-            addCriterion("view is not null");
+        public Criteria andTDescriptionNotEqualTo(String value) {
+            addCriterion("t_description <>", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewEqualTo(Integer value) {
-            addCriterion("view =", value, "view");
+        public Criteria andTDescriptionGreaterThan(String value) {
+            addCriterion("t_description >", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewNotEqualTo(Integer value) {
-            addCriterion("view <>", value, "view");
+        public Criteria andTDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("t_description >=", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewGreaterThan(Integer value) {
-            addCriterion("view >", value, "view");
+        public Criteria andTDescriptionLessThan(String value) {
+            addCriterion("t_description <", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewGreaterThanOrEqualTo(Integer value) {
-            addCriterion("view >=", value, "view");
+        public Criteria andTDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("t_description <=", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewLessThan(Integer value) {
-            addCriterion("view <", value, "view");
+        public Criteria andTDescriptionLike(String value) {
+            addCriterion("t_description like", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewLessThanOrEqualTo(Integer value) {
-            addCriterion("view <=", value, "view");
+        public Criteria andTDescriptionNotLike(String value) {
+            addCriterion("t_description not like", value, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewIn(List<Integer> values) {
-            addCriterion("view in", values, "view");
+        public Criteria andTDescriptionIn(List<String> values) {
+            addCriterion("t_description in", values, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewNotIn(List<Integer> values) {
-            addCriterion("view not in", values, "view");
+        public Criteria andTDescriptionNotIn(List<String> values) {
+            addCriterion("t_description not in", values, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewBetween(Integer value1, Integer value2) {
-            addCriterion("view between", value1, value2, "view");
+        public Criteria andTDescriptionBetween(String value1, String value2) {
+            addCriterion("t_description between", value1, value2, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andViewNotBetween(Integer value1, Integer value2) {
-            addCriterion("view not between", value1, value2, "view");
+        public Criteria andTDescriptionNotBetween(String value1, String value2) {
+            addCriterion("t_description not between", value1, value2, "tDescription");
             return (Criteria) this;
         }
 
-        public Criteria andLikeIsNull() {
-            addCriterion("like is null");
+        public Criteria andTViewIsNull() {
+            addCriterion("t_view is null");
             return (Criteria) this;
         }
 
-        public Criteria andLikeIsNotNull() {
-            addCriterion("like is not null");
+        public Criteria andTViewIsNotNull() {
+            addCriterion("t_view is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLikeEqualTo(Integer value) {
-            addCriterion("like =", value, "like");
+        public Criteria andTViewEqualTo(Integer value) {
+            addCriterion("t_view =", value, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeNotEqualTo(Integer value) {
-            addCriterion("like <>", value, "like");
+        public Criteria andTViewNotEqualTo(Integer value) {
+            addCriterion("t_view <>", value, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeGreaterThan(Integer value) {
-            addCriterion("like >", value, "like");
+        public Criteria andTViewGreaterThan(Integer value) {
+            addCriterion("t_view >", value, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("like >=", value, "like");
+        public Criteria andTViewGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_view >=", value, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeLessThan(Integer value) {
-            addCriterion("like <", value, "like");
+        public Criteria andTViewLessThan(Integer value) {
+            addCriterion("t_view <", value, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeLessThanOrEqualTo(Integer value) {
-            addCriterion("like <=", value, "like");
+        public Criteria andTViewLessThanOrEqualTo(Integer value) {
+            addCriterion("t_view <=", value, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeIn(List<Integer> values) {
-            addCriterion("like in", values, "like");
+        public Criteria andTViewIn(List<Integer> values) {
+            addCriterion("t_view in", values, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeNotIn(List<Integer> values) {
-            addCriterion("like not in", values, "like");
+        public Criteria andTViewNotIn(List<Integer> values) {
+            addCriterion("t_view not in", values, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeBetween(Integer value1, Integer value2) {
-            addCriterion("like between", value1, value2, "like");
+        public Criteria andTViewBetween(Integer value1, Integer value2) {
+            addCriterion("t_view between", value1, value2, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeNotBetween(Integer value1, Integer value2) {
-            addCriterion("like not between", value1, value2, "like");
+        public Criteria andTViewNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_view not between", value1, value2, "tView");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionIsNull() {
-            addCriterion("attention is null");
+        public Criteria andTLikeIsNull() {
+            addCriterion("t_like is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionIsNotNull() {
-            addCriterion("attention is not null");
+        public Criteria andTLikeIsNotNull() {
+            addCriterion("t_like is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionEqualTo(Integer value) {
-            addCriterion("attention =", value, "attention");
+        public Criteria andTLikeEqualTo(Integer value) {
+            addCriterion("t_like =", value, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionNotEqualTo(Integer value) {
-            addCriterion("attention <>", value, "attention");
+        public Criteria andTLikeNotEqualTo(Integer value) {
+            addCriterion("t_like <>", value, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionGreaterThan(Integer value) {
-            addCriterion("attention >", value, "attention");
+        public Criteria andTLikeGreaterThan(Integer value) {
+            addCriterion("t_like >", value, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionGreaterThanOrEqualTo(Integer value) {
-            addCriterion("attention >=", value, "attention");
+        public Criteria andTLikeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_like >=", value, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionLessThan(Integer value) {
-            addCriterion("attention <", value, "attention");
+        public Criteria andTLikeLessThan(Integer value) {
+            addCriterion("t_like <", value, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionLessThanOrEqualTo(Integer value) {
-            addCriterion("attention <=", value, "attention");
+        public Criteria andTLikeLessThanOrEqualTo(Integer value) {
+            addCriterion("t_like <=", value, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionIn(List<Integer> values) {
-            addCriterion("attention in", values, "attention");
+        public Criteria andTLikeIn(List<Integer> values) {
+            addCriterion("t_like in", values, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionNotIn(List<Integer> values) {
-            addCriterion("attention not in", values, "attention");
+        public Criteria andTLikeNotIn(List<Integer> values) {
+            addCriterion("t_like not in", values, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionBetween(Integer value1, Integer value2) {
-            addCriterion("attention between", value1, value2, "attention");
+        public Criteria andTLikeBetween(Integer value1, Integer value2) {
+            addCriterion("t_like between", value1, value2, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionNotBetween(Integer value1, Integer value2) {
-            addCriterion("attention not between", value1, value2, "attention");
+        public Criteria andTLikeNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_like not between", value1, value2, "tLike");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeIsNull() {
-            addCriterion("dislike is null");
+        public Criteria andTAttentionIsNull() {
+            addCriterion("t_attention is null");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeIsNotNull() {
-            addCriterion("dislike is not null");
+        public Criteria andTAttentionIsNotNull() {
+            addCriterion("t_attention is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeEqualTo(Integer value) {
-            addCriterion("dislike =", value, "dislike");
+        public Criteria andTAttentionEqualTo(Integer value) {
+            addCriterion("t_attention =", value, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeNotEqualTo(Integer value) {
-            addCriterion("dislike <>", value, "dislike");
+        public Criteria andTAttentionNotEqualTo(Integer value) {
+            addCriterion("t_attention <>", value, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeGreaterThan(Integer value) {
-            addCriterion("dislike >", value, "dislike");
+        public Criteria andTAttentionGreaterThan(Integer value) {
+            addCriterion("t_attention >", value, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("dislike >=", value, "dislike");
+        public Criteria andTAttentionGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_attention >=", value, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeLessThan(Integer value) {
-            addCriterion("dislike <", value, "dislike");
+        public Criteria andTAttentionLessThan(Integer value) {
+            addCriterion("t_attention <", value, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeLessThanOrEqualTo(Integer value) {
-            addCriterion("dislike <=", value, "dislike");
+        public Criteria andTAttentionLessThanOrEqualTo(Integer value) {
+            addCriterion("t_attention <=", value, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeIn(List<Integer> values) {
-            addCriterion("dislike in", values, "dislike");
+        public Criteria andTAttentionIn(List<Integer> values) {
+            addCriterion("t_attention in", values, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeNotIn(List<Integer> values) {
-            addCriterion("dislike not in", values, "dislike");
+        public Criteria andTAttentionNotIn(List<Integer> values) {
+            addCriterion("t_attention not in", values, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeBetween(Integer value1, Integer value2) {
-            addCriterion("dislike between", value1, value2, "dislike");
+        public Criteria andTAttentionBetween(Integer value1, Integer value2) {
+            addCriterion("t_attention between", value1, value2, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeNotBetween(Integer value1, Integer value2) {
-            addCriterion("dislike not between", value1, value2, "dislike");
+        public Criteria andTAttentionNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_attention not between", value1, value2, "tAttention");
             return (Criteria) this;
         }
 
-        public Criteria andAskIsNull() {
-            addCriterion("ask is null");
+        public Criteria andTDislikeIsNull() {
+            addCriterion("t_dislike is null");
             return (Criteria) this;
         }
 
-        public Criteria andAskIsNotNull() {
-            addCriterion("ask is not null");
+        public Criteria andTDislikeIsNotNull() {
+            addCriterion("t_dislike is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAskEqualTo(Integer value) {
-            addCriterion("ask =", value, "ask");
+        public Criteria andTDislikeEqualTo(Integer value) {
+            addCriterion("t_dislike =", value, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskNotEqualTo(Integer value) {
-            addCriterion("ask <>", value, "ask");
+        public Criteria andTDislikeNotEqualTo(Integer value) {
+            addCriterion("t_dislike <>", value, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskGreaterThan(Integer value) {
-            addCriterion("ask >", value, "ask");
+        public Criteria andTDislikeGreaterThan(Integer value) {
+            addCriterion("t_dislike >", value, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskGreaterThanOrEqualTo(Integer value) {
-            addCriterion("ask >=", value, "ask");
+        public Criteria andTDislikeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_dislike >=", value, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskLessThan(Integer value) {
-            addCriterion("ask <", value, "ask");
+        public Criteria andTDislikeLessThan(Integer value) {
+            addCriterion("t_dislike <", value, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskLessThanOrEqualTo(Integer value) {
-            addCriterion("ask <=", value, "ask");
+        public Criteria andTDislikeLessThanOrEqualTo(Integer value) {
+            addCriterion("t_dislike <=", value, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskIn(List<Integer> values) {
-            addCriterion("ask in", values, "ask");
+        public Criteria andTDislikeIn(List<Integer> values) {
+            addCriterion("t_dislike in", values, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskNotIn(List<Integer> values) {
-            addCriterion("ask not in", values, "ask");
+        public Criteria andTDislikeNotIn(List<Integer> values) {
+            addCriterion("t_dislike not in", values, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskBetween(Integer value1, Integer value2) {
-            addCriterion("ask between", value1, value2, "ask");
+        public Criteria andTDislikeBetween(Integer value1, Integer value2) {
+            addCriterion("t_dislike between", value1, value2, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andAskNotBetween(Integer value1, Integer value2) {
-            addCriterion("ask not between", value1, value2, "ask");
+        public Criteria andTDislikeNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_dislike not between", value1, value2, "tDislike");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionIsNull() {
-            addCriterion("question is null");
+        public Criteria andTAskIsNull() {
+            addCriterion("t_ask is null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionIsNotNull() {
-            addCriterion("question is not null");
+        public Criteria andTAskIsNotNull() {
+            addCriterion("t_ask is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionEqualTo(Integer value) {
-            addCriterion("question =", value, "question");
+        public Criteria andTAskEqualTo(Integer value) {
+            addCriterion("t_ask =", value, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionNotEqualTo(Integer value) {
-            addCriterion("question <>", value, "question");
+        public Criteria andTAskNotEqualTo(Integer value) {
+            addCriterion("t_ask <>", value, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionGreaterThan(Integer value) {
-            addCriterion("question >", value, "question");
+        public Criteria andTAskGreaterThan(Integer value) {
+            addCriterion("t_ask >", value, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionGreaterThanOrEqualTo(Integer value) {
-            addCriterion("question >=", value, "question");
+        public Criteria andTAskGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_ask >=", value, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionLessThan(Integer value) {
-            addCriterion("question <", value, "question");
+        public Criteria andTAskLessThan(Integer value) {
+            addCriterion("t_ask <", value, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionLessThanOrEqualTo(Integer value) {
-            addCriterion("question <=", value, "question");
+        public Criteria andTAskLessThanOrEqualTo(Integer value) {
+            addCriterion("t_ask <=", value, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionIn(List<Integer> values) {
-            addCriterion("question in", values, "question");
+        public Criteria andTAskIn(List<Integer> values) {
+            addCriterion("t_ask in", values, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionNotIn(List<Integer> values) {
-            addCriterion("question not in", values, "question");
+        public Criteria andTAskNotIn(List<Integer> values) {
+            addCriterion("t_ask not in", values, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionBetween(Integer value1, Integer value2) {
-            addCriterion("question between", value1, value2, "question");
+        public Criteria andTAskBetween(Integer value1, Integer value2) {
+            addCriterion("t_ask between", value1, value2, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionNotBetween(Integer value1, Integer value2) {
-            addCriterion("question not between", value1, value2, "question");
+        public Criteria andTAskNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_ask not between", value1, value2, "tAsk");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistIsNull() {
-            addCriterion("asklist is null");
+        public Criteria andTQuestionIsNull() {
+            addCriterion("t_question is null");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistIsNotNull() {
-            addCriterion("asklist is not null");
+        public Criteria andTQuestionIsNotNull() {
+            addCriterion("t_question is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistEqualTo(Integer value) {
-            addCriterion("asklist =", value, "asklist");
+        public Criteria andTQuestionEqualTo(Integer value) {
+            addCriterion("t_question =", value, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistNotEqualTo(Integer value) {
-            addCriterion("asklist <>", value, "asklist");
+        public Criteria andTQuestionNotEqualTo(Integer value) {
+            addCriterion("t_question <>", value, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistGreaterThan(Integer value) {
-            addCriterion("asklist >", value, "asklist");
+        public Criteria andTQuestionGreaterThan(Integer value) {
+            addCriterion("t_question >", value, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistGreaterThanOrEqualTo(Integer value) {
-            addCriterion("asklist >=", value, "asklist");
+        public Criteria andTQuestionGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_question >=", value, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistLessThan(Integer value) {
-            addCriterion("asklist <", value, "asklist");
+        public Criteria andTQuestionLessThan(Integer value) {
+            addCriterion("t_question <", value, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistLessThanOrEqualTo(Integer value) {
-            addCriterion("asklist <=", value, "asklist");
+        public Criteria andTQuestionLessThanOrEqualTo(Integer value) {
+            addCriterion("t_question <=", value, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistIn(List<Integer> values) {
-            addCriterion("asklist in", values, "asklist");
+        public Criteria andTQuestionIn(List<Integer> values) {
+            addCriterion("t_question in", values, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistNotIn(List<Integer> values) {
-            addCriterion("asklist not in", values, "asklist");
+        public Criteria andTQuestionNotIn(List<Integer> values) {
+            addCriterion("t_question not in", values, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistBetween(Integer value1, Integer value2) {
-            addCriterion("asklist between", value1, value2, "asklist");
+        public Criteria andTQuestionBetween(Integer value1, Integer value2) {
+            addCriterion("t_question between", value1, value2, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andAsklistNotBetween(Integer value1, Integer value2) {
-            addCriterion("asklist not between", value1, value2, "asklist");
+        public Criteria andTQuestionNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_question not between", value1, value2, "tQuestion");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistIsNull() {
-            addCriterion("questionlist is null");
+        public Criteria andTAsklistIsNull() {
+            addCriterion("t_asklist is null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistIsNotNull() {
-            addCriterion("questionlist is not null");
+        public Criteria andTAsklistIsNotNull() {
+            addCriterion("t_asklist is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistEqualTo(Integer value) {
-            addCriterion("questionlist =", value, "questionlist");
+        public Criteria andTAsklistEqualTo(Integer value) {
+            addCriterion("t_asklist =", value, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistNotEqualTo(Integer value) {
-            addCriterion("questionlist <>", value, "questionlist");
+        public Criteria andTAsklistNotEqualTo(Integer value) {
+            addCriterion("t_asklist <>", value, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistGreaterThan(Integer value) {
-            addCriterion("questionlist >", value, "questionlist");
+        public Criteria andTAsklistGreaterThan(Integer value) {
+            addCriterion("t_asklist >", value, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistGreaterThanOrEqualTo(Integer value) {
-            addCriterion("questionlist >=", value, "questionlist");
+        public Criteria andTAsklistGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_asklist >=", value, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistLessThan(Integer value) {
-            addCriterion("questionlist <", value, "questionlist");
+        public Criteria andTAsklistLessThan(Integer value) {
+            addCriterion("t_asklist <", value, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistLessThanOrEqualTo(Integer value) {
-            addCriterion("questionlist <=", value, "questionlist");
+        public Criteria andTAsklistLessThanOrEqualTo(Integer value) {
+            addCriterion("t_asklist <=", value, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistIn(List<Integer> values) {
-            addCriterion("questionlist in", values, "questionlist");
+        public Criteria andTAsklistIn(List<Integer> values) {
+            addCriterion("t_asklist in", values, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistNotIn(List<Integer> values) {
-            addCriterion("questionlist not in", values, "questionlist");
+        public Criteria andTAsklistNotIn(List<Integer> values) {
+            addCriterion("t_asklist not in", values, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistBetween(Integer value1, Integer value2) {
-            addCriterion("questionlist between", value1, value2, "questionlist");
+        public Criteria andTAsklistBetween(Integer value1, Integer value2) {
+            addCriterion("t_asklist between", value1, value2, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionlistNotBetween(Integer value1, Integer value2) {
-            addCriterion("questionlist not between", value1, value2, "questionlist");
+        public Criteria andTAsklistNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_asklist not between", value1, value2, "tAsklist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeIsNull() {
-            addCriterion("publishTime is null");
+        public Criteria andTQuestionlistIsNull() {
+            addCriterion("t_questionlist is null");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeIsNotNull() {
-            addCriterion("publishTime is not null");
+        public Criteria andTQuestionlistIsNotNull() {
+            addCriterion("t_questionlist is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeEqualTo(Date value) {
-            addCriterion("publishTime =", value, "publishtime");
+        public Criteria andTQuestionlistEqualTo(Integer value) {
+            addCriterion("t_questionlist =", value, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeNotEqualTo(Date value) {
-            addCriterion("publishTime <>", value, "publishtime");
+        public Criteria andTQuestionlistNotEqualTo(Integer value) {
+            addCriterion("t_questionlist <>", value, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeGreaterThan(Date value) {
-            addCriterion("publishTime >", value, "publishtime");
+        public Criteria andTQuestionlistGreaterThan(Integer value) {
+            addCriterion("t_questionlist >", value, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("publishTime >=", value, "publishtime");
+        public Criteria andTQuestionlistGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_questionlist >=", value, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeLessThan(Date value) {
-            addCriterion("publishTime <", value, "publishtime");
+        public Criteria andTQuestionlistLessThan(Integer value) {
+            addCriterion("t_questionlist <", value, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeLessThanOrEqualTo(Date value) {
-            addCriterion("publishTime <=", value, "publishtime");
+        public Criteria andTQuestionlistLessThanOrEqualTo(Integer value) {
+            addCriterion("t_questionlist <=", value, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeIn(List<Date> values) {
-            addCriterion("publishTime in", values, "publishtime");
+        public Criteria andTQuestionlistIn(List<Integer> values) {
+            addCriterion("t_questionlist in", values, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeNotIn(List<Date> values) {
-            addCriterion("publishTime not in", values, "publishtime");
+        public Criteria andTQuestionlistNotIn(List<Integer> values) {
+            addCriterion("t_questionlist not in", values, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeBetween(Date value1, Date value2) {
-            addCriterion("publishTime between", value1, value2, "publishtime");
+        public Criteria andTQuestionlistBetween(Integer value1, Integer value2) {
+            addCriterion("t_questionlist between", value1, value2, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeNotBetween(Date value1, Date value2) {
-            addCriterion("publishTime not between", value1, value2, "publishtime");
+        public Criteria andTQuestionlistNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_questionlist not between", value1, value2, "tQuestionlist");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeIsNull() {
-            addCriterion("contentTime is null");
+        public Criteria andTPublishtimeIsNull() {
+            addCriterion("t_publishTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeIsNotNull() {
-            addCriterion("contentTime is not null");
+        public Criteria andTPublishtimeIsNotNull() {
+            addCriterion("t_publishTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeEqualTo(Date value) {
-            addCriterion("contentTime =", value, "contenttime");
+        public Criteria andTPublishtimeEqualTo(Date value) {
+            addCriterion("t_publishTime =", value, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeNotEqualTo(Date value) {
-            addCriterion("contentTime <>", value, "contenttime");
+        public Criteria andTPublishtimeNotEqualTo(Date value) {
+            addCriterion("t_publishTime <>", value, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeGreaterThan(Date value) {
-            addCriterion("contentTime >", value, "contenttime");
+        public Criteria andTPublishtimeGreaterThan(Date value) {
+            addCriterion("t_publishTime >", value, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("contentTime >=", value, "contenttime");
+        public Criteria andTPublishtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("t_publishTime >=", value, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeLessThan(Date value) {
-            addCriterion("contentTime <", value, "contenttime");
+        public Criteria andTPublishtimeLessThan(Date value) {
+            addCriterion("t_publishTime <", value, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeLessThanOrEqualTo(Date value) {
-            addCriterion("contentTime <=", value, "contenttime");
+        public Criteria andTPublishtimeLessThanOrEqualTo(Date value) {
+            addCriterion("t_publishTime <=", value, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeIn(List<Date> values) {
-            addCriterion("contentTime in", values, "contenttime");
+        public Criteria andTPublishtimeIn(List<Date> values) {
+            addCriterion("t_publishTime in", values, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeNotIn(List<Date> values) {
-            addCriterion("contentTime not in", values, "contenttime");
+        public Criteria andTPublishtimeNotIn(List<Date> values) {
+            addCriterion("t_publishTime not in", values, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeBetween(Date value1, Date value2) {
-            addCriterion("contentTime between", value1, value2, "contenttime");
+        public Criteria andTPublishtimeBetween(Date value1, Date value2) {
+            addCriterion("t_publishTime between", value1, value2, "tPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeNotBetween(Date value1, Date value2) {
-            addCriterion("contentTime not between", value1, value2, "contenttime");
+        public Criteria andTPublishtimeNotBetween(Date value1, Date value2) {
+            addCriterion("t_publishTime not between", value1, value2, "tPublishtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeIsNull() {
+            addCriterion("t_contentTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeIsNotNull() {
+            addCriterion("t_contentTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeEqualTo(Date value) {
+            addCriterion("t_contentTime =", value, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeNotEqualTo(Date value) {
+            addCriterion("t_contentTime <>", value, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeGreaterThan(Date value) {
+            addCriterion("t_contentTime >", value, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("t_contentTime >=", value, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeLessThan(Date value) {
+            addCriterion("t_contentTime <", value, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeLessThanOrEqualTo(Date value) {
+            addCriterion("t_contentTime <=", value, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeIn(List<Date> values) {
+            addCriterion("t_contentTime in", values, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeNotIn(List<Date> values) {
+            addCriterion("t_contentTime not in", values, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeBetween(Date value1, Date value2) {
+            addCriterion("t_contentTime between", value1, value2, "tContenttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTContenttimeNotBetween(Date value1, Date value2) {
+            addCriterion("t_contentTime not between", value1, value2, "tContenttime");
             return (Criteria) this;
         }
 

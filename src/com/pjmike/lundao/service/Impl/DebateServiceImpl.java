@@ -1,15 +1,12 @@
 package com.pjmike.lundao.service.Impl;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pjmike.lundao.controller.ThesisController;
 import com.pjmike.lundao.mapper.DebatetopicMapper;
 import com.pjmike.lundao.mapper.MarkdebateMapper;
 import com.pjmike.lundao.mapper.ThesisMapper;
@@ -30,12 +27,12 @@ public class DebateServiceImpl implements DebateService{
 	private MarkdebateMapper markdebateMapper;
 	
 	//按照id查找某一具体辩题及相关论点
-	//有一个问题是查询出的所有论点点赞数关注数都一样？？？？？？
+	//有一个问题是查询出的所有论点点赞数关注数都一样--->已解决
 	
 	@Override
 	public Debatetopicextend selectByPrimaryKey(Integer topicid) {
 		Debatetopicextend debatetopicextend = debatetopicMapper.selectByPrimaryKey(topicid);
-		/*List<Thesis> thesislist = debatetopicextend.getThesisList();
+		List<Thesis> thesislist = debatetopicextend.getThesisList();
 
 		//将论点列表进行排序,冒泡排序
 		for(int i=0;i<thesislist.size()-1;i++) {
@@ -50,7 +47,7 @@ public class DebateServiceImpl implements DebateService{
 			}
 			
 		}
-		debatetopicextend.setThesisList(thesislist);*/
+		debatetopicextend.setThesisList(thesislist);
 		return debatetopicextend;
 	}
 	
@@ -158,18 +155,18 @@ public class DebateServiceImpl implements DebateService{
 	//论点排序算法
 	public static long ThesisCount(Thesis d) {
 		
-		long sum = (long) (d.getAttention()+d.getLike()+(Math.log10(d.getView()))*4);
+		long sum = (long) (d.gettAttention()+d.gettLike()+(Math.log10(d.gettView()))*4);
 		
 		//s1距离发表的时间
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-		Date s = d.getPublishtime();
+		Date s = d.gettPublishtime();
 		Date now = new Date(); 
 		long l1 = now.getTime() - s.getTime();  
 		long day1 = l1 / (24 * 60 * 60 * 1000);  
 		long hour1 = (l1 / (60 * 60 * 1000) - day1 * 24); 
 		
 		//s2为距离发表内容的时间
-		Date s2 =d.getContenttime();
+		Date s2 =d.gettContenttime();
 		
 		long l2 = now.getTime()-s2.getTime();
 		long day2 = l2 / (24 * 60 * 60 * 1000);  

@@ -19,20 +19,20 @@
     <!-- 实现一对多查询，查询出一个辩题及该辩题下的所有论点 -->
     <collection property="thesisList" ofType="com.pjmike.lundao.po.Thesis">
 	    	<id column="thesisId" property="thesisid" jdbcType="INTEGER" />
-	    	<result column="debateId" property="debateId" jdbcType="INTEGER"/>
-		    <result column="description" property="description" jdbcType="VARCHAR" />
-		    <result column="view" property="view" jdbcType="INTEGER" />
-		    <result column="like" property="like" jdbcType="INTEGER" />
-		    <result column="attention" property="attention" jdbcType="INTEGER" />
-		    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-		    <result column="ask" property="ask" jdbcType="INTEGER" />
-		    <result column="question" property="question" jdbcType="INTEGER" />
-		    <result column="asklist" property="asklist" jdbcType="INTEGER" />
-		    <result column="questionlist" property="questionlist" jdbcType="INTEGER" />
-		    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-		    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-		    <result column="complete" property="complete" jdbcType="INTEGER" />
-		    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
+    <result column="t_debateId" property="tDebateid" jdbcType="INTEGER" />
+    <result column="t_description" property="tDescription" jdbcType="VARCHAR" />
+    <result column="t_view" property="tView" jdbcType="INTEGER" />
+    <result column="t_like" property="tLike" jdbcType="INTEGER" />
+    <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
+    <result column="t_dislike" property="tDislike" jdbcType="INTEGER" />
+    <result column="t_ask" property="tAsk" jdbcType="INTEGER" />
+    <result column="t_question" property="tQuestion" jdbcType="INTEGER" />
+    <result column="t_asklist" property="tAsklist" jdbcType="INTEGER" />
+    <result column="t_questionlist" property="tQuestionlist" jdbcType="INTEGER" />
+    <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
+    <result column="t_contentTime" property="tContenttime" jdbcType="TIMESTAMP" />
+    <result column="complete" property="complete" jdbcType="INTEGER" />
+    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
     </collection>
     
     
@@ -164,7 +164,7 @@
   <!-- 根据id查询辩题并返回该论点下所有的论点 -->
   <!-- 判断是否为空 -->
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select * from debateTopic d,thesis t where topicId = #{topicid} and  t.debateId = #{topicid}
+    select * from debateTopic d,thesis t where topicId = #{topicid} and  t.t_debateId = #{topicid}
   </select>
   
  <!--  查询全部辩题不带论点 -->

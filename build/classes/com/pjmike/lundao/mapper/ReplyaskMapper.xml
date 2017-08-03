@@ -3,20 +3,19 @@
 <mapper namespace="com.pjmike.lundao.mapper.ReplyaskMapper" >
   <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Replyask" >
     <id column="replyakdId" property="replyakdid" jdbcType="INTEGER" />
-    <result column="askId" property="askid" jdbcType="INTEGER" />
-    <result column="view" property="view" jdbcType="INTEGER" />
-    <result column="like" property="like" jdbcType="INTEGER" />
-    <result column="attention" property="attention" jdbcType="INTEGER" />
-    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-    <result column="reply" property="reply" jdbcType="INTEGER" />
-    <result column="replylist" property="replylist" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-    <result column="floor" property="floor" jdbcType="INTEGER" />
+    <result column="ra_askId" property="raAskid" jdbcType="INTEGER" />
+    <result column="ra_view" property="raView" jdbcType="INTEGER" />
+    <result column="ra_like" property="raLike" jdbcType="INTEGER" />
+    <result column="ra_attention" property="raAttention" jdbcType="INTEGER" />
+    <result column="ra_dislike" property="raDislike" jdbcType="INTEGER" />
+    <result column="ra_replyid" property="raReplyid" jdbcType="INTEGER" />
+    <result column="ra_username" property="raUsername" jdbcType="VARCHAR" />
+    <result column="ra_publishTime" property="raPublishtime" jdbcType="TIMESTAMP" />
+    <result column="ra_contentTime" property="raContenttime" jdbcType="TIMESTAMP" />
+    <result column="ra_floor" property="raFloor" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Replyask" extends="BaseResultMap" >
-    <result column="describtion" property="describtion" jdbcType="LONGVARCHAR" />
+    <result column="ra_describtion" property="raDescribtion" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,11 +76,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    replyakdId, askId, view, like, attention, dislike, reply, replylist, username, publishTime, 
-    contentTime, floor
+    replyakdId, ra_askId, ra_view, ra_like, ra_attention, ra_dislike, ra_replyid, ra_username, 
+    ra_publishTime, ra_contentTime, ra_floor
   </sql>
   <sql id="Blob_Column_List" >
-    describtion
+    ra_describtion
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pjmike.lundao.po.ReplyaskExample" >
     select
@@ -132,16 +131,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.pjmike.lundao.po.Replyask" >
-    insert into replyAsk (replyakdId, askId, view, 
-      like, attention, dislike, 
-      reply, replylist, username, 
-      publishTime, contentTime, floor, 
-      describtion)
-    values (#{replyakdid,jdbcType=INTEGER}, #{askid,jdbcType=INTEGER}, #{view,jdbcType=INTEGER}, 
-      #{like,jdbcType=INTEGER}, #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, 
-      #{reply,jdbcType=INTEGER}, #{replylist,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}, #{floor,jdbcType=INTEGER}, 
-      #{describtion,jdbcType=LONGVARCHAR})
+    insert into replyAsk (replyakdId, ra_askId, ra_view, 
+      ra_like, ra_attention, ra_dislike, 
+      ra_replyid, ra_username, ra_publishTime, 
+      ra_contentTime, ra_floor, ra_describtion
+      )
+    values (#{replyakdid,jdbcType=INTEGER}, #{raAskid,jdbcType=INTEGER}, #{raView,jdbcType=INTEGER}, 
+      #{raLike,jdbcType=INTEGER}, #{raAttention,jdbcType=INTEGER}, #{raDislike,jdbcType=INTEGER}, 
+      #{raReplyid,jdbcType=INTEGER}, #{raUsername,jdbcType=VARCHAR}, #{raPublishtime,jdbcType=TIMESTAMP}, 
+      #{raContenttime,jdbcType=TIMESTAMP}, #{raFloor,jdbcType=INTEGER}, #{raDescribtion,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Replyask" >
     insert into replyAsk
@@ -149,82 +148,76 @@
       <if test="replyakdid != null" >
         replyakdId,
       </if>
-      <if test="askid != null" >
-        askId,
+      <if test="raAskid != null" >
+        ra_askId,
       </if>
-      <if test="view != null" >
-        view,
+      <if test="raView != null" >
+        ra_view,
       </if>
-      <if test="like != null" >
-        like,
+      <if test="raLike != null" >
+        ra_like,
       </if>
-      <if test="attention != null" >
-        attention,
+      <if test="raAttention != null" >
+        ra_attention,
       </if>
-      <if test="dislike != null" >
-        dislike,
+      <if test="raDislike != null" >
+        ra_dislike,
       </if>
-      <if test="reply != null" >
-        reply,
+      <if test="raReplyid != null" >
+        ra_replyid,
       </if>
-      <if test="replylist != null" >
-        replylist,
+      <if test="raUsername != null" >
+        ra_username,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="raPublishtime != null" >
+        ra_publishTime,
       </if>
-      <if test="publishtime != null" >
-        publishTime,
+      <if test="raContenttime != null" >
+        ra_contentTime,
       </if>
-      <if test="contenttime != null" >
-        contentTime,
+      <if test="raFloor != null" >
+        ra_floor,
       </if>
-      <if test="floor != null" >
-        floor,
-      </if>
-      <if test="describtion != null" >
-        describtion,
+      <if test="raDescribtion != null" >
+        ra_describtion,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="replyakdid != null" >
         #{replyakdid,jdbcType=INTEGER},
       </if>
-      <if test="askid != null" >
-        #{askid,jdbcType=INTEGER},
+      <if test="raAskid != null" >
+        #{raAskid,jdbcType=INTEGER},
       </if>
-      <if test="view != null" >
-        #{view,jdbcType=INTEGER},
+      <if test="raView != null" >
+        #{raView,jdbcType=INTEGER},
       </if>
-      <if test="like != null" >
-        #{like,jdbcType=INTEGER},
+      <if test="raLike != null" >
+        #{raLike,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        #{attention,jdbcType=INTEGER},
+      <if test="raAttention != null" >
+        #{raAttention,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        #{dislike,jdbcType=INTEGER},
+      <if test="raDislike != null" >
+        #{raDislike,jdbcType=INTEGER},
       </if>
-      <if test="reply != null" >
-        #{reply,jdbcType=INTEGER},
+      <if test="raReplyid != null" >
+        #{raReplyid,jdbcType=INTEGER},
       </if>
-      <if test="replylist != null" >
-        #{replylist,jdbcType=INTEGER},
+      <if test="raUsername != null" >
+        #{raUsername,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="raPublishtime != null" >
+        #{raPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="publishtime != null" >
-        #{publishtime,jdbcType=TIMESTAMP},
+      <if test="raContenttime != null" >
+        #{raContenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="contenttime != null" >
-        #{contenttime,jdbcType=TIMESTAMP},
+      <if test="raFloor != null" >
+        #{raFloor,jdbcType=INTEGER},
       </if>
-      <if test="floor != null" >
-        #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="describtion != null" >
-        #{describtion,jdbcType=LONGVARCHAR},
+      <if test="raDescribtion != null" >
+        #{raDescribtion,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -240,41 +233,38 @@
       <if test="record.replyakdid != null" >
         replyakdId = #{record.replyakdid,jdbcType=INTEGER},
       </if>
-      <if test="record.askid != null" >
-        askId = #{record.askid,jdbcType=INTEGER},
+      <if test="record.raAskid != null" >
+        ra_askId = #{record.raAskid,jdbcType=INTEGER},
       </if>
-      <if test="record.view != null" >
-        view = #{record.view,jdbcType=INTEGER},
+      <if test="record.raView != null" >
+        ra_view = #{record.raView,jdbcType=INTEGER},
       </if>
-      <if test="record.like != null" >
-        like = #{record.like,jdbcType=INTEGER},
+      <if test="record.raLike != null" >
+        ra_like = #{record.raLike,jdbcType=INTEGER},
       </if>
-      <if test="record.attention != null" >
-        attention = #{record.attention,jdbcType=INTEGER},
+      <if test="record.raAttention != null" >
+        ra_attention = #{record.raAttention,jdbcType=INTEGER},
       </if>
-      <if test="record.dislike != null" >
-        dislike = #{record.dislike,jdbcType=INTEGER},
+      <if test="record.raDislike != null" >
+        ra_dislike = #{record.raDislike,jdbcType=INTEGER},
       </if>
-      <if test="record.reply != null" >
-        reply = #{record.reply,jdbcType=INTEGER},
+      <if test="record.raReplyid != null" >
+        ra_replyid = #{record.raReplyid,jdbcType=INTEGER},
       </if>
-      <if test="record.replylist != null" >
-        replylist = #{record.replylist,jdbcType=INTEGER},
+      <if test="record.raUsername != null" >
+        ra_username = #{record.raUsername,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.raPublishtime != null" >
+        ra_publishTime = #{record.raPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.publishtime != null" >
-        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      <if test="record.raContenttime != null" >
+        ra_contentTime = #{record.raContenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.contenttime != null" >
-        contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      <if test="record.raFloor != null" >
+        ra_floor = #{record.raFloor,jdbcType=INTEGER},
       </if>
-      <if test="record.floor != null" >
-        floor = #{record.floor,jdbcType=INTEGER},
-      </if>
-      <if test="record.describtion != null" >
-        describtion = #{record.describtion,jdbcType=LONGVARCHAR},
+      <if test="record.raDescribtion != null" >
+        ra_describtion = #{record.raDescribtion,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -284,18 +274,17 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update replyAsk
     set replyakdId = #{record.replyakdid,jdbcType=INTEGER},
-      askId = #{record.askid,jdbcType=INTEGER},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      reply = #{record.reply,jdbcType=INTEGER},
-      replylist = #{record.replylist,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      floor = #{record.floor,jdbcType=INTEGER},
-      describtion = #{record.describtion,jdbcType=LONGVARCHAR}
+      ra_askId = #{record.raAskid,jdbcType=INTEGER},
+      ra_view = #{record.raView,jdbcType=INTEGER},
+      ra_like = #{record.raLike,jdbcType=INTEGER},
+      ra_attention = #{record.raAttention,jdbcType=INTEGER},
+      ra_dislike = #{record.raDislike,jdbcType=INTEGER},
+      ra_replyid = #{record.raReplyid,jdbcType=INTEGER},
+      ra_username = #{record.raUsername,jdbcType=VARCHAR},
+      ra_publishTime = #{record.raPublishtime,jdbcType=TIMESTAMP},
+      ra_contentTime = #{record.raContenttime,jdbcType=TIMESTAMP},
+      ra_floor = #{record.raFloor,jdbcType=INTEGER},
+      ra_describtion = #{record.raDescribtion,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -303,17 +292,16 @@
   <update id="updateByExample" parameterType="map" >
     update replyAsk
     set replyakdId = #{record.replyakdid,jdbcType=INTEGER},
-      askId = #{record.askid,jdbcType=INTEGER},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      reply = #{record.reply,jdbcType=INTEGER},
-      replylist = #{record.replylist,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      floor = #{record.floor,jdbcType=INTEGER}
+      ra_askId = #{record.raAskid,jdbcType=INTEGER},
+      ra_view = #{record.raView,jdbcType=INTEGER},
+      ra_like = #{record.raLike,jdbcType=INTEGER},
+      ra_attention = #{record.raAttention,jdbcType=INTEGER},
+      ra_dislike = #{record.raDislike,jdbcType=INTEGER},
+      ra_replyid = #{record.raReplyid,jdbcType=INTEGER},
+      ra_username = #{record.raUsername,jdbcType=VARCHAR},
+      ra_publishTime = #{record.raPublishtime,jdbcType=TIMESTAMP},
+      ra_contentTime = #{record.raContenttime,jdbcType=TIMESTAMP},
+      ra_floor = #{record.raFloor,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -321,74 +309,69 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Replyask" >
     update replyAsk
     <set >
-      <if test="askid != null" >
-        askId = #{askid,jdbcType=INTEGER},
+      <if test="raAskid != null" >
+        ra_askId = #{raAskid,jdbcType=INTEGER},
       </if>
-      <if test="view != null" >
-        view = #{view,jdbcType=INTEGER},
+      <if test="raView != null" >
+        ra_view = #{raView,jdbcType=INTEGER},
       </if>
-      <if test="like != null" >
-        like = #{like,jdbcType=INTEGER},
+      <if test="raLike != null" >
+        ra_like = #{raLike,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        attention = #{attention,jdbcType=INTEGER},
+      <if test="raAttention != null" >
+        ra_attention = #{raAttention,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        dislike = #{dislike,jdbcType=INTEGER},
+      <if test="raDislike != null" >
+        ra_dislike = #{raDislike,jdbcType=INTEGER},
       </if>
-      <if test="reply != null" >
-        reply = #{reply,jdbcType=INTEGER},
+      <if test="raReplyid != null" >
+        ra_replyid = #{raReplyid,jdbcType=INTEGER},
       </if>
-      <if test="replylist != null" >
-        replylist = #{replylist,jdbcType=INTEGER},
+      <if test="raUsername != null" >
+        ra_username = #{raUsername,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="raPublishtime != null" >
+        ra_publishTime = #{raPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="publishtime != null" >
-        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      <if test="raContenttime != null" >
+        ra_contentTime = #{raContenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="contenttime != null" >
-        contentTime = #{contenttime,jdbcType=TIMESTAMP},
+      <if test="raFloor != null" >
+        ra_floor = #{raFloor,jdbcType=INTEGER},
       </if>
-      <if test="floor != null" >
-        floor = #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="describtion != null" >
-        describtion = #{describtion,jdbcType=LONGVARCHAR},
+      <if test="raDescribtion != null" >
+        ra_describtion = #{raDescribtion,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where replyakdId = #{replyakdid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pjmike.lundao.po.Replyask" >
     update replyAsk
-    set askId = #{askid,jdbcType=INTEGER},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      reply = #{reply,jdbcType=INTEGER},
-      replylist = #{replylist,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      floor = #{floor,jdbcType=INTEGER},
-      describtion = #{describtion,jdbcType=LONGVARCHAR}
+    set ra_askId = #{raAskid,jdbcType=INTEGER},
+      ra_view = #{raView,jdbcType=INTEGER},
+      ra_like = #{raLike,jdbcType=INTEGER},
+      ra_attention = #{raAttention,jdbcType=INTEGER},
+      ra_dislike = #{raDislike,jdbcType=INTEGER},
+      ra_replyid = #{raReplyid,jdbcType=INTEGER},
+      ra_username = #{raUsername,jdbcType=VARCHAR},
+      ra_publishTime = #{raPublishtime,jdbcType=TIMESTAMP},
+      ra_contentTime = #{raContenttime,jdbcType=TIMESTAMP},
+      ra_floor = #{raFloor,jdbcType=INTEGER},
+      ra_describtion = #{raDescribtion,jdbcType=LONGVARCHAR}
     where replyakdId = #{replyakdid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Replyask" >
     update replyAsk
-    set askId = #{askid,jdbcType=INTEGER},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      reply = #{reply,jdbcType=INTEGER},
-      replylist = #{replylist,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      floor = #{floor,jdbcType=INTEGER}
+    set ra_askId = #{raAskid,jdbcType=INTEGER},
+      ra_view = #{raView,jdbcType=INTEGER},
+      ra_like = #{raLike,jdbcType=INTEGER},
+      ra_attention = #{raAttention,jdbcType=INTEGER},
+      ra_dislike = #{raDislike,jdbcType=INTEGER},
+      ra_replyid = #{raReplyid,jdbcType=INTEGER},
+      ra_username = #{raUsername,jdbcType=VARCHAR},
+      ra_publishTime = #{raPublishtime,jdbcType=TIMESTAMP},
+      ra_contentTime = #{raContenttime,jdbcType=TIMESTAMP},
+      ra_floor = #{raFloor,jdbcType=INTEGER}
     where replyakdId = #{replyakdid,jdbcType=INTEGER}
   </update>
 </mapper>

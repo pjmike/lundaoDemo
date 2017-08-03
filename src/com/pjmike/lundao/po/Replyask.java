@@ -5,29 +5,27 @@ import java.util.Date;
 public class Replyask {
     private Integer replyakdid;
 
-    private Integer askid;
+    private Integer raAskid;
 
-    private Integer view;
+    private Integer raView;
 
-    private Integer like;
+    private Integer raLike;
 
-    private Integer attention;
+    private Integer raAttention;
 
-    private Integer dislike;
+    private Integer raDislike;
 
-    private Integer reply;
+    private Integer raReplyid;
 
-    private Integer replylist;
+    private String raUsername;
 
-    private String username;
+    private Date raPublishtime;
 
-    private Date publishtime;
+    private Date raContenttime;
 
-    private Date contenttime;
+    private Integer raFloor;
 
-    private Integer floor;
-
-    private String describtion;
+    private String raDescribtion;
 
     public Integer getReplyakdid() {
         return replyakdid;
@@ -37,99 +35,91 @@ public class Replyask {
         this.replyakdid = replyakdid;
     }
 
-    public Integer getAskid() {
-        return askid;
+    public Integer getRaAskid() {
+        return raAskid;
     }
 
-    public void setAskid(Integer askid) {
-        this.askid = askid;
+    public void setRaAskid(Integer raAskid) {
+        this.raAskid = raAskid;
     }
 
-    public Integer getView() {
-        return view;
+    public Integer getRaView() {
+        return raView;
     }
 
-    public void setView(Integer view) {
-        this.view = view;
+    public void setRaView(Integer raView) {
+        this.raView = raView;
     }
 
-    public Integer getLike() {
-        return like;
+    public Integer getRaLike() {
+        return raLike;
     }
 
-    public void setLike(Integer like) {
-        this.like = like;
+    public void setRaLike(Integer raLike) {
+        this.raLike = raLike;
     }
 
-    public Integer getAttention() {
-        return attention;
+    public Integer getRaAttention() {
+        return raAttention;
     }
 
-    public void setAttention(Integer attention) {
-        this.attention = attention;
+    public void setRaAttention(Integer raAttention) {
+        this.raAttention = raAttention;
     }
 
-    public Integer getDislike() {
-        return dislike;
+    public Integer getRaDislike() {
+        return raDislike;
     }
 
-    public void setDislike(Integer dislike) {
-        this.dislike = dislike;
+    public void setRaDislike(Integer raDislike) {
+        this.raDislike = raDislike;
     }
 
-    public Integer getReply() {
-        return reply;
+    public Integer getRaReplyid() {
+        return raReplyid;
     }
 
-    public void setReply(Integer reply) {
-        this.reply = reply;
+    public void setRaReplyid(Integer raReplyid) {
+        this.raReplyid = raReplyid;
     }
 
-    public Integer getReplylist() {
-        return replylist;
+    public String getRaUsername() {
+        return raUsername;
     }
 
-    public void setReplylist(Integer replylist) {
-        this.replylist = replylist;
+    public void setRaUsername(String raUsername) {
+        this.raUsername = raUsername == null ? null : raUsername.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public Date getRaPublishtime() {
+        return raPublishtime;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setRaPublishtime(Date raPublishtime) {
+        this.raPublishtime = raPublishtime;
     }
 
-    public Date getPublishtime() {
-        return publishtime;
+    public Date getRaContenttime() {
+        return raContenttime;
     }
 
-    public void setPublishtime(Date publishtime) {
-        this.publishtime = publishtime;
+    public void setRaContenttime(Date raContenttime) {
+        this.raContenttime = raContenttime;
     }
 
-    public Date getContenttime() {
-        return contenttime;
+    public Integer getRaFloor() {
+        return raFloor;
     }
 
-    public void setContenttime(Date contenttime) {
-        this.contenttime = contenttime;
+    public void setRaFloor(Integer raFloor) {
+        this.raFloor = raFloor;
     }
 
-    public Integer getFloor() {
-        return floor;
+    public String getRaDescribtion() {
+        return raDescribtion;
     }
 
-    public void setFloor(Integer floor) {
-        this.floor = floor;
-    }
-
-    public String getDescribtion() {
-        return describtion;
-    }
-
-    public void setDescribtion(String describtion) {
-        this.describtion = describtion == null ? null : describtion.trim();
+    public void setRaDescribtion(String raDescribtion) {
+        this.raDescribtion = raDescribtion == null ? null : raDescribtion.trim();
     }
 }

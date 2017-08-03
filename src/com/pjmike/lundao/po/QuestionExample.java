@@ -105,943 +105,943 @@ public class QuestionExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andQuestionidIsNull() {
-            addCriterion("questionId is null");
+        public Criteria andQQuestionidIsNull() {
+            addCriterion("q_questionId is null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidIsNotNull() {
-            addCriterion("questionId is not null");
+        public Criteria andQQuestionidIsNotNull() {
+            addCriterion("q_questionId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidEqualTo(Integer value) {
-            addCriterion("questionId =", value, "questionid");
+        public Criteria andQQuestionidEqualTo(Integer value) {
+            addCriterion("q_questionId =", value, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidNotEqualTo(Integer value) {
-            addCriterion("questionId <>", value, "questionid");
+        public Criteria andQQuestionidNotEqualTo(Integer value) {
+            addCriterion("q_questionId <>", value, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidGreaterThan(Integer value) {
-            addCriterion("questionId >", value, "questionid");
+        public Criteria andQQuestionidGreaterThan(Integer value) {
+            addCriterion("q_questionId >", value, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("questionId >=", value, "questionid");
+        public Criteria andQQuestionidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_questionId >=", value, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidLessThan(Integer value) {
-            addCriterion("questionId <", value, "questionid");
+        public Criteria andQQuestionidLessThan(Integer value) {
+            addCriterion("q_questionId <", value, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidLessThanOrEqualTo(Integer value) {
-            addCriterion("questionId <=", value, "questionid");
+        public Criteria andQQuestionidLessThanOrEqualTo(Integer value) {
+            addCriterion("q_questionId <=", value, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidIn(List<Integer> values) {
-            addCriterion("questionId in", values, "questionid");
+        public Criteria andQQuestionidIn(List<Integer> values) {
+            addCriterion("q_questionId in", values, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidNotIn(List<Integer> values) {
-            addCriterion("questionId not in", values, "questionid");
+        public Criteria andQQuestionidNotIn(List<Integer> values) {
+            addCriterion("q_questionId not in", values, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidBetween(Integer value1, Integer value2) {
-            addCriterion("questionId between", value1, value2, "questionid");
+        public Criteria andQQuestionidBetween(Integer value1, Integer value2) {
+            addCriterion("q_questionId between", value1, value2, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andQuestionidNotBetween(Integer value1, Integer value2) {
-            addCriterion("questionId not between", value1, value2, "questionid");
+        public Criteria andQQuestionidNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_questionId not between", value1, value2, "qQuestionid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidIsNull() {
-            addCriterion("debateId is null");
+        public Criteria andQDebateidIsNull() {
+            addCriterion("q_debateId is null");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidIsNotNull() {
-            addCriterion("debateId is not null");
+        public Criteria andQDebateidIsNotNull() {
+            addCriterion("q_debateId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidEqualTo(Integer value) {
-            addCriterion("debateId =", value, "debateid");
+        public Criteria andQDebateidEqualTo(Integer value) {
+            addCriterion("q_debateId =", value, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidNotEqualTo(Integer value) {
-            addCriterion("debateId <>", value, "debateid");
+        public Criteria andQDebateidNotEqualTo(Integer value) {
+            addCriterion("q_debateId <>", value, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidGreaterThan(Integer value) {
-            addCriterion("debateId >", value, "debateid");
+        public Criteria andQDebateidGreaterThan(Integer value) {
+            addCriterion("q_debateId >", value, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("debateId >=", value, "debateid");
+        public Criteria andQDebateidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_debateId >=", value, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidLessThan(Integer value) {
-            addCriterion("debateId <", value, "debateid");
+        public Criteria andQDebateidLessThan(Integer value) {
+            addCriterion("q_debateId <", value, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidLessThanOrEqualTo(Integer value) {
-            addCriterion("debateId <=", value, "debateid");
+        public Criteria andQDebateidLessThanOrEqualTo(Integer value) {
+            addCriterion("q_debateId <=", value, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidIn(List<Integer> values) {
-            addCriterion("debateId in", values, "debateid");
+        public Criteria andQDebateidIn(List<Integer> values) {
+            addCriterion("q_debateId in", values, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidNotIn(List<Integer> values) {
-            addCriterion("debateId not in", values, "debateid");
+        public Criteria andQDebateidNotIn(List<Integer> values) {
+            addCriterion("q_debateId not in", values, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidBetween(Integer value1, Integer value2) {
-            addCriterion("debateId between", value1, value2, "debateid");
+        public Criteria andQDebateidBetween(Integer value1, Integer value2) {
+            addCriterion("q_debateId between", value1, value2, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDebateidNotBetween(Integer value1, Integer value2) {
-            addCriterion("debateId not between", value1, value2, "debateid");
+        public Criteria andQDebateidNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_debateId not between", value1, value2, "qDebateid");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionIsNull() {
-            addCriterion("describtion is null");
+        public Criteria andQDescribtionIsNull() {
+            addCriterion("q_describtion is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionIsNotNull() {
-            addCriterion("describtion is not null");
+        public Criteria andQDescribtionIsNotNull() {
+            addCriterion("q_describtion is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionEqualTo(String value) {
-            addCriterion("describtion =", value, "describtion");
+        public Criteria andQDescribtionEqualTo(String value) {
+            addCriterion("q_describtion =", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionNotEqualTo(String value) {
-            addCriterion("describtion <>", value, "describtion");
+        public Criteria andQDescribtionNotEqualTo(String value) {
+            addCriterion("q_describtion <>", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionGreaterThan(String value) {
-            addCriterion("describtion >", value, "describtion");
+        public Criteria andQDescribtionGreaterThan(String value) {
+            addCriterion("q_describtion >", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionGreaterThanOrEqualTo(String value) {
-            addCriterion("describtion >=", value, "describtion");
+        public Criteria andQDescribtionGreaterThanOrEqualTo(String value) {
+            addCriterion("q_describtion >=", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionLessThan(String value) {
-            addCriterion("describtion <", value, "describtion");
+        public Criteria andQDescribtionLessThan(String value) {
+            addCriterion("q_describtion <", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionLessThanOrEqualTo(String value) {
-            addCriterion("describtion <=", value, "describtion");
+        public Criteria andQDescribtionLessThanOrEqualTo(String value) {
+            addCriterion("q_describtion <=", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionLike(String value) {
-            addCriterion("describtion like", value, "describtion");
+        public Criteria andQDescribtionLike(String value) {
+            addCriterion("q_describtion like", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionNotLike(String value) {
-            addCriterion("describtion not like", value, "describtion");
+        public Criteria andQDescribtionNotLike(String value) {
+            addCriterion("q_describtion not like", value, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionIn(List<String> values) {
-            addCriterion("describtion in", values, "describtion");
+        public Criteria andQDescribtionIn(List<String> values) {
+            addCriterion("q_describtion in", values, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionNotIn(List<String> values) {
-            addCriterion("describtion not in", values, "describtion");
+        public Criteria andQDescribtionNotIn(List<String> values) {
+            addCriterion("q_describtion not in", values, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionBetween(String value1, String value2) {
-            addCriterion("describtion between", value1, value2, "describtion");
+        public Criteria andQDescribtionBetween(String value1, String value2) {
+            addCriterion("q_describtion between", value1, value2, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andDescribtionNotBetween(String value1, String value2) {
-            addCriterion("describtion not between", value1, value2, "describtion");
+        public Criteria andQDescribtionNotBetween(String value1, String value2) {
+            addCriterion("q_describtion not between", value1, value2, "qDescribtion");
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNull() {
-            addCriterion("content is null");
+        public Criteria andQContentIsNull() {
+            addCriterion("q_content is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNotNull() {
-            addCriterion("content is not null");
+        public Criteria andQContentIsNotNull() {
+            addCriterion("q_content is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContentEqualTo(String value) {
-            addCriterion("content =", value, "content");
+        public Criteria andQContentEqualTo(String value) {
+            addCriterion("q_content =", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotEqualTo(String value) {
-            addCriterion("content <>", value, "content");
+        public Criteria andQContentNotEqualTo(String value) {
+            addCriterion("q_content <>", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThan(String value) {
-            addCriterion("content >", value, "content");
+        public Criteria andQContentGreaterThan(String value) {
+            addCriterion("q_content >", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThanOrEqualTo(String value) {
-            addCriterion("content >=", value, "content");
+        public Criteria andQContentGreaterThanOrEqualTo(String value) {
+            addCriterion("q_content >=", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThan(String value) {
-            addCriterion("content <", value, "content");
+        public Criteria andQContentLessThan(String value) {
+            addCriterion("q_content <", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThanOrEqualTo(String value) {
-            addCriterion("content <=", value, "content");
+        public Criteria andQContentLessThanOrEqualTo(String value) {
+            addCriterion("q_content <=", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentLike(String value) {
-            addCriterion("content like", value, "content");
+        public Criteria andQContentLike(String value) {
+            addCriterion("q_content like", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotLike(String value) {
-            addCriterion("content not like", value, "content");
+        public Criteria andQContentNotLike(String value) {
+            addCriterion("q_content not like", value, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentIn(List<String> values) {
-            addCriterion("content in", values, "content");
+        public Criteria andQContentIn(List<String> values) {
+            addCriterion("q_content in", values, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotIn(List<String> values) {
-            addCriterion("content not in", values, "content");
+        public Criteria andQContentNotIn(List<String> values) {
+            addCriterion("q_content not in", values, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentBetween(String value1, String value2) {
-            addCriterion("content between", value1, value2, "content");
+        public Criteria andQContentBetween(String value1, String value2) {
+            addCriterion("q_content between", value1, value2, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotBetween(String value1, String value2) {
-            addCriterion("content not between", value1, value2, "content");
+        public Criteria andQContentNotBetween(String value1, String value2) {
+            addCriterion("q_content not between", value1, value2, "qContent");
             return (Criteria) this;
         }
 
-        public Criteria andViewIsNull() {
-            addCriterion("view is null");
+        public Criteria andQStatusIsNull() {
+            addCriterion("q_status is null");
             return (Criteria) this;
         }
 
-        public Criteria andViewIsNotNull() {
-            addCriterion("view is not null");
+        public Criteria andQStatusIsNotNull() {
+            addCriterion("q_status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andViewEqualTo(Integer value) {
-            addCriterion("view =", value, "view");
+        public Criteria andQStatusEqualTo(String value) {
+            addCriterion("q_status =", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewNotEqualTo(Integer value) {
-            addCriterion("view <>", value, "view");
+        public Criteria andQStatusNotEqualTo(String value) {
+            addCriterion("q_status <>", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewGreaterThan(Integer value) {
-            addCriterion("view >", value, "view");
+        public Criteria andQStatusGreaterThan(String value) {
+            addCriterion("q_status >", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewGreaterThanOrEqualTo(Integer value) {
-            addCriterion("view >=", value, "view");
+        public Criteria andQStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("q_status >=", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewLessThan(Integer value) {
-            addCriterion("view <", value, "view");
+        public Criteria andQStatusLessThan(String value) {
+            addCriterion("q_status <", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewLessThanOrEqualTo(Integer value) {
-            addCriterion("view <=", value, "view");
+        public Criteria andQStatusLessThanOrEqualTo(String value) {
+            addCriterion("q_status <=", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewIn(List<Integer> values) {
-            addCriterion("view in", values, "view");
+        public Criteria andQStatusLike(String value) {
+            addCriterion("q_status like", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewNotIn(List<Integer> values) {
-            addCriterion("view not in", values, "view");
+        public Criteria andQStatusNotLike(String value) {
+            addCriterion("q_status not like", value, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewBetween(Integer value1, Integer value2) {
-            addCriterion("view between", value1, value2, "view");
+        public Criteria andQStatusIn(List<String> values) {
+            addCriterion("q_status in", values, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andViewNotBetween(Integer value1, Integer value2) {
-            addCriterion("view not between", value1, value2, "view");
+        public Criteria andQStatusNotIn(List<String> values) {
+            addCriterion("q_status not in", values, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andLikeIsNull() {
-            addCriterion("like is null");
+        public Criteria andQStatusBetween(String value1, String value2) {
+            addCriterion("q_status between", value1, value2, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andLikeIsNotNull() {
-            addCriterion("like is not null");
+        public Criteria andQStatusNotBetween(String value1, String value2) {
+            addCriterion("q_status not between", value1, value2, "qStatus");
             return (Criteria) this;
         }
 
-        public Criteria andLikeEqualTo(Integer value) {
-            addCriterion("like =", value, "like");
+        public Criteria andQViewIsNull() {
+            addCriterion("q_view is null");
             return (Criteria) this;
         }
 
-        public Criteria andLikeNotEqualTo(Integer value) {
-            addCriterion("like <>", value, "like");
+        public Criteria andQViewIsNotNull() {
+            addCriterion("q_view is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLikeGreaterThan(Integer value) {
-            addCriterion("like >", value, "like");
+        public Criteria andQViewEqualTo(Integer value) {
+            addCriterion("q_view =", value, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("like >=", value, "like");
+        public Criteria andQViewNotEqualTo(Integer value) {
+            addCriterion("q_view <>", value, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeLessThan(Integer value) {
-            addCriterion("like <", value, "like");
+        public Criteria andQViewGreaterThan(Integer value) {
+            addCriterion("q_view >", value, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeLessThanOrEqualTo(Integer value) {
-            addCriterion("like <=", value, "like");
+        public Criteria andQViewGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_view >=", value, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeIn(List<Integer> values) {
-            addCriterion("like in", values, "like");
+        public Criteria andQViewLessThan(Integer value) {
+            addCriterion("q_view <", value, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeNotIn(List<Integer> values) {
-            addCriterion("like not in", values, "like");
+        public Criteria andQViewLessThanOrEqualTo(Integer value) {
+            addCriterion("q_view <=", value, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeBetween(Integer value1, Integer value2) {
-            addCriterion("like between", value1, value2, "like");
+        public Criteria andQViewIn(List<Integer> values) {
+            addCriterion("q_view in", values, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andLikeNotBetween(Integer value1, Integer value2) {
-            addCriterion("like not between", value1, value2, "like");
+        public Criteria andQViewNotIn(List<Integer> values) {
+            addCriterion("q_view not in", values, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionIsNull() {
-            addCriterion("attention is null");
+        public Criteria andQViewBetween(Integer value1, Integer value2) {
+            addCriterion("q_view between", value1, value2, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionIsNotNull() {
-            addCriterion("attention is not null");
+        public Criteria andQViewNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_view not between", value1, value2, "qView");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionEqualTo(Integer value) {
-            addCriterion("attention =", value, "attention");
+        public Criteria andQLikeIsNull() {
+            addCriterion("q_like is null");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionNotEqualTo(Integer value) {
-            addCriterion("attention <>", value, "attention");
+        public Criteria andQLikeIsNotNull() {
+            addCriterion("q_like is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionGreaterThan(Integer value) {
-            addCriterion("attention >", value, "attention");
+        public Criteria andQLikeEqualTo(Integer value) {
+            addCriterion("q_like =", value, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionGreaterThanOrEqualTo(Integer value) {
-            addCriterion("attention >=", value, "attention");
+        public Criteria andQLikeNotEqualTo(Integer value) {
+            addCriterion("q_like <>", value, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionLessThan(Integer value) {
-            addCriterion("attention <", value, "attention");
+        public Criteria andQLikeGreaterThan(Integer value) {
+            addCriterion("q_like >", value, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionLessThanOrEqualTo(Integer value) {
-            addCriterion("attention <=", value, "attention");
+        public Criteria andQLikeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_like >=", value, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionIn(List<Integer> values) {
-            addCriterion("attention in", values, "attention");
+        public Criteria andQLikeLessThan(Integer value) {
+            addCriterion("q_like <", value, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionNotIn(List<Integer> values) {
-            addCriterion("attention not in", values, "attention");
+        public Criteria andQLikeLessThanOrEqualTo(Integer value) {
+            addCriterion("q_like <=", value, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionBetween(Integer value1, Integer value2) {
-            addCriterion("attention between", value1, value2, "attention");
+        public Criteria andQLikeIn(List<Integer> values) {
+            addCriterion("q_like in", values, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andAttentionNotBetween(Integer value1, Integer value2) {
-            addCriterion("attention not between", value1, value2, "attention");
+        public Criteria andQLikeNotIn(List<Integer> values) {
+            addCriterion("q_like not in", values, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeIsNull() {
-            addCriterion("dislike is null");
+        public Criteria andQLikeBetween(Integer value1, Integer value2) {
+            addCriterion("q_like between", value1, value2, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeIsNotNull() {
-            addCriterion("dislike is not null");
+        public Criteria andQLikeNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_like not between", value1, value2, "qLike");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeEqualTo(Integer value) {
-            addCriterion("dislike =", value, "dislike");
+        public Criteria andQAttentionIsNull() {
+            addCriterion("q_attention is null");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeNotEqualTo(Integer value) {
-            addCriterion("dislike <>", value, "dislike");
+        public Criteria andQAttentionIsNotNull() {
+            addCriterion("q_attention is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeGreaterThan(Integer value) {
-            addCriterion("dislike >", value, "dislike");
+        public Criteria andQAttentionEqualTo(Integer value) {
+            addCriterion("q_attention =", value, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("dislike >=", value, "dislike");
+        public Criteria andQAttentionNotEqualTo(Integer value) {
+            addCriterion("q_attention <>", value, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeLessThan(Integer value) {
-            addCriterion("dislike <", value, "dislike");
+        public Criteria andQAttentionGreaterThan(Integer value) {
+            addCriterion("q_attention >", value, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeLessThanOrEqualTo(Integer value) {
-            addCriterion("dislike <=", value, "dislike");
+        public Criteria andQAttentionGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_attention >=", value, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeIn(List<Integer> values) {
-            addCriterion("dislike in", values, "dislike");
+        public Criteria andQAttentionLessThan(Integer value) {
+            addCriterion("q_attention <", value, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeNotIn(List<Integer> values) {
-            addCriterion("dislike not in", values, "dislike");
+        public Criteria andQAttentionLessThanOrEqualTo(Integer value) {
+            addCriterion("q_attention <=", value, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeBetween(Integer value1, Integer value2) {
-            addCriterion("dislike between", value1, value2, "dislike");
+        public Criteria andQAttentionIn(List<Integer> values) {
+            addCriterion("q_attention in", values, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andDislikeNotBetween(Integer value1, Integer value2) {
-            addCriterion("dislike not between", value1, value2, "dislike");
+        public Criteria andQAttentionNotIn(List<Integer> values) {
+            addCriterion("q_attention not in", values, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andReplyIsNull() {
-            addCriterion("reply is null");
+        public Criteria andQAttentionBetween(Integer value1, Integer value2) {
+            addCriterion("q_attention between", value1, value2, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andReplyIsNotNull() {
-            addCriterion("reply is not null");
+        public Criteria andQAttentionNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_attention not between", value1, value2, "qAttention");
             return (Criteria) this;
         }
 
-        public Criteria andReplyEqualTo(Integer value) {
-            addCriterion("reply =", value, "reply");
+        public Criteria andQDislikeIsNull() {
+            addCriterion("q_dislike is null");
             return (Criteria) this;
         }
 
-        public Criteria andReplyNotEqualTo(Integer value) {
-            addCriterion("reply <>", value, "reply");
+        public Criteria andQDislikeIsNotNull() {
+            addCriterion("q_dislike is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReplyGreaterThan(Integer value) {
-            addCriterion("reply >", value, "reply");
+        public Criteria andQDislikeEqualTo(Integer value) {
+            addCriterion("q_dislike =", value, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplyGreaterThanOrEqualTo(Integer value) {
-            addCriterion("reply >=", value, "reply");
+        public Criteria andQDislikeNotEqualTo(Integer value) {
+            addCriterion("q_dislike <>", value, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplyLessThan(Integer value) {
-            addCriterion("reply <", value, "reply");
+        public Criteria andQDislikeGreaterThan(Integer value) {
+            addCriterion("q_dislike >", value, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplyLessThanOrEqualTo(Integer value) {
-            addCriterion("reply <=", value, "reply");
+        public Criteria andQDislikeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_dislike >=", value, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplyIn(List<Integer> values) {
-            addCriterion("reply in", values, "reply");
+        public Criteria andQDislikeLessThan(Integer value) {
+            addCriterion("q_dislike <", value, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplyNotIn(List<Integer> values) {
-            addCriterion("reply not in", values, "reply");
+        public Criteria andQDislikeLessThanOrEqualTo(Integer value) {
+            addCriterion("q_dislike <=", value, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplyBetween(Integer value1, Integer value2) {
-            addCriterion("reply between", value1, value2, "reply");
+        public Criteria andQDislikeIn(List<Integer> values) {
+            addCriterion("q_dislike in", values, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplyNotBetween(Integer value1, Integer value2) {
-            addCriterion("reply not between", value1, value2, "reply");
+        public Criteria andQDislikeNotIn(List<Integer> values) {
+            addCriterion("q_dislike not in", values, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistIsNull() {
-            addCriterion("replylist is null");
+        public Criteria andQDislikeBetween(Integer value1, Integer value2) {
+            addCriterion("q_dislike between", value1, value2, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistIsNotNull() {
-            addCriterion("replylist is not null");
+        public Criteria andQDislikeNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_dislike not between", value1, value2, "qDislike");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistEqualTo(Integer value) {
-            addCriterion("replylist =", value, "replylist");
+        public Criteria andQReplyIsNull() {
+            addCriterion("q_reply is null");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistNotEqualTo(Integer value) {
-            addCriterion("replylist <>", value, "replylist");
+        public Criteria andQReplyIsNotNull() {
+            addCriterion("q_reply is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistGreaterThan(Integer value) {
-            addCriterion("replylist >", value, "replylist");
+        public Criteria andQReplyEqualTo(Integer value) {
+            addCriterion("q_reply =", value, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistGreaterThanOrEqualTo(Integer value) {
-            addCriterion("replylist >=", value, "replylist");
+        public Criteria andQReplyNotEqualTo(Integer value) {
+            addCriterion("q_reply <>", value, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistLessThan(Integer value) {
-            addCriterion("replylist <", value, "replylist");
+        public Criteria andQReplyGreaterThan(Integer value) {
+            addCriterion("q_reply >", value, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistLessThanOrEqualTo(Integer value) {
-            addCriterion("replylist <=", value, "replylist");
+        public Criteria andQReplyGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_reply >=", value, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistIn(List<Integer> values) {
-            addCriterion("replylist in", values, "replylist");
+        public Criteria andQReplyLessThan(Integer value) {
+            addCriterion("q_reply <", value, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistNotIn(List<Integer> values) {
-            addCriterion("replylist not in", values, "replylist");
+        public Criteria andQReplyLessThanOrEqualTo(Integer value) {
+            addCriterion("q_reply <=", value, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistBetween(Integer value1, Integer value2) {
-            addCriterion("replylist between", value1, value2, "replylist");
+        public Criteria andQReplyIn(List<Integer> values) {
+            addCriterion("q_reply in", values, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andReplylistNotBetween(Integer value1, Integer value2) {
-            addCriterion("replylist not between", value1, value2, "replylist");
+        public Criteria andQReplyNotIn(List<Integer> values) {
+            addCriterion("q_reply not in", values, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountIsNull() {
-            addCriterion("clickcount is null");
+        public Criteria andQReplyBetween(Integer value1, Integer value2) {
+            addCriterion("q_reply between", value1, value2, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountIsNotNull() {
-            addCriterion("clickcount is not null");
+        public Criteria andQReplyNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_reply not between", value1, value2, "qReply");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountEqualTo(Integer value) {
-            addCriterion("clickcount =", value, "clickcount");
+        public Criteria andQReplylistIsNull() {
+            addCriterion("q_replylist is null");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountNotEqualTo(Integer value) {
-            addCriterion("clickcount <>", value, "clickcount");
+        public Criteria andQReplylistIsNotNull() {
+            addCriterion("q_replylist is not null");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountGreaterThan(Integer value) {
-            addCriterion("clickcount >", value, "clickcount");
+        public Criteria andQReplylistEqualTo(Integer value) {
+            addCriterion("q_replylist =", value, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("clickcount >=", value, "clickcount");
+        public Criteria andQReplylistNotEqualTo(Integer value) {
+            addCriterion("q_replylist <>", value, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountLessThan(Integer value) {
-            addCriterion("clickcount <", value, "clickcount");
+        public Criteria andQReplylistGreaterThan(Integer value) {
+            addCriterion("q_replylist >", value, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountLessThanOrEqualTo(Integer value) {
-            addCriterion("clickcount <=", value, "clickcount");
+        public Criteria andQReplylistGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_replylist >=", value, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountIn(List<Integer> values) {
-            addCriterion("clickcount in", values, "clickcount");
+        public Criteria andQReplylistLessThan(Integer value) {
+            addCriterion("q_replylist <", value, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountNotIn(List<Integer> values) {
-            addCriterion("clickcount not in", values, "clickcount");
+        public Criteria andQReplylistLessThanOrEqualTo(Integer value) {
+            addCriterion("q_replylist <=", value, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountBetween(Integer value1, Integer value2) {
-            addCriterion("clickcount between", value1, value2, "clickcount");
+        public Criteria andQReplylistIn(List<Integer> values) {
+            addCriterion("q_replylist in", values, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andClickcountNotBetween(Integer value1, Integer value2) {
-            addCriterion("clickcount not between", value1, value2, "clickcount");
+        public Criteria andQReplylistNotIn(List<Integer> values) {
+            addCriterion("q_replylist not in", values, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameIsNull() {
-            addCriterion("username is null");
+        public Criteria andQReplylistBetween(Integer value1, Integer value2) {
+            addCriterion("q_replylist between", value1, value2, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameIsNotNull() {
-            addCriterion("username is not null");
+        public Criteria andQReplylistNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_replylist not between", value1, value2, "qReplylist");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameEqualTo(String value) {
-            addCriterion("username =", value, "username");
+        public Criteria andQClickcountIsNull() {
+            addCriterion("q_clickcount is null");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotEqualTo(String value) {
-            addCriterion("username <>", value, "username");
+        public Criteria andQClickcountIsNotNull() {
+            addCriterion("q_clickcount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameGreaterThan(String value) {
-            addCriterion("username >", value, "username");
+        public Criteria andQClickcountEqualTo(Integer value) {
+            addCriterion("q_clickcount =", value, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameGreaterThanOrEqualTo(String value) {
-            addCriterion("username >=", value, "username");
+        public Criteria andQClickcountNotEqualTo(Integer value) {
+            addCriterion("q_clickcount <>", value, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameLessThan(String value) {
-            addCriterion("username <", value, "username");
+        public Criteria andQClickcountGreaterThan(Integer value) {
+            addCriterion("q_clickcount >", value, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameLessThanOrEqualTo(String value) {
-            addCriterion("username <=", value, "username");
+        public Criteria andQClickcountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("q_clickcount >=", value, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameLike(String value) {
-            addCriterion("username like", value, "username");
+        public Criteria andQClickcountLessThan(Integer value) {
+            addCriterion("q_clickcount <", value, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotLike(String value) {
-            addCriterion("username not like", value, "username");
+        public Criteria andQClickcountLessThanOrEqualTo(Integer value) {
+            addCriterion("q_clickcount <=", value, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameIn(List<String> values) {
-            addCriterion("username in", values, "username");
+        public Criteria andQClickcountIn(List<Integer> values) {
+            addCriterion("q_clickcount in", values, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotIn(List<String> values) {
-            addCriterion("username not in", values, "username");
+        public Criteria andQClickcountNotIn(List<Integer> values) {
+            addCriterion("q_clickcount not in", values, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameBetween(String value1, String value2) {
-            addCriterion("username between", value1, value2, "username");
+        public Criteria andQClickcountBetween(Integer value1, Integer value2) {
+            addCriterion("q_clickcount between", value1, value2, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotBetween(String value1, String value2) {
-            addCriterion("username not between", value1, value2, "username");
+        public Criteria andQClickcountNotBetween(Integer value1, Integer value2) {
+            addCriterion("q_clickcount not between", value1, value2, "qClickcount");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeIsNull() {
-            addCriterion("publishTime is null");
+        public Criteria andQUsernameIsNull() {
+            addCriterion("q_username is null");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeIsNotNull() {
-            addCriterion("publishTime is not null");
+        public Criteria andQUsernameIsNotNull() {
+            addCriterion("q_username is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeEqualTo(Date value) {
-            addCriterion("publishTime =", value, "publishtime");
+        public Criteria andQUsernameEqualTo(String value) {
+            addCriterion("q_username =", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeNotEqualTo(Date value) {
-            addCriterion("publishTime <>", value, "publishtime");
+        public Criteria andQUsernameNotEqualTo(String value) {
+            addCriterion("q_username <>", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeGreaterThan(Date value) {
-            addCriterion("publishTime >", value, "publishtime");
+        public Criteria andQUsernameGreaterThan(String value) {
+            addCriterion("q_username >", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("publishTime >=", value, "publishtime");
+        public Criteria andQUsernameGreaterThanOrEqualTo(String value) {
+            addCriterion("q_username >=", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeLessThan(Date value) {
-            addCriterion("publishTime <", value, "publishtime");
+        public Criteria andQUsernameLessThan(String value) {
+            addCriterion("q_username <", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeLessThanOrEqualTo(Date value) {
-            addCriterion("publishTime <=", value, "publishtime");
+        public Criteria andQUsernameLessThanOrEqualTo(String value) {
+            addCriterion("q_username <=", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeIn(List<Date> values) {
-            addCriterion("publishTime in", values, "publishtime");
+        public Criteria andQUsernameLike(String value) {
+            addCriterion("q_username like", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeNotIn(List<Date> values) {
-            addCriterion("publishTime not in", values, "publishtime");
+        public Criteria andQUsernameNotLike(String value) {
+            addCriterion("q_username not like", value, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeBetween(Date value1, Date value2) {
-            addCriterion("publishTime between", value1, value2, "publishtime");
+        public Criteria andQUsernameIn(List<String> values) {
+            addCriterion("q_username in", values, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andPublishtimeNotBetween(Date value1, Date value2) {
-            addCriterion("publishTime not between", value1, value2, "publishtime");
+        public Criteria andQUsernameNotIn(List<String> values) {
+            addCriterion("q_username not in", values, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeIsNull() {
-            addCriterion("contentTime is null");
+        public Criteria andQUsernameBetween(String value1, String value2) {
+            addCriterion("q_username between", value1, value2, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeIsNotNull() {
-            addCriterion("contentTime is not null");
+        public Criteria andQUsernameNotBetween(String value1, String value2) {
+            addCriterion("q_username not between", value1, value2, "qUsername");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeEqualTo(Date value) {
-            addCriterion("contentTime =", value, "contenttime");
+        public Criteria andQPublishtimeIsNull() {
+            addCriterion("q_publishTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeNotEqualTo(Date value) {
-            addCriterion("contentTime <>", value, "contenttime");
+        public Criteria andQPublishtimeIsNotNull() {
+            addCriterion("q_publishTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeGreaterThan(Date value) {
-            addCriterion("contentTime >", value, "contenttime");
+        public Criteria andQPublishtimeEqualTo(Date value) {
+            addCriterion("q_publishTime =", value, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("contentTime >=", value, "contenttime");
+        public Criteria andQPublishtimeNotEqualTo(Date value) {
+            addCriterion("q_publishTime <>", value, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeLessThan(Date value) {
-            addCriterion("contentTime <", value, "contenttime");
+        public Criteria andQPublishtimeGreaterThan(Date value) {
+            addCriterion("q_publishTime >", value, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeLessThanOrEqualTo(Date value) {
-            addCriterion("contentTime <=", value, "contenttime");
+        public Criteria andQPublishtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("q_publishTime >=", value, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeIn(List<Date> values) {
-            addCriterion("contentTime in", values, "contenttime");
+        public Criteria andQPublishtimeLessThan(Date value) {
+            addCriterion("q_publishTime <", value, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeNotIn(List<Date> values) {
-            addCriterion("contentTime not in", values, "contenttime");
+        public Criteria andQPublishtimeLessThanOrEqualTo(Date value) {
+            addCriterion("q_publishTime <=", value, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeBetween(Date value1, Date value2) {
-            addCriterion("contentTime between", value1, value2, "contenttime");
+        public Criteria andQPublishtimeIn(List<Date> values) {
+            addCriterion("q_publishTime in", values, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andContenttimeNotBetween(Date value1, Date value2) {
-            addCriterion("contentTime not between", value1, value2, "contenttime");
+        public Criteria andQPublishtimeNotIn(List<Date> values) {
+            addCriterion("q_publishTime not in", values, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionIsNull() {
-            addCriterion("condition is null");
+        public Criteria andQPublishtimeBetween(Date value1, Date value2) {
+            addCriterion("q_publishTime between", value1, value2, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionIsNotNull() {
-            addCriterion("condition is not null");
+        public Criteria andQPublishtimeNotBetween(Date value1, Date value2) {
+            addCriterion("q_publishTime not between", value1, value2, "qPublishtime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionEqualTo(String value) {
-            addCriterion("condition =", value, "condition");
+        public Criteria andQContenttimeIsNull() {
+            addCriterion("q_contentTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andConditionNotEqualTo(String value) {
-            addCriterion("condition <>", value, "condition");
+        public Criteria andQContenttimeIsNotNull() {
+            addCriterion("q_contentTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConditionGreaterThan(String value) {
-            addCriterion("condition >", value, "condition");
+        public Criteria andQContenttimeEqualTo(Date value) {
+            addCriterion("q_contentTime =", value, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionGreaterThanOrEqualTo(String value) {
-            addCriterion("condition >=", value, "condition");
+        public Criteria andQContenttimeNotEqualTo(Date value) {
+            addCriterion("q_contentTime <>", value, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionLessThan(String value) {
-            addCriterion("condition <", value, "condition");
+        public Criteria andQContenttimeGreaterThan(Date value) {
+            addCriterion("q_contentTime >", value, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionLessThanOrEqualTo(String value) {
-            addCriterion("condition <=", value, "condition");
+        public Criteria andQContenttimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("q_contentTime >=", value, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionLike(String value) {
-            addCriterion("condition like", value, "condition");
+        public Criteria andQContenttimeLessThan(Date value) {
+            addCriterion("q_contentTime <", value, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionNotLike(String value) {
-            addCriterion("condition not like", value, "condition");
+        public Criteria andQContenttimeLessThanOrEqualTo(Date value) {
+            addCriterion("q_contentTime <=", value, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionIn(List<String> values) {
-            addCriterion("condition in", values, "condition");
+        public Criteria andQContenttimeIn(List<Date> values) {
+            addCriterion("q_contentTime in", values, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionNotIn(List<String> values) {
-            addCriterion("condition not in", values, "condition");
+        public Criteria andQContenttimeNotIn(List<Date> values) {
+            addCriterion("q_contentTime not in", values, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionBetween(String value1, String value2) {
-            addCriterion("condition between", value1, value2, "condition");
+        public Criteria andQContenttimeBetween(Date value1, Date value2) {
+            addCriterion("q_contentTime between", value1, value2, "qContenttime");
             return (Criteria) this;
         }
 
-        public Criteria andConditionNotBetween(String value1, String value2) {
-            addCriterion("condition not between", value1, value2, "condition");
+        public Criteria andQContenttimeNotBetween(Date value1, Date value2) {
+            addCriterion("q_contentTime not between", value1, value2, "qContenttime");
             return (Criteria) this;
         }
     }

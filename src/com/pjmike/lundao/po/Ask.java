@@ -11,6 +11,8 @@ public class Ask {
 
     private String content;
 
+    private String status;
+
     private Integer view;
 
     private Integer like;
@@ -30,8 +32,6 @@ public class Ask {
     private Date publishtime;
 
     private Date contenttime;
-
-    private String askcondition;
 
     public Integer getAskid() {
         return askid;
@@ -63,6 +63,14 @@ public class Ask {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public Integer getView() {
@@ -143,13 +151,5 @@ public class Ask {
 
     public void setContenttime(Date contenttime) {
         this.contenttime = contenttime;
-    }
-
-    public String getAskcondition() {
-        return askcondition;
-    }
-
-    public void setAskcondition(String askcondition) {
-        this.askcondition = askcondition == null ? null : askcondition.trim();
     }
 }

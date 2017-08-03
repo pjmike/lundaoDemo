@@ -365,6 +365,76 @@ public class AskExample {
             return (Criteria) this;
         }
 
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(String value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(String value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(String value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(String value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(String value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLike(String value) {
+            addCriterion("status like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotLike(String value) {
+            addCriterion("status not like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<String> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<String> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(String value1, String value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(String value1, String value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
         public Criteria andViewIsNull() {
             addCriterion("view is null");
             return (Criteria) this;
@@ -972,76 +1042,6 @@ public class AskExample {
 
         public Criteria andContenttimeNotBetween(Date value1, Date value2) {
             addCriterion("contentTime not between", value1, value2, "contenttime");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionIsNull() {
-            addCriterion("askcondition is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionIsNotNull() {
-            addCriterion("askcondition is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionEqualTo(String value) {
-            addCriterion("askcondition =", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionNotEqualTo(String value) {
-            addCriterion("askcondition <>", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionGreaterThan(String value) {
-            addCriterion("askcondition >", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionGreaterThanOrEqualTo(String value) {
-            addCriterion("askcondition >=", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionLessThan(String value) {
-            addCriterion("askcondition <", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionLessThanOrEqualTo(String value) {
-            addCriterion("askcondition <=", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionLike(String value) {
-            addCriterion("askcondition like", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionNotLike(String value) {
-            addCriterion("askcondition not like", value, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionIn(List<String> values) {
-            addCriterion("askcondition in", values, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionNotIn(List<String> values) {
-            addCriterion("askcondition not in", values, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionBetween(String value1, String value2) {
-            addCriterion("askcondition between", value1, value2, "askcondition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAskconditionNotBetween(String value1, String value2) {
-            addCriterion("askcondition not between", value1, value2, "askcondition");
             return (Criteria) this;
         }
     }

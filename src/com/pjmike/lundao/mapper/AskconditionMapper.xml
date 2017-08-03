@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pjmike.lundao.mapper.AskconditionMapper" >
+  <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Askcondition" >
+    <id column="askcdId" property="askcdid" jdbcType="INTEGER" />
+    <result column="solve" property="solve" jdbcType="VARCHAR" />
+    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    askcdId, solve, discuss
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.AskconditionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from askcondition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from askcondition
+    where askcdId = #{askcdid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from askcondition
+    where askcdId = #{askcdid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pjmike.lundao.po.AskconditionExample" >
+    delete from askcondition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pjmike.lundao.po.Askcondition" >
+    insert into askcondition (askcdId, solve, discuss
+      )
+    values (#{askcdid,jdbcType=INTEGER}, #{solve,jdbcType=VARCHAR}, #{discuss,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Askcondition" >
+    insert into askcondition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="askcdid != null" >
+        askcdId,
+      </if>
+      <if test="solve != null" >
+        solve,
+      </if>
+      <if test="discuss != null" >
+        discuss,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="askcdid != null" >
+        #{askcdid,jdbcType=INTEGER},
+      </if>
+      <if test="solve != null" >
+        #{solve,jdbcType=VARCHAR},
+      </if>
+      <if test="discuss != null" >
+        #{discuss,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pjmike.lundao.po.AskconditionExample" resultType="java.lang.Integer" >
+    select count(*) from askcondition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update askcondition
+    <set >
+      <if test="record.askcdid != null" >
+        askcdId = #{record.askcdid,jdbcType=INTEGER},
+      </if>
+      <if test="record.solve != null" >
+        solve = #{record.solve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discuss != null" >
+        discuss = #{record.discuss,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update askcondition
+    set askcdId = #{record.askcdid,jdbcType=INTEGER},
+      solve = #{record.solve,jdbcType=VARCHAR},
+      discuss = #{record.discuss,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Askcondition" >
+    update askcondition
+    <set >
+      <if test="solve != null" >
+        solve = #{solve,jdbcType=VARCHAR},
+      </if>
+      <if test="discuss != null" >
+        discuss = #{discuss,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where askcdId = #{askcdid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Askcondition" >
+    update askcondition
+    set solve = #{solve,jdbcType=VARCHAR},
+      discuss = #{discuss,jdbcType=VARCHAR}
+    where askcdId = #{askcdid,jdbcType=INTEGER}
+  </update>
+</mapper>

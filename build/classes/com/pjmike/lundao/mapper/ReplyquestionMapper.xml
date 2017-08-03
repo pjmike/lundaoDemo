@@ -3,20 +3,19 @@
 <mapper namespace="com.pjmike.lundao.mapper.ReplyquestionMapper" >
   <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Replyquestion" >
     <id column="replyquesId" property="replyquesid" jdbcType="INTEGER" />
-    <result column="questionId" property="questionid" jdbcType="INTEGER" />
-    <result column="view" property="view" jdbcType="INTEGER" />
-    <result column="like" property="like" jdbcType="INTEGER" />
-    <result column="attention" property="attention" jdbcType="INTEGER" />
-    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-    <result column="reply" property="reply" jdbcType="INTEGER" />
-    <result column="replylist" property="replylist" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-    <result column="floor" property="floor" jdbcType="INTEGER" />
+    <result column="rq_questionId" property="rqQuestionid" jdbcType="INTEGER" />
+    <result column="rq_view" property="rqView" jdbcType="INTEGER" />
+    <result column="rq_like" property="rqLike" jdbcType="INTEGER" />
+    <result column="rq_attention" property="rqAttention" jdbcType="INTEGER" />
+    <result column="rq_dislike" property="rqDislike" jdbcType="INTEGER" />
+    <result column="rq_replyid" property="rqReplyid" jdbcType="INTEGER" />
+    <result column="rq_username" property="rqUsername" jdbcType="VARCHAR" />
+    <result column="rq_publishTime" property="rqPublishtime" jdbcType="TIMESTAMP" />
+    <result column="rq_contentTime" property="rqContenttime" jdbcType="TIMESTAMP" />
+    <result column="rq_floor" property="rqFloor" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Replyquestion" extends="BaseResultMap" >
-    <result column="describtion" property="describtion" jdbcType="LONGVARCHAR" />
+    <result column="rq_describtion" property="rqDescribtion" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,11 +76,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    replyquesId, questionId, view, like, attention, dislike, reply, replylist, username, 
-    publishTime, contentTime, floor
+    replyquesId, rq_questionId, rq_view, rq_like, rq_attention, rq_dislike, rq_replyid, 
+    rq_username, rq_publishTime, rq_contentTime, rq_floor
   </sql>
   <sql id="Blob_Column_List" >
-    describtion
+    rq_describtion
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pjmike.lundao.po.ReplyquestionExample" >
     select
@@ -132,16 +131,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.pjmike.lundao.po.Replyquestion" >
-    insert into replyquestion (replyquesId, questionId, view, 
-      like, attention, dislike, 
-      reply, replylist, username, 
-      publishTime, contentTime, floor, 
-      describtion)
-    values (#{replyquesid,jdbcType=INTEGER}, #{questionid,jdbcType=INTEGER}, #{view,jdbcType=INTEGER}, 
-      #{like,jdbcType=INTEGER}, #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, 
-      #{reply,jdbcType=INTEGER}, #{replylist,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}, #{floor,jdbcType=INTEGER}, 
-      #{describtion,jdbcType=LONGVARCHAR})
+    insert into replyquestion (replyquesId, rq_questionId, rq_view, 
+      rq_like, rq_attention, rq_dislike, 
+      rq_replyid, rq_username, rq_publishTime, 
+      rq_contentTime, rq_floor, rq_describtion
+      )
+    values (#{replyquesid,jdbcType=INTEGER}, #{rqQuestionid,jdbcType=INTEGER}, #{rqView,jdbcType=INTEGER}, 
+      #{rqLike,jdbcType=INTEGER}, #{rqAttention,jdbcType=INTEGER}, #{rqDislike,jdbcType=INTEGER}, 
+      #{rqReplyid,jdbcType=INTEGER}, #{rqUsername,jdbcType=VARCHAR}, #{rqPublishtime,jdbcType=TIMESTAMP}, 
+      #{rqContenttime,jdbcType=TIMESTAMP}, #{rqFloor,jdbcType=INTEGER}, #{rqDescribtion,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Replyquestion" >
     insert into replyquestion
@@ -149,82 +148,76 @@
       <if test="replyquesid != null" >
         replyquesId,
       </if>
-      <if test="questionid != null" >
-        questionId,
+      <if test="rqQuestionid != null" >
+        rq_questionId,
       </if>
-      <if test="view != null" >
-        view,
+      <if test="rqView != null" >
+        rq_view,
       </if>
-      <if test="like != null" >
-        like,
+      <if test="rqLike != null" >
+        rq_like,
       </if>
-      <if test="attention != null" >
-        attention,
+      <if test="rqAttention != null" >
+        rq_attention,
       </if>
-      <if test="dislike != null" >
-        dislike,
+      <if test="rqDislike != null" >
+        rq_dislike,
       </if>
-      <if test="reply != null" >
-        reply,
+      <if test="rqReplyid != null" >
+        rq_replyid,
       </if>
-      <if test="replylist != null" >
-        replylist,
+      <if test="rqUsername != null" >
+        rq_username,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="rqPublishtime != null" >
+        rq_publishTime,
       </if>
-      <if test="publishtime != null" >
-        publishTime,
+      <if test="rqContenttime != null" >
+        rq_contentTime,
       </if>
-      <if test="contenttime != null" >
-        contentTime,
+      <if test="rqFloor != null" >
+        rq_floor,
       </if>
-      <if test="floor != null" >
-        floor,
-      </if>
-      <if test="describtion != null" >
-        describtion,
+      <if test="rqDescribtion != null" >
+        rq_describtion,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="replyquesid != null" >
         #{replyquesid,jdbcType=INTEGER},
       </if>
-      <if test="questionid != null" >
-        #{questionid,jdbcType=INTEGER},
+      <if test="rqQuestionid != null" >
+        #{rqQuestionid,jdbcType=INTEGER},
       </if>
-      <if test="view != null" >
-        #{view,jdbcType=INTEGER},
+      <if test="rqView != null" >
+        #{rqView,jdbcType=INTEGER},
       </if>
-      <if test="like != null" >
-        #{like,jdbcType=INTEGER},
+      <if test="rqLike != null" >
+        #{rqLike,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        #{attention,jdbcType=INTEGER},
+      <if test="rqAttention != null" >
+        #{rqAttention,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        #{dislike,jdbcType=INTEGER},
+      <if test="rqDislike != null" >
+        #{rqDislike,jdbcType=INTEGER},
       </if>
-      <if test="reply != null" >
-        #{reply,jdbcType=INTEGER},
+      <if test="rqReplyid != null" >
+        #{rqReplyid,jdbcType=INTEGER},
       </if>
-      <if test="replylist != null" >
-        #{replylist,jdbcType=INTEGER},
+      <if test="rqUsername != null" >
+        #{rqUsername,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+      <if test="rqPublishtime != null" >
+        #{rqPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="publishtime != null" >
-        #{publishtime,jdbcType=TIMESTAMP},
+      <if test="rqContenttime != null" >
+        #{rqContenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="contenttime != null" >
-        #{contenttime,jdbcType=TIMESTAMP},
+      <if test="rqFloor != null" >
+        #{rqFloor,jdbcType=INTEGER},
       </if>
-      <if test="floor != null" >
-        #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="describtion != null" >
-        #{describtion,jdbcType=LONGVARCHAR},
+      <if test="rqDescribtion != null" >
+        #{rqDescribtion,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -240,41 +233,38 @@
       <if test="record.replyquesid != null" >
         replyquesId = #{record.replyquesid,jdbcType=INTEGER},
       </if>
-      <if test="record.questionid != null" >
-        questionId = #{record.questionid,jdbcType=INTEGER},
+      <if test="record.rqQuestionid != null" >
+        rq_questionId = #{record.rqQuestionid,jdbcType=INTEGER},
       </if>
-      <if test="record.view != null" >
-        view = #{record.view,jdbcType=INTEGER},
+      <if test="record.rqView != null" >
+        rq_view = #{record.rqView,jdbcType=INTEGER},
       </if>
-      <if test="record.like != null" >
-        like = #{record.like,jdbcType=INTEGER},
+      <if test="record.rqLike != null" >
+        rq_like = #{record.rqLike,jdbcType=INTEGER},
       </if>
-      <if test="record.attention != null" >
-        attention = #{record.attention,jdbcType=INTEGER},
+      <if test="record.rqAttention != null" >
+        rq_attention = #{record.rqAttention,jdbcType=INTEGER},
       </if>
-      <if test="record.dislike != null" >
-        dislike = #{record.dislike,jdbcType=INTEGER},
+      <if test="record.rqDislike != null" >
+        rq_dislike = #{record.rqDislike,jdbcType=INTEGER},
       </if>
-      <if test="record.reply != null" >
-        reply = #{record.reply,jdbcType=INTEGER},
+      <if test="record.rqReplyid != null" >
+        rq_replyid = #{record.rqReplyid,jdbcType=INTEGER},
       </if>
-      <if test="record.replylist != null" >
-        replylist = #{record.replylist,jdbcType=INTEGER},
+      <if test="record.rqUsername != null" >
+        rq_username = #{record.rqUsername,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.rqPublishtime != null" >
+        rq_publishTime = #{record.rqPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.publishtime != null" >
-        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      <if test="record.rqContenttime != null" >
+        rq_contentTime = #{record.rqContenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.contenttime != null" >
-        contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      <if test="record.rqFloor != null" >
+        rq_floor = #{record.rqFloor,jdbcType=INTEGER},
       </if>
-      <if test="record.floor != null" >
-        floor = #{record.floor,jdbcType=INTEGER},
-      </if>
-      <if test="record.describtion != null" >
-        describtion = #{record.describtion,jdbcType=LONGVARCHAR},
+      <if test="record.rqDescribtion != null" >
+        rq_describtion = #{record.rqDescribtion,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -284,18 +274,17 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update replyquestion
     set replyquesId = #{record.replyquesid,jdbcType=INTEGER},
-      questionId = #{record.questionid,jdbcType=INTEGER},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      reply = #{record.reply,jdbcType=INTEGER},
-      replylist = #{record.replylist,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      floor = #{record.floor,jdbcType=INTEGER},
-      describtion = #{record.describtion,jdbcType=LONGVARCHAR}
+      rq_questionId = #{record.rqQuestionid,jdbcType=INTEGER},
+      rq_view = #{record.rqView,jdbcType=INTEGER},
+      rq_like = #{record.rqLike,jdbcType=INTEGER},
+      rq_attention = #{record.rqAttention,jdbcType=INTEGER},
+      rq_dislike = #{record.rqDislike,jdbcType=INTEGER},
+      rq_replyid = #{record.rqReplyid,jdbcType=INTEGER},
+      rq_username = #{record.rqUsername,jdbcType=VARCHAR},
+      rq_publishTime = #{record.rqPublishtime,jdbcType=TIMESTAMP},
+      rq_contentTime = #{record.rqContenttime,jdbcType=TIMESTAMP},
+      rq_floor = #{record.rqFloor,jdbcType=INTEGER},
+      rq_describtion = #{record.rqDescribtion,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -303,17 +292,16 @@
   <update id="updateByExample" parameterType="map" >
     update replyquestion
     set replyquesId = #{record.replyquesid,jdbcType=INTEGER},
-      questionId = #{record.questionid,jdbcType=INTEGER},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      reply = #{record.reply,jdbcType=INTEGER},
-      replylist = #{record.replylist,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      floor = #{record.floor,jdbcType=INTEGER}
+      rq_questionId = #{record.rqQuestionid,jdbcType=INTEGER},
+      rq_view = #{record.rqView,jdbcType=INTEGER},
+      rq_like = #{record.rqLike,jdbcType=INTEGER},
+      rq_attention = #{record.rqAttention,jdbcType=INTEGER},
+      rq_dislike = #{record.rqDislike,jdbcType=INTEGER},
+      rq_replyid = #{record.rqReplyid,jdbcType=INTEGER},
+      rq_username = #{record.rqUsername,jdbcType=VARCHAR},
+      rq_publishTime = #{record.rqPublishtime,jdbcType=TIMESTAMP},
+      rq_contentTime = #{record.rqContenttime,jdbcType=TIMESTAMP},
+      rq_floor = #{record.rqFloor,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -321,74 +309,69 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Replyquestion" >
     update replyquestion
     <set >
-      <if test="questionid != null" >
-        questionId = #{questionid,jdbcType=INTEGER},
+      <if test="rqQuestionid != null" >
+        rq_questionId = #{rqQuestionid,jdbcType=INTEGER},
       </if>
-      <if test="view != null" >
-        view = #{view,jdbcType=INTEGER},
+      <if test="rqView != null" >
+        rq_view = #{rqView,jdbcType=INTEGER},
       </if>
-      <if test="like != null" >
-        like = #{like,jdbcType=INTEGER},
+      <if test="rqLike != null" >
+        rq_like = #{rqLike,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        attention = #{attention,jdbcType=INTEGER},
+      <if test="rqAttention != null" >
+        rq_attention = #{rqAttention,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        dislike = #{dislike,jdbcType=INTEGER},
+      <if test="rqDislike != null" >
+        rq_dislike = #{rqDislike,jdbcType=INTEGER},
       </if>
-      <if test="reply != null" >
-        reply = #{reply,jdbcType=INTEGER},
+      <if test="rqReplyid != null" >
+        rq_replyid = #{rqReplyid,jdbcType=INTEGER},
       </if>
-      <if test="replylist != null" >
-        replylist = #{replylist,jdbcType=INTEGER},
+      <if test="rqUsername != null" >
+        rq_username = #{rqUsername,jdbcType=VARCHAR},
       </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="rqPublishtime != null" >
+        rq_publishTime = #{rqPublishtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="publishtime != null" >
-        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      <if test="rqContenttime != null" >
+        rq_contentTime = #{rqContenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="contenttime != null" >
-        contentTime = #{contenttime,jdbcType=TIMESTAMP},
+      <if test="rqFloor != null" >
+        rq_floor = #{rqFloor,jdbcType=INTEGER},
       </if>
-      <if test="floor != null" >
-        floor = #{floor,jdbcType=INTEGER},
-      </if>
-      <if test="describtion != null" >
-        describtion = #{describtion,jdbcType=LONGVARCHAR},
+      <if test="rqDescribtion != null" >
+        rq_describtion = #{rqDescribtion,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where replyquesId = #{replyquesid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pjmike.lundao.po.Replyquestion" >
     update replyquestion
-    set questionId = #{questionid,jdbcType=INTEGER},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      reply = #{reply,jdbcType=INTEGER},
-      replylist = #{replylist,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      floor = #{floor,jdbcType=INTEGER},
-      describtion = #{describtion,jdbcType=LONGVARCHAR}
+    set rq_questionId = #{rqQuestionid,jdbcType=INTEGER},
+      rq_view = #{rqView,jdbcType=INTEGER},
+      rq_like = #{rqLike,jdbcType=INTEGER},
+      rq_attention = #{rqAttention,jdbcType=INTEGER},
+      rq_dislike = #{rqDislike,jdbcType=INTEGER},
+      rq_replyid = #{rqReplyid,jdbcType=INTEGER},
+      rq_username = #{rqUsername,jdbcType=VARCHAR},
+      rq_publishTime = #{rqPublishtime,jdbcType=TIMESTAMP},
+      rq_contentTime = #{rqContenttime,jdbcType=TIMESTAMP},
+      rq_floor = #{rqFloor,jdbcType=INTEGER},
+      rq_describtion = #{rqDescribtion,jdbcType=LONGVARCHAR}
     where replyquesId = #{replyquesid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Replyquestion" >
     update replyquestion
-    set questionId = #{questionid,jdbcType=INTEGER},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      reply = #{reply,jdbcType=INTEGER},
-      replylist = #{replylist,jdbcType=INTEGER},
-      username = #{username,jdbcType=VARCHAR},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      floor = #{floor,jdbcType=INTEGER}
+    set rq_questionId = #{rqQuestionid,jdbcType=INTEGER},
+      rq_view = #{rqView,jdbcType=INTEGER},
+      rq_like = #{rqLike,jdbcType=INTEGER},
+      rq_attention = #{rqAttention,jdbcType=INTEGER},
+      rq_dislike = #{rqDislike,jdbcType=INTEGER},
+      rq_replyid = #{rqReplyid,jdbcType=INTEGER},
+      rq_username = #{rqUsername,jdbcType=VARCHAR},
+      rq_publishTime = #{rqPublishtime,jdbcType=TIMESTAMP},
+      rq_contentTime = #{rqContenttime,jdbcType=TIMESTAMP},
+      rq_floor = #{rqFloor,jdbcType=INTEGER}
     where replyquesId = #{replyquesid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -3,92 +3,135 @@
 <mapper namespace="com.pjmike.lundao.mapper.ThesisMapper" >
   <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Thesis" >
     <id column="thesisId" property="thesisid" jdbcType="INTEGER" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="view" property="view" jdbcType="INTEGER" />
-    <result column="like" property="like" jdbcType="INTEGER" />
-    <result column="attention" property="attention" jdbcType="INTEGER" />
-    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-    <result column="ask" property="ask" jdbcType="INTEGER" />
-    <result column="question" property="question" jdbcType="INTEGER" />
-    <result column="asklist" property="asklist" jdbcType="INTEGER" />
-    <result column="questionlist" property="questionlist" jdbcType="INTEGER" />
-    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+    <result column="t_debateId" property="tDebateid" jdbcType="INTEGER" />
+    <result column="t_description" property="tDescription" jdbcType="VARCHAR" />
+    <result column="t_view" property="tView" jdbcType="INTEGER" />
+    <result column="t_like" property="tLike" jdbcType="INTEGER" />
+    <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
+    <result column="t_dislike" property="tDislike" jdbcType="INTEGER" />
+    <result column="t_ask" property="tAsk" jdbcType="INTEGER" />
+    <result column="t_question" property="tQuestion" jdbcType="INTEGER" />
+    <result column="t_asklist" property="tAsklist" jdbcType="INTEGER" />
+    <result column="t_questionlist" property="tQuestionlist" jdbcType="INTEGER" />
+    <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
+    <result column="t_contentTime" property="tContenttime" jdbcType="TIMESTAMP" />
     <result column="complete" property="complete" jdbcType="INTEGER" />
     <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Thesis" extends="BaseResultMap" >
-    <result column="state" property="state" jdbcType="LONGVARCHAR" />
+    <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
+    
+    
   </resultMap>
   
   
   
-  
-  
-  <!-- 用于查找某一论点下所有的提问及回复 -->
-  <!-- 以下是提问 -->
   <resultMap id="BaseResultMap1" type="com.pjmike.lundao.po.ThesisExtend" >
     <id column="thesisId" property="thesisid" jdbcType="INTEGER" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="view" property="view" jdbcType="INTEGER" />
-    <result column="like" property="like" jdbcType="INTEGER" />
-    <result column="attention" property="attention" jdbcType="INTEGER" />
-    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-    <result column="ask" property="ask" jdbcType="INTEGER" />
-    <result column="question" property="question" jdbcType="INTEGER" />
-    <result column="asklist" property="asklist" jdbcType="INTEGER" />
-    <result column="questionlist" property="questionlist" jdbcType="INTEGER" />
-    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+    <result column="t_debateId" property="tDebateid" jdbcType="INTEGER" />
+    <result column="t_description" property="tDescription" jdbcType="VARCHAR" />
+    <result column="t_view" property="tView" jdbcType="INTEGER" />
+    <result column="t_like" property="tLike" jdbcType="INTEGER" />
+    <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
+    <result column="t_dislike" property="tDislike" jdbcType="INTEGER" />
+    <result column="t_ask" property="tAsk" jdbcType="INTEGER" />
+    <result column="t_question" property="tQuestion" jdbcType="INTEGER" />
+    <result column="t_asklist" property="tAsklist" jdbcType="INTEGER" />
+    <result column="t_questionlist" property="tQuestionlist" jdbcType="INTEGER" />
+    <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
+    <result column="t_contentTime" property="tContenttime" jdbcType="TIMESTAMP" />
     <result column="complete" property="complete" jdbcType="INTEGER" />
     <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
-    
-      <!-- 以下是提问级联 -->
-    <collection property="asks" ofType="com.pjmike.lundao.po.Ask">
+     <!-- 以下是提问级联 -->
+    <collection property="asks" ofType="com.pjmike.lundao.po.AskExtend">
     	
-	    <id column="askId" property="askid" jdbcType="INTEGER" />
-	    <result column="debateId" property="debateid" jdbcType="INTEGER" />
-	    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
-	    <result column="content" property="content" jdbcType="VARCHAR" />
-	    <result column="view" property="view" jdbcType="INTEGER" />
-	    <result column="like" property="like" jdbcType="INTEGER" />
-	    <result column="attention" property="attention" jdbcType="INTEGER" />
-	    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-	    <result column="reply" property="reply" jdbcType="INTEGER" />
-	    <result column="replylist" property="replylist" jdbcType="INTEGER" />
-	    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
-	    <result column="username" property="username" jdbcType="VARCHAR" />
-	    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-	    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-	    <result column="askcondition" property="askcondition" jdbcType="VARCHAR" />
-    </collection>
+	    <id column="askId" jdbcType="INTEGER" property="askid" />
+	    <result column="debateId" jdbcType="INTEGER" property="debateid" />
+	    <result column="describtion" jdbcType="VARCHAR" property="describtion" />
+	    <result column="content" jdbcType="VARCHAR" property="content" />
+	    <result column="status" jdbcType="VARCHAR" property="status" />
+	    <result column="view" jdbcType="INTEGER" property="view" />
+	    <result column="like" jdbcType="INTEGER" property="like" />
+	    <result column="attention" jdbcType="INTEGER" property="attention" />
+	    <result column="dislike" jdbcType="INTEGER" property="dislike" />
+	    <result column="reply" jdbcType="INTEGER" property="reply" />
+	    <result column="replylist" jdbcType="INTEGER" property="replylist" />
+	    <result column="clickcount" jdbcType="INTEGER" property="clickcount" />
+	    <result column="username" jdbcType="VARCHAR" property="username" />
+	    <result column="publishTime" jdbcType="TIMESTAMP" property="publishtime" />
+	    <result column="contentTime" jdbcType="TIMESTAMP" property="contenttime" />
+    
+   <!--  提问的状态 -->
+	    <association property="askcondition" javaType="com.pjmike.lundao.po.Askcondition">
+	    	<id column="askcdId" property="askcdid" jdbcType="INTEGER" />
+		    <result column="solve" property="solve" jdbcType="VARCHAR" />
+		    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
+	    </association>   
+	    
+    	<!-- 级联提问的回复 -->
+	    <collection property="replyask" ofType="com.pjmike.lundao.po.Replyask">
+	    	<id column="replyakdId" property="replyakdid" jdbcType="INTEGER" />
+		    <result column="ra_askId" property="raAskid" jdbcType="INTEGER" />
+		    <result column="ra_describtion" property="raDescribtion" jdbcType="LONGVARCHAR" />
+		    <result column="ra_view" property="raView" jdbcType="INTEGER" />
+		    <result column="ra_like" property="raLike" jdbcType="INTEGER" />
+		    <result column="ra_attention" property="raAttention" jdbcType="INTEGER" />
+		    <result column="ra_dislike" property="raDislike" jdbcType="INTEGER" />
+		    <result column="ra_replyid" property="raReplyid" jdbcType="INTEGER" />
+		    <result column="ra_username" property="raUsername" jdbcType="VARCHAR" />
+		    <result column="ra_publishTime" property="raPublishtime" jdbcType="TIMESTAMP" />
+		    <result column="ra_contentTime" property="raContenttime" jdbcType="TIMESTAMP" />
+		    <result column="ra_floor" property="raFloor" jdbcType="INTEGER" />
+	    </collection>
+    </collection><!--  -->
     
     <!-- 以下是异议级联 -->
-    <collection property="questions" ofType="com.pjmike.lundao.po.Question">
-    	<id column="questionId" property="questionid" jdbcType="INTEGER" />
-	    <result column="debateId" property="debateid" jdbcType="INTEGER" />
-	    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
-	    <result column="content" property="content" jdbcType="VARCHAR" />
-	    <result column="view" property="view" jdbcType="INTEGER" />
-	    <result column="like" property="like" jdbcType="INTEGER" />
-	    <result column="attention" property="attention" jdbcType="INTEGER" />
-	    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-	    <result column="reply" property="reply" jdbcType="INTEGER" />
-	    <result column="replylist" property="replylist" jdbcType="INTEGER" />
-	    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
-	    <result column="username" property="username" jdbcType="VARCHAR" />
-	    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-	    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-	    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    <collection property="questions" ofType="com.pjmike.lundao.po.QuestionExtend">
+    	<id column="q_questionId" property="qQuestionid" jdbcType="INTEGER" />
+	    <result column="q_debateId" property="qDebateid" jdbcType="INTEGER" />
+	    <result column="q_describtion" property="qDescribtion" jdbcType="VARCHAR" />
+	    <result column="q_content" property="qContent" jdbcType="VARCHAR" />
+	    <result column="q_status" property="qStatus" jdbcType="VARCHAR" />
+	    <result column="q_view" property="qView" jdbcType="INTEGER" />
+	    <result column="q_like" property="qLike" jdbcType="INTEGER" />
+	    <result column="q_attention" property="qAttention" jdbcType="INTEGER" />
+	    <result column="q_dislike" property="qDislike" jdbcType="INTEGER" />
+	    <result column="q_reply" property="qReply" jdbcType="INTEGER" />
+	    <result column="q_replylist" property="qReplylist" jdbcType="INTEGER" />
+	    <result column="q_clickcount" property="qClickcount" jdbcType="INTEGER" />
+	    <result column="q_username" property="qUsername" jdbcType="VARCHAR" />
+	    <result column="q_publishTime" property="qPublishtime" jdbcType="TIMESTAMP" />
+	    <result column="q_contentTime" property="qContenttime" jdbcType="TIMESTAMP" />
+	    <!-- 异议的状态 -->
+<!-- 	    <association property="replyquestion" javaType="com.pjmike.lundao.po.Quescondition">
+	    	<id column="quesId" property="quesid" jdbcType="INTEGER" />
+		    <result column="accept" property="accept" jdbcType="VARCHAR" />
+		    <result column="complete" property="complete" jdbcType="VARCHAR" />
+		    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
+	    </association> -->
+	 <!--    关联异议的回复 -->
+	    <collection property="replyquestion" ofType="com.pjmike.lundao.po.Replyquestion">
+	    	 <id column="replyquesId" property="replyquesid" jdbcType="INTEGER" />
+    <result column="rq_questionId" property="rqQuestionid" jdbcType="INTEGER" />
+    <result column="rq_describtion" property="rqDescribtion" jdbcType="LONGVARCHAR" />
+    <result column="rq_view" property="rqView" jdbcType="INTEGER" />
+    <result column="rq_like" property="rqLike" jdbcType="INTEGER" />
+    <result column="rq_attention" property="rqAttention" jdbcType="INTEGER" />
+    <result column="rq_dislike" property="rqDislike" jdbcType="INTEGER" />
+    <result column="rq_replyid" property="rqReplyid" jdbcType="INTEGER" />
+    <result column="rq_username" property="rqUsername" jdbcType="VARCHAR" />
+    <result column="rq_publishTime" property="rqPublishtime" jdbcType="TIMESTAMP" />
+    <result column="rq_contentTime" property="rqContenttime" jdbcType="TIMESTAMP" />
+    <result column="rq_floor" property="rqFloor" jdbcType="INTEGER" />
+	    </collection>
     </collection>
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs1" type="com.pjmike.lundao.po.ThesisExtend" extends="BaseResultMap1" >
+    <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
+    
     
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs1" type="com.pjmike.lundao.po.ThesisExtend" extends="BaseResultMap1" >
-    <result column="state" property="state" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  
-  
-  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -148,11 +191,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    thesisId, description, view, like, attention, dislike, ask, question, asklist, questionlist, 
-    publishTime, contentTime, complete, uncomplete
+    thesisId, t_debateId, t_description, t_view, t_like, t_attention, t_dislike, t_ask, 
+    t_question, t_asklist, t_questionlist, t_publishTime, t_contentTime, complete, uncomplete
   </sql>
   <sql id="Blob_Column_List" >
-    state
+    t_state
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pjmike.lundao.po.ThesisExample" >
     select
@@ -199,9 +242,15 @@
   
   <!-- 一对多查询 -->
   <select id="selectBykey" resultMap="ResultMapWithBLOBs">
-  	select thesis.* from thesis,debateTopic where thesis.debateId = debateTopic.topicId 
+  	select thesis.* from thesis,debateTopic where thesis.t_debateId = debateTopic.topicId 
   </select>
   <!-- 根据一个论点id查询出它下面所有的提问及异议 -->
+  <select id="selectBythesisId" resultMap="ResultMapWithBLOBs1" parameterType="int">
+  	select * from thesis t,ask a,question q,replyAsk r,replyquestion re where t.thesisId=#{id} and a.debateId=#{id} and q.q_debateId=#{id}
+  	and r.ra_askId = a.askId and re.rq_questionId = q.q_questionId
+  </select>
+  
+  
   
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -215,18 +264,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.pjmike.lundao.po.Thesis" >
-    insert into thesis (thesisId, description, view, 
-      like, attention, dislike, 
-      ask, question, asklist, 
-      questionlist, publishTime, contentTime, 
-      complete, uncomplete, state
-      )
-    values (#{thesisid,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{view,jdbcType=INTEGER}, 
-      #{like,jdbcType=INTEGER}, #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, 
-      #{ask,jdbcType=INTEGER}, #{question,jdbcType=INTEGER}, #{asklist,jdbcType=INTEGER}, 
-      #{questionlist,jdbcType=INTEGER}, #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}, 
-      #{complete,jdbcType=INTEGER}, #{uncomplete,jdbcType=INTEGER}, #{state,jdbcType=LONGVARCHAR}
-      )
+    insert into thesis (thesisId, t_debateId, t_description, 
+      t_view, t_like, t_attention, 
+      t_dislike, t_ask, t_question, 
+      t_asklist, t_questionlist, t_publishTime, 
+      t_contentTime, complete, uncomplete, 
+      t_state)
+    values (#{thesisid,jdbcType=INTEGER}, #{tDebateid,jdbcType=INTEGER}, #{tDescription,jdbcType=VARCHAR}, 
+      #{tView,jdbcType=INTEGER}, #{tLike,jdbcType=INTEGER}, #{tAttention,jdbcType=INTEGER}, 
+      #{tDislike,jdbcType=INTEGER}, #{tAsk,jdbcType=INTEGER}, #{tQuestion,jdbcType=INTEGER}, 
+      #{tAsklist,jdbcType=INTEGER}, #{tQuestionlist,jdbcType=INTEGER}, #{tPublishtime,jdbcType=TIMESTAMP}, 
+      #{tContenttime,jdbcType=TIMESTAMP}, #{complete,jdbcType=INTEGER}, #{uncomplete,jdbcType=INTEGER}, 
+      #{tState,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Thesis" >
     insert into thesis
@@ -234,38 +283,41 @@
       <if test="thesisid != null" >
         thesisId,
       </if>
-      <if test="description != null" >
-        description,
+      <if test="tDebateid != null" >
+        t_debateId,
       </if>
-      <if test="view != null" >
-        view,
+      <if test="tDescription != null" >
+        t_description,
       </if>
-      <if test="like != null" >
-        like,
+      <if test="tView != null" >
+        t_view,
       </if>
-      <if test="attention != null" >
-        attention,
+      <if test="tLike != null" >
+        t_like,
       </if>
-      <if test="dislike != null" >
-        dislike,
+      <if test="tAttention != null" >
+        t_attention,
       </if>
-      <if test="ask != null" >
-        ask,
+      <if test="tDislike != null" >
+        t_dislike,
       </if>
-      <if test="question != null" >
-        question,
+      <if test="tAsk != null" >
+        t_ask,
       </if>
-      <if test="asklist != null" >
-        asklist,
+      <if test="tQuestion != null" >
+        t_question,
       </if>
-      <if test="questionlist != null" >
-        questionlist,
+      <if test="tAsklist != null" >
+        t_asklist,
       </if>
-      <if test="publishtime != null" >
-        publishTime,
+      <if test="tQuestionlist != null" >
+        t_questionlist,
       </if>
-      <if test="contenttime != null" >
-        contentTime,
+      <if test="tPublishtime != null" >
+        t_publishTime,
+      </if>
+      <if test="tContenttime != null" >
+        t_contentTime,
       </if>
       <if test="complete != null" >
         complete,
@@ -273,46 +325,49 @@
       <if test="uncomplete != null" >
         uncomplete,
       </if>
-      <if test="state != null" >
-        state,
+      <if test="tState != null" >
+        t_state,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="thesisid != null" >
         #{thesisid,jdbcType=INTEGER},
       </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+      <if test="tDebateid != null" >
+        #{tDebateid,jdbcType=INTEGER},
       </if>
-      <if test="view != null" >
-        #{view,jdbcType=INTEGER},
+      <if test="tDescription != null" >
+        #{tDescription,jdbcType=VARCHAR},
       </if>
-      <if test="like != null" >
-        #{like,jdbcType=INTEGER},
+      <if test="tView != null" >
+        #{tView,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        #{attention,jdbcType=INTEGER},
+      <if test="tLike != null" >
+        #{tLike,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        #{dislike,jdbcType=INTEGER},
+      <if test="tAttention != null" >
+        #{tAttention,jdbcType=INTEGER},
       </if>
-      <if test="ask != null" >
-        #{ask,jdbcType=INTEGER},
+      <if test="tDislike != null" >
+        #{tDislike,jdbcType=INTEGER},
       </if>
-      <if test="question != null" >
-        #{question,jdbcType=INTEGER},
+      <if test="tAsk != null" >
+        #{tAsk,jdbcType=INTEGER},
       </if>
-      <if test="asklist != null" >
-        #{asklist,jdbcType=INTEGER},
+      <if test="tQuestion != null" >
+        #{tQuestion,jdbcType=INTEGER},
       </if>
-      <if test="questionlist != null" >
-        #{questionlist,jdbcType=INTEGER},
+      <if test="tAsklist != null" >
+        #{tAsklist,jdbcType=INTEGER},
       </if>
-      <if test="publishtime != null" >
-        #{publishtime,jdbcType=TIMESTAMP},
+      <if test="tQuestionlist != null" >
+        #{tQuestionlist,jdbcType=INTEGER},
       </if>
-      <if test="contenttime != null" >
-        #{contenttime,jdbcType=TIMESTAMP},
+      <if test="tPublishtime != null" >
+        #{tPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tContenttime != null" >
+        #{tContenttime,jdbcType=TIMESTAMP},
       </if>
       <if test="complete != null" >
         #{complete,jdbcType=INTEGER},
@@ -320,8 +375,8 @@
       <if test="uncomplete != null" >
         #{uncomplete,jdbcType=INTEGER},
       </if>
-      <if test="state != null" >
-        #{state,jdbcType=LONGVARCHAR},
+      <if test="tState != null" >
+        #{tState,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -337,38 +392,41 @@
       <if test="record.thesisid != null" >
         thesisId = #{record.thesisid,jdbcType=INTEGER},
       </if>
-      <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
+      <if test="record.tDebateid != null" >
+        t_debateId = #{record.tDebateid,jdbcType=INTEGER},
       </if>
-      <if test="record.view != null" >
-        view = #{record.view,jdbcType=INTEGER},
+      <if test="record.tDescription != null" >
+        t_description = #{record.tDescription,jdbcType=VARCHAR},
       </if>
-      <if test="record.like != null" >
-        like = #{record.like,jdbcType=INTEGER},
+      <if test="record.tView != null" >
+        t_view = #{record.tView,jdbcType=INTEGER},
       </if>
-      <if test="record.attention != null" >
-        attention = #{record.attention,jdbcType=INTEGER},
+      <if test="record.tLike != null" >
+        t_like = #{record.tLike,jdbcType=INTEGER},
       </if>
-      <if test="record.dislike != null" >
-        dislike = #{record.dislike,jdbcType=INTEGER},
+      <if test="record.tAttention != null" >
+        t_attention = #{record.tAttention,jdbcType=INTEGER},
       </if>
-      <if test="record.ask != null" >
-        ask = #{record.ask,jdbcType=INTEGER},
+      <if test="record.tDislike != null" >
+        t_dislike = #{record.tDislike,jdbcType=INTEGER},
       </if>
-      <if test="record.question != null" >
-        question = #{record.question,jdbcType=INTEGER},
+      <if test="record.tAsk != null" >
+        t_ask = #{record.tAsk,jdbcType=INTEGER},
       </if>
-      <if test="record.asklist != null" >
-        asklist = #{record.asklist,jdbcType=INTEGER},
+      <if test="record.tQuestion != null" >
+        t_question = #{record.tQuestion,jdbcType=INTEGER},
       </if>
-      <if test="record.questionlist != null" >
-        questionlist = #{record.questionlist,jdbcType=INTEGER},
+      <if test="record.tAsklist != null" >
+        t_asklist = #{record.tAsklist,jdbcType=INTEGER},
       </if>
-      <if test="record.publishtime != null" >
-        publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
+      <if test="record.tQuestionlist != null" >
+        t_questionlist = #{record.tQuestionlist,jdbcType=INTEGER},
       </if>
-      <if test="record.contenttime != null" >
-        contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      <if test="record.tPublishtime != null" >
+        t_publishTime = #{record.tPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tContenttime != null" >
+        t_contentTime = #{record.tContenttime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.complete != null" >
         complete = #{record.complete,jdbcType=INTEGER},
@@ -376,8 +434,8 @@
       <if test="record.uncomplete != null" >
         uncomplete = #{record.uncomplete,jdbcType=INTEGER},
       </if>
-      <if test="record.state != null" >
-        state = #{record.state,jdbcType=LONGVARCHAR},
+      <if test="record.tState != null" >
+        t_state = #{record.tState,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -387,20 +445,21 @@
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update thesis
     set thesisId = #{record.thesisid,jdbcType=INTEGER},
-      description = #{record.description,jdbcType=VARCHAR},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      ask = #{record.ask,jdbcType=INTEGER},
-      question = #{record.question,jdbcType=INTEGER},
-      asklist = #{record.asklist,jdbcType=INTEGER},
-      questionlist = #{record.questionlist,jdbcType=INTEGER},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      t_debateId = #{record.tDebateid,jdbcType=INTEGER},
+      t_description = #{record.tDescription,jdbcType=VARCHAR},
+      t_view = #{record.tView,jdbcType=INTEGER},
+      t_like = #{record.tLike,jdbcType=INTEGER},
+      t_attention = #{record.tAttention,jdbcType=INTEGER},
+      t_dislike = #{record.tDislike,jdbcType=INTEGER},
+      t_ask = #{record.tAsk,jdbcType=INTEGER},
+      t_question = #{record.tQuestion,jdbcType=INTEGER},
+      t_asklist = #{record.tAsklist,jdbcType=INTEGER},
+      t_questionlist = #{record.tQuestionlist,jdbcType=INTEGER},
+      t_publishTime = #{record.tPublishtime,jdbcType=TIMESTAMP},
+      t_contentTime = #{record.tContenttime,jdbcType=TIMESTAMP},
       complete = #{record.complete,jdbcType=INTEGER},
       uncomplete = #{record.uncomplete,jdbcType=INTEGER},
-      state = #{record.state,jdbcType=LONGVARCHAR}
+      t_state = #{record.tState,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -408,17 +467,18 @@
   <update id="updateByExample" parameterType="map" >
     update thesis
     set thesisId = #{record.thesisid,jdbcType=INTEGER},
-      description = #{record.description,jdbcType=VARCHAR},
-      view = #{record.view,jdbcType=INTEGER},
-      like = #{record.like,jdbcType=INTEGER},
-      attention = #{record.attention,jdbcType=INTEGER},
-      dislike = #{record.dislike,jdbcType=INTEGER},
-      ask = #{record.ask,jdbcType=INTEGER},
-      question = #{record.question,jdbcType=INTEGER},
-      asklist = #{record.asklist,jdbcType=INTEGER},
-      questionlist = #{record.questionlist,jdbcType=INTEGER},
-      publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
+      t_debateId = #{record.tDebateid,jdbcType=INTEGER},
+      t_description = #{record.tDescription,jdbcType=VARCHAR},
+      t_view = #{record.tView,jdbcType=INTEGER},
+      t_like = #{record.tLike,jdbcType=INTEGER},
+      t_attention = #{record.tAttention,jdbcType=INTEGER},
+      t_dislike = #{record.tDislike,jdbcType=INTEGER},
+      t_ask = #{record.tAsk,jdbcType=INTEGER},
+      t_question = #{record.tQuestion,jdbcType=INTEGER},
+      t_asklist = #{record.tAsklist,jdbcType=INTEGER},
+      t_questionlist = #{record.tQuestionlist,jdbcType=INTEGER},
+      t_publishTime = #{record.tPublishtime,jdbcType=TIMESTAMP},
+      t_contentTime = #{record.tContenttime,jdbcType=TIMESTAMP},
       complete = #{record.complete,jdbcType=INTEGER},
       uncomplete = #{record.uncomplete,jdbcType=INTEGER}
     <if test="_parameter != null" >
@@ -428,38 +488,41 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Thesis" >
     update thesis
     <set >
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+      <if test="tDebateid != null" >
+        t_debateId = #{tDebateid,jdbcType=INTEGER},
       </if>
-      <if test="view != null" >
-        view = #{view,jdbcType=INTEGER},
+      <if test="tDescription != null" >
+        t_description = #{tDescription,jdbcType=VARCHAR},
       </if>
-      <if test="like != null" >
-        like = #{like,jdbcType=INTEGER},
+      <if test="tView != null" >
+        t_view = #{tView,jdbcType=INTEGER},
       </if>
-      <if test="attention != null" >
-        attention = #{attention,jdbcType=INTEGER},
+      <if test="tLike != null" >
+        t_like = #{tLike,jdbcType=INTEGER},
       </if>
-      <if test="dislike != null" >
-        dislike = #{dislike,jdbcType=INTEGER},
+      <if test="tAttention != null" >
+        t_attention = #{tAttention,jdbcType=INTEGER},
       </if>
-      <if test="ask != null" >
-        ask = #{ask,jdbcType=INTEGER},
+      <if test="tDislike != null" >
+        t_dislike = #{tDislike,jdbcType=INTEGER},
       </if>
-      <if test="question != null" >
-        question = #{question,jdbcType=INTEGER},
+      <if test="tAsk != null" >
+        t_ask = #{tAsk,jdbcType=INTEGER},
       </if>
-      <if test="asklist != null" >
-        asklist = #{asklist,jdbcType=INTEGER},
+      <if test="tQuestion != null" >
+        t_question = #{tQuestion,jdbcType=INTEGER},
       </if>
-      <if test="questionlist != null" >
-        questionlist = #{questionlist,jdbcType=INTEGER},
+      <if test="tAsklist != null" >
+        t_asklist = #{tAsklist,jdbcType=INTEGER},
       </if>
-      <if test="publishtime != null" >
-        publishTime = #{publishtime,jdbcType=TIMESTAMP},
+      <if test="tQuestionlist != null" >
+        t_questionlist = #{tQuestionlist,jdbcType=INTEGER},
       </if>
-      <if test="contenttime != null" >
-        contentTime = #{contenttime,jdbcType=TIMESTAMP},
+      <if test="tPublishtime != null" >
+        t_publishTime = #{tPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tContenttime != null" >
+        t_contentTime = #{tContenttime,jdbcType=TIMESTAMP},
       </if>
       <if test="complete != null" >
         complete = #{complete,jdbcType=INTEGER},
@@ -467,43 +530,45 @@
       <if test="uncomplete != null" >
         uncomplete = #{uncomplete,jdbcType=INTEGER},
       </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=LONGVARCHAR},
+      <if test="tState != null" >
+        t_state = #{tState,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where thesisId = #{thesisid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pjmike.lundao.po.Thesis" >
     update thesis
-    set description = #{description,jdbcType=VARCHAR},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      ask = #{ask,jdbcType=INTEGER},
-      question = #{question,jdbcType=INTEGER},
-      asklist = #{asklist,jdbcType=INTEGER},
-      questionlist = #{questionlist,jdbcType=INTEGER},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
+    set t_debateId = #{tDebateid,jdbcType=INTEGER},
+      t_description = #{tDescription,jdbcType=VARCHAR},
+      t_view = #{tView,jdbcType=INTEGER},
+      t_like = #{tLike,jdbcType=INTEGER},
+      t_attention = #{tAttention,jdbcType=INTEGER},
+      t_dislike = #{tDislike,jdbcType=INTEGER},
+      t_ask = #{tAsk,jdbcType=INTEGER},
+      t_question = #{tQuestion,jdbcType=INTEGER},
+      t_asklist = #{tAsklist,jdbcType=INTEGER},
+      t_questionlist = #{tQuestionlist,jdbcType=INTEGER},
+      t_publishTime = #{tPublishtime,jdbcType=TIMESTAMP},
+      t_contentTime = #{tContenttime,jdbcType=TIMESTAMP},
       complete = #{complete,jdbcType=INTEGER},
       uncomplete = #{uncomplete,jdbcType=INTEGER},
-      state = #{state,jdbcType=LONGVARCHAR}
+      t_state = #{tState,jdbcType=LONGVARCHAR}
     where thesisId = #{thesisid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Thesis" >
     update thesis
-    set description = #{description,jdbcType=VARCHAR},
-      view = #{view,jdbcType=INTEGER},
-      like = #{like,jdbcType=INTEGER},
-      attention = #{attention,jdbcType=INTEGER},
-      dislike = #{dislike,jdbcType=INTEGER},
-      ask = #{ask,jdbcType=INTEGER},
-      question = #{question,jdbcType=INTEGER},
-      asklist = #{asklist,jdbcType=INTEGER},
-      questionlist = #{questionlist,jdbcType=INTEGER},
-      publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
+    set t_debateId = #{tDebateid,jdbcType=INTEGER},
+      t_description = #{tDescription,jdbcType=VARCHAR},
+      t_view = #{tView,jdbcType=INTEGER},
+      t_like = #{tLike,jdbcType=INTEGER},
+      t_attention = #{tAttention,jdbcType=INTEGER},
+      t_dislike = #{tDislike,jdbcType=INTEGER},
+      t_ask = #{tAsk,jdbcType=INTEGER},
+      t_question = #{tQuestion,jdbcType=INTEGER},
+      t_asklist = #{tAsklist,jdbcType=INTEGER},
+      t_questionlist = #{tQuestionlist,jdbcType=INTEGER},
+      t_publishTime = #{tPublishtime,jdbcType=TIMESTAMP},
+      t_contentTime = #{tContenttime,jdbcType=TIMESTAMP},
       complete = #{complete,jdbcType=INTEGER},
       uncomplete = #{uncomplete,jdbcType=INTEGER}
     where thesisId = #{thesisid,jdbcType=INTEGER}

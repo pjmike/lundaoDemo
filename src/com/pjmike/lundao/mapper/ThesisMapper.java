@@ -2,6 +2,8 @@ package com.pjmike.lundao.mapper;
 
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExample;
+import com.pjmike.lundao.po.ThesisExtend;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,13 +17,14 @@ public interface ThesisMapper {
     int insert(Thesis record);
 
     int insertSelective(Thesis record);
+
     List<Thesis> selectBykey();
     
     List<Thesis> selectByExampleWithBLOBs(ThesisExample example);
 
     List<Thesis> selectByExample(ThesisExample example);
-
-    Thesis selectByPrimaryKey(Integer thesisid);
+    
+    ThesisExtend selectBythesisId(int id);
 
     int updateByExampleSelective(@Param("record") Thesis record, @Param("example") ThesisExample example);
 

@@ -4,36 +4,36 @@ import java.util.Date;
 
 public class Thesis {
     private Integer thesisid;
-    
-    private String description;
-    private Integer debateId;
-   
 
-	private Integer view;
+    private Integer tDebateid;
 
-    private Integer like;
+    private String tDescription;
 
-    private Integer attention;
+    private Integer tView;
 
-    private Integer dislike;
+    private Integer tLike;
 
-    private Integer ask;
+    private Integer tAttention;
 
-    private Integer question;
+    private Integer tDislike;
 
-    private Integer asklist;
+    private Integer tAsk;
 
-    private Integer questionlist;
+    private Integer tQuestion;
 
-    private Date publishtime;
+    private Integer tAsklist;
 
-    private Date contenttime;
+    private Integer tQuestionlist;
+
+    private Date tPublishtime;
+
+    private Date tContenttime;
 
     private Integer complete;
 
     private Integer uncomplete;
 
-    private String state;
+    private String tState;
 
     public Integer getThesisid() {
         return thesisid;
@@ -43,92 +43,100 @@ public class Thesis {
         this.thesisid = thesisid;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer gettDebateid() {
+        return tDebateid;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    public void settDebateid(Integer tDebateid) {
+        this.tDebateid = tDebateid;
     }
 
-    public Integer getView() {
-        return view;
+    public String gettDescription() {
+        return tDescription;
     }
 
-    public void setView(Integer view) {
-        this.view = view;
+    public void settDescription(String tDescription) {
+        this.tDescription = tDescription == null ? null : tDescription.trim();
     }
 
-    public Integer getLike() {
-        return like;
+    public Integer gettView() {
+        return tView;
     }
 
-    public void setLike(Integer like) {
-        this.like = like;
+    public void settView(Integer tView) {
+        this.tView = tView;
     }
 
-    public Integer getAttention() {
-        return attention;
+    public Integer gettLike() {
+        return tLike;
     }
 
-    public void setAttention(Integer attention) {
-        this.attention = attention;
+    public void settLike(Integer tLike) {
+        this.tLike = tLike;
     }
 
-    public Integer getDislike() {
-        return dislike;
+    public Integer gettAttention() {
+        return tAttention;
     }
 
-    public void setDislike(Integer dislike) {
-        this.dislike = dislike;
+    public void settAttention(Integer tAttention) {
+        this.tAttention = tAttention;
     }
 
-    public Integer getAsk() {
-        return ask;
+    public Integer gettDislike() {
+        return tDislike;
     }
 
-    public void setAsk(Integer ask) {
-        this.ask = ask;
+    public void settDislike(Integer tDislike) {
+        this.tDislike = tDislike;
     }
 
-    public Integer getQuestion() {
-        return question;
+    public Integer gettAsk() {
+        return tAsk;
     }
 
-    public void setQuestion(Integer question) {
-        this.question = question;
+    public void settAsk(Integer tAsk) {
+        this.tAsk = tAsk;
     }
 
-    public Integer getAsklist() {
-        return asklist;
+    public Integer gettQuestion() {
+        return tQuestion;
     }
 
-    public void setAsklist(Integer asklist) {
-        this.asklist = asklist;
+    public void settQuestion(Integer tQuestion) {
+        this.tQuestion = tQuestion;
     }
 
-    public Integer getQuestionlist() {
-        return questionlist;
+    public Integer gettAsklist() {
+        return tAsklist;
     }
 
-    public void setQuestionlist(Integer questionlist) {
-        this.questionlist = questionlist;
+    public void settAsklist(Integer tAsklist) {
+        this.tAsklist = tAsklist;
     }
 
-    public Date getPublishtime() {
-        return publishtime;
+    public Integer gettQuestionlist() {
+        return tQuestionlist;
     }
 
-    public void setPublishtime(Date publishtime) {
-        this.publishtime = publishtime;
+    public void settQuestionlist(Integer tQuestionlist) {
+        this.tQuestionlist = tQuestionlist;
     }
 
-    public Date getContenttime() {
-        return contenttime;
+    public Date gettPublishtime() {
+        return tPublishtime;
     }
 
-    public void setContenttime(Date contenttime) {
-        this.contenttime = contenttime;
+    public void settPublishtime(Date tPublishtime) {
+        this.tPublishtime = tPublishtime;
+    }
+
+    public Date gettContenttime() {
+        return tContenttime;
+    }
+
+    public void settContenttime(Date tContenttime) {
+        this.tContenttime = tContenttime;
     }
 
     public Integer getComplete() {
@@ -147,18 +155,11 @@ public class Thesis {
         this.uncomplete = uncomplete;
     }
 
-    public String getState() {
-        return state;
+    public String gettState() {
+        return tState;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void settState(String tState) {
+        this.tState = tState == null ? null : tState.trim();
     }
-    public Integer getDebateId() {
-		return debateId;
-	}
-
-	public void setDebateId(Integer debateId) {
-		this.debateId = debateId;
-	}
 }

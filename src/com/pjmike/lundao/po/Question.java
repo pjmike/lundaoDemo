@@ -3,153 +3,153 @@ package com.pjmike.lundao.po;
 import java.util.Date;
 
 public class Question {
-    private Integer questionid;
+    private Integer qQuestionid;
 
-    private Integer debateid;
+    private Integer qDebateid;
 
-    private String describtion;
+    private String qDescribtion;
 
-    private String content;
+    private String qContent;
 
-    private Integer view;
+    private String qStatus;
 
-    private Integer like;
+    private Integer qView;
 
-    private Integer attention;
+    private Integer qLike;
 
-    private Integer dislike;
+    private Integer qAttention;
 
-    private Integer reply;
+    private Integer qDislike;
 
-    private Integer replylist;
+    private Integer qReply;
 
-    private Integer clickcount;
+    private Integer qReplylist;
 
-    private String username;
+    private Integer qClickcount;
 
-    private Date publishtime;
+    private String qUsername;
 
-    private Date contenttime;
+    private Date qPublishtime;
 
-    private String condition;
+    private Date qContenttime;
 
-    public Integer getQuestionid() {
-        return questionid;
+    public Integer getqQuestionid() {
+        return qQuestionid;
     }
 
-    public void setQuestionid(Integer questionid) {
-        this.questionid = questionid;
+    public void setqQuestionid(Integer qQuestionid) {
+        this.qQuestionid = qQuestionid;
     }
 
-    public Integer getDebateid() {
-        return debateid;
+    public Integer getqDebateid() {
+        return qDebateid;
     }
 
-    public void setDebateid(Integer debateid) {
-        this.debateid = debateid;
+    public void setqDebateid(Integer qDebateid) {
+        this.qDebateid = qDebateid;
     }
 
-    public String getDescribtion() {
-        return describtion;
+    public String getqDescribtion() {
+        return qDescribtion;
     }
 
-    public void setDescribtion(String describtion) {
-        this.describtion = describtion == null ? null : describtion.trim();
+    public void setqDescribtion(String qDescribtion) {
+        this.qDescribtion = qDescribtion == null ? null : qDescribtion.trim();
     }
 
-    public String getContent() {
-        return content;
+    public String getqContent() {
+        return qContent;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setqContent(String qContent) {
+        this.qContent = qContent == null ? null : qContent.trim();
     }
 
-    public Integer getView() {
-        return view;
+    public String getqStatus() {
+        return qStatus;
     }
 
-    public void setView(Integer view) {
-        this.view = view;
+    public void setqStatus(String qStatus) {
+        this.qStatus = qStatus == null ? null : qStatus.trim();
     }
 
-    public Integer getLike() {
-        return like;
+    public Integer getqView() {
+        return qView;
     }
 
-    public void setLike(Integer like) {
-        this.like = like;
+    public void setqView(Integer qView) {
+        this.qView = qView;
     }
 
-    public Integer getAttention() {
-        return attention;
+    public Integer getqLike() {
+        return qLike;
     }
 
-    public void setAttention(Integer attention) {
-        this.attention = attention;
+    public void setqLike(Integer qLike) {
+        this.qLike = qLike;
     }
 
-    public Integer getDislike() {
-        return dislike;
+    public Integer getqAttention() {
+        return qAttention;
     }
 
-    public void setDislike(Integer dislike) {
-        this.dislike = dislike;
+    public void setqAttention(Integer qAttention) {
+        this.qAttention = qAttention;
     }
 
-    public Integer getReply() {
-        return reply;
+    public Integer getqDislike() {
+        return qDislike;
     }
 
-    public void setReply(Integer reply) {
-        this.reply = reply;
+    public void setqDislike(Integer qDislike) {
+        this.qDislike = qDislike;
     }
 
-    public Integer getReplylist() {
-        return replylist;
+    public Integer getqReply() {
+        return qReply;
     }
 
-    public void setReplylist(Integer replylist) {
-        this.replylist = replylist;
+    public void setqReply(Integer qReply) {
+        this.qReply = qReply;
     }
 
-    public Integer getClickcount() {
-        return clickcount;
+    public Integer getqReplylist() {
+        return qReplylist;
     }
 
-    public void setClickcount(Integer clickcount) {
-        this.clickcount = clickcount;
+    public void setqReplylist(Integer qReplylist) {
+        this.qReplylist = qReplylist;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getqClickcount() {
+        return qClickcount;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setqClickcount(Integer qClickcount) {
+        this.qClickcount = qClickcount;
     }
 
-    public Date getPublishtime() {
-        return publishtime;
+    public String getqUsername() {
+        return qUsername;
     }
 
-    public void setPublishtime(Date publishtime) {
-        this.publishtime = publishtime;
+    public void setqUsername(String qUsername) {
+        this.qUsername = qUsername == null ? null : qUsername.trim();
     }
 
-    public Date getContenttime() {
-        return contenttime;
+    public Date getqPublishtime() {
+        return qPublishtime;
     }
 
-    public void setContenttime(Date contenttime) {
-        this.contenttime = contenttime;
+    public void setqPublishtime(Date qPublishtime) {
+        this.qPublishtime = qPublishtime;
     }
 
-    public String getCondition() {
-        return condition;
+    public Date getqContenttime() {
+        return qContenttime;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition == null ? null : condition.trim();
+    public void setqContenttime(Date qContenttime) {
+        this.qContenttime = qContenttime;
     }
 }

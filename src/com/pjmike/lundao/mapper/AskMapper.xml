@@ -6,6 +6,7 @@
     <result column="debateId" property="debateid" jdbcType="INTEGER" />
     <result column="describtion" property="describtion" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="view" property="view" jdbcType="INTEGER" />
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="attention" property="attention" jdbcType="INTEGER" />
@@ -16,7 +17,6 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
     <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-    <result column="askcondition" property="askcondition" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    askId, debateId, describtion, content, view, like, attention, dislike, reply, replylist, 
-    clickcount, username, publishTime, contentTime, askcondition
+    askId, debateId, describtion, content, status, view, like, attention, dislike, reply, 
+    replylist, clickcount, username, publishTime, contentTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.AskExample" >
     select
@@ -112,16 +112,16 @@
   </delete>
   <insert id="insert" parameterType="com.pjmike.lundao.po.Ask" >
     insert into ask (askId, debateId, describtion, 
-      content, view, like, 
-      attention, dislike, reply, 
-      replylist, clickcount, username, 
-      publishTime, contentTime, askcondition
+      content, status, view, 
+      like, attention, dislike, 
+      reply, replylist, clickcount, 
+      username, publishTime, contentTime
       )
     values (#{askid,jdbcType=INTEGER}, #{debateid,jdbcType=INTEGER}, #{describtion,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{view,jdbcType=INTEGER}, #{like,jdbcType=INTEGER}, 
-      #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, #{reply,jdbcType=INTEGER}, 
-      #{replylist,jdbcType=INTEGER}, #{clickcount,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}, #{askcondition,jdbcType=VARCHAR}
+      #{content,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{view,jdbcType=INTEGER}, 
+      #{like,jdbcType=INTEGER}, #{attention,jdbcType=INTEGER}, #{dislike,jdbcType=INTEGER}, 
+      #{reply,jdbcType=INTEGER}, #{replylist,jdbcType=INTEGER}, #{clickcount,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP}, #{contenttime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Ask" >
@@ -138,6 +138,9 @@
       </if>
       <if test="content != null" >
         content,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="view != null" >
         view,
@@ -169,9 +172,6 @@
       <if test="contenttime != null" >
         contentTime,
       </if>
-      <if test="askcondition != null" >
-        askcondition,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="askid != null" >
@@ -185,6 +185,9 @@
       </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="view != null" >
         #{view,jdbcType=INTEGER},
@@ -216,9 +219,6 @@
       <if test="contenttime != null" >
         #{contenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="askcondition != null" >
-        #{askcondition,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.pjmike.lundao.po.AskExample" resultType="java.lang.Integer" >
@@ -241,6 +241,9 @@
       </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
       </if>
       <if test="record.view != null" >
         view = #{record.view,jdbcType=INTEGER},
@@ -272,9 +275,6 @@
       <if test="record.contenttime != null" >
         contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.askcondition != null" >
-        askcondition = #{record.askcondition,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -286,6 +286,7 @@
       debateId = #{record.debateid,jdbcType=INTEGER},
       describtion = #{record.describtion,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
       view = #{record.view,jdbcType=INTEGER},
       like = #{record.like,jdbcType=INTEGER},
       attention = #{record.attention,jdbcType=INTEGER},
@@ -295,8 +296,7 @@
       clickcount = #{record.clickcount,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       publishTime = #{record.publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{record.contenttime,jdbcType=TIMESTAMP},
-      askcondition = #{record.askcondition,jdbcType=VARCHAR}
+      contentTime = #{record.contenttime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -312,6 +312,9 @@
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
       </if>
       <if test="view != null" >
         view = #{view,jdbcType=INTEGER},
@@ -343,9 +346,6 @@
       <if test="contenttime != null" >
         contentTime = #{contenttime,jdbcType=TIMESTAMP},
       </if>
-      <if test="askcondition != null" >
-        askcondition = #{askcondition,jdbcType=VARCHAR},
-      </if>
     </set>
     where askId = #{askid,jdbcType=INTEGER}
   </update>
@@ -354,6 +354,7 @@
     set debateId = #{debateid,jdbcType=INTEGER},
       describtion = #{describtion,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
       view = #{view,jdbcType=INTEGER},
       like = #{like,jdbcType=INTEGER},
       attention = #{attention,jdbcType=INTEGER},
@@ -363,8 +364,7 @@
       clickcount = #{clickcount,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
       publishTime = #{publishtime,jdbcType=TIMESTAMP},
-      contentTime = #{contenttime,jdbcType=TIMESTAMP},
-      askcondition = #{askcondition,jdbcType=VARCHAR}
+      contentTime = #{contenttime,jdbcType=TIMESTAMP}
     where askId = #{askid,jdbcType=INTEGER}
   </update>
 </mapper>

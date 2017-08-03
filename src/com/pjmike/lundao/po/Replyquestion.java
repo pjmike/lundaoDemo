@@ -5,29 +5,27 @@ import java.util.Date;
 public class Replyquestion {
     private Integer replyquesid;
 
-    private Integer questionid;
+    private Integer rqQuestionid;
 
-    private Integer view;
+    private Integer rqView;
 
-    private Integer like;
+    private Integer rqLike;
 
-    private Integer attention;
+    private Integer rqAttention;
 
-    private Integer dislike;
+    private Integer rqDislike;
 
-    private Integer reply;
+    private Integer rqReplyid;
 
-    private Integer replylist;
+    private String rqUsername;
 
-    private String username;
+    private Date rqPublishtime;
 
-    private Date publishtime;
+    private Date rqContenttime;
 
-    private Date contenttime;
+    private Integer rqFloor;
 
-    private Integer floor;
-
-    private String describtion;
+    private String rqDescribtion;
 
     public Integer getReplyquesid() {
         return replyquesid;
@@ -37,99 +35,91 @@ public class Replyquestion {
         this.replyquesid = replyquesid;
     }
 
-    public Integer getQuestionid() {
-        return questionid;
+    public Integer getRqQuestionid() {
+        return rqQuestionid;
     }
 
-    public void setQuestionid(Integer questionid) {
-        this.questionid = questionid;
+    public void setRqQuestionid(Integer rqQuestionid) {
+        this.rqQuestionid = rqQuestionid;
     }
 
-    public Integer getView() {
-        return view;
+    public Integer getRqView() {
+        return rqView;
     }
 
-    public void setView(Integer view) {
-        this.view = view;
+    public void setRqView(Integer rqView) {
+        this.rqView = rqView;
     }
 
-    public Integer getLike() {
-        return like;
+    public Integer getRqLike() {
+        return rqLike;
     }
 
-    public void setLike(Integer like) {
-        this.like = like;
+    public void setRqLike(Integer rqLike) {
+        this.rqLike = rqLike;
     }
 
-    public Integer getAttention() {
-        return attention;
+    public Integer getRqAttention() {
+        return rqAttention;
     }
 
-    public void setAttention(Integer attention) {
-        this.attention = attention;
+    public void setRqAttention(Integer rqAttention) {
+        this.rqAttention = rqAttention;
     }
 
-    public Integer getDislike() {
-        return dislike;
+    public Integer getRqDislike() {
+        return rqDislike;
     }
 
-    public void setDislike(Integer dislike) {
-        this.dislike = dislike;
+    public void setRqDislike(Integer rqDislike) {
+        this.rqDislike = rqDislike;
     }
 
-    public Integer getReply() {
-        return reply;
+    public Integer getRqReplyid() {
+        return rqReplyid;
     }
 
-    public void setReply(Integer reply) {
-        this.reply = reply;
+    public void setRqReplyid(Integer rqReplyid) {
+        this.rqReplyid = rqReplyid;
     }
 
-    public Integer getReplylist() {
-        return replylist;
+    public String getRqUsername() {
+        return rqUsername;
     }
 
-    public void setReplylist(Integer replylist) {
-        this.replylist = replylist;
+    public void setRqUsername(String rqUsername) {
+        this.rqUsername = rqUsername == null ? null : rqUsername.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public Date getRqPublishtime() {
+        return rqPublishtime;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setRqPublishtime(Date rqPublishtime) {
+        this.rqPublishtime = rqPublishtime;
     }
 
-    public Date getPublishtime() {
-        return publishtime;
+    public Date getRqContenttime() {
+        return rqContenttime;
     }
 
-    public void setPublishtime(Date publishtime) {
-        this.publishtime = publishtime;
+    public void setRqContenttime(Date rqContenttime) {
+        this.rqContenttime = rqContenttime;
     }
 
-    public Date getContenttime() {
-        return contenttime;
+    public Integer getRqFloor() {
+        return rqFloor;
     }
 
-    public void setContenttime(Date contenttime) {
-        this.contenttime = contenttime;
+    public void setRqFloor(Integer rqFloor) {
+        this.rqFloor = rqFloor;
     }
 
-    public Integer getFloor() {
-        return floor;
+    public String getRqDescribtion() {
+        return rqDescribtion;
     }
 
-    public void setFloor(Integer floor) {
-        this.floor = floor;
-    }
-
-    public String getDescribtion() {
-        return describtion;
-    }
-
-    public void setDescribtion(String describtion) {
-        this.describtion = describtion == null ? null : describtion.trim();
+    public void setRqDescribtion(String rqDescribtion) {
+        this.rqDescribtion = rqDescribtion == null ? null : rqDescribtion.trim();
     }
 }
