@@ -30,6 +30,7 @@
     <id column="thesisId" property="thesisid" jdbcType="INTEGER" />
     <result column="t_debateId" property="tDebateid" jdbcType="INTEGER" />
     <result column="t_description" property="tDescription" jdbcType="VARCHAR" />
+    <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
     <result column="t_view" property="tView" jdbcType="INTEGER" />
     <result column="t_like" property="tLike" jdbcType="INTEGER" />
     <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
@@ -41,94 +42,47 @@
     <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
     <result column="t_contentTime" property="tContenttime" jdbcType="TIMESTAMP" />
     <result column="complete" property="complete" jdbcType="INTEGER" />
-    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
-     <!-- 以下是提问级联 -->
-    <collection property="asks" ofType="com.pjmike.lundao.po.AskExtend">
-    	
-	    <id column="askId" jdbcType="INTEGER" property="askid" />
-	    <result column="debateId" jdbcType="INTEGER" property="debateid" />
-	    <result column="describtion" jdbcType="VARCHAR" property="describtion" />
-	    <result column="content" jdbcType="VARCHAR" property="content" />
-	    <result column="status" jdbcType="VARCHAR" property="status" />
-	    <result column="view" jdbcType="INTEGER" property="view" />
-	    <result column="like" jdbcType="INTEGER" property="like" />
-	    <result column="attention" jdbcType="INTEGER" property="attention" />
-	    <result column="dislike" jdbcType="INTEGER" property="dislike" />
-	    <result column="reply" jdbcType="INTEGER" property="reply" />
-	    <result column="replylist" jdbcType="INTEGER" property="replylist" />
-	    <result column="clickcount" jdbcType="INTEGER" property="clickcount" />
-	    <result column="username" jdbcType="VARCHAR" property="username" />
-	    <result column="publishTime" jdbcType="TIMESTAMP" property="publishtime" />
-	    <result column="contentTime" jdbcType="TIMESTAMP" property="contenttime" />
+
     
-   <!--  提问的状态 -->
-	    <association property="askcondition" javaType="com.pjmike.lundao.po.Askcondition">
-	    	<id column="askcdId" property="askcdid" jdbcType="INTEGER" />
-		    <result column="solve" property="solve" jdbcType="VARCHAR" />
-		    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
-	    </association>   
-	    
-    	<!-- 级联提问的回复 -->
-	    <collection property="replyask" ofType="com.pjmike.lundao.po.Replyask">
-	    	<id column="replyakdId" property="replyakdid" jdbcType="INTEGER" />
-		    <result column="ra_askId" property="raAskid" jdbcType="INTEGER" />
-		    <result column="ra_describtion" property="raDescribtion" jdbcType="LONGVARCHAR" />
-		    <result column="ra_view" property="raView" jdbcType="INTEGER" />
-		    <result column="ra_like" property="raLike" jdbcType="INTEGER" />
-		    <result column="ra_attention" property="raAttention" jdbcType="INTEGER" />
-		    <result column="ra_dislike" property="raDislike" jdbcType="INTEGER" />
-		    <result column="ra_replyid" property="raReplyid" jdbcType="INTEGER" />
-		    <result column="ra_username" property="raUsername" jdbcType="VARCHAR" />
-		    <result column="ra_publishTime" property="raPublishtime" jdbcType="TIMESTAMP" />
-		    <result column="ra_contentTime" property="raContenttime" jdbcType="TIMESTAMP" />
-		    <result column="ra_floor" property="raFloor" jdbcType="INTEGER" />
-	    </collection>
-    </collection><!--  -->
+    <!-- 对论点的评论 -->
+   <collection property="askquestions" ofType="com.pjmike.lundao.po.AskquestionExtend">
+   	   <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="thesis_id" property="thesisId" jdbcType="INTEGER" />
+    <result column="from_uid" property="fromUid" jdbcType="INTEGER" />
+    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="view" property="view" jdbcType="INTEGER" />
+    <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="attention" property="attention" jdbcType="INTEGER" />
+    <result column="dislike" property="dislike" jdbcType="INTEGER" />
+    <result column="reply" property="reply" jdbcType="INTEGER" />
+    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
     
-    <!-- 以下是异议级联 -->
-    <collection property="questions" ofType="com.pjmike.lundao.po.QuestionExtend">
-    	<id column="q_questionId" property="qQuestionid" jdbcType="INTEGER" />
-	    <result column="q_debateId" property="qDebateid" jdbcType="INTEGER" />
-	    <result column="q_describtion" property="qDescribtion" jdbcType="VARCHAR" />
-	    <result column="q_content" property="qContent" jdbcType="VARCHAR" />
-	    <result column="q_status" property="qStatus" jdbcType="VARCHAR" />
-	    <result column="q_view" property="qView" jdbcType="INTEGER" />
-	    <result column="q_like" property="qLike" jdbcType="INTEGER" />
-	    <result column="q_attention" property="qAttention" jdbcType="INTEGER" />
-	    <result column="q_dislike" property="qDislike" jdbcType="INTEGER" />
-	    <result column="q_reply" property="qReply" jdbcType="INTEGER" />
-	    <result column="q_replylist" property="qReplylist" jdbcType="INTEGER" />
-	    <result column="q_clickcount" property="qClickcount" jdbcType="INTEGER" />
-	    <result column="q_username" property="qUsername" jdbcType="VARCHAR" />
-	    <result column="q_publishTime" property="qPublishtime" jdbcType="TIMESTAMP" />
-	    <result column="q_contentTime" property="qContenttime" jdbcType="TIMESTAMP" />
-	    <!-- 异议的状态 -->
-<!-- 	    <association property="replyquestion" javaType="com.pjmike.lundao.po.Quescondition">
-	    	<id column="quesId" property="quesid" jdbcType="INTEGER" />
-		    <result column="accept" property="accept" jdbcType="VARCHAR" />
-		    <result column="complete" property="complete" jdbcType="VARCHAR" />
-		    <result column="discuss" property="discuss" jdbcType="VARCHAR" />
-	    </association> -->
-	 <!--    关联异议的回复 -->
-	    <collection property="replyquestion" ofType="com.pjmike.lundao.po.Replyquestion">
-	    	 <id column="replyquesId" property="replyquesid" jdbcType="INTEGER" />
-    <result column="rq_questionId" property="rqQuestionid" jdbcType="INTEGER" />
-    <result column="rq_describtion" property="rqDescribtion" jdbcType="LONGVARCHAR" />
-    <result column="rq_view" property="rqView" jdbcType="INTEGER" />
-    <result column="rq_like" property="rqLike" jdbcType="INTEGER" />
-    <result column="rq_attention" property="rqAttention" jdbcType="INTEGER" />
-    <result column="rq_dislike" property="rqDislike" jdbcType="INTEGER" />
-    <result column="rq_replyid" property="rqReplyid" jdbcType="INTEGER" />
-    <result column="rq_username" property="rqUsername" jdbcType="VARCHAR" />
-    <result column="rq_publishTime" property="rqPublishtime" jdbcType="TIMESTAMP" />
-    <result column="rq_contentTime" property="rqContenttime" jdbcType="TIMESTAMP" />
-    <result column="rq_floor" property="rqFloor" jdbcType="INTEGER" />
-	    </collection>
+    <!-- 堆评论的回复 -->
+    <collection property="replies" ofType="com.pjmike.lundao.po.Reply">
+    	  <id column="r_id" property="id" jdbcType="INTEGER" />
+    <result column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <result column="reply_id" property="replyId" jdbcType="INTEGER" />
+    <result column="from_uid" property="fromUid" jdbcType="INTEGER" />
+    <result column="to_uid" property="toUid" jdbcType="INTEGER" />
+    <result column="r_type" property="rType" jdbcType="VARCHAR" />
+    <result column="r_view" property="rView" jdbcType="INTEGER" />
+    <result column="r_like" property="rLike" jdbcType="INTEGER" />
+    <result column="r_attention" property="rAttention" jdbcType="INTEGER" />
+    <result column="r_dislike" property="rDislike" jdbcType="INTEGER" />
+    <result column="r_publishTime" property="rPublishtime" jdbcType="TIMESTAMP" />
+    <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" />
+    <result column="r_floor" property="rFloor" jdbcType="INTEGER" />
+     <result column="r_describtion" property="rDescribtion" jdbcType="LONGVARCHAR" />
     </collection>
+    
+   </collection>
   </resultMap>
-  
   <resultMap id="ResultMapWithBLOBs1" type="com.pjmike.lundao.po.ThesisExtend" extends="BaseResultMap1" >
-    <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
+    
     
     
   </resultMap>
@@ -246,8 +200,8 @@
   </select>
   <!-- 根据一个论点id查询出它下面所有的提问及异议 -->
   <select id="selectBythesisId" resultMap="ResultMapWithBLOBs1" parameterType="int">
-  	select * from thesis t,ask a,question q,replyAsk r,replyquestion re where t.thesisId=#{id} and a.debateId=#{id} and q.q_debateId=#{id}
-  	and r.ra_askId = a.askId and re.rq_questionId = q.q_questionId
+  	select * from thesis t,askquestion a,reply r where t.thesisId =#{id} and a.thesis_id=t.thesisId
+  	and r.comment_id=a.id order by thesisId limit 0,10
   </select>
   
   

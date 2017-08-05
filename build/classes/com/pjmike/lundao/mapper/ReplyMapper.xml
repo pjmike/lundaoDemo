@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pjmike.lundao.mapper.ReplyMapper" >
+  <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Reply" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <result column="reply_id" property="replyId" jdbcType="INTEGER" />
+    <result column="from_uid" property="fromUid" jdbcType="INTEGER" />
+    <result column="to_uid" property="toUid" jdbcType="INTEGER" />
+    <result column="r_type" property="rType" jdbcType="VARCHAR" />
+    <result column="r_view" property="rView" jdbcType="INTEGER" />
+    <result column="r_like" property="rLike" jdbcType="INTEGER" />
+    <result column="r_attention" property="rAttention" jdbcType="INTEGER" />
+    <result column="r_dislike" property="rDislike" jdbcType="INTEGER" />
+    <result column="r_publishTime" property="rPublishtime" jdbcType="TIMESTAMP" />
+    <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" />
+    <result column="r_floor" property="rFloor" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Reply" extends="BaseResultMap" >
+    <result column="r_describtion" property="rDescribtion" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, comment_id, reply_id, from_uid, to_uid, r_type, r_view, r_like, r_attention, 
+    r_dislike, r_publishTime, r_contentTime, r_floor
+  </sql>
+  <sql id="Blob_Column_List" >
+    r_describtion
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pjmike.lundao.po.ReplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.ReplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from reply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pjmike.lundao.po.ReplyExample" >
+    delete from reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pjmike.lundao.po.Reply" >
+    insert into reply (id, comment_id, reply_id, 
+      from_uid, to_uid, r_type, 
+      r_view, r_like, r_attention, 
+      r_dislike, r_publishTime, r_contentTime, 
+      r_floor, r_describtion)
+    values (#{id,jdbcType=INTEGER}, #{commentId,jdbcType=INTEGER}, #{replyId,jdbcType=INTEGER}, 
+      #{fromUid,jdbcType=INTEGER}, #{toUid,jdbcType=INTEGER}, #{rType,jdbcType=VARCHAR}, 
+      #{rView,jdbcType=INTEGER}, #{rLike,jdbcType=INTEGER}, #{rAttention,jdbcType=INTEGER}, 
+      #{rDislike,jdbcType=INTEGER}, #{rPublishtime,jdbcType=TIMESTAMP}, #{rContenttime,jdbcType=TIMESTAMP}, 
+      #{rFloor,jdbcType=INTEGER}, #{rDescribtion,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Reply" >
+    insert into reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="replyId != null" >
+        reply_id,
+      </if>
+      <if test="fromUid != null" >
+        from_uid,
+      </if>
+      <if test="toUid != null" >
+        to_uid,
+      </if>
+      <if test="rType != null" >
+        r_type,
+      </if>
+      <if test="rView != null" >
+        r_view,
+      </if>
+      <if test="rLike != null" >
+        r_like,
+      </if>
+      <if test="rAttention != null" >
+        r_attention,
+      </if>
+      <if test="rDislike != null" >
+        r_dislike,
+      </if>
+      <if test="rPublishtime != null" >
+        r_publishTime,
+      </if>
+      <if test="rContenttime != null" >
+        r_contentTime,
+      </if>
+      <if test="rFloor != null" >
+        r_floor,
+      </if>
+      <if test="rDescribtion != null" >
+        r_describtion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="replyId != null" >
+        #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="fromUid != null" >
+        #{fromUid,jdbcType=INTEGER},
+      </if>
+      <if test="toUid != null" >
+        #{toUid,jdbcType=INTEGER},
+      </if>
+      <if test="rType != null" >
+        #{rType,jdbcType=VARCHAR},
+      </if>
+      <if test="rView != null" >
+        #{rView,jdbcType=INTEGER},
+      </if>
+      <if test="rLike != null" >
+        #{rLike,jdbcType=INTEGER},
+      </if>
+      <if test="rAttention != null" >
+        #{rAttention,jdbcType=INTEGER},
+      </if>
+      <if test="rDislike != null" >
+        #{rDislike,jdbcType=INTEGER},
+      </if>
+      <if test="rPublishtime != null" >
+        #{rPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rContenttime != null" >
+        #{rContenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rFloor != null" >
+        #{rFloor,jdbcType=INTEGER},
+      </if>
+      <if test="rDescribtion != null" >
+        #{rDescribtion,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pjmike.lundao.po.ReplyExample" resultType="java.lang.Integer" >
+    select count(*) from reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update reply
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentId != null" >
+        comment_id = #{record.commentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyId != null" >
+        reply_id = #{record.replyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromUid != null" >
+        from_uid = #{record.fromUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.toUid != null" >
+        to_uid = #{record.toUid,jdbcType=INTEGER},
+      </if>
+      <if test="record.rType != null" >
+        r_type = #{record.rType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rView != null" >
+        r_view = #{record.rView,jdbcType=INTEGER},
+      </if>
+      <if test="record.rLike != null" >
+        r_like = #{record.rLike,jdbcType=INTEGER},
+      </if>
+      <if test="record.rAttention != null" >
+        r_attention = #{record.rAttention,jdbcType=INTEGER},
+      </if>
+      <if test="record.rDislike != null" >
+        r_dislike = #{record.rDislike,jdbcType=INTEGER},
+      </if>
+      <if test="record.rPublishtime != null" >
+        r_publishTime = #{record.rPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rContenttime != null" >
+        r_contentTime = #{record.rContenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rFloor != null" >
+        r_floor = #{record.rFloor,jdbcType=INTEGER},
+      </if>
+      <if test="record.rDescribtion != null" >
+        r_describtion = #{record.rDescribtion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update reply
+    set id = #{record.id,jdbcType=INTEGER},
+      comment_id = #{record.commentId,jdbcType=INTEGER},
+      reply_id = #{record.replyId,jdbcType=INTEGER},
+      from_uid = #{record.fromUid,jdbcType=INTEGER},
+      to_uid = #{record.toUid,jdbcType=INTEGER},
+      r_type = #{record.rType,jdbcType=VARCHAR},
+      r_view = #{record.rView,jdbcType=INTEGER},
+      r_like = #{record.rLike,jdbcType=INTEGER},
+      r_attention = #{record.rAttention,jdbcType=INTEGER},
+      r_dislike = #{record.rDislike,jdbcType=INTEGER},
+      r_publishTime = #{record.rPublishtime,jdbcType=TIMESTAMP},
+      r_contentTime = #{record.rContenttime,jdbcType=TIMESTAMP},
+      r_floor = #{record.rFloor,jdbcType=INTEGER},
+      r_describtion = #{record.rDescribtion,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update reply
+    set id = #{record.id,jdbcType=INTEGER},
+      comment_id = #{record.commentId,jdbcType=INTEGER},
+      reply_id = #{record.replyId,jdbcType=INTEGER},
+      from_uid = #{record.fromUid,jdbcType=INTEGER},
+      to_uid = #{record.toUid,jdbcType=INTEGER},
+      r_type = #{record.rType,jdbcType=VARCHAR},
+      r_view = #{record.rView,jdbcType=INTEGER},
+      r_like = #{record.rLike,jdbcType=INTEGER},
+      r_attention = #{record.rAttention,jdbcType=INTEGER},
+      r_dislike = #{record.rDislike,jdbcType=INTEGER},
+      r_publishTime = #{record.rPublishtime,jdbcType=TIMESTAMP},
+      r_contentTime = #{record.rContenttime,jdbcType=TIMESTAMP},
+      r_floor = #{record.rFloor,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Reply" >
+    update reply
+    <set >
+      <if test="commentId != null" >
+        comment_id = #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="replyId != null" >
+        reply_id = #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="fromUid != null" >
+        from_uid = #{fromUid,jdbcType=INTEGER},
+      </if>
+      <if test="toUid != null" >
+        to_uid = #{toUid,jdbcType=INTEGER},
+      </if>
+      <if test="rType != null" >
+        r_type = #{rType,jdbcType=VARCHAR},
+      </if>
+      <if test="rView != null" >
+        r_view = #{rView,jdbcType=INTEGER},
+      </if>
+      <if test="rLike != null" >
+        r_like = #{rLike,jdbcType=INTEGER},
+      </if>
+      <if test="rAttention != null" >
+        r_attention = #{rAttention,jdbcType=INTEGER},
+      </if>
+      <if test="rDislike != null" >
+        r_dislike = #{rDislike,jdbcType=INTEGER},
+      </if>
+      <if test="rPublishtime != null" >
+        r_publishTime = #{rPublishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rContenttime != null" >
+        r_contentTime = #{rContenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rFloor != null" >
+        r_floor = #{rFloor,jdbcType=INTEGER},
+      </if>
+      <if test="rDescribtion != null" >
+        r_describtion = #{rDescribtion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pjmike.lundao.po.Reply" >
+    update reply
+    set comment_id = #{commentId,jdbcType=INTEGER},
+      reply_id = #{replyId,jdbcType=INTEGER},
+      from_uid = #{fromUid,jdbcType=INTEGER},
+      to_uid = #{toUid,jdbcType=INTEGER},
+      r_type = #{rType,jdbcType=VARCHAR},
+      r_view = #{rView,jdbcType=INTEGER},
+      r_like = #{rLike,jdbcType=INTEGER},
+      r_attention = #{rAttention,jdbcType=INTEGER},
+      r_dislike = #{rDislike,jdbcType=INTEGER},
+      r_publishTime = #{rPublishtime,jdbcType=TIMESTAMP},
+      r_contentTime = #{rContenttime,jdbcType=TIMESTAMP},
+      r_floor = #{rFloor,jdbcType=INTEGER},
+      r_describtion = #{rDescribtion,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Reply" >
+    update reply
+    set comment_id = #{commentId,jdbcType=INTEGER},
+      reply_id = #{replyId,jdbcType=INTEGER},
+      from_uid = #{fromUid,jdbcType=INTEGER},
+      to_uid = #{toUid,jdbcType=INTEGER},
+      r_type = #{rType,jdbcType=VARCHAR},
+      r_view = #{rView,jdbcType=INTEGER},
+      r_like = #{rLike,jdbcType=INTEGER},
+      r_attention = #{rAttention,jdbcType=INTEGER},
+      r_dislike = #{rDislike,jdbcType=INTEGER},
+      r_publishTime = #{rPublishtime,jdbcType=TIMESTAMP},
+      r_contentTime = #{rContenttime,jdbcType=TIMESTAMP},
+      r_floor = #{rFloor,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
