@@ -3,13 +3,13 @@ package com.pjmike.lundao.po;
 import java.util.List;
 
 public class AskquestionExtend extends Askquestion{
-	private List<Reply> replies;
+	private List<ReplyExtend> replies;
 
-	public List<Reply> getReplies() {
+	public List<ReplyExtend> getReplies() {
 		return replies;
 	}
 
-	public void setReplies(List<Reply> replies) {
+	public void setReplies(List<ReplyExtend> replies) {
 		this.replies = replies;
 	}
 }

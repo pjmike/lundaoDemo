@@ -19,7 +19,7 @@ public class ThesisController {
 	ThesisServiceImpl thesisServiceImpl;
 	@RequestMapping("/thesisbyid")
 	@ResponseBody
-	public ThesisExtend selectBythesisId(int id) {
+	public ThesisExtend selectBythesisId(int id) throws Exception,ClassCastException {
 		return thesisServiceImpl.selectBythesisId(id);
 		
 	}

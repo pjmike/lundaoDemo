@@ -24,7 +24,7 @@ public interface ThesisMapper {
 
     List<Thesis> selectByExample(ThesisExample example);
     
-    ThesisExtend selectBythesisId(int id);
+    ThesisExtend selectBythesisId (int id);
 
     int updateByExampleSelective(@Param("record") Thesis record, @Param("example") ThesisExample example);
 
