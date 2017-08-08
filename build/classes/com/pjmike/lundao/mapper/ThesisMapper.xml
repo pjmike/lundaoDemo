@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pjmike.lundao.mapper.ThesisMapper" >
-  <resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Thesis" >
+<resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Thesis" >
     <id column="thesisId" property="thesisid" jdbcType="INTEGER" />
     <result column="t_debateId" property="tDebateid" jdbcType="INTEGER" />
     <result column="t_description" property="tDescription" jdbcType="VARCHAR" />
@@ -20,511 +20,89 @@
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.pjmike.lundao.po.Thesis" extends="BaseResultMap" >
     <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
-    
-    
-  </resultMap>
-  
-  
-  
-  <resultMap id="BaseResultMap1" type="com.pjmike.lundao.po.ThesisExtend" >
+   </resultMap>
+   
+   <resultMap id="BaseResultMap1" type="com.pjmike.lundao.po.ThesisExtend" >
     <id column="thesisId" property="thesisid" jdbcType="INTEGER" />
     <result column="t_debateId" property="tDebateid" jdbcType="INTEGER" />
     <result column="t_description" property="tDescription" jdbcType="VARCHAR" />
     <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
-    <result column="t_view" property="tView" jdbcType="INTEGER" />
     <result column="t_like" property="tLike" jdbcType="INTEGER" />
     <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
     <result column="t_dislike" property="tDislike" jdbcType="INTEGER" />
-    <result column="t_ask" property="tAsk" jdbcType="INTEGER" />
-    <result column="t_question" property="tQuestion" jdbcType="INTEGER" />
-    <result column="t_asklist" property="tAsklist" jdbcType="INTEGER" />
-    <result column="t_questionlist" property="tQuestionlist" jdbcType="INTEGER" />
-    <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
     <result column="t_contentTime" property="tContenttime" jdbcType="TIMESTAMP" />
     <result column="complete" property="complete" jdbcType="INTEGER" />
+    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
+    <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
 
     
     <!-- 对论点的评论 -->
    <collection property="askquestions" ofType="com.pjmike.lundao.po.AskquestionExtend">
    	   <id column="id" property="id" jdbcType="INTEGER" />
     <result column="thesis_id" property="thesisId" jdbcType="INTEGER" />
-    <result column="from_uid" property="fromUid" jdbcType="INTEGER" />
     <result column="describtion" property="describtion" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="view" property="view" jdbcType="INTEGER" />
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="attention" property="attention" jdbcType="INTEGER" />
-    <result column="dislike" property="dislike" jdbcType="INTEGER" />
-    <result column="reply" property="reply" jdbcType="INTEGER" />
-    <result column="clickcount" property="clickcount" jdbcType="INTEGER" />
-    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
-    <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
+    <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP"/>
     
-    <!-- 堆评论的回复 -->
-    <collection property="replies" ofType="com.pjmike.lundao.po.Reply">
-    	  <id column="r_id" property="id" jdbcType="INTEGER" />
+    
+    	<collection property="replies" ofType="com.pjmike.lundao.po.ReplyExtend">
+    			    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="comment_id" property="commentId" jdbcType="INTEGER" />
     <result column="reply_id" property="replyId" jdbcType="INTEGER" />
     <result column="from_uid" property="fromUid" jdbcType="INTEGER" />
     <result column="to_uid" property="toUid" jdbcType="INTEGER" />
-    <result column="r_type" property="rType" jdbcType="VARCHAR" />
-    <result column="r_view" property="rView" jdbcType="INTEGER" />
     <result column="r_like" property="rLike" jdbcType="INTEGER" />
-    <result column="r_attention" property="rAttention" jdbcType="INTEGER" />
-    <result column="r_dislike" property="rDislike" jdbcType="INTEGER" />
     <result column="r_publishTime" property="rPublishtime" jdbcType="TIMESTAMP" />
     <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" />
-    <result column="r_floor" property="rFloor" jdbcType="INTEGER" />
-     <result column="r_describtion" property="rDescribtion" jdbcType="LONGVARCHAR" />
-    </collection>
     
+    	</collection>
    </collection>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs1" type="com.pjmike.lundao.po.ThesisExtend" extends="BaseResultMap1" >
-    
-    
-    
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    thesisId, t_debateId, t_description, t_view, t_like, t_attention, t_dislike, t_ask, 
-    t_question, t_asklist, t_questionlist, t_publishTime, t_contentTime, complete, uncomplete
-  </sql>
-  <sql id="Blob_Column_List" >
-    t_state
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pjmike.lundao.po.ThesisExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from thesis
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pjmike.lundao.po.ThesisExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from thesis
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from thesis
-    where thesisId = #{thesisid,jdbcType=INTEGER}
-  </select>
-  
-  
-  
-  <!-- 查询所有的论点 -->
-  
-  <!-- 一对多查询 -->
+   </resultMap>
+   
+ <!-- 一对多查询 -->
   <select id="selectBykey" resultMap="ResultMapWithBLOBs">
   	select thesis.* from thesis,debateTopic where thesis.t_debateId = debateTopic.topicId 
   </select>
   <!-- 根据一个论点id查询出它下面所有的提问及异议 -->
-  <select id="selectBythesisId" resultMap="ResultMapWithBLOBs1" parameterType="int">
-  	select * from thesis t,askquestion a,reply r where t.thesisId =#{id} and a.thesis_id=t.thesisId
-  	and r.comment_id=a.id order by thesisId limit 0,10
-  </select>
-  
-  
-  
-  
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from thesis
-    where thesisId = #{thesisid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.pjmike.lundao.po.ThesisExample" >
-    delete from thesis
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.pjmike.lundao.po.Thesis" >
-    insert into thesis (thesisId, t_debateId, t_description, 
-      t_view, t_like, t_attention, 
-      t_dislike, t_ask, t_question, 
-      t_asklist, t_questionlist, t_publishTime, 
-      t_contentTime, complete, uncomplete, 
-      t_state)
-    values (#{thesisid,jdbcType=INTEGER}, #{tDebateid,jdbcType=INTEGER}, #{tDescription,jdbcType=VARCHAR}, 
-      #{tView,jdbcType=INTEGER}, #{tLike,jdbcType=INTEGER}, #{tAttention,jdbcType=INTEGER}, 
-      #{tDislike,jdbcType=INTEGER}, #{tAsk,jdbcType=INTEGER}, #{tQuestion,jdbcType=INTEGER}, 
-      #{tAsklist,jdbcType=INTEGER}, #{tQuestionlist,jdbcType=INTEGER}, #{tPublishtime,jdbcType=TIMESTAMP}, 
-      #{tContenttime,jdbcType=TIMESTAMP}, #{complete,jdbcType=INTEGER}, #{uncomplete,jdbcType=INTEGER}, 
-      #{tState,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.pjmike.lundao.po.Thesis" >
-    insert into thesis
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="thesisid != null" >
-        thesisId,
-      </if>
-      <if test="tDebateid != null" >
-        t_debateId,
-      </if>
-      <if test="tDescription != null" >
-        t_description,
-      </if>
-      <if test="tView != null" >
-        t_view,
-      </if>
-      <if test="tLike != null" >
-        t_like,
-      </if>
-      <if test="tAttention != null" >
-        t_attention,
-      </if>
-      <if test="tDislike != null" >
-        t_dislike,
-      </if>
-      <if test="tAsk != null" >
-        t_ask,
-      </if>
-      <if test="tQuestion != null" >
-        t_question,
-      </if>
-      <if test="tAsklist != null" >
-        t_asklist,
-      </if>
-      <if test="tQuestionlist != null" >
-        t_questionlist,
-      </if>
-      <if test="tPublishtime != null" >
-        t_publishTime,
-      </if>
-      <if test="tContenttime != null" >
-        t_contentTime,
-      </if>
-      <if test="complete != null" >
-        complete,
-      </if>
-      <if test="uncomplete != null" >
-        uncomplete,
-      </if>
-      <if test="tState != null" >
-        t_state,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="thesisid != null" >
-        #{thesisid,jdbcType=INTEGER},
-      </if>
-      <if test="tDebateid != null" >
-        #{tDebateid,jdbcType=INTEGER},
-      </if>
-      <if test="tDescription != null" >
-        #{tDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="tView != null" >
-        #{tView,jdbcType=INTEGER},
-      </if>
-      <if test="tLike != null" >
-        #{tLike,jdbcType=INTEGER},
-      </if>
-      <if test="tAttention != null" >
-        #{tAttention,jdbcType=INTEGER},
-      </if>
-      <if test="tDislike != null" >
-        #{tDislike,jdbcType=INTEGER},
-      </if>
-      <if test="tAsk != null" >
-        #{tAsk,jdbcType=INTEGER},
-      </if>
-      <if test="tQuestion != null" >
-        #{tQuestion,jdbcType=INTEGER},
-      </if>
-      <if test="tAsklist != null" >
-        #{tAsklist,jdbcType=INTEGER},
-      </if>
-      <if test="tQuestionlist != null" >
-        #{tQuestionlist,jdbcType=INTEGER},
-      </if>
-      <if test="tPublishtime != null" >
-        #{tPublishtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tContenttime != null" >
-        #{tContenttime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="complete != null" >
-        #{complete,jdbcType=INTEGER},
-      </if>
-      <if test="uncomplete != null" >
-        #{uncomplete,jdbcType=INTEGER},
-      </if>
-      <if test="tState != null" >
-        #{tState,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.pjmike.lundao.po.ThesisExample" resultType="java.lang.Integer" >
-    select count(*) from thesis
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update thesis
-    <set >
-      <if test="record.thesisid != null" >
-        thesisId = #{record.thesisid,jdbcType=INTEGER},
-      </if>
-      <if test="record.tDebateid != null" >
-        t_debateId = #{record.tDebateid,jdbcType=INTEGER},
-      </if>
-      <if test="record.tDescription != null" >
-        t_description = #{record.tDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tView != null" >
-        t_view = #{record.tView,jdbcType=INTEGER},
-      </if>
-      <if test="record.tLike != null" >
-        t_like = #{record.tLike,jdbcType=INTEGER},
-      </if>
-      <if test="record.tAttention != null" >
-        t_attention = #{record.tAttention,jdbcType=INTEGER},
-      </if>
-      <if test="record.tDislike != null" >
-        t_dislike = #{record.tDislike,jdbcType=INTEGER},
-      </if>
-      <if test="record.tAsk != null" >
-        t_ask = #{record.tAsk,jdbcType=INTEGER},
-      </if>
-      <if test="record.tQuestion != null" >
-        t_question = #{record.tQuestion,jdbcType=INTEGER},
-      </if>
-      <if test="record.tAsklist != null" >
-        t_asklist = #{record.tAsklist,jdbcType=INTEGER},
-      </if>
-      <if test="record.tQuestionlist != null" >
-        t_questionlist = #{record.tQuestionlist,jdbcType=INTEGER},
-      </if>
-      <if test="record.tPublishtime != null" >
-        t_publishTime = #{record.tPublishtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.tContenttime != null" >
-        t_contentTime = #{record.tContenttime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.complete != null" >
-        complete = #{record.complete,jdbcType=INTEGER},
-      </if>
-      <if test="record.uncomplete != null" >
-        uncomplete = #{record.uncomplete,jdbcType=INTEGER},
-      </if>
-      <if test="record.tState != null" >
-        t_state = #{record.tState,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update thesis
-    set thesisId = #{record.thesisid,jdbcType=INTEGER},
-      t_debateId = #{record.tDebateid,jdbcType=INTEGER},
-      t_description = #{record.tDescription,jdbcType=VARCHAR},
-      t_view = #{record.tView,jdbcType=INTEGER},
-      t_like = #{record.tLike,jdbcType=INTEGER},
-      t_attention = #{record.tAttention,jdbcType=INTEGER},
-      t_dislike = #{record.tDislike,jdbcType=INTEGER},
-      t_ask = #{record.tAsk,jdbcType=INTEGER},
-      t_question = #{record.tQuestion,jdbcType=INTEGER},
-      t_asklist = #{record.tAsklist,jdbcType=INTEGER},
-      t_questionlist = #{record.tQuestionlist,jdbcType=INTEGER},
-      t_publishTime = #{record.tPublishtime,jdbcType=TIMESTAMP},
-      t_contentTime = #{record.tContenttime,jdbcType=TIMESTAMP},
-      complete = #{record.complete,jdbcType=INTEGER},
-      uncomplete = #{record.uncomplete,jdbcType=INTEGER},
-      t_state = #{record.tState,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update thesis
-    set thesisId = #{record.thesisid,jdbcType=INTEGER},
-      t_debateId = #{record.tDebateid,jdbcType=INTEGER},
-      t_description = #{record.tDescription,jdbcType=VARCHAR},
-      t_view = #{record.tView,jdbcType=INTEGER},
-      t_like = #{record.tLike,jdbcType=INTEGER},
-      t_attention = #{record.tAttention,jdbcType=INTEGER},
-      t_dislike = #{record.tDislike,jdbcType=INTEGER},
-      t_ask = #{record.tAsk,jdbcType=INTEGER},
-      t_question = #{record.tQuestion,jdbcType=INTEGER},
-      t_asklist = #{record.tAsklist,jdbcType=INTEGER},
-      t_questionlist = #{record.tQuestionlist,jdbcType=INTEGER},
-      t_publishTime = #{record.tPublishtime,jdbcType=TIMESTAMP},
-      t_contentTime = #{record.tContenttime,jdbcType=TIMESTAMP},
-      complete = #{record.complete,jdbcType=INTEGER},
-      uncomplete = #{record.uncomplete,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pjmike.lundao.po.Thesis" >
-    update thesis
-    <set >
-      <if test="tDebateid != null" >
-        t_debateId = #{tDebateid,jdbcType=INTEGER},
-      </if>
-      <if test="tDescription != null" >
-        t_description = #{tDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="tView != null" >
-        t_view = #{tView,jdbcType=INTEGER},
-      </if>
-      <if test="tLike != null" >
-        t_like = #{tLike,jdbcType=INTEGER},
-      </if>
-      <if test="tAttention != null" >
-        t_attention = #{tAttention,jdbcType=INTEGER},
-      </if>
-      <if test="tDislike != null" >
-        t_dislike = #{tDislike,jdbcType=INTEGER},
-      </if>
-      <if test="tAsk != null" >
-        t_ask = #{tAsk,jdbcType=INTEGER},
-      </if>
-      <if test="tQuestion != null" >
-        t_question = #{tQuestion,jdbcType=INTEGER},
-      </if>
-      <if test="tAsklist != null" >
-        t_asklist = #{tAsklist,jdbcType=INTEGER},
-      </if>
-      <if test="tQuestionlist != null" >
-        t_questionlist = #{tQuestionlist,jdbcType=INTEGER},
-      </if>
-      <if test="tPublishtime != null" >
-        t_publishTime = #{tPublishtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tContenttime != null" >
-        t_contentTime = #{tContenttime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="complete != null" >
-        complete = #{complete,jdbcType=INTEGER},
-      </if>
-      <if test="uncomplete != null" >
-        uncomplete = #{uncomplete,jdbcType=INTEGER},
-      </if>
-      <if test="tState != null" >
-        t_state = #{tState,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where thesisId = #{thesisid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pjmike.lundao.po.Thesis" >
-    update thesis
-    set t_debateId = #{tDebateid,jdbcType=INTEGER},
-      t_description = #{tDescription,jdbcType=VARCHAR},
-      t_view = #{tView,jdbcType=INTEGER},
-      t_like = #{tLike,jdbcType=INTEGER},
-      t_attention = #{tAttention,jdbcType=INTEGER},
-      t_dislike = #{tDislike,jdbcType=INTEGER},
-      t_ask = #{tAsk,jdbcType=INTEGER},
-      t_question = #{tQuestion,jdbcType=INTEGER},
-      t_asklist = #{tAsklist,jdbcType=INTEGER},
-      t_questionlist = #{tQuestionlist,jdbcType=INTEGER},
-      t_publishTime = #{tPublishtime,jdbcType=TIMESTAMP},
-      t_contentTime = #{tContenttime,jdbcType=TIMESTAMP},
-      complete = #{complete,jdbcType=INTEGER},
-      uncomplete = #{uncomplete,jdbcType=INTEGER},
-      t_state = #{tState,jdbcType=LONGVARCHAR}
-    where thesisId = #{thesisid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.pjmike.lundao.po.Thesis" >
-    update thesis
-    set t_debateId = #{tDebateid,jdbcType=INTEGER},
-      t_description = #{tDescription,jdbcType=VARCHAR},
-      t_view = #{tView,jdbcType=INTEGER},
-      t_like = #{tLike,jdbcType=INTEGER},
-      t_attention = #{tAttention,jdbcType=INTEGER},
-      t_dislike = #{tDislike,jdbcType=INTEGER},
-      t_ask = #{tAsk,jdbcType=INTEGER},
-      t_question = #{tQuestion,jdbcType=INTEGER},
-      t_asklist = #{tAsklist,jdbcType=INTEGER},
-      t_questionlist = #{tQuestionlist,jdbcType=INTEGER},
-      t_publishTime = #{tPublishtime,jdbcType=TIMESTAMP},
-      t_contentTime = #{tContenttime,jdbcType=TIMESTAMP},
-      complete = #{complete,jdbcType=INTEGER},
-      uncomplete = #{uncomplete,jdbcType=INTEGER}
-    where thesisId = #{thesisid,jdbcType=INTEGER}
-  </update>
+  <select id="selectBythesisId" resultMap="BaseResultMap1" parameterType="int">
+ 	select 
+	 		t.thesisId,
+	 		t.t_debateId,
+	 		t.t_description,
+	 		t.t_state,
+	 		t.t_like,
+	 		t.t_dislike,
+	 		t.t_contentTime,
+	 		t.t_attention,
+	 		t.t_state,
+	 		t.complete,
+	 		t.uncomplete,
+	 		a.id,
+	 		a.thesis_id,
+	 		a.describtion,
+	 		a.content,
+	 		a.type,
+	 		a.like,
+	 		a.attention,
+	 		a.publishTime,
+	 		r.id,
+	 		r.comment_id,
+	 		r.reply_id,
+	 		r.from_uid,
+	 		r.to_uid,
+	 		r.r_like,
+	 		r.r_publishTime,
+	 		r.r_contentTime
+ 	 from thesis t left join askquestion a on a.thesis_id = t.thesisId left join reply r on
+ 	 r.comment_id = a.id where t.thesisId=#{id}  order by thesisId desc limit 10
+   </select>
+   
+   <!-- 增加论点 -->
+   <insert id="insert" parameterType="com.pjmike.lundao.po.Thesis">
+   		insert into thesis(t_description,t_state) values (#{tDescription},#{tState})
+   </insert>
+   
 </mapper>

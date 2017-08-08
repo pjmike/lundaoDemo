@@ -12,14 +12,11 @@ import org.springframework.stereotype.Service;
 import com.pjmike.lundao.mapper.ThesisMapper;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
+import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
 
 /**
- * @author DELL
- *
- */
-/**
- * @author DELL
+ * @author pjmike
  *
  */
 @Service
@@ -36,47 +33,57 @@ public class ThesisServiceImpl implements ThesisService {
 		if(askquestions == null || askquestions.size()==0) {
 			askquestions = new ArrayList<>();
 		}
-		//对评论的回复
+		/*//对评论的回复
 		List<ReplyExtend> creplylist = new ArrayList<ReplyExtend>();
 		//字回复
 		List<ReplyExtend> rreplylist = new ArrayList<>();
 		
 		for(AskquestionExtend as:askquestions) {
-			for(ReplyExtend r:as.getReplies()) {
-				
-				if("comment".equals(r.getrType())) {
-					//找出对评论的回复
-				
-					creplylist.add(r);
-					
-				} else {
-					//判断对评论的回复是否为空，为空则无子回复
-					if(creplylist.size() >0) {
-						for(ReplyExtend reply:creplylist) {
-							if(reply.getId().equals(r.getReplyId())) {
-								if(reply.getNextReply() == null) {
-									reply.setNextReply(new ArrayList<>());
+			List<ReplyExtend> rep =as.getReplies();
+			
+			
+			
+			if (rep!=null) {
+				for (ReplyExtend r : rep) {
+
+					if ("comment".equals(r.getrType())) {
+						//找出对评论的回复
+
+						creplylist.add(r);
+
+					} else {
+						//判断对评论的回复是否为空，为空则无子回复
+						if (creplylist.size() > 0) {
+							for (ReplyExtend reply : creplylist) {
+								if (reply.getId() != null && r.getReplyId() != null) {
+									if (reply.getId().equals(r.getReplyId())) {
+										if (reply.getNextReply() == null) {
+											reply.setNextReply(new ArrayList<>());
+										}
+										reply.getNextReply().add(r);
+										creplylist.add(r);
+										break;
+									}
 								}
-								reply.getNextReply().add(r);
-								creplylist.add(r);
-								break;
 							}
 						}
 					}
 				}
+				as.setReplies(creplylist);
 			}
-			
-			as.setReplies(creplylist);
 		}
 		List<ReplyExtend> replys = new ArrayList<>();
 		for(AskquestionExtend as:askquestions) {
-				for(ReplyExtend r:as.getReplies()) {
+				if (as.getReplies()!=null) {
+					for (ReplyExtend r : as.getReplies()) {
 						if ("comment".equals(r.getrType())) {
 							//找出对评论的回复
 							replys.add(r);
-						} 
+						}
+					} 
 				}
 				//找出最佳对评论的回复。
+				//只返回一条记录
 				ReplyExtend replyMax = findNiceReply(replys);
 				List<ReplyExtend> res = new ArrayList<>();
 				res = as.getReplies();
@@ -85,7 +92,7 @@ public class ThesisServiceImpl implements ThesisService {
 				
 				as.setReplies(res);
 				
-		}
+		}*/
 		
 		
 		
@@ -93,10 +100,9 @@ public class ThesisServiceImpl implements ThesisService {
 		
 		
 		thesisextend.setAskquestions(findMaxlike);
-		
+	
 		return thesisextend;
 	}
-	
 	
 	
 	/*
@@ -117,11 +123,13 @@ public class ThesisServiceImpl implements ThesisService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date s = as.getPublishtime();
 			Date now = new Date();
+			long sum = 0;
 			long l1 = now.getTime() - s.getTime();
 			long day1 = l1 / (24 * 60 * 60 * 1000);
 			long hour1 = (l1 / (60 * 60 * 1000) - day1 * 24);
-			
-			long sum = as.getLike()/hour1;
+			if(hour1!=0) {
+				sum = as.getLike()/hour1;
+			}
 			return sum;
 		
 	}
@@ -169,7 +177,15 @@ public class ThesisServiceImpl implements ThesisService {
 			}
 			
 		}
-			
 		return re;
+	}
+
+	/**
+	 * 实现增加论点
+	 */
+	@Override
+	public int insert(Thesis record) {
+		
+		return thesisMapper.insert(record);
 	}
 }

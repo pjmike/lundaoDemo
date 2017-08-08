@@ -1,6 +1,7 @@
 package com.pjmike.lundao.po;
 
 import java.util.Date;
+import java.util.List;
 
 public class Reply {
     private Integer id;
@@ -30,8 +31,17 @@ public class Reply {
     private Integer rFloor;
 
     private String rDescribtion;
+    
+  /*  private List<Reply> replies;
+    public List<Reply> getReplies() {
+		return replies;
+	}
 
-    public Integer getId() {
+	public void setReplies(List<Reply> replies) {
+		this.replies = replies;
+	}
+*/
+	public Integer getId() {
         return id;
     }
 

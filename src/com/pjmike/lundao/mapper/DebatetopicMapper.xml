@@ -169,7 +169,7 @@
   
  <!--  查询全部辩题不带论点 -->
   <select id="selectListby" resultMap="ResultMapWithBLOBs1" >
-    select * from debateTopic 
+    select * from debateTopic order by topicId desc limit 10
   </select>
   
   <!-- 查询辩题数据 -->
