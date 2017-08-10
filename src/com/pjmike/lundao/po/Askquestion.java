@@ -13,7 +13,7 @@ public class Askquestion {
 
     private String content;
 
-    private String type;
+    private int type;
 
     private Integer view;
 
@@ -71,12 +71,12 @@ public class Askquestion {
         this.content = content == null ? null : content.trim();
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setType(int type) {
+        this.type = type ;
     }
 
     public Integer getView() {

@@ -42,12 +42,12 @@
     <result column="thesis_id" property="thesisId" jdbcType="INTEGER" />
     <result column="describtion" property="describtion" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="attention" property="attention" jdbcType="INTEGER" />
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP"/>
     
-    
+    <!-- 
     	<collection property="replies" ofType="com.pjmike.lundao.po.ReplyExtend">
     			    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="comment_id" property="commentId" jdbcType="INTEGER" />
@@ -55,11 +55,11 @@
     <result column="from_uid" property="fromUid" jdbcType="INTEGER" />
     <result column="to_uid" property="toUid" jdbcType="INTEGER" />
     <result column="r_like" property="rLike" jdbcType="INTEGER" />
+    <result column="r_type" property="rType" jdbcType="VARCHAR" />
     <result column="r_publishTime" property="rPublishtime" jdbcType="TIMESTAMP" />
-    <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" />
+    <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" /> -->
     
     	</collection>
-   </collection>
    </resultMap>
    
  <!-- 一对多查询 -->
@@ -87,17 +87,18 @@
 	 		a.type,
 	 		a.like,
 	 		a.attention,
-	 		a.publishTime,
-	 		r.id,
+	 		a.publishTime
+	 	<!-- 	r.id,
 	 		r.comment_id,
 	 		r.reply_id,
 	 		r.from_uid,
 	 		r.to_uid,
+	 		r.r_type,
 	 		r.r_like,
 	 		r.r_publishTime,
-	 		r.r_contentTime
- 	 from thesis t left join askquestion a on a.thesis_id = t.thesisId left join reply r on
- 	 r.comment_id = a.id where t.thesisId=#{id}  order by thesisId desc limit 10
+	 		r.r_contentTime -->
+ 	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  <!-- left join  reply r on
+ 	 r.comment_id = a.id  -->where t.thesisId=#{id}  order by thesisId  limit 10
    </select>
    
    <!-- 增加论点 -->

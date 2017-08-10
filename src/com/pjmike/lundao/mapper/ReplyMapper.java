@@ -2,13 +2,14 @@ package com.pjmike.lundao.mapper;
 
 import com.pjmike.lundao.po.Reply;
 import com.pjmike.lundao.po.ReplyExample;
+import com.pjmike.lundao.po.ReplyExtend;
+import com.pjmike.lundao.po.User;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ReplyMapper {
-    int countByExample(ReplyExample example);
-
-    int deleteByExample(ReplyExample example);
+    
 
     int deleteByPrimaryKey(Integer id);
 
@@ -16,17 +17,12 @@ public interface ReplyMapper {
 
     int insertSelective(Reply record);
 
-    List<Reply> selectByExampleWithBLOBs(ReplyExample example);
+    //添加回复
+    int insert(User user,Reply reply);
+    
+    List<ReplyExtend> select(Integer id);
 
-    List<Reply> selectByExample(ReplyExample example);
-
-    Reply selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") Reply record, @Param("example") ReplyExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") Reply record, @Param("example") ReplyExample example);
-
-    int updateByExample(@Param("record") Reply record, @Param("example") ReplyExample example);
+    ReplyExtend selectbyReplyid(Integer id);
 
     int updateByPrimaryKeySelective(Reply record);
 

@@ -12,6 +12,7 @@ import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
+import com.pjmike.lundao.service.Impl.ThesisServiceImpl2;
 
 /**
  * @author DELL
@@ -27,13 +28,11 @@ public class ThesisController {
 	
 	@Autowired
 	ThesisServiceImpl thesisServiceImpl;
-	
+	@Autowired
+	ThesisServiceImpl2 thesisServiceImpl2;
 	/**
 	 * 
-	 * @param 查询一个论点下所有评论及回复
 	 * @return
-	 * @throws Exception
-	 * @throws ClassCastException
 	 */
 	@RequestMapping("/thesisbyid")
 	@ResponseBody

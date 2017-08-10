@@ -12,7 +12,7 @@ public interface AskquestionMapper {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(Askquestion record);
+    int insertaskquestion(Askquestion askquestion);
 
     int insertSelective(Askquestion record);
 

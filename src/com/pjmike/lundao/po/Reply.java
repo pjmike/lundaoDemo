@@ -14,7 +14,7 @@ public class Reply {
 
     private Integer toUid;
 
-    private String rType;
+    private int rType;
 
     private Integer rView;
 
@@ -81,12 +81,12 @@ public class Reply {
         this.toUid = toUid;
     }
 
-    public String getrType() {
+    public int getrType() {
         return rType;
     }
 
-    public void setrType(String rType) {
-        this.rType = rType == null ? null : rType.trim();
+    public void setrType(int rType) {
+        this.rType = rType;
     }
 
     public Integer getrView() {

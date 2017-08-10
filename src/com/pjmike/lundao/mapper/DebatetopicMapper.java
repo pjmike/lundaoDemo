@@ -25,6 +25,9 @@ public interface DebatetopicMapper {
     List<Debatetopicextend> selectList();
     List<Debatetopic> selectListby();
     
+    //返回一个辩题的点赞数
+    int likeNumber(int id);
+    
     //查找一个辩题下所有论点
     Debatetopicextend selectByPrimaryKey(@Param("topicid") Integer id);
 

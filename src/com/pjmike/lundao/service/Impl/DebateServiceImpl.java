@@ -106,7 +106,12 @@ public class DebateServiceImpl implements DebateService{
 	public List<Debatetopic> selectListby() {
 		//从数据库查询出来的辩题列表
 				List<Debatetopic> debatelist = debatetopicMapper.selectListby();
-				
+				for(Debatetopic d:debatelist) {
+					int num = debatetopicMapper.likeNumber(d.getTopicid());
+					if(num >0) {
+						d.setLike(num);
+					}
+				}
 				//将辩题列表进行排序,冒泡排序
 				for(int i=0;i<debatelist.size()-1;i++) {
 					for (int j = i+1; j <debatelist.size(); j++) {

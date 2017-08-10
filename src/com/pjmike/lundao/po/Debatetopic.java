@@ -30,9 +30,18 @@ public class Debatetopic {
     private Date contenttime;
 
     private String content;
+    private int status;
     
      
-    public Integer getTopicid() {
+    public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Integer getTopicid() {
         return topicid;
     }
 
