@@ -1,5 +1,6 @@
 package com.pjmike.lundao.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,95 +28,101 @@ public class DebateController {
 	 */
 	@RequestMapping("/debateFindbyId")
 	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request, int id,Debatetopicextend debatetopic) {
-		
-		debatetopic = debateServiceImpl.selectByPrimaryKey(id);
 		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		debatetopic = debateServiceImpl.selectByPrimaryKey(id,user);
 		session.setAttribute("debatetopic", debatetopic);
 		return debatetopic;
 	}
 	/*
-	 * 返回所有的辩题
-	 */
-	@RequestMapping("/debate")
-	public  @ResponseBody List<Debatetopicextend> debate(HttpServletRequest request) {
-		List<Debatetopicextend> DebatetopicList = debateServiceImpl.selectList();
-		HttpSession session = request.getSession();
-		session.setAttribute("DebatetopicList", DebatetopicList);
-		return DebatetopicList;
-	}
-	/*
 	 * 
-	 * 获取全部辩题不带论点
+	 * 获取全部辩题不含论点
 	 */
 	
 	@RequestMapping("/debateby")
 	public  @ResponseBody List<Debatetopic> debateby(HttpServletRequest request) {
-		List<Debatetopic> DebatetopicList = debateServiceImpl.selectListby();
 		HttpSession session = request.getSession();
-		session.setAttribute("DebatetopicList", DebatetopicList);
+		User user = (User) session.getAttribute("user");
+		List<Debatetopic> DebatetopicList = new ArrayList<>();
+		
+			DebatetopicList = debateServiceImpl.selectListby(user);
 		return DebatetopicList;
 	}
 	
-	/*
-	 * 跟新辩题的关注量
-	 */
-	@RequestMapping("/updateMark")
-	public  @ResponseBody Debatetopic updateMark(HttpServletRequest request, int id,Debatetopic debatetopic) {
-		//首先查找该辩题
-		debatetopic = debateServiceImpl.selectByPrimaryKey(id);
-		//设置user
-		User user = (User) request.getAttribute("user");
-		if(debatetopic != null) {
-			int vote = debatetopic.getAttention();
-			debatetopic.setAttention(vote+1);
-			debateServiceImpl.updateByPrimaryKey(debatetopic,user);
-		}
-		HttpSession session = request.getSession();
-		session.setAttribute("debatetopic", debatetopic);
-		return debatetopic;
-	}
 	
 	/*
 	 * 
-	 * 跟新辩题的点赞量？？？？？未解决？？？
+	 *点赞操作
 	 */
 	@RequestMapping("/updateVote")
-	public  @ResponseBody Debatetopic updateVote(HttpServletRequest request, int topicid,Debatetopic debatetopic) {
+	public void updateVote(HttpServletRequest request, int topicid) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 		//首先查找该辩题
-		debatetopic = debateServiceImpl.selectByPrimaryKey(topicid);
-		if(debatetopic != null) {
+		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicid,user);
+		if(debatetopic != null && user !=null) {
 			int vote = debatetopic.getLike();
-			debatetopic.setAttention(vote+1);
-			debateServiceImpl.updateByPrimaryKeyWithLike(debatetopic);
-			
+			debatetopic.setLike(vote+1);
+			debateServiceImpl.insetLike(topicid, user);
 		}
-		HttpSession session = request.getSession();
-		session.setAttribute("debatetopic", debatetopic);
-		return debatetopic;
 	}
 	/*
-	 * 
-	 *跟新辩题的不喜欢量
+	 * 取消点赞
 	 */
-	@RequestMapping("/updatedlike")
-	public  @ResponseBody Debatetopic updatedlike(HttpServletRequest request, int topicid,Debatetopic debatetopic) {
+	@RequestMapping("/deleteLike")
+	public void deleteLike(HttpServletRequest request, int topicid) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 		//首先查找该辩题
-		debatetopic = debateServiceImpl.selectByPrimaryKey(topicid);
-		if(debatetopic != null) {
-			int vote = debatetopic.getDislike();
-			debatetopic.setAttention(vote+1);
+		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicid,user);
+		if(debatetopic != null && user !=null) {
+			int vote = debatetopic.getLike();
+			debatetopic.setLike(vote-1);
+			debateServiceImpl.giveupLike(topicid, user);
 		}
-		HttpSession session = request.getSession();
-		session.setAttribute("debatetopic", debatetopic);
-		return debatetopic;
 	}
-	
-	
-	/*
-	 * 根据已登录用户是否点击关注按钮来
-	 * 返回给前端辩题的关注状态?????
+	/**
 	 * 
+	 * 更新辩题的点击量
 	 */
-//	 @RequestMapping("")
-	 
+	@RequestMapping("/updateClick")
+	public void updateClick(HttpServletRequest request,int topicId) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		//首先查找该辩题
+		Debatetopic debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
+		if(debatetopic != null) {
+			int vote = debatetopic.getClickcount();
+			debatetopic.setAttention(vote+1);
+			debateServiceImpl.updateClick(debatetopic);
+		}
+	}
+	/**
+	 * 点击关注
+	 */
+	@RequestMapping("updateAttention")
+	public void updateAttention(HttpServletRequest request,int topicId) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		//首先查找该辩题
+		Debatetopic debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
+		if(debatetopic != null && user !=null) {
+			
+			debateServiceImpl.insertAttention(topicId, user);
+		}
+	}
+	/**
+	 * 取消关注
+	 */
+	@RequestMapping("deleteAttention")
+	public void deleteAttention(HttpServletRequest request,int topicId) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		//首先查找该辩题
+		Debatetopic debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
+		if(debatetopic != null && user !=null) {
+			
+			debateServiceImpl.deleteAttention(topicId, user);
+		}
+	}
 }

@@ -30,16 +30,33 @@ public class Debatetopic {
     private Date contenttime;
 
     private String content;
-    private int status;
-    
-     
-    public int getStatus() {
-		return status;
+    private boolean islike = false;
+    private boolean isAttention = false;
+    private String backgroud;
+     public String getBackgroud() {
+		return backgroud;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setBackgroud(String backgroud) {
+		this.backgroud = backgroud;
 	}
+
+    public boolean isIslike() {
+		return islike;
+	}
+
+	public void setIslike(boolean islike) {
+		this.islike = islike;
+	}
+
+	public boolean getAttention2() {
+		return isAttention;
+	}
+
+	public void setAttention2(boolean isAttention) {
+		this.isAttention = isAttention;
+	}
+
 
 	public Integer getTopicid() {
         return topicid;

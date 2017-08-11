@@ -34,8 +34,27 @@ public class Thesis {
     private Integer uncomplete;
 
     private String tState;
+    
+    private boolean isAttention = false;
+    
+    private boolean isLike = false;
+    public boolean getAttention2() {
+		return isAttention;
+	}
 
-    public Integer getThesisid() {
+	public void setAttention2(boolean isAttention) {
+		this.isAttention = isAttention;
+	}
+
+	public boolean isLike() {
+		return isLike;
+	}
+
+	public void setLike(boolean isLike) {
+		this.isLike = isLike;
+	}
+
+	public Integer getThesisid() {
         return thesisid;
     }
 

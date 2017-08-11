@@ -13,7 +13,7 @@ import com.pjmike.lundao.po.User;
  */
 public interface DebateService {
 	//根据主键查询辩题
-   public Debatetopic selectByPrimaryKey(Integer topicid);
+   public Debatetopicextend selectByPrimaryKey(Integer topicid,User user);
    //查询辩题下的论点
    public List<Thesis> selectBykey();
    //跟新辩题的关注量
@@ -25,5 +25,18 @@ public interface DebateService {
    public List<Debatetopicextend> selectList();
    
    //获取全部辩题不带论点
-   public List<Debatetopic> selectListby();
+   public List<Debatetopic> selectListby(User user);
+   //获取全部辩题不带论点
+   public List<Debatetopic> selectListNoUser();
+   
+   //更新点赞量
+   public int updateClick(Debatetopic record);
+   //点赞操作
+   public int insetLike(Integer topicid,User user);
+   //取消点赞
+   public int giveupLike(Integer topicid,User user);
+   //关注辩题
+   int insertAttention(Integer topicid,User user);
+   //取消点赞
+   int deleteAttention(Integer topicid,User user);
 }

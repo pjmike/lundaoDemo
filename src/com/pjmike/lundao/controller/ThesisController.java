@@ -2,6 +2,7 @@ package com.pjmike.lundao.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl2;
@@ -53,5 +55,28 @@ public class ThesisController {
 		thesis.settState(request.getParameter("content"));
 		thesisServiceImpl.insert(thesis);
 	}
-	
+	/**
+	 * 关注辩题
+	 */
+	@RequestMapping("/thesisAttention")
+	public void thesisAttention(HttpServletRequest request,int thesisid) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		Thesis thesis = thesisServiceImpl.selectOne(thesisid);
+		if(thesis != null && user !=null) {
+			thesisServiceImpl.insertAttention(thesisid, user);
+		}
+	}
+	/**
+	 * 取消关注辩题
+	 */
+	@RequestMapping("/giveupAttention")
+	public void giveupAttention(HttpServletRequest request,int thesisid) {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		Thesis thesis = thesisServiceImpl.selectOne(thesisid);
+		if(thesis != null && user !=null) {
+			thesisServiceImpl.deleteAttention(thesisid, user);
+		}
+	}
 }

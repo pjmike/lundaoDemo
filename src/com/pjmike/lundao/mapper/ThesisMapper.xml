@@ -62,6 +62,11 @@
     	</collection>
    </resultMap>
    
+   
+   
+   <select id="selectOne" parameterType="int" resultMap="ResultMapWithBLOBs">
+   		select * from thesis where thesisId=#{id}
+   </select>
  <!-- 一对多查询 -->
   <select id="selectBykey" resultMap="ResultMapWithBLOBs">
   	select thesis.* from thesis,debateTopic where thesis.t_debateId = debateTopic.topicId 
@@ -105,5 +110,38 @@
    <insert id="insert" parameterType="com.pjmike.lundao.po.Thesis">
    		insert into thesis(t_description,t_state) values (#{tDescription},#{tState})
    </insert>
+   
+   
+   <!-- 返回一个论点的点赞数 -->
+  <select id="likeNumber" parameterType="int" resultType="int">
+  	select count(*) from thesisvote  where t_thesisid =#{id} and t_status=1 
+  </select>
+  
+  <!-- 判断一个用户是否具体点赞过某个辩题 -->
+  <select id="Islike"  resultType="int">
+  	select t_status from  thesisvote where t_uid =#{t_uid} and t_thesisid =#{t_thesisid}
+  </select>
+  <!-- 判断一个用户是否关注某个辩题 -->
+  <select id="IsAttention" resultType="int">
+  	select status from  thesisAttention where user_id =#{user_id} and thesis_id =#{thesis_id}
+  </select>
+  
+  
+  <!--设置点赞-->
+  <insert id="insetLike" >
+   insert into thesisvote(t_thesisid,t_uid,t_status) values(#{t_thesisid},#{t_uid},1)
+  </insert>
+  <!-- 取消点赞 -->
+  <update id="giveupLike">
+  	update thesisvote set t_status = 0 where t_uid =#{t_uid} and t_thesisid =#{t_thesisid}
+  </update>
+  <!-- 关注辩题 -->
+  <insert id="insertAttention">
+  	insert into thesisAttention(thesis_id,user_id,status) values(#{thesis_id},#{user_id},1)
+  </insert>
+  <!--取消关注辩题 -->
+  <update id="deleteAttention">
+  	update thesisAttention set status = 0 where user_id =#{user_id} and thesis_id =#{thesis_id}
+  </update>
    
 </mapper>

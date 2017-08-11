@@ -57,7 +57,7 @@
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
     <result column="label" property="label" jdbcType="VARCHAR" />
     <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="backgroud" property="backgroud" jdbcType="VARCHAR"/>
   </resultMap>
    <resultMap id="ResultMapWithBLOBs1" type="com.pjmike.lundao.po.Debatetopic" extends="BaseResultMap1" >
   
@@ -74,7 +74,7 @@
   
  <!--  查询全部辩题不带论点 -->
   <select id="selectListby" resultMap="ResultMapWithBLOBs1" >
-    select d.*,db.d_status status from debateTopic d left join debatevote db on db.debate_id = d.topicId where db.user_id =#{id} order by topicId  limit 10
+    select * from debateTopic d order by topicId  limit 10
   </select>
   <!-- 根据用户点赞状态返回全部辩题 -->
   <select id="selectListby2" resultMap="ResultMapWithBLOBs1"> 
@@ -91,7 +91,33 @@
   </select>
   
   <!-- 判断一个用户是否具体点赞过某个辩题 -->
-  <select id="Islike">
-  	select d_status from  debatevote db where user_id =#{id} and db.debate_id =#{id2}
+  <select id="Islike"  resultType="int">
+  	select d_status from  debatevote where user_id =#{user_id} and debate_id =#{debate_id}
   </select>
+  <!-- 判断一个用户是否关注某个辩题 -->
+  <select id="IsAttention" resultType="int">
+  	select status from  debateAttention where user_id =#{user_id} and debate_id =#{debate_id}
+  </select>
+  
+  <!-- 更新点击量 -->
+  <update id="updateClick" parameterType="com.pjmike.lundao.po.Debatetopic">
+  	update debateTopic set clickcount=#{clickcount}
+  </update>
+  
+  <!--设置点赞-->
+  <insert id="insetLike" >
+   insert into debatevote(debate_id,user_id,d_status) values(#{debate_id},#{user_id},1)
+  </insert>
+  <!-- 取消点赞 -->
+  <update id="giveupLike">
+  	update debatevote set d_status = 0 where user_id =#{user_id} and debate_id =#{debate_id}
+  </update>
+  <!-- 关注辩题 -->
+  <insert id="insertAttention">
+  	insert into debateAttention(debate_id,user_id,status) values(#{debate_id},#{user_id},1)
+  </insert>
+  <!--取消关注辩题 -->
+  <update id="deleteAttention">
+  	update debateAttention set status = 0 where user_id =#{user_id} and debate_id =#{debate_id}
+  </update>
 </mapper>

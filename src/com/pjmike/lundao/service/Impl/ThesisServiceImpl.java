@@ -15,6 +15,7 @@ import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.User;
 
 /**
  * @author pjmike
@@ -231,5 +232,24 @@ public class ThesisServiceImpl implements ThesisService {
 	public int insert(Thesis record) {
 		
 		return thesisMapper.insert(record);
+	}
+
+
+
+
+	@Override
+	public int insertAttention(Integer thesisId, User user) {
+		return thesisMapper.insertAttention(user.getId(), thesisId);
+	}
+
+	@Override
+	public int deleteAttention(Integer thesisId, User user) {
+		return thesisMapper.deleteAttention(user.getId(), thesisId);
+	}
+
+
+	@Override
+	public Thesis selectOne(int id) {
+		return thesisMapper.selectOne(id);
 	}
 }

@@ -14,6 +14,7 @@ import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.User;
 @Service
 public class ThesisServiceImpl2 implements ThesisService {
 	@Autowired
@@ -133,6 +134,21 @@ public class ThesisServiceImpl2 implements ThesisService {
 	public int insert(Thesis record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int insertAttention(Integer thesisId, User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int deleteAttention(Integer thesisId, User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public Thesis selectOne(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
