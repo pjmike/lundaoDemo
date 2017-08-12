@@ -7,13 +7,14 @@ public class Thesis {
 
     private Integer tDebateid;
 
-    private String tDescription;
+    private String tdescription;
 
     private Integer tView;
-
+    private Integer tfromuid;
     private Integer tLike;
 
-    private Integer tAttention;
+
+	private Integer tAttention;
 
     private Integer tDislike;
 
@@ -31,12 +32,20 @@ public class Thesis {
 
     private Integer complete;
 
+    
     private Integer uncomplete;
 
-    private String tState;
+    private String tstate;
     
     private boolean isAttention = false;
     
+    public Integer getTfromuid() {
+    	return tfromuid;
+    }
+    
+    public void setTfromuid(Integer tfromuid) {
+    	this.tfromuid = tfromuid;
+    }
     private boolean isLike = false;
     public boolean getAttention2() {
 		return isAttention;
@@ -71,11 +80,11 @@ public class Thesis {
     }
 
     public String gettDescription() {
-        return tDescription;
+        return tdescription;
     }
 
     public void settDescription(String tDescription) {
-        this.tDescription = tDescription == null ? null : tDescription.trim();
+        this.tdescription = tDescription == null ? null : tDescription.trim();
     }
 
     public Integer gettView() {
@@ -175,10 +184,10 @@ public class Thesis {
     }
 
     public String gettState() {
-        return tState;
+        return tstate;
     }
 
     public void settState(String tState) {
-        this.tState = tState == null ? null : tState.trim();
+        this.tstate = tState == null ? null : tState.trim();
     }
 }

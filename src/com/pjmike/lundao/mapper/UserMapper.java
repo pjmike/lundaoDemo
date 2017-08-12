@@ -1,6 +1,7 @@
 package com.pjmike.lundao.mapper;
 
 
+import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.User2;
 
 /**
@@ -11,8 +12,15 @@ import com.pjmike.lundao.po.User2;
 
 
 public interface UserMapper {
+	//更新用户信息
+	public int updateUser(User user) throws Exception;
 	
-	public User2 findUserByName(String username) throws Exception;
-	public int addUser(User2 user) throws Exception;
-	public int updateUser(User2 user) throws Exception;
+	
+	//保存用户的头像与用户名 
+	public int insertUser(User user);
+	
+	//根据用户id查询用户头像与nickname 
+	public User selectNicknameAndIcon(int id);
+	
+	
 }

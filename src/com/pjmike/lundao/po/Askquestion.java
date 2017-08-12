@@ -30,8 +30,25 @@ public class Askquestion {
     private Date publishtime;
 
     private Date contenttime;
+    private boolean islike = false;
+    private boolean isAttention = false;
+    public boolean isIslike() {
+		return islike;
+	}
 
-    public Integer getId() {
+	public void setIslike(boolean islike) {
+		this.islike = islike;
+	}
+
+	public boolean getAttention2() {
+		return isAttention;
+	}
+
+	public void setAttention2(boolean isAttention) {
+		this.isAttention = isAttention;
+	}
+
+	public Integer getId() {
         return id;
     }
 

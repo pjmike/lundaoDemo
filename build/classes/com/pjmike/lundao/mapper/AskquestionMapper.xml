@@ -22,28 +22,27 @@
 	<insert id="insertaskquestion" parameterType="com.pjmike.lundao.po.Askquestion">
 		insert into askquestion(thesis_id,from_uid,describtion,content,type) values(#{thesis_id},#{from_uid},#{describtion},#{content},#{type})
 	</insert> 	
-	  <!-- 返回一个辩题的点赞数 -->
+	  <!-- 返回一个提问的点赞数 -->
   <select id="likeNumber" parameterType="int" resultType="int">
-  	select count(*) from debatevote  where debate_id =#{id} and d_status=1 
+  	select count(*) from comvote  where a_comment_id =#{id} and a_status=1 
   </select>
   
-  <!-- 判断一个用户是否具体点赞过某个辩题 -->
-  <select id="Islike"  resultType="int">
-  	select d_status from  debatevote where user_id =#{user_id} and debate_id =#{debate_id}
-  </select>
-  <!-- 判断一个用户是否关注某个辩题 -->
-  <select id="IsAttention" resultType="int">
-  	select status from  debateAttention where user_id =#{user_id} and debate_id =#{debate_id}
+  <!-- 判断一个用户是否具体点赞过某个提问 -->
+  <select id="Islike" parameterType="com.pjmike.lundao.po.comvote" resultType="int">
+  	select a_status from  comvote where a_uid =#{a_uid} and a_comment_id =#{a_comment_id}
   </select>
   
   <!--设置点赞-->
-  <insert id="insetLike" >
-   insert into comvote(a_comment_id,a_uid,a_status,a_type) values(#{a_comment_id},#{a_uid},1,#{a_type})
+  <insert id="insetLike" parameterType="com.pjmike.lundao.po.comvote">
+   insert into comvote(a_comment_id,a_uid,a_status) values(#{a_comment_id},#{a_uid},1)
   </insert>
   <!-- 取消点赞 -->
-  <update id="giveupLike">
-  	update comvote set a_status = 0 where a_uid =#{a_uid} and a_comment_id =#{a_comment_id}
+  <update id="giveupLike" parameterType="com.pjmike.lundao.po.comvote">
+  	update comvote set a_status = 0 where a_uid =#{a_uid} and a_comment_id =#{a_comment_id} 
   </update>
+  
+  
+  
   <!-- 关注辩题 -->
   <insert id="insertAttention">
   	insert into askquAttention(ask_id,user_id,status) values(#{ask_id},#{user_id},1)
@@ -53,4 +52,8 @@
   	update askquAttention set status = 0 where user_id =#{user_id} and ask_id =#{ask_id}
   </update>
 	
+  <!-- 判断一个用户是否关注某个提问 -->
+  <select id="IsAttention" parameterType="com.pjmike.lundao.po.comvote" resultType="int">
+  	select status from  askquAttention where user_id =#{user_id} and ask_id =#{ask_id}
+  </select>
 </mapper>

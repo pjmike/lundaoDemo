@@ -22,7 +22,7 @@ public class ThesisServiceImpl2 implements ThesisService {
 	@Autowired
 	ReplyMapper replyMapper;
 	@Override
-	public ThesisExtend selectBythesisId(int id) throws Exception, ClassCastException {
+	public ThesisExtend selectBythesisId(int id,User user) throws Exception, ClassCastException {
 		List<AskquestionExtend> asklist = new ArrayList<>();
 		ThesisExtend thesis = theisMapper.selectBythesisId(id);
 		//得到评论列表

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,9 +39,22 @@ public class ThesisController {
 	 */
 	@RequestMapping("/thesisbyid")
 	@ResponseBody
-	public ThesisExtend selectBythesisId(int id) throws Exception,ClassCastException {
-		return thesisServiceImpl.selectBythesisId(id);
+	public ThesisExtend selectBythesisId(int id,HttpServletRequest request) throws Exception,ClassCastException {
 		
+		HttpSession session = request.getSession();
+		User user  = (User) session.getAttribute("user");
+		return thesisServiceImpl.selectBythesisId(id,user);
+		
+	}
+	/**
+	 * 查询某一具体论点的简介与题目
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/oneThesis")
+	@ResponseBody
+	public Thesis oneThesis(int id) {
+		return thesisServiceImpl.selectOne(id);
 	}
 	
 	/**
@@ -49,10 +63,15 @@ public class ThesisController {
 	 * 做增添论点的功能
 	 */
 	@RequestMapping("/insertthesis")
-	public void insertthesis(HttpServletRequest request) {
-		Thesis thesis = new Thesis();
+	public void insertthesis(@RequestBody Thesis thesis,HttpServletRequest request) {
+		/*Thesis thesis = new Thesis();
 		thesis.settDescription(request.getParameter("title"));
 		thesis.settState(request.getParameter("content"));
+		User user = new User();
+		
+		thesis.setTfromuid(user.getId());*/
+		
+		
 		thesisServiceImpl.insert(thesis);
 	}
 	/**

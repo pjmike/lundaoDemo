@@ -4,13 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pjmike.lundao.mapper.UserMapper;
-import com.pjmike.lundao.mapper.UserMapper2;
 import com.pjmike.lundao.po.User;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
+	/*@Autowired
 	private UserMapper2 userMapper2;
 	
 	@Override
@@ -44,6 +43,27 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		user = userMapper2.updateUserById(user);
 		return user;
+	}*/
+
+	
+	
+	@Autowired
+	UserMapper userMapper;
+	@Override
+	public int updateUser(User user) throws Exception {
+		
+		return userMapper.updateUser(user);
+	}
+
+	@Override
+	public int insertUser(User user) {
+		return userMapper.insertUser(user);
+	}
+	
+	//根据id返回用户头像和nickname
+	@Override
+	public User selectNicknameAndIcon(int id) {
+		return userMapper.selectNicknameAndIcon(id);
 	}
 
 	

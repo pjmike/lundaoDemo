@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pjmike.lundao.mapper.AskquestionMapper;
 import com.pjmike.lundao.mapper.ReplyMapper;
 import com.pjmike.lundao.mapper.ThesisMapper;
 import com.pjmike.lundao.po.AskquestionExtend;
@@ -16,7 +17,7 @@ import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.User;
-
+import com.pjmike.lundao.po.comvote;
 /**
  * @author pjmike
  *
@@ -27,8 +28,10 @@ public class ThesisServiceImpl implements ThesisService {
 	ThesisMapper thesisMapper;
 	@Autowired
 	ReplyMapper replyMapper;
+	@Autowired
+	AskquestionMapper askquestionMapper;
 	@Override
-	public ThesisExtend selectBythesisId(int id) throws Exception,ClassCastException{
+	public ThesisExtend selectBythesisId(int id,User user) throws Exception,ClassCastException{
 		ThesisExtend thesisextend = thesisMapper.selectBythesisId(id);
 		//以下为评论列表
 		List<AskquestionExtend> askquestions = thesisextend.getAskquestions();
@@ -41,6 +44,24 @@ public class ThesisServiceImpl implements ThesisService {
 		//字回复
 		
 		for(AskquestionExtend as:askquestions) {
+			//更新点赞量
+			int like = askquestionMapper.likeNumber(as.getId());
+			if(like>0) {
+				as.setLike(like);
+			}
+			if(user != null) {
+				comvote comvote = new comvote();
+				comvote.setA_comment_id(as.getId());
+				comvote.setA_uid(user.getId());
+				int islike = askquestionMapper.Islike(comvote);
+				if(islike>0) {
+					as.setIslike(true);
+				} 
+				int isAttention = askquestionMapper.IsAttention(user.getId(),as.getId());
+				if(isAttention>0) {
+					as.setAttention2(true);
+				}
+			}
 			
 			List<ReplyExtend> rep =replyMapper.select(as.getId());
 			
@@ -50,13 +71,24 @@ public class ThesisServiceImpl implements ThesisService {
 			if (rep!=null) {
 				for (ReplyExtend r : rep) {
 					
-
+					int replylike = replyMapper.likeNumber(r.getReplyId());
+					//更新点赞量
+					if(replylike>0) {
+						r.setrLike(replylike);
+					}
+					
+					if (user!=null) {
+						int islike = replyMapper.Islike(user.getId(), r.getReplyId());
+						//判断用户是否对回复点赞
+						if (islike > 0) {
+							r.setIslike(true);
+						} 
+					}
+					
 					if (r.getReplyId()==0) {
 						//找出对评论的回复
 						rreplylist.add(r);
 						creplylist.add(r);
-						
-
 					} else {
 						//判断对评论的回复是否为空，为空则无子回复
 						//设置creplylist进行循环判断，但不将creplylist设置到as中，听因为在此过程中,对象已经被修改
@@ -175,8 +207,8 @@ public class ThesisServiceImpl implements ThesisService {
 			return sum;
 		
 	}
+	//按点赞数排序
 	public  List<AskquestionExtend> findMaxlike(List<AskquestionExtend> askquestions) {
-		//按点赞数排序
 				for(int i=0;i<askquestions.size()-1;i++) {
 					for (int j = i+1; j <askquestions.size(); j++) {
 						long count =askquestions.get(i).getLike();
@@ -247,7 +279,9 @@ public class ThesisServiceImpl implements ThesisService {
 		return thesisMapper.deleteAttention(user.getId(), thesisId);
 	}
 
-
+	/**
+	 * 查询某一论点的简介与题目
+	 */
 	@Override
 	public Thesis selectOne(int id) {
 		return thesisMapper.selectOne(id);

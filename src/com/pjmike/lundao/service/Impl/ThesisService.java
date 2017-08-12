@@ -5,7 +5,7 @@ import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.User;
 
 public interface ThesisService {
-	public ThesisExtend selectBythesisId(int id) throws Exception,ClassCastException;
+	public ThesisExtend selectBythesisId(int id,User user) throws Exception,ClassCastException;
 	
 	 //增加论点
     int insert(Thesis record);

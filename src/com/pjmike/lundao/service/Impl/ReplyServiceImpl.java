@@ -16,8 +16,36 @@ public class ReplyServiceImpl implements ReplyService {
 	 */
 	@Override
 	public int insert(User user, Reply reply) {
-		
 		return replyMapper.insert(user, reply);
+	}
+	
+	/**
+	 * 点赞
+	 */
+	@Override
+	public int insetLike(User user, int replyid) {
+		return replyMapper.insetLike(user.getId(),replyid);
+	}
+	/**
+	 * 取消点赞
+	 */
+	@Override
+	public int giveupLike(User user, int replyid) {
+		return replyMapper.giveupLike(user.getId(), replyid);
+	}
+	/**
+	 * 点赞数
+	 */
+	@Override
+	public int likeNumber(int id) {
+		return replyMapper.likeNumber(id);
+	}
+	/**
+	 * 是否点赞
+	 */
+	@Override
+	public int Islike(User user, int replyid) {
+		return replyMapper.Islike(user.getId(), replyid);
 	}
 
 }

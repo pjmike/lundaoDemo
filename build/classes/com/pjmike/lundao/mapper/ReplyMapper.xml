@@ -45,6 +45,7 @@
 	 		r.r_contentTime 
 	 		from reply r where comment_id =#{id}
 	</select>
+	
 	<select id="selectbyReplyid" parameterType="int" resultMap="BaseResultMap">
 		select r.id,
 	 		r.comment_id,
@@ -58,4 +59,20 @@
 	 		from reply r where id =#{id}
 	</select>
  
+  <!-- 判断一个用户是否具体点赞过某个回复 -->
+  <select id="Islike"  resultType="int">
+  	select r_status from  replyvote where r_uid =#{r_uid} and r_replyid =#{r_replyid}
+  </select>
+  <!-- 返回一个提问的点赞数 -->
+  <select id="likeNumber" parameterType="int" resultType="int">
+  	select count(*) from replyvote  where r_replyid =#{id} and r_status=1 
+  </select>
+  <!--设置点赞-->
+  <insert id="insetLike">
+   insert into replyvote(r_replyid,r_uid,r_status) values(#{r_replyid},#{r_uid},1)
+  </insert>
+  <!-- 取消点赞 -->
+  <update id="giveupLike">
+  	update replyvote set r_status = 0 where r_uid =#{r_uid} and r_replyid =#{r_replyid}
+  </update>
 </mapper>

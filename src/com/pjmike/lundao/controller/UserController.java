@@ -89,7 +89,7 @@ public class UserController {
 		return "signin";
 	}
 	
-	//用户注册
+	/*//用户注册
 	@RequestMapping(value="/user/adduser",method={RequestMethod.POST})
 	 public @ResponseBody User loginupJson(Model model,User user) throws Exception {
 		 //@responseBody将user转成json输出
@@ -126,5 +126,5 @@ public class UserController {
 	public @ResponseBody User updateUserById(Model model,User user) throws Exception { 
 		user = userServiceImpl.updateUserById(user);
 		return user;
-	}
+	}*/
 }

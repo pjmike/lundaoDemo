@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pjmike.lundao.mapper.UserMapper">
-	<select id="findUserByName" parameterType="String" resultType="com.pjmike.lundao.po.User2">
+	<!-- <select id="findUserByName" parameterType="String" resultType="com.pjmike.lundao.po.User2">
 		select * from users where username = #{username}
 	</select>
 	<insert id="addUser" parameterType="com.pjmike.lundao.po.User2">
@@ -11,5 +11,26 @@
 	</insert>
 	<update id="pudateUser" parameterType="com.pjmike.lundao.po.User2">
 	update users set username=#{username}, password=#{password}
-	</update>
+	</update> -->
+
+	<resultMap type="com.pjmike.lundao.po.User" id="ResultOne">
+		<result column="nickname" property="nickname"/>
+		<result column="Icon" property="Icon"/>
+	</resultMap>
+	
+	<!-- 保存用户的头像与用户名 -->
+	<insert id="insertUser" parameterType="com.pjmike.lundao.po.User">
+		insert into user(nickname,Icon) values(#{nickname},#{Icon})
+	</insert>
+	
+	<!-- 更新用户的信息 -->
+	<insert id="updateUser" parameterType="com.pjmike.lundao.po.User">
+		update user set nickname=#{nickname} and Icon=#{Icon}
+	</insert>
+	
+	
+	<!-- 根据用户id查询用户头像与nickname -->	
+	<select id="selectNicknameAndIcon" parameterType="int" resultMap="ResultOne">
+		select nickname,Icon from user where id =#{id}
+	</select>
 </mapper>

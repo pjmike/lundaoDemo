@@ -9,6 +9,7 @@ public class User {
 	private String password;
 	private String nickname;
 	private String gender;
+	private String Icon;
 	private int age;
 	private String school;
 	private String experience;
@@ -19,6 +20,12 @@ public class User {
 	private String auth_token;
 	private Timestamp created_at;
 	private Timestamp updated_at;
+	public String getIcon() {
+		return Icon;
+	}
+	public void setIcon(String icon) {
+		Icon = icon;
+	}
 	public int getAge() {
 		return age;
 	}

@@ -63,9 +63,13 @@
    </resultMap>
    
    
-   
-   <select id="selectOne" parameterType="int" resultMap="ResultMapWithBLOBs">
-   		select * from thesis where thesisId=#{id}
+   <resultMap type="com.pjmike.lundao.po.Thesis" id="ResultOne">
+   	<id column="thesisId" property="thesisid"/>
+   	<result column="t_description" property="tdescription"/>
+   	<result column="t_state" property="tstate"/>
+   </resultMap>
+   <select id="selectOne" parameterType="int" resultMap="ResultOne">
+   		select thesisId,t_description,t_state from thesis where thesisId=#{id}
    </select>
  <!-- 一对多查询 -->
   <select id="selectBykey" resultMap="ResultMapWithBLOBs">
@@ -108,7 +112,7 @@
    
    <!-- 增加论点 -->
    <insert id="insert" parameterType="com.pjmike.lundao.po.Thesis">
-   		insert into thesis(t_description,t_state) values (#{tDescription},#{tState})
+   		insert into thesis(t_description,t_state,t_from_uid) values (#{tDescription},#{tState},#{tfromuid})
    </insert>
    
    
@@ -128,7 +132,7 @@
   
   
   <!--设置点赞-->
-  <insert id="insetLike" >
+  <insert id="insetLike">
    insert into thesisvote(t_thesisid,t_uid,t_status) values(#{t_thesisid},#{t_uid},1)
   </insert>
   <!-- 取消点赞 -->

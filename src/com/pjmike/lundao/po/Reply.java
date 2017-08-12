@@ -32,7 +32,18 @@ public class Reply {
 
     private String rDescribtion;
     
-  /*  private List<Reply> replies;
+    private boolean islike = false;
+    
+    
+  public boolean isIslike() {
+		return islike;
+	}
+
+	public void setIslike(boolean islike) {
+		this.islike = islike;
+	}
+
+	/*  private List<Reply> replies;
     public List<Reply> getReplies() {
 		return replies;
 	}
