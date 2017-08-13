@@ -1,11 +1,8 @@
 package com.pjmike.lundao.mapper;
 
 import com.pjmike.lundao.po.Askquestion;
-import com.pjmike.lundao.po.AskquestionExample;
-import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.comvote;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface AskquestionMapper {

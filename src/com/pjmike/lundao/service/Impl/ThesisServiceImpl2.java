@@ -12,8 +12,10 @@ import com.pjmike.lundao.mapper.ReplyMapper;
 import com.pjmike.lundao.mapper.ThesisMapper;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
+import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 @Service
 public class ThesisServiceImpl2 implements ThesisService {
@@ -147,6 +149,16 @@ public class ThesisServiceImpl2 implements ThesisService {
 	}
 	@Override
 	public Thesis selectOne(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int insertsupplement(Supplement supplement) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<ThesisSupplement> selectAllSupplement(Supplement supplement) {
 		// TODO Auto-generated method stub
 		return null;
 	}

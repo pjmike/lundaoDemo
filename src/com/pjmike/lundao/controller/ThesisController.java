@@ -1,6 +1,8 @@
 package com.pjmike.lundao.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl2;
+
+import net.sf.json.JSONObject;
 
 /**
  * @author DELL
@@ -97,5 +103,30 @@ public class ThesisController {
 		if(thesis != null && user !=null) {
 			thesisServiceImpl.deleteAttention(thesisid, user);
 		}
+	}
+	
+	
+	/**
+	 * 提交完善版本
+	 */
+	@RequestMapping("/submitSupplement")
+	public void submitSupplement(@RequestBody Supplement supplement) {
+		thesisServiceImpl.insertsupplement(supplement);
+	}
+	/**
+	 * 返回所有的完善版本
+	 */
+	@RequestMapping("/returnAllSupplement")
+	@ResponseBody
+	public List<ThesisSupplement> returnAllSupplement(HttpServletRequest request) {
+		//object为前端传过来的属性名
+		JSONObject jb = new JSONObject().fromObject(request.getParameter("object"));
+		
+		Supplement supplement = new Supplement();
+		supplement.setNickname(jb.getString("nickname"));
+		supplement.setIcon(jb.getString("Icon"));
+		supplement.setThesisId(jb.getInt("thesisId"));
+		
+		return thesisServiceImpl.selectAllSupplement(supplement);
 	}
 }

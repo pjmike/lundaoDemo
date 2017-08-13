@@ -41,7 +41,10 @@ public class AskquesController {
 		JSONObject jb=new JSONObject();
 		String content = jb.fromObject(str).getString("content");
 		
-		
+
+
+
+
 		askquesServiceImpl.insertaskquestion(askquestion);
 	}
 }

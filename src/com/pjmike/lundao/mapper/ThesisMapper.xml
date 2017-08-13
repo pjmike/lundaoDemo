@@ -43,6 +43,7 @@
     <result column="describtion" property="describtion" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER"/>
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="attention" property="attention" jdbcType="INTEGER" />
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP"/>
@@ -68,6 +69,15 @@
    	<result column="t_description" property="tdescription"/>
    	<result column="t_state" property="tstate"/>
    </resultMap>
+   
+   
+   <!-- 论点完善版本的resultMap -->
+   <resultMap type="com.pjmike.lundao.po.ThesisSupplement" id="ResultSupplement">
+    <result column="t_description" property="tdescription"/>
+    <result column="t_state" property="tstate"/>
+    <result column="supplement" property="supplement"/>
+   </resultMap>
+   
    <select id="selectOne" parameterType="int" resultMap="ResultOne">
    		select thesisId,t_description,t_state from thesis where thesisId=#{id}
    </select>
@@ -94,6 +104,7 @@
 	 		a.describtion,
 	 		a.content,
 	 		a.type,
+	 		a.state,
 	 		a.like,
 	 		a.attention,
 	 		a.publishTime
@@ -131,6 +142,12 @@
   </select>
   
   
+  <!-- 返回论点的所有完善版本 -->
+  <select id="selectAllSupplement" parameterType="com.pjmike.lundao.po.Supplement" resultMap="ResultSupplement">
+  	select t.t_description,t.t_state,s.nickname,s.supplement from thesis t left join supplement s on s.thesisId = t.thesisId 
+  	where s.thesisId =#{thesisId} and s.nickname=#{nickname}
+  </select>
+  
   <!--设置点赞-->
   <insert id="insetLike">
    insert into thesisvote(t_thesisid,t_uid,t_status) values(#{t_thesisid},#{t_uid},1)
@@ -147,5 +164,8 @@
   <update id="deleteAttention">
   	update thesisAttention set status = 0 where user_id =#{user_id} and thesis_id =#{thesis_id}
   </update>
+   
+   
+   
    
 </mapper>

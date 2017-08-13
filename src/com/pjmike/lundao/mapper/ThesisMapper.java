@@ -1,8 +1,10 @@
 package com.pjmike.lundao.mapper;
 
+import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExample;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 
 import java.util.List;
@@ -36,4 +38,7 @@ public interface ThesisMapper {
     
     //关注辩题
     int insertAttention(@Param("user_id")int id,@Param("debate_id")int thesisid);
+    
+    //返回所有的完善版本
+    List<ThesisSupplement> selectAllSupplement(Supplement supplement);
 }

@@ -14,7 +14,8 @@ public class Askquestion {
     private String content;
 
     private int type;
-
+    
+    private int state;
     private Integer view;
 
     private Integer like;
@@ -96,7 +97,15 @@ public class Askquestion {
         this.type = type ;
     }
 
-    public Integer getView() {
+    public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public Integer getView() {
         return view;
     }
 

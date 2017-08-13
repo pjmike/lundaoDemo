@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.pjmike.lundao.mapper.AskquestionMapper;
 import com.pjmike.lundao.mapper.ReplyMapper;
+import com.pjmike.lundao.mapper.SupplementMapper;
 import com.pjmike.lundao.mapper.ThesisMapper;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
+import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.comvote;
 /**
@@ -30,8 +33,37 @@ public class ThesisServiceImpl implements ThesisService {
 	ReplyMapper replyMapper;
 	@Autowired
 	AskquestionMapper askquestionMapper;
+	@Autowired
+	SupplementMapper supplementMapper;
+	
 	@Override
 	public ThesisExtend selectBythesisId(int id,User user) throws Exception,ClassCastException{
+		/**
+		 * 定义一个新的thesisExtend然后只包含提问及异议，然后·一列·回复·
+		 */
+		/*ThesisExtend extend = thesisMapper.selectBythesisId(id);
+		List<AskquestionExtend> asks = extend.getAskquestions();		
+		for(AskquestionExtend ask:asks) {
+			List<ReplyExtend> replys = replyMapper.select(ask.getId());
+			ReplyExtend maxLikeReply = findNiceReply(replys);
+			
+		}
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**
+		 * 以下方法为全部返回所有评论及回复
+		 */
 		ThesisExtend thesisextend = thesisMapper.selectBythesisId(id);
 		//以下为评论列表
 		List<AskquestionExtend> askquestions = thesisextend.getAskquestions();
@@ -49,6 +81,9 @@ public class ThesisServiceImpl implements ThesisService {
 			if(like>0) {
 				as.setLike(like);
 			}
+			/**
+			 * 判断是否点赞与是否关注
+			 */
 			if(user != null) {
 				comvote comvote = new comvote();
 				comvote.setA_comment_id(as.getId());
@@ -63,6 +98,9 @@ public class ThesisServiceImpl implements ThesisService {
 				}
 			}
 			
+			/**
+			 * 先找出所有回复内容，包扩对评论的回复以及子回复
+			 */
 			List<ReplyExtend> rep =replyMapper.select(as.getId());
 			
 			List<ReplyExtend> creplylist = new ArrayList<ReplyExtend>();
@@ -86,8 +124,9 @@ public class ThesisServiceImpl implements ThesisService {
 					}
 					
 					if (r.getReplyId()==0) {
-						//找出对评论的回复
+						//找出对评论的所有回复
 						rreplylist.add(r);
+						
 						creplylist.add(r);
 					} else {
 						//判断对评论的回复是否为空，为空则无子回复
@@ -107,36 +146,33 @@ public class ThesisServiceImpl implements ThesisService {
 							}
 						}
 					}
+					
+					//找出其中获赞数最大的评论
+					//用一个递归方法
+			/*		ReplyExtend maxReply = findNiceReply(rreplylist);
+					List<ReplyExtend> replyList = new ArrayList<>();
+					if(r.getReplyId()==0) {
+						replyList.add(r);
+					}
+					for (ReplyExtend reply : replyList) {
+					if (maxReply.getId() != null && r.getReplyId()>0) {
+						if (maxReply.getId().equals(r.getReplyId())) {
+							if (maxReply.getNextReply() == null) {
+								maxReply.setNextReply(new ArrayList<>());
+							}
+							maxReply.getNextReply().add(r);
+							replyList.add(r);
+							break;
+						}
+					}	
+				}	*/
+					
 					//这里只设置评论，不设置回复，回复内容已经包含在其中
 					as.setReplies(rreplylist); 
+//					as.setExtend(maxReply);
 				}
-				/*//将对应
-				List<ReplyExtend> list = new ArrayList<>();
-				for(ReplyExtend re:creplylist) {
-					if(re.getCommentId().equals(as.getId())) {
-						list.add(re);
-					}
-				}
-				as.setReplies(list);*/
 			}
 		}
-		/*List<ReplyExtend> replys = new ArrayList<>();
-		for(AskquestionExtend as:askquestions) {
-				if (as.getReplies()!=null) {
-					for (ReplyExtend r : as.getReplies()) {
-						if ("comment".equals(r.getrType())) {
-							//找出对评论的回复
-							replys.add(r);
-						}
-					} 
-				}
-				//找出最佳对评论的回复。
-				ReplyExtend replyMax = findNiceReply(replys);
-				if (as.getReplies().size()>0) {
-					as.getReplies().set(0, replyMax);
-				}*/
-				
-//		}
 		
 		
 		
@@ -239,7 +275,8 @@ public class ThesisServiceImpl implements ThesisService {
 	}
 	
 	
-	//找出点赞数最大的评论
+	
+	//找出点赞数最大的回复
 	public  ReplyExtend findNiceReply(List<ReplyExtend> replys) {
 		ReplyExtend re = null;
 		if (replys.size()>0) {
@@ -251,12 +288,11 @@ public class ThesisServiceImpl implements ThesisService {
 					max = temp;
 					re = replys.get(i);
 				}
-
 			} 
 		}
 		return re;
 	}
-
+	
 	/**
 	 * 实现增加论点
 	 */
@@ -286,4 +322,24 @@ public class ThesisServiceImpl implements ThesisService {
 	public Thesis selectOne(int id) {
 		return thesisMapper.selectOne(id);
 	}
+
+	/**
+	 * 提交完善版本
+	 * @param supplement
+	 * @return
+	 */
+	@Override
+	public int insertsupplement(Supplement supplement) {
+		return supplementMapper.insertsupplement(supplement);
+	}
+
+
+	/**
+	 * 返回所有的完善版本
+	 */
+	@Override
+	public List<ThesisSupplement> selectAllSupplement(Supplement supplement) {
+		return thesisMapper.selectAllSupplement(supplement);
+	}
+
 }

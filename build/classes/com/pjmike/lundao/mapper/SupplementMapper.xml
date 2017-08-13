@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pjmike.lundao.mapper.SupplementMapper0">
+	<!-- 提交完善版本 -->
+	<insert id="insertsupplement" parameterType="com.pjmike.lundao.po.Supplement">
+		insert into supplement(thesisId,nickname,Icon,supplement) values(#{thesisid},#{nickname},#{Icon},#{supplement})
+	</insert>
+</mapper>
