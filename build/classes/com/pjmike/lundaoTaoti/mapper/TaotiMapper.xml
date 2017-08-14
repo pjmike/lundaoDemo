@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pjmike.lundaoTaoti.mapper.TaotiMapper">
+	<resultMap type="com.pjmike.lundaoTaoti.po.Taoti" id="ResultAllTaoti">
+		<id column="taotiId" property="taotiId"/>
+		<result column="title" property="title"/>
+		<result column="backgroud" property="backgroud"/>
+		<result column="commentNum" property="commentNum"/>
+		<result column="commented" property="comment"/>
+	</resultMap>
+	<resultMap type="com.pjmike.lundaoTaoti.po.Taoti" id="ResultAllTaoti2">
+		<id column="taotiId" property="taotiId"/>
+		<result column="title" property="title"/>
+		<result column="backgroud" property="backgroud"/>
+		<result column="commented" property="comment"/>
+	</resultMap>
+
+	<!-- 增添用户发起的辩题 -->
+	<insert id="insertTheis" parameterType="com.pjmike.lundaoTaoti.po.Taoti">
+		insert into taoTi(nickname,Icon,title,content,backgroud) values(#{nickname},#{Icon},#{title},#{conten},#{backgroud})
+	</insert>
+	
+	<!-- 找出用户所有的淘题 -->
+	<select id="selectAllTaoti" parameterType="String" resultMap="ResultAllTaoti">
+		select taotiId,title,backgroud,commentNum,commented from taoTi where nickname=#{nickname}
+	</select>
+	<!-- 返回某一具体淘题的信息 -->
+	<select id="selectOne" parameterType="int" resultMap="ResultAllTaoti2">
+		select title,content,backgroud,commented from taoTi where taotiId = #{id}
+	</select>
+	
+	<!-- 增加淘题的期望值 -->
+	<update id="upCommentNum" parameterType="int">
+		update taoTi set commentNum = commentNum+1 where taotiId = #{id}
+	</update>
+	<!-- 减少淘题的期望值 -->
+	<update id="downCommentNum" parameterType="int">
+		update taoTi set commentNum = commentNum-1 where taotiId = #{id}
+	</update>
+</mapper>
