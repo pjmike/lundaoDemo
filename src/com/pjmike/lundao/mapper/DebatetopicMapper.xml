@@ -33,6 +33,7 @@
     <result column="t_contentTime" property="tContenttime" jdbcType="TIMESTAMP" />
     <result column="complete" property="complete" jdbcType="INTEGER" />
     <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
+    <result column="t_state" property="tstate"/>
     </collection>
     
     
@@ -63,8 +64,7 @@
   
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
-
-  
+ 
   
   <!-- 根据id查询辩题并返回该论点下所有的论点 -->
   <!-- 判断是否为空 -->
@@ -89,8 +89,16 @@
   <select id="likeNumber" parameterType="int" resultType="int">
   	select count(*) from debatevote  where debate_id =#{id} and d_status=1 
   </select>
-  
-  <!-- 判断一个用户是否具体点赞过某个辩题 -->
+  <!--获取辩题的收藏数 -->
+  <select id="AttentionNumber" parameterType="int" resultType="int">
+  	select count(*) from debateAttention where debate_id =#{id} and status=1
+  </select>
+  	 <!-- 返回用户所关注的辩题 -->
+ <select id="selectAlldebateAttentioned" parameterType="int" resultMap="ResultOne2">
+ 	select topicId,describtion,content,view from debateTopic where
+ 	thesisId in(select debate_id from debateAttention where user_id=#{id})
+ </select>
+  <!-- 判断一个用户是否具体点赞过某个辩题 --> 
   <select id="Islike"  resultType="int">
   	select d_status from  debatevote where user_id =#{user_id} and debate_id =#{debate_id}
   </select>
@@ -120,4 +128,5 @@
   <update id="deleteAttention">
   	update debateAttention set status = 0 where user_id =#{user_id} and debate_id =#{debate_id}
   </update>
+  
 </mapper>

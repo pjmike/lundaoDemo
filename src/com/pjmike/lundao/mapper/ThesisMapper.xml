@@ -70,7 +70,9 @@
    	<result column="t_state" property="tstate"/>
    </resultMap>
    
-   
+   <resultMap type="com.pjmike.lundao.po.Thesis" id="ResultOne2" extends="ResultOne">
+   		<result column="t_view" property="tView" jdbcType="INTEGER" />
+   </resultMap>
    <!-- 论点完善版本的resultMap -->
    <resultMap type="com.pjmike.lundao.po.ThesisSupplement" id="ResultSupplement">
     <result column="t_description" property="tdescription"/>
@@ -131,7 +133,15 @@
   <select id="likeNumber" parameterType="int" resultType="int">
   	select count(*) from thesisvote  where t_thesisid =#{id} and t_status=1 
   </select>
-  
+  <!-- 返回一个论点的关注数 -->
+  <select id="attentionNum" parameterType="int" resultType="int">
+  	select count(*) from thesisAttention where thesis_id = #{id} and status=1
+  </select>
+ <!-- 返回用户所关注的论点 -->
+ <select id="selectAllThesisAttentioned" parameterType="int" resultMap="ResultOne2">
+ 	select thesisId,t_description,t_state,t_view from thesis where
+ 	thesisId in(select thesis_id from thesisAttention where user_id=#{id})
+ </select>
   <!-- 判断一个用户是否具体点赞过某个辩题 -->
   <select id="Islike"  resultType="int">
   	select t_status from  thesisvote where t_uid =#{t_uid} and t_thesisid =#{t_thesisid}

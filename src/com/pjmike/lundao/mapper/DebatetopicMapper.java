@@ -21,9 +21,15 @@ public interface DebatetopicMapper {
     List<Debatetopicextend> selectList();
     List<Debatetopic> selectListby();
     
+    /**返回用户关注的辩题
+     * @param id
+     * @return
+     */
+    List<Debatetopic> selectAlldebateAttentioned(int id);
     //返回一个辩题的点赞数
     int likeNumber(int id);
-    
+    //返回一个辩题的关注量
+    int AttentionNumber(int id);
     //判断是否点赞
     int Islike(@Param("user_id")int id,@Param("debate_id")int topicId);
     

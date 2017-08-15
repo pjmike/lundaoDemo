@@ -24,7 +24,12 @@ public interface ThesisMapper {
     //查询某一个辩题
     Thesis selectOne(int id);
     ThesisExtend selectBythesisId (int id);
-
+    //返回一个论点的关注数
+    int attentionNum(int id);
+    //返回一个论点的点赞数、
+    int likeNumber(int id);
+    //返回一个用户所关注的论点
+    List<Thesis> selectAllThesisAttentioned(int id);
 
     int updateByPrimaryKey(Thesis record);
     //判断是否点赞

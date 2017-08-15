@@ -3,6 +3,8 @@ package com.pjmike.lundao.mapper;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.comvote;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface AskquestionMapper {
@@ -17,7 +19,11 @@ public interface AskquestionMapper {
 
     int updateByPrimaryKeySelective(Askquestion record);
 
+    
     int updateByPrimaryKey(Askquestion record);
+    
+    List<Askquestion> selecrAllAttentionAskqustion(int id);
+    
     //返回一个辩题的点赞数
     int likeNumber(int id);
     

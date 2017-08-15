@@ -7,9 +7,17 @@ public class Taoti {
 	private String title;
 	private String title1;
 	private String content;
-	private String background;
+	private String backgroud;
 	private int commentNum;
 	private int comment;
+	private String[] labels;
+	
+	public String[] getLabels() {
+		return labels;
+	}
+	public void setLabels(String[] labels) {
+		this.labels = labels;
+	}
 	public int getComment() {
 		return comment;
 	}
@@ -54,10 +62,10 @@ public class Taoti {
 		this.content = content;
 	}
 	public String getBackground() {
-		return background;
+		return backgroud;
 	}
 	public void setBackground(String background) {
-		this.background = background;
+		this.backgroud = background;
 	}
 	public int getCommentNum() {
 		return commentNum;

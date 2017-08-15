@@ -39,6 +39,10 @@ public class DebateServiceImpl implements DebateService{
 		if (user!=null) {
 			int status = debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid());
 			int attention = debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
+			int attentionNum = debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid());
+			if(attentionNum >0) {
+				debatetopicextend.setAttention(attentionNum);
+			}
 			if (status>0) {
 				debatetopicextend.setIslike(true);
 			} else {
@@ -53,9 +57,16 @@ public class DebateServiceImpl implements DebateService{
 		List<Thesis> thesislist = debatetopicextend.getThesisList();
 		
 		for(Thesis t:thesislist) {
+			/**
+			 *判断点赞数，关注数，点赞状态和关注状态
+			 */
 			if(user!=null) {
 				int status = thesisMapper.Islike(user.getId(), debatetopicextend.getTopicid());
 				int attention = thesisMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
+				int thesisAttention = thesisMapper.attentionNum(t.getThesisid());
+				if(thesisAttention>0) {
+					t.settAttention(thesisAttention);
+				}
 				if (status>0) {
 					t.setLike(true);
 				} else {
@@ -150,6 +161,10 @@ public class DebateServiceImpl implements DebateService{
 					int num = debatetopicMapper.likeNumber(d.getTopicid());
 					if(num >0) {
 						d.setLike(num);
+					}
+					int attentionNum = debatetopicMapper.AttentionNumber(d.getTopicid());
+					if(attentionNum >0) {
+						d.setAttention(attentionNum);
 					}
 					if (user!=null) {
 						int status = debatetopicMapper.Islike(user.getId(), d.getTopicid());

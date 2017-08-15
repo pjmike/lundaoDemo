@@ -78,7 +78,8 @@
       	   	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
          </bean> 
              
-        
+        <!-- AOP自动代理功能 -->
+    	<aop:aspectj-autoproxy proxy-target-class="true"/>
         
          
          
