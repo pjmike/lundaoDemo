@@ -5,6 +5,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop" 
        xmlns:tx="http://www.springframework.org/schema/tx"
+         xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/mvc
@@ -13,12 +14,15 @@
         http://www.springframework.org/schema/context/spring-context-4.2.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/rabbit
+        http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
-
         <context:component-scan base-package="com.pjmike.lundao.aop"></context:component-scan>
+        
         <context:component-scan base-package="com.pjmike.lundaoTaoti.service.Impl"></context:component-scan>
         <context:component-scan base-package="com.pjmike.lundao.service.Impl"></context:component-scan>
+        <context:component-scan base-package="com.pjmike.lundao.tool"></context:component-scan>
          <context:property-placeholder location="classpath:db.properties" /> 
          <!-- 数据源1 -->
          <!-- 数据源，使用c3p0 --><bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
@@ -70,9 +74,13 @@
         	<!-- 使用动态的数据源dynamicDataSorce -->
         	<property name="dataSource" ref="dynamicDataSorce"></property>
         </bean>
+        
+        
+        
          	<!-- 使用annotation定义事务 -->
          	<tx:annotation-driven transaction-manager="transactionManager"/>
             <!-- 自动扫描出mapper接口 -->
+           
          <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
          	<property name="basePackage" value="com.pjmike.lundao.mapper,com.pjmike.lundaoTaoti.mapper"></property>
       	   	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>

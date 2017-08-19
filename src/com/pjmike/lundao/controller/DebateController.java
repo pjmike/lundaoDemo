@@ -1,5 +1,7 @@
 package com.pjmike.lundao.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,5 +126,12 @@ public class DebateController {
 			
 			debateServiceImpl.deleteAttention(topicId, user);
 		}
+	}
+	/**
+	 * test
+	 */
+	@RequestMapping("/testController")
+	public void test(HttpServletRequest request) {
+		System.out.println("get it");
 	}
 }

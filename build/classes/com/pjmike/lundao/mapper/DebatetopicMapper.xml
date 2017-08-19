@@ -64,7 +64,12 @@
   
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
- 
+ <resultMap type="com.pjmike.lundao.po.Debatetopic" id="ResultOne2">
+ 	 <id column="topicId" property="topicid" jdbcType="INTEGER" />
+    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+    <result column="view" property="view" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+ </resultMap>
   
   <!-- 根据id查询辩题并返回该论点下所有的论点 -->
   <!-- 判断是否为空 -->
