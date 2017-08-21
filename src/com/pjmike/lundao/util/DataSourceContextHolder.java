@@ -1,4 +1,4 @@
-package com.pjmike.lundao.tool;
+package com.pjmike.lundao.util;
 
 public class DataSourceContextHolder {
 	private static final ThreadLocal<String> dataSourceTypes = new ThreadLocal<String>();

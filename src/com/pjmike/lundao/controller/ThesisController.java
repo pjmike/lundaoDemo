@@ -45,12 +45,23 @@ public class ThesisController {
 	 */
 	@RequestMapping("/thesisbyid")
 	@ResponseBody
-	public ThesisExtend selectBythesisId(int id,HttpServletRequest request) throws Exception,ClassCastException {
+	public ThesisExtend selectBythesisId(HttpServletRequest request) throws Exception,ClassCastException {
 		
-		HttpSession session = request.getSession();
-		User user  = (User) session.getAttribute("user");
+		String thesisid = request.getParameter("thesisId");
+		String userid = request.getParameter("id");
+		
+		int id = Integer.parseInt(thesisid);
+		int uid = 0;
+		if(userid!=null) {
+			uid = Integer.parseInt(userid);
+		}
+		User user = null;
+		if (uid>0) {
+			user = new User();
+			user.setId(uid);
+		}
+		
 		return thesisServiceImpl.selectBythesisId(id,user);
-		
 	}
 	/**
 	 * 查询某一具体论点的简介与题目
@@ -70,18 +81,12 @@ public class ThesisController {
 	 */
 	@RequestMapping("/insertthesis")
 	public void insertthesis(@RequestBody Thesis thesis,HttpServletRequest request) {
-		/*Thesis thesis = new Thesis();
-		thesis.settDescription(request.getParameter("title"));
-		thesis.settState(request.getParameter("content"));
-		User user = new User();
-		
-		thesis.setTfromuid(user.getId());*/
 		
 		
 		thesisServiceImpl.insert(thesis);
 	}
 	/**
-	 * 关注辩题
+	 * 关注与取消论点
 	 */
 	@RequestMapping("/thesisAttention")
 	public void thesisAttention(HttpServletRequest request,int thesisid) {
@@ -92,19 +97,6 @@ public class ThesisController {
 			thesisServiceImpl.insertAttention(thesisid, user);
 		}
 	}
-	/**
-	 * 取消关注辩题
-	 */
-	@RequestMapping("/giveupAttention")
-	public void giveupAttention(HttpServletRequest request,int thesisid) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		Thesis thesis = thesisServiceImpl.selectOne(thesisid);
-		if(thesis != null && user !=null) {
-			thesisServiceImpl.deleteAttention(thesisid, user);
-		}
-	}
-	
 	
 	/**
 	 * 提交完善版本

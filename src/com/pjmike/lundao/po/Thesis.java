@@ -37,7 +37,22 @@ public class Thesis {
 
     private String tstate;
     
-    private boolean isAttention = false;
+    public String getTdescription() {
+		return tdescription;
+	}
+
+	public void setTdescription(String tdescription) {
+		this.tdescription = tdescription;
+	}
+
+	public String getTstate() {
+		return tstate;
+	}
+
+	public void setTstate(String tstate) {
+		this.tstate = tstate;
+	}
+	private boolean isAttention = false;
     
     public Integer getTfromuid() {
     	return tfromuid;
@@ -47,16 +62,18 @@ public class Thesis {
     	this.tfromuid = tfromuid;
     }
     private boolean isLike = false;
-    public boolean getAttention2() {
-		return isAttention;
-	}
-
-	public void setAttention2(boolean isAttention) {
-		this.isAttention = isAttention;
-	}
+ 
 
 	public boolean isLike() {
 		return isLike;
+	}
+
+	public boolean isAttention() {
+		return isAttention;
+	}
+
+	public void setAttention(boolean isAttention) {
+		this.isAttention = isAttention;
 	}
 
 	public void setLike(boolean isLike) {

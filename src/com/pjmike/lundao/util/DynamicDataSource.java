@@ -1,4 +1,4 @@
-package com.pjmike.lundao.tool;
+package com.pjmike.lundao.util;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

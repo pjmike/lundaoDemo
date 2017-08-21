@@ -32,11 +32,11 @@ public interface DebateService {
    //更新点赞量
    public int updateClick(Debatetopic record);
    //点赞操作
-   public int insetLike(Integer topicid,User user);
+   public int insetLike(Integer topicid,int id);
    //取消点赞
-   public int giveupLike(Integer topicid,User user);
+   public int giveupLike(Integer topicid,int id);
    //关注辩题
-   int insertAttention(Integer topicid,User user);
+   int insertAttention(Integer topicid,int id);
    //取消点赞
-   int deleteAttention(Integer topicid,User user);
+   int deleteAttention(Integer topicid,int id);
 }

@@ -2,9 +2,12 @@ package com.pjmike.lundao.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,22 +21,29 @@ import com.pjmike.lundao.po.Debatetopic;
 import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
+import com.pjmike.lundao.service.util.JsonRead;
+import com.pjmike.lundao.util.Producer;
+import com.rabbitmq.tools.json.JSONReader;
+
+import net.sf.json.JSONObject;
 
 
 @Controller
 public class DebateController {
 	@Autowired
 	private DebateServiceImpl debateServiceImpl;
-	
+	@Autowired
+	private Producer producer;
 	/*
 	 * 按主键查找辩题，返回json辩题
 	 */
 	@RequestMapping("/debateFindbyId")
-	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request, int id,Debatetopicextend debatetopic) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		debatetopic = debateServiceImpl.selectByPrimaryKey(id,user);
-		session.setAttribute("debatetopic", debatetopic);
+	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int userid = json.getInt("id");
+		int topicId = json.getInt("topicId");
+		User user = new User();
+		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
 		return debatetopic;
 	}
 	/*
@@ -42,12 +52,22 @@ public class DebateController {
 	 */
 	
 	@RequestMapping("/debateby")
-	public  @ResponseBody List<Debatetopic> debateby(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+	public  @ResponseBody List<Debatetopic> debateby(HttpServletRequest request) throws IOException {
+		User user =null;
+		String idd = request.getParameter("id");
+		int id = 0;
+		producer.sendmessage("hello");
+		
+		if (idd !=null) {
+			id = Integer.parseInt(idd);
+		}
+		if(id>0) {
+			user = new User();
+			user.setId(id);
+		}
 		List<Debatetopic> DebatetopicList = new ArrayList<>();
 		
-			DebatetopicList = debateServiceImpl.selectListby(user);
+		DebatetopicList = debateServiceImpl.selectListby(user);
 		return DebatetopicList;
 	}
 	
@@ -57,81 +77,36 @@ public class DebateController {
 	 *点赞操作
 	 */
 	@RequestMapping("/updateVote")
-	public void updateVote(HttpServletRequest request, int topicid) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		//首先查找该辩题
-		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicid,user);
-		if(debatetopic != null && user !=null) {
-			int vote = debatetopic.getLike();
-			debatetopic.setLike(vote+1);
-			debateServiceImpl.insetLike(topicid, user);
+	public void updateVote(HttpServletRequest request, int topicid) throws UnsupportedEncodingException, IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int userid = json.getInt("id");
+		int topicId = json.getInt("topicId");
+		boolean statusLike = json.getBoolean("islike");
+		if(statusLike) {
+			debateServiceImpl.insetLike(topicid, userid);
+			
+		} else {
+			debateServiceImpl.giveupLike(topicid, userid);
 		}
+		
 	}
-	/*
-	 * 取消点赞
-	 */
-	@RequestMapping("/deleteLike")
-	public void deleteLike(HttpServletRequest request, int topicid) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		//首先查找该辩题
-		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicid,user);
-		if(debatetopic != null && user !=null) {
-			int vote = debatetopic.getLike();
-			debatetopic.setLike(vote-1);
-			debateServiceImpl.giveupLike(topicid, user);
-		}
-	}
-	/**
-	 * 
-	 * 更新辩题的点击量
-	 */
-	@RequestMapping("/updateClick")
-	public void updateClick(HttpServletRequest request,int topicId) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		//首先查找该辩题
-		Debatetopic debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
-		if(debatetopic != null) {
-			int vote = debatetopic.getClickcount();
-			debatetopic.setAttention(vote+1);
-			debateServiceImpl.updateClick(debatetopic);
-		}
-	}
+
 	/**
 	 * 点击关注
+	 * @throws IOException 
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("updateAttention")
-	public void updateAttention(HttpServletRequest request,int topicId) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		//首先查找该辩题
-		Debatetopic debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
-		if(debatetopic != null && user !=null) {
-			
-			debateServiceImpl.insertAttention(topicId, user);
+	public void updateAttention(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		
+		int userid = json.getInt("id");
+		int topicId = json.getInt("topicId");
+		boolean isAttention = json.getBoolean("isAttention");
+		if(isAttention) {
+			debateServiceImpl.insertAttention(topicId, userid);
+		} else {
+			debateServiceImpl.deleteAttention(topicId, userid);
 		}
-	}
-	/**
-	 * 取消关注
-	 */
-	@RequestMapping("deleteAttention")
-	public void deleteAttention(HttpServletRequest request,int topicId) {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		//首先查找该辩题
-		Debatetopic debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
-		if(debatetopic != null && user !=null) {
-			
-			debateServiceImpl.deleteAttention(topicId, user);
-		}
-	}
-	/**
-	 * test
-	 */
-	@RequestMapping("/testController")
-	public void test(HttpServletRequest request) {
-		System.out.println("get it");
 	}
 }

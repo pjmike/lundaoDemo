@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-import com.pjmike.lundao.tool.DataSourceContextHolder;
+import com.pjmike.lundao.util.DataSourceContextHolder;
 
 @Aspect
 @Component

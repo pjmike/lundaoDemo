@@ -1,4 +1,4 @@
-package com.pjmike.lundao.test;
+/*package com.pjmike.lundao.test;
 
 import static org.junit.Assert.*;
 
@@ -29,4 +29,4 @@ public class Test {
 		    user.setId(12);
 		    messageProducerServiceImp.sendMessage(user);
 	}
-}
+}*/

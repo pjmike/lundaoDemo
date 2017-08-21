@@ -47,5 +47,13 @@ public class ReplyServiceImpl implements ReplyService {
 	public int Islike(User user, int replyid) {
 		return replyMapper.Islike(user.getId(), replyid);
 	}
+	/**
+	 * 发表回复
+	 */
+	@Override
+	public int reply(Reply reply) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

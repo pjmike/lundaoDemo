@@ -41,4 +41,7 @@ public interface ReplyMapper {
     int updateByPrimaryKeyWithBLOBs(Reply record);
 
     int updateByPrimaryKey(Reply record);
+    
+    //发起回复
+    int reply(Reply reply);
 }

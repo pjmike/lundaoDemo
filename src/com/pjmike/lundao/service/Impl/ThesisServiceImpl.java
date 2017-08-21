@@ -341,5 +341,19 @@ public class ThesisServiceImpl implements ThesisService {
 	public List<ThesisSupplement> selectAllSupplement(Supplement supplement) {
 		return thesisMapper.selectAllSupplement(supplement);
 	}
+	/**
+	 * 收藏论点
+	 */
+	@Override
+	public int collectionThesis(Integer thesisId, int id) {
+		
+		return thesisMapper.collectionThesis(id, thesisId);
+	}
+
+
+	@Override
+	public List<Thesis> selectAllCollectionThesis(int id) {
+		return thesisMapper.selectAllThesisAttentioned(id);
+	}
 
 }

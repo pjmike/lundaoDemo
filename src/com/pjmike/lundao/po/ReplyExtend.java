@@ -4,6 +4,27 @@ import java.util.List;
 
 public class ReplyExtend extends Reply{
 	private String nickname ="";
+	
+	private boolean isLeftScroll=false;
+	
+	private boolean isRightScroll=false;
+	
+	public boolean isLeftScroll() {
+		return isLeftScroll;
+	}
+
+	public void setLeftScroll(boolean isLeftScroll) {
+		this.isLeftScroll = isLeftScroll;
+	}
+
+	public boolean RightScroll() {
+		return isRightScroll;
+	}
+
+	public void setRightScroll(boolean isRightScroll) {
+		this.isRightScroll = isRightScroll;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}

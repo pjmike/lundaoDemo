@@ -36,7 +36,7 @@ public class DebateServiceImpl implements DebateService{
 		if(num >0) {
 			debatetopicextend.setLike(num);
 		}
-		if (user!=null) {
+		if (user!= null) {
 			int status = debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid());
 			int attention = debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
 			int attentionNum = debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid());
@@ -73,9 +73,9 @@ public class DebateServiceImpl implements DebateService{
 					t.setLike(false);
 				} 
 				if(attention>0) {
-					t.setAttention2(true);
+					t.setAttention(true);
 				} else {
-					t.setAttention2(false);
+					t.setAttention(false);
 				}
 			}
 		}
@@ -147,9 +147,6 @@ public class DebateServiceImpl implements DebateService{
 		 return debatelist;
 	}
 
-	
-	
-	
 	//查看全部辩题不含论点
 	@Override
 	public List<Debatetopic> selectListby(User user) {
@@ -257,24 +254,22 @@ public class DebateServiceImpl implements DebateService{
 	}
 
 	@Override
-	public int insetLike(Integer topicid, User user) {
+	public int insetLike(Integer topicid, int id) {
 		
-		return debatetopicMapper.insetLike(user.getId(),topicid);
+		return debatetopicMapper.insetLike(id,topicid);
 	}
 
 	@Override
-	public int giveupLike(Integer topicid, User user) {
-		return debatetopicMapper.giveupLike(user.getId(), topicid);
+	public int giveupLike(Integer topicid, int id) {
+		return debatetopicMapper.giveupLike(id, topicid);
+	}
+	@Override
+	public int insertAttention(Integer topicid, int id) {
+		return debatetopicMapper.insertAttention(id, topicid);
 	}
 
 	@Override
-	public int insertAttention(Integer topicid, User user) {
-		return debatetopicMapper.insertAttention(user.getId(), topicid);
+	public int deleteAttention(Integer topicid, int id) {
+		return debatetopicMapper.deleteAttention(id, topicid);
 	}
-
-	@Override
-	public int deleteAttention(Integer topicid, User user) {
-		return debatetopicMapper.deleteAttention(user.getId(), topicid);
-	}
-
 }

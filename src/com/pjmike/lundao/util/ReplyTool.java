@@ -1,4 +1,4 @@
-package com.pjmike.lundao.tool;
+package com.pjmike.lundao.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +52,6 @@ public class ReplyTool {
 						maxReply.setNextReply(new ArrayList<>());
 					}
 					maxReply.getNextReply().add(r); 
-					
-					
 					replyList.add(r);
 					break;
 					}

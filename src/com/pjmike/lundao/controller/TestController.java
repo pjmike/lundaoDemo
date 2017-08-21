@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pjmike.lundao.po.User;
-import com.pjmike.lundao.tool.Producer;
+import com.pjmike.lundao.util.Producer;
 @Controller
 public class TestController {
 	@Autowired
@@ -20,5 +20,6 @@ public class TestController {
 		    user.setPassword("123456");
 		    user.setId(12);
 		    producer.sendmessage(user);
+		    
 	}
 }

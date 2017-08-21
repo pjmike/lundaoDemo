@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
+import com.pjmike.lundao.util.Producer;
 
 import net.sf.json.JSONObject;
 
@@ -21,6 +22,8 @@ import net.sf.json.JSONObject;
 public class AskquesController {
 	@Autowired
 	AskquesServiceImpl askquesServiceImpl;
+	@Autowired
+	Producer producer;
 	/**
 	 * 
 	 * @param request
@@ -29,21 +32,13 @@ public class AskquesController {
 	 */
 	@RequestMapping("/insertAskquestion")
 	public void insertAskquestion(@RequestBody Askquestion askquestion,HttpServletRequest request) throws UnsupportedEncodingException {
-		//提问及异议发过来的是什么
-		/*HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
 		
-		askquestion.setFromUid(user.getId());*/
-		
-		//使用Java解析json数据
-		//解码
 		String str = URLDecoder.decode(request.getParameter("object"),"UTF-8"); 
 		JSONObject jb=new JSONObject();
 		String content = jb.fromObject(str).getString("content");
+
 		
-
-
-
+		producer.sendmessage(askquestion);
 
 		askquesServiceImpl.insertaskquestion(askquestion);
 	}

@@ -12,5 +12,4 @@ public class Debatetopicextend extends Debatetopic{
 	public void setThesisList(List<Thesis> thesisList) {
 		this.thesisList = thesisList;
 	}
-	
 }

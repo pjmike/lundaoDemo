@@ -25,6 +25,7 @@ public interface ThesisMapper {
     Thesis selectOne(int id);
     ThesisExtend selectBythesisId (int id);
     //返回一个论点的关注数
+    
     int attentionNum(int id);
     //返回一个论点的点赞数、
     int likeNumber(int id);
@@ -44,6 +45,10 @@ public interface ThesisMapper {
     //关注辩题
     int insertAttention(@Param("user_id")int id,@Param("debate_id")int thesisid);
     
+    //收藏论点
+    int collectionThesis(@Param("user_id")int id,@Param("debate_id")int thesisid);
     //返回所有的完善版本
     List<ThesisSupplement> selectAllSupplement(Supplement supplement);
+    
+    List<Thesis> selectAllCollectionThesis(int id);
 }

@@ -15,7 +15,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.2.xsd 
         http://www.springframework.org/schema/rabbit
-                http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+        http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
       
       <!-- 连接服务配置 -->
       

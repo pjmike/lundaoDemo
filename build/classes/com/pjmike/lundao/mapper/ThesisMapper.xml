@@ -110,15 +110,6 @@
 	 		a.like,
 	 		a.attention,
 	 		a.publishTime
-	 	<!-- 	r.id,
-	 		r.comment_id,
-	 		r.reply_id,
-	 		r.from_uid,
-	 		r.to_uid,
-	 		r.r_type,
-	 		r.r_like,
-	 		r.r_publishTime,
-	 		r.r_contentTime -->
  	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  <!-- left join  reply r on
  	 r.comment_id = a.id  -->where t.thesisId=#{id}  order by thesisId  limit 10
    </select>
@@ -166,10 +157,20 @@
   <update id="giveupLike">
   	update thesisvote set t_status = 0 where t_uid =#{t_uid} and t_thesisid =#{t_thesisid}
   </update>
-  <!-- 关注辩题 -->
+  <!-- 关注论点 -->
   <insert id="insertAttention">
   	insert into thesisAttention(thesis_id,user_id,status) values(#{thesis_id},#{user_id},1)
   </insert>
+  <!-- 收藏论点 -->
+  <insert id="collectionThesis">
+  	insert into collectionThesis(thesis_id,user_id,status) values(#{thesis_id},#{user_id},1)
+  </insert>
+  
+  <!-- 返回所有收藏的论点 -->
+  <select id="selectAllCollectionThesis" parameterType="int" resultMap="ResultOne">
+  	select t.thesisId,t.t_description,t.t_state from thesis t left join collectionThesis c on c.thesis_id = t.thesisId
+  	where c.userid = #{id}
+  </select>
   <!--取消关注辩题 -->
   <update id="deleteAttention">
   	update thesisAttention set status = 0 where user_id =#{user_id} and thesis_id =#{thesis_id}

@@ -19,7 +19,8 @@ public interface ThesisService {
     int insertAttention(Integer thesisId,User user);
     //取消点赞
     int deleteAttention(Integer thesisId,User user);
-    
+    //收藏论点
+    int collectionThesis(Integer thesisId,int id);
     /**
 	 * 提交论点完善版本
 	 * @param supplement
@@ -30,4 +31,5 @@ public interface ThesisService {
 	 //返回所有的完善版本
     List<ThesisSupplement> selectAllSupplement(Supplement supplement);
     
+    List<Thesis> selectAllCollectionThesis(int id);
 }

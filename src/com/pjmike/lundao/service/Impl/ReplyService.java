@@ -16,4 +16,6 @@ public interface ReplyService {
     int insetLike(User user,int replyid);
     //取消点赞
     int giveupLike(User user,int replyid);
+    //发起回复
+    int reply(Reply reply);
 }
