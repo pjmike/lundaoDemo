@@ -7,7 +7,7 @@
     <result column="from_uid" property="fromUid" jdbcType="INTEGER" />
     <result column="describtion" property="describtion" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
     <result column="view" property="view" jdbcType="INTEGER" />
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="attention" property="attention" jdbcType="INTEGER" />
@@ -25,6 +25,19 @@
  		      <result column="type" property="type" jdbcType="VARCHAR" />
  		      <result column="view" property="view" jdbcType="INTEGER" />
  	</resultMap>
+ 	
+ 	<!-- 返回某一个具体的提问及异议 -->
+ 	<resultMap type="com.pjmike.lundao.po.AskquestionExtend" id="OneAskqyestion">
+ 		 <id column="id" property="id" jdbcType="INTEGER" />
+ 		   <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+ 		     <result column="content" property="content" jdbcType="VARCHAR" />
+ 		      <result column="type" property="type" jdbcType="INTEGER" />
+ 		      <result column="state" property="state"/>
+ 		      <result column="nickname" property="nickname"/>
+ 		      <result column="Icon" property="Icon"/>
+ 		      <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP" />
+ 	</resultMap>
+ 	
 <!-- 发起提问或者异议 -->
 	<insert id="insertaskquestion" parameterType="com.pjmike.lundao.po.Askquestion">
 		insert into askquestion(thesis_id,from_uid,describtion,content,type) values(#{thesis_id},#{from_uid},#{describtion},#{content},#{type})
@@ -41,6 +54,11 @@
   <!-- 判断一个用户是否具体点赞过某个提问 -->
   <select id="Islike" parameterType="com.pjmike.lundao.po.comvote" resultType="int">
   	select a_status from  comvote where a_uid =#{a_uid} and a_comment_id =#{a_comment_id}
+  </select>
+  <!-- 查找某一具体提问或者异议 -->
+  <select id="selectOneAskquestion" parameterType="int" resultMap="OneAskqyestion">
+  	select a.id,a.type,a.state,a.publishTime,a.describtion,a.content,u.nickname,u.Icon
+  	 from askquestion a left join user u on u.id = a.from_uid where id =#{id}
   </select>
   
   <!--设置点赞-->

@@ -1,6 +1,7 @@
 package com.pjmike.lundao.mapper;
 
 import com.pjmike.lundao.po.Askquestion;
+import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.comvote;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface AskquestionMapper {
 
     int updateByPrimaryKeySelective(Askquestion record);
 
-    
+    AskquestionExtend selectOneAskquestion(int id);
     int updateByPrimaryKey(Askquestion record);
     
     List<Askquestion> selecrAllAttentionAskqustion(int id);
