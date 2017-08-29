@@ -9,8 +9,6 @@ import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.util.Producer;
 @Controller
 public class TestController {
-	@Autowired
-	private Producer producer;
 	@RequestMapping("/sendRabbitMessage")
 	@ResponseBody
 	public void test() {
@@ -19,7 +17,6 @@ public class TestController {
 		    user.setAge(25);
 		    user.setPassword("123456");
 		    user.setId(12);
-		    producer.sendmessage(user);
 		    
 	}
 }

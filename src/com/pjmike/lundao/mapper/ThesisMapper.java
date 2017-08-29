@@ -2,10 +2,8 @@ package com.pjmike.lundao.mapper;
 
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
-import com.pjmike.lundao.po.ThesisExample;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
-import com.pjmike.lundao.po.User;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

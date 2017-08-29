@@ -39,7 +39,7 @@ public class ThesisServiceImpl2 implements ThesisService {
 	private static int count = 1;
 	private static int number = 0;
 	@Override
-	public ThesisExtend selectBythesisId(int id,User user) throws Exception,ClassCastException{
+	public ThesisExtend selectBythesisId(int id,User user){
 		ThesisExtend thesisextend = thesisMapper.selectBythesisId(id);
 		//以下为评论列表
 		List<AskquestionExtend> askquestions = thesisextend.getAskquestions();
@@ -69,7 +69,7 @@ public class ThesisServiceImpl2 implements ThesisService {
 				} 
 				int isAttention = askquestionMapper.IsAttention(user.getId(),as.getId());
 				if(isAttention>0) {
-					as.setAttention2(true);
+					as.setAttention(true);
 				}
 			}
 			
@@ -173,7 +173,7 @@ public class ThesisServiceImpl2 implements ThesisService {
 		for(AskquestionExtend ask:testask) {
 			List<ReplyExtend> replylist = ask.getReplies();
 			 max = findNiceReply(replylist);
-			ask.setExtend(max);
+			ask.setReplyextend(max);
 			replylist.remove(number);
 			if((replylist.size()-count)>0) {
 				max.setRightScroll(true);
@@ -389,6 +389,13 @@ public class ThesisServiceImpl2 implements ThesisService {
 	@Override
 	public List<Thesis> selectAllCollectionThesis(int id) {
 		return thesisMapper.selectAllThesisAttentioned(id);
+	}
+
+
+	@Override
+	public AskquestionExtend selectReply(ReplyExtend it) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

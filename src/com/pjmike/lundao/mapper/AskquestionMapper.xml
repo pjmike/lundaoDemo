@@ -52,13 +52,13 @@
   	(select ask_id from askAttention where user_id =#{id})
   </select>
   <!-- 判断一个用户是否具体点赞过某个提问 -->
-  <select id="Islike" parameterType="com.pjmike.lundao.po.comvote" resultType="int">
+  <select id="Islike" parameterType="com.pjmike.lundao.po.comvote" resultType="java.lang.Integer">
   	select a_status from  comvote where a_uid =#{a_uid} and a_comment_id =#{a_comment_id}
   </select>
   <!-- 查找某一具体提问或者异议 -->
   <select id="selectOneAskquestion" parameterType="int" resultMap="OneAskqyestion">
   	select a.id,a.type,a.state,a.publishTime,a.describtion,a.content,u.nickname,u.Icon
-  	 from askquestion a left join user u on u.id = a.from_uid where id =#{id}
+  	 from askquestion a left join user u on u.id = a.from_uid where a.id =#{id}
   </select>
   
   <!--设置点赞-->
@@ -82,7 +82,7 @@
   </update>
 	
   <!-- 判断一个用户是否关注某个提问 -->
-  <select id="IsAttention" parameterType="com.pjmike.lundao.po.comvote" resultType="int">
+  <select id="IsAttention" parameterType="com.pjmike.lundao.po.comvote" resultType="java.lang.Integer">
   	select status from  askquAttention where user_id =#{user_id} and ask_id =#{ask_id}
   </select>
 </mapper>

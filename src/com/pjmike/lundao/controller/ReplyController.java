@@ -12,18 +12,13 @@ import com.pjmike.lundao.service.Impl.ReplyServiceImpl;
 import com.pjmike.lundao.util.Producer;
 
 @Controller
+@RequestMapping("/reply")
 public class ReplyController {
 	@Autowired
 	ReplyServiceImpl replyServiceImpl;
 	
-	@Autowired
-	Producer producer;
-	
-	
-	@RequestMapping("/reply")
+	@RequestMapping("/insertreply")
 	public void reply(@RequestBody Reply reply,HttpServletRequest request) {
-		
-		
 		replyServiceImpl.reply(reply);
 		
 	}

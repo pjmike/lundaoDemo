@@ -29,10 +29,10 @@ public interface AskquestionMapper {
     int likeNumber(int id);
     
     //判断是否点赞
-    int Islike(comvote comvote);
+    Integer Islike(comvote comvote);
     
     //判断是否关注
-    int IsAttention(@Param("user_id")int id,@Param("ask_id")int askid);
+    Integer IsAttention(@Param("user_id")int id,@Param("ask_id")int askid);
     //点赞
     int insetLike(comvote comvote);
     //取消点赞

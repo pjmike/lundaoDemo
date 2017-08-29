@@ -1,6 +1,8 @@
 package com.pjmike.lundao.service.Impl;
 
 import com.pjmike.lundao.po.Askquestion;
+import com.pjmike.lundao.po.AskquestionExtend;
+import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.comvote;
 
@@ -25,4 +27,6 @@ public interface AskquesService {
 	    
 	    //判断是否关注
 	    int IsAttention(User user,int askid);
+	    
+	    AskquestionExtend findReply(ReplyExtend it,int id);
 }

@@ -27,7 +27,7 @@ import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.comvote;
 /**
  * @author pjmike
- *
+ *	
  */
 @Service
 public class ThesisServiceImpl3 implements ThesisService {
@@ -43,22 +43,21 @@ public class ThesisServiceImpl3 implements ThesisService {
 	private static int number = 0;
 	
 	
-	private static List<Integer> listId = new ArrayList<>();
+	
+	//向右滑
 	@Override
-	public ThesisExtend selectReply(ReplyExtend it,int id){
-		ThesisExtend thesisextend = thesisMapper.selectBythesisId(id);
-		
+	public AskquestionExtend selectReply(ReplyExtend it){
 		
 		List<ReplyExtend> replys = replyMapper.select(it.getCommentId());
 		List<ReplyExtend> creplylist = new ArrayList<ReplyExtend>();
 			
 		List<ReplyExtend> rreplylist = new ArrayList<>();
+		
 		if (replys!=null) {
 				for (ReplyExtend r : replys) {
 					if (r.getReplyId()==0) {
 						//找出对评论的所有回复
 						rreplylist.add(r);
-						
 						creplylist.add(r);
 					} else {
 						//判断对评论的回复是否为空，为空则无子回复
@@ -85,74 +84,92 @@ public class ThesisServiceImpl3 implements ThesisService {
 		AskquestionExtend ask = askquestionMapper.selectOneAskquestion(it.getCommentId());
 		ask.setReplies(rreplylist);
 		
-		if (it.RightScroll()) {
 			ReplyExtend max = new ReplyExtend();
 			List<ReplyExtend> replylist = replyMapper.select(it.getCommentId());
-			LinkedList<ReplyExtend> linkedReplylist = (LinkedList<ReplyExtend>) replyMapper.select(it.getCommentId());
-			listId.add(it.getId());
-			if (it.getReplyId() > 0) {
-
-				for (int i = 0; i < listId.size(); i++) {
-					linkedReplylist.remove(i);
+			
+			List<ReplyExtend> list = replyMapper.selectAleadyClick();
+			for(ReplyExtend re:list) {
+				if(re.getId() == it.getId()) {
+					break;
+				} else{
+					replyMapper.storeAlreadyClick(it);
+					break;
 				}
-				max = findNiceReply(linkedReplylist);
+			}
+			
+			
+			if (it.getReplyId() == 0) {
+				for(int i=0;i<rreplylist.size();i++) {
+					for (int j = 0; j < list.size(); j++) {
+						if (rreplylist.get(i).getId() == list.get(j).getId()) {
+							rreplylist.remove(i);
+						} 
+					}
+				}
+				
+				max = findNiceReply(rreplylist);
 				max.setLeftScroll(true);
-
-				if ((replylist.size() - listId.size()) > 0) {
+				if(rreplylist.size()>0) {
 					max.setRightScroll(true);
 				}
 				Callback(max, ask);
+				
+				max.setNextReply(null);
+				
+				ask.setReplyextend(max);
+				
 			} else {
-
-			}
-			for (int i = 0; i < listId.size(); i++) {
-				linkedReplylist.remove(i);
-			}
-			max = findNiceReply(replylist);
-			max.setLeftScroll(true);
-			ask.setExtend(max);
-			if ((replylist.size() - listId.size()) > 0) {
-				max.setRightScroll(true);
-			}
-			Callback(max, ask);
-		 } else {
-			 	ReplyExtend max = new ReplyExtend();
-				List<ReplyExtend> replylist = replyMapper.select(it.getCommentId());
-				LinkedList<ReplyExtend> linkedReplylist = (LinkedList<ReplyExtend>) replyMapper.select(it.getCommentId());
-				if(it.getReplyId()==0) {
-					List<ReplyExtend> temp = new ArrayList<>();
-					for(int i=0;i<listId.size();i++) {
-						temp.add(replylist.get(i));
-					}
-						List<ReplyExtend> listtemp = new ArrayList<>();
-						for(ReplyExtend re:temp) {
-							if(re.getReplyId() == 0) {
-								listtemp.add(re);
+						for(int i=0;i<rreplylist.size();i++) {
+							for (int j = 0; j < list.size(); j++) {
+								if (rreplylist.get(i).getId() == list.get(j).getId()) {
+									rreplylist.remove(i);
+								} 
 							}
 						}
-						max = findNiceReply(listtemp);
-					Callback(max,ask);
-			} else {
-				List<ReplyExtend> temp = new ArrayList<>();
-				for(int i=0;i<listId.size();i++) {
-					temp.add(replylist.get(i));
-				}
+						
+						max = findNiceReply(rreplylist);
+						max.setLeftScroll(true);
+						/*if ((rreplylist.size() - listId.size()) > 0) {
+							max.setRightScroll(true);
+						}*/
+						
+						Callback(max, ask);
+						max.setNextReply(null);
+						ask.setReplyextend(max);
 			}
-		 }
+			ask.setReplies(null);
+			return ask;
 	}
 			
+	
+	
 	public void Callback(ReplyExtend reply,AskquestionExtend ask) {
+		List<ReplyExtend> list = replyMapper.selectAleadyClick();
 		if ( reply.getNextReply()!=null ) {
+			List<ReplyExtend> replytemp = reply.getNextReply();
+			for(int i=0;i<replytemp.size();i++) {
+				for (int j = 0; j < list.size(); j++) {
+					if (replytemp.get(0).getId() == list.get(j).getId()) {
+						replytemp.remove(i);
+					} 
+				}
+			}
 			
 			reply.setReplyExtend(findFirstReply(reply.getNextReply(),ask,reply));
-			if(reply.getNextReply().size()-count>0) {
-				reply.getReplyExtend().setRightScroll(true);
+			if (reply.getReplyId() == 0) {
+				if (reply.getNextReply().size() > 1) {
+					reply.getReplyExtend().setRightScroll(true);
+				} 
 			}
+			
+			if(replytemp.size()>1) {
+				reply.getReplyExtend().setRightScroll(true);
+				reply.getReplyExtend().setLeftScroll(true);
+			}
+			
 			Callback(reply.getReplyExtend(),ask);
 		}
 	}
-	
-	
 //	 查询出一个辩题下所有评论
 	 
 	 public void getCommentList(int id) {
@@ -241,7 +258,7 @@ public class ThesisServiceImpl3 implements ThesisService {
 		ReplyExtend re = null;
 		if (replys.size()>0) {
 			int max = replys.get(0).getrLike();
-			re = new ReplyExtend();
+			re = replys.get(0);
 			for (int i = 1; i < replys.size(); i++) {
 				int temp = replys.get(i).getrLike();
 				if (max < temp) {
@@ -267,7 +284,7 @@ public class ThesisServiceImpl3 implements ThesisService {
 		ReplyExtend maxReply = list.get(0);
 		for(int i=1;i<list.size();i++) {
 			long temp = Time(list.get(i));
-			if(temp>maxtime) {
+			if(temp<maxtime) {
 				maxtime = temp;
 				maxReply = list.get(i);
 			}
@@ -345,6 +362,12 @@ public class ThesisServiceImpl3 implements ThesisService {
 	@Override
 	public List<Thesis> selectAllCollectionThesis(int id) {
 		return thesisMapper.selectAllThesisAttentioned(id);
+	}
+
+	@Override
+	public ThesisExtend selectBythesisId(int id, User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

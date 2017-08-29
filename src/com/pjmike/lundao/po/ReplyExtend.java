@@ -2,6 +2,9 @@ package com.pjmike.lundao.po;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ReplyExtend extends Reply{
 	private String nickname ="";
 	
@@ -9,6 +12,7 @@ public class ReplyExtend extends Reply{
 	
 	private boolean isRightScroll=false;
 	
+	@JsonGetter("isLeftScroll")
 	public boolean isLeftScroll() {
 		return isLeftScroll;
 	}
@@ -16,7 +20,9 @@ public class ReplyExtend extends Reply{
 	public void setLeftScroll(boolean isLeftScroll) {
 		this.isLeftScroll = isLeftScroll;
 	}
-
+	
+	
+	@JsonGetter("isRightScroll")
 	public boolean RightScroll() {
 		return isRightScroll;
 	}
@@ -24,7 +30,7 @@ public class ReplyExtend extends Reply{
 	public void setRightScroll(boolean isRightScroll) {
 		this.isRightScroll = isRightScroll;
 	}
-
+	
 	public String getNickname() {
 		return nickname;
 	}
@@ -32,7 +38,7 @@ public class ReplyExtend extends Reply{
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-
+	@JsonIgnore
 	private List<ReplyExtend> nextReply;
 	private ReplyExtend replyExtend;
 	public ReplyExtend getReplyExtend() {

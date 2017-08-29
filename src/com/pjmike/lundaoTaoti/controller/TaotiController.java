@@ -1,5 +1,6 @@
 package com.pjmike.lundaoTaoti.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pjmike.lundao.service.util.JsonRead;
 import com.pjmike.lundaoTaoti.po.Taoti;
 import com.pjmike.lundaoTaoti.service.Impl.TaotiServiceImpl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
+@RequestMapping("/taoti")
 public class TaotiController {
 	@Autowired
 	TaotiServiceImpl taotiServiceImpl;
@@ -37,12 +40,12 @@ public class TaotiController {
 	 * 查询出所有淘题信息
 	 * @param request
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping("allTaoti")
 	@ResponseBody
-	public List<Taoti> allTaoti(HttpServletRequest request) {
-		@SuppressWarnings("static-access")
-		JSONObject jsonObject = new JSONObject().fromObject(request.getAttribute("object"));
+	public List<Taoti> allTaoti(HttpServletRequest request) throws IOException {
+		JSONObject jsonObject = JsonRead.receivePost(request);
 		String nickname = jsonObject.getString("nickname");
 		
 		return taotiServiceImpl.selectAllTaoti(nickname);
@@ -51,11 +54,11 @@ public class TaotiController {
 	/**
 	 * 增加或减少淘题的期望值
 	 * @param request
+	 * @throws IOException 
 	 */
 	@RequestMapping("upAndDownCommentNum")
-	public void upAndDownCommentNum(HttpServletRequest request) {
-		@SuppressWarnings("static-access")
-		JSONObject jb = new JSONObject().fromObject(request.getAttribute("Taoti"));
+	public void upAndDownCommentNum(HttpServletRequest request) throws IOException {
+		JSONObject jb = JsonRead.receivePost(request);
 		
 		Taoti taoti = new Taoti();
 		taotiServiceImpl.upAndDownCommentNum(taoti);
@@ -64,11 +67,11 @@ public class TaotiController {
 	/**
 	 * 发起一个辩题
 	 * @param request
+	 * @throws IOException 
 	 */
 	@RequestMapping("insertTheis")
-	public void insertTheis(HttpServletRequest request) {
-		@SuppressWarnings("static-access")
-		JSONObject jb = new JSONObject().fromObject(request.getAttribute("Taoti"));
+	public void insertTheis(HttpServletRequest request) throws IOException {
+		JSONObject jb = JsonRead.receivePost(request);
 		String nickname = jb.getString("nickname");
 		String Icon = jb.getString("Icon");
 		String title = jb.getString("describtion");

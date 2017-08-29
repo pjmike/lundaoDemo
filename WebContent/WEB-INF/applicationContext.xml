@@ -45,8 +45,6 @@
          	<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>s       	
          </bean> -->
          
-         
-         
          <!-- 数据源2 -->
          
          <bean id="dataSource2" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
@@ -59,7 +57,7 @@
          
          
          <!-- 数据库连接池 -->
-        <bean id="dynamicDataSorce" class="com.pjmike.lundao.tool.DynamicDataSource">
+        <bean id="dynamicDataSorce" class="com.pjmike.lundao.util.DynamicDataSource">
         	<property name="defaultTargetDataSource" ref="dataSource"></property>
         	<property name="targetDataSources">
         		<map key-type="java.lang.String">
@@ -81,6 +79,10 @@
         	<property name="dataSource" ref="dynamicDataSorce"></property>
         </bean>
         
+         	<!-- 使用annotation定义事务 -->
+         	<tx:annotation-driven transaction-manager="transactionManager"/>
+         	
+         	
         <!-- 处理websocket配置 -->    
         <bean id="websocket" class="com.pjmike.lundao.websocket.WebSocketHandler"/>
             <websocket:handlers>
@@ -90,8 +92,6 @@
             </websocket:handshake-interceptors> 
            </websocket:handlers>
            
-         	<!-- 使用annotation定义事务 -->
-         	<tx:annotation-driven transaction-manager="transactionManager"/>
             <!-- 自动扫描出mapper接口 -->
          <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
          	<property name="basePackage" value="com.pjmike.lundao.mapper,com.pjmike.lundaoTaoti.mapper"></property>

@@ -25,6 +25,7 @@ import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.comvote;
+
 /**
  * @author pjmike
  *
@@ -44,9 +45,11 @@ public class ThesisServiceImpl4 implements ThesisService {
 	
 	
 	private static List<Integer> listId = new ArrayList<>();
+	private static List<ReplyExtend> listReplys = new ArrayList<>();
+	
+	
 	@Override
-	public ThesisExtend selectReply(ReplyExtend it,int id){
-		ThesisExtend thesisextend = thesisMapper.selectBythesisId(id);
+	public AskquestionExtend selectReply(ReplyExtend it){
 		
 		
 		List<ReplyExtend> replys = replyMapper.select(it.getCommentId());
@@ -84,52 +87,65 @@ public class ThesisServiceImpl4 implements ThesisService {
 		
 		AskquestionExtend ask = askquestionMapper.selectOneAskquestion(it.getCommentId());
 		ask.setReplies(rreplylist);
+		listReplys.add(it);
+		
+		
 		
 		ReplyExtend max = new ReplyExtend();
 		List<ReplyExtend> replylist =  replyMapper.select(it.getCommentId());
 		LinkedList<ReplyExtend> linkedReplylist = (LinkedList<ReplyExtend>) replyMapper.select(it.getCommentId());
 		
-		listId.add(it.getId());
-			
-			for(int i=0;i<listId.size();i++) {
-				linkedReplylist.remove(i);
-			}
-			max = findNiceReply(linkedReplylist);
-			max.setLeftScroll(true);
-			
-			if((replylist.size()-listId.size())>0) {
-					max.setRightScroll(true);
-				}
-				Callback(max,ask);
-			
+		
 
 		for(int i=0;i<listId.size();i++) {
-			linkedReplylist.remove(i);
+			linkedReplylist.remove(listId.get(i));
 		}		
 		
 		max = findNiceReply(replylist);
 		
 		max.setLeftScroll(true);
-		ask.setExtend(max);
+		ask.setReplyextend(max);
+		
+		for(int i=0;i<listId.size();i++) {
+			if(it.getId() == listId.get(i)) {
+				listId.remove(i);
+			}
+		}
+		
+		List<ReplyExtend> list = new ArrayList<>();
+		for(ReplyExtend re:listReplys) {
+			if(re.getReplyId() == it.getReplyId()) {
+				list.add(re);
+			}
+		}
 		
 		if((replylist.size()-listId.size())>0) {
 				max.setRightScroll(true);
 			}
 		
-			Callback(max,ask);
+			Callback(max,ask,it);
+			return ask;
 		}
 			
-	public void Callback(ReplyExtend reply,AskquestionExtend ask) {
-		if ( reply.getNextReply()!=null ) {
+	public void Callback(ReplyExtend reply,AskquestionExtend ask,ReplyExtend it) {
+		if(reply.getId() == it.getReplyId()) {
+			reply.setReplyExtend(findLastReply(listReplys, ask, reply));
+			reply.setRightScroll(true);
+			Callback(reply.getReplyExtend(),ask,it);
+		} else {
 			
-			reply.setReplyExtend(findFirstReply(reply.getNextReply(),ask,reply));
-			if(reply.getNextReply().size()-count>0) {
-				reply.getReplyExtend().setRightScroll(true);
+			if ( reply.getNextReply()!=null ) {
+				
+				reply.setReplyExtend(findFirstReply(reply.getNextReply(),ask,reply));
+				if(reply.getNextReply().size()-count>0) {
+					reply.getReplyExtend().setRightScroll(true);
+				}
+				Callback(reply.getReplyExtend(),ask,it);
 			}
-			Callback(reply.getReplyExtend(),ask);
+
 		}
+		
 	}
-	
 	
 //	 查询出一个辩题下所有评论
 	 
@@ -230,8 +246,32 @@ public class ThesisServiceImpl4 implements ThesisService {
 		}
 		return re;
 	}
+	
 	//找出最先发布的回复
 	public ReplyExtend findFirstReply(List<ReplyExtend> list,AskquestionExtend ask,ReplyExtend re) {
+		for(ReplyExtend reply:list) {
+			if(reply.getFromUid() == re.getToUid()) {
+				return reply;
+			}
+			if(reply.getFromUid() == ask.getFromUid()) {
+				return reply;
+			}
+			
+		}
+		long mintime = Time(list.get(0));
+		ReplyExtend minReply = list.get(0);
+		for(int i=1;i<list.size();i++) {
+			long temp = Time(list.get(i));
+			if(temp<mintime) {
+				mintime = temp;
+				minReply = list.get(i);
+			}
+		}
+		return minReply;
+	}
+	
+	//找出最后发布的回复
+	public ReplyExtend findLastReply(List<ReplyExtend> list,AskquestionExtend ask,ReplyExtend re) {
 		for(ReplyExtend reply:list) {
 			if(reply.getFromUid() == re.getToUid()) {
 				return reply;
@@ -252,7 +292,6 @@ public class ThesisServiceImpl4 implements ThesisService {
 		}
 		return maxReply;
 	}
-	
 	//找出时间差
 	public long Time(ReplyExtend d) {
 		Date s = d.getrPublishtime();
@@ -323,6 +362,12 @@ public class ThesisServiceImpl4 implements ThesisService {
 	@Override
 	public List<Thesis> selectAllCollectionThesis(int id) {
 		return thesisMapper.selectAllThesisAttentioned(id);
+	}
+
+	@Override
+	public ThesisExtend selectBythesisId(int id, User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

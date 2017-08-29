@@ -29,20 +29,20 @@ import net.sf.json.JSONObject;
 
 
 @Controller
+@RequestMapping("/debate")
 public class DebateController {
 	@Autowired
 	private DebateServiceImpl debateServiceImpl;
-	@Autowired
-	private Producer producer;
 	/*
 	 * 按主键查找辩题，返回json辩题
 	 */
-	@RequestMapping("/debateFindbyId")
+	@RequestMapping("/findbyId")
 	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int userid = json.getInt("id");
 		int topicId = json.getInt("topicId");
 		User user = new User();
+		user.setId(userid);
 		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
 		return debatetopic;
 	}
@@ -51,12 +51,11 @@ public class DebateController {
 	 * 获取全部辩题不含论点
 	 */
 	
-	@RequestMapping("/debateby")
+	@RequestMapping("/alldebate")
 	public  @ResponseBody List<Debatetopic> debateby(HttpServletRequest request) throws IOException {
 		User user =null;
 		String idd = request.getParameter("id");
 		int id = 0;
-		producer.sendmessage("hello");
 		
 		if (idd !=null) {
 			id = Integer.parseInt(idd);

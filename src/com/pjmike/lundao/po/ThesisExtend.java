@@ -12,6 +12,5 @@ public class ThesisExtend extends Thesis{
 	public void setAskquestions(List<AskquestionExtend> askquestions) {
 		this.askquestions = askquestions;
 	}
-	
 }
 

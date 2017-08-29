@@ -2,6 +2,8 @@ package com.pjmike.lundao.po;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
 public class Debatetopic {
     private Integer topicid;
 
@@ -48,7 +50,7 @@ public class Debatetopic {
 	public void setIslike(boolean islike) {
 		this.islike = islike;
 	}
-
+	@JsonGetter("isAttention")
 	public boolean getAttention2() {
 		return isAttention;
 	}

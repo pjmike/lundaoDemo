@@ -32,7 +32,8 @@
     <result column="r_like" property="rLike" jdbcType="INTEGER" />
     <result column="r_describtion" property="rDescribtion" jdbcType="LONGVARCHAR" />
     <result column="r_publishTime" property="rPublishtime" jdbcType="TIMESTAMP" />
-    <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" />    
+    <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" />
+    <result column="nickname" property="nickname" />
 	</resultMap>
 
 	<select id="select" parameterType="int" resultMap="BaseResultMap">
@@ -44,8 +45,9 @@
 	 		r.r_like,
 	 		r_describtion,
 	 		r.r_publishTime,
-	 		r.r_contentTime 
-	 		from reply r where comment_id =#{id}
+	 		r.r_contentTime,
+	 		u.nickname
+	 		from reply r left join user u on r.from_uid = u.id where comment_id =#{id}
 	</select>
 	
 	<select id="selectbyReplyid" parameterType="int" resultMap="BaseResultMap">
@@ -57,8 +59,9 @@
 	 		r.r_type,
 	 		r.r_like,
 	 		r.r_publishTime,
-	 		r.r_contentTime 
-	 		from reply r where id =#{id}
+	 		r.r_contentTime, 
+	 		u.nickname
+	 		from reply r left join user u on r.from_uid = u.id where id =#{id}
 	</select>
  
   <!-- 判断一个用户是否具体点赞过某个回复 -->
@@ -66,7 +69,7 @@
   	select r_status from  replyvote where r_uid =#{r_uid} and r_replyid =#{r_replyid}
   </select>
   <!-- 返回一个提问的点赞数 -->
-  <select id="likeNumber" parameterType="int" resultType="int">
+  <select id="likeNumber" parameterType="int" resultType="java.lang.Integer">
   	select count(*) from replyvote  where r_replyid =#{id} and r_status=1 
   </select>
   <!--设置点赞-->
@@ -83,4 +86,22 @@
   	insert into reply(comment_id,reply_id,from_uid,to_uid,r_describtion) values(#{commentId},#{replyId},#{fromUid},
   	#{toUid},#{rDescribtion})
   </insert>
+  
+  <!-- 插入已点击的数据 -->
+  <insert id="storeAlreadyClick" parameterType="com.pjmike.lundao.po.ReplyExtend">
+  	insert into reply_copy(id,comment_id,reply_id,from_uid,to_uid,r_describtion) values(#{id},#{commentId},#{replyId},#{fromUid},#{toUid},#{rDescribtion})
+  </insert>
+  <!-- 找出所有点击过的数据 -->
+  <select id="selectAleadyClick" resultMap="BaseResultMap">
+  	select r.id,
+	 		r.comment_id,
+	 		r.reply_id,
+	 		r.from_uid,
+	 		r.to_uid,
+	 		r.r_like,
+	 		r.r_publishTime,
+	 		r.r_contentTime 
+	 		from reply_copy r
+  </select>
+  
 </mapper>

@@ -1,7 +1,6 @@
 package com.pjmike.lundao.mapper;
 
 import com.pjmike.lundao.po.Reply;
-import com.pjmike.lundao.po.ReplyExample;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.comvote;
@@ -25,7 +24,7 @@ public interface ReplyMapper {
   //返回一个辩题的点赞数
     int likeNumber(int id);
     //是否点赞
-    int Islike(@Param("r_uid")int id,@Param("r_replyid")int replyid);
+    Integer Islike(@Param("r_uid")int id,@Param("r_replyid")int replyid);
     //点赞
     int insetLike(@Param("r_uid")int id,@Param("r_replyid")int replyid);
     //取消点赞
@@ -44,4 +43,10 @@ public interface ReplyMapper {
     
     //发起回复
     int reply(Reply reply);
+    
+    //插入已经点击过的【评论
+    int storeAlreadyClick(ReplyExtend reply);
+    
+    List<ReplyExtend> selectAleadyClick();
+    
 }

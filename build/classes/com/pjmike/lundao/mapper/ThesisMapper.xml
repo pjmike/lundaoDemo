@@ -30,6 +30,7 @@
     <result column="t_like" property="tLike" jdbcType="INTEGER" />
     <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
     <result column="t_dislike" property="tDislike" jdbcType="INTEGER" />
+    <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
     <result column="t_contentTime" property="tContenttime" jdbcType="TIMESTAMP" />
     <result column="complete" property="complete" jdbcType="INTEGER" />
     <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
@@ -47,7 +48,8 @@
     <result column="like" property="like" jdbcType="INTEGER" />
     <result column="attention" property="attention" jdbcType="INTEGER" />
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP"/>
-    
+    <result column="nickname" property="nickname"/>
+    <result column="Icon" property="Icon"/>
     <!-- 
     	<collection property="replies" ofType="com.pjmike.lundao.po.ReplyExtend">
     			    <id column="id" property="id" jdbcType="INTEGER" />
@@ -69,7 +71,7 @@
    	<result column="t_description" property="tdescription"/>
    	<result column="t_state" property="tstate"/>
    </resultMap>
-   
+   <resultMap type="" id=""></resultMap>
    <resultMap type="com.pjmike.lundao.po.Thesis" id="ResultOne2" extends="ResultOne">
    		<result column="t_view" property="tView" jdbcType="INTEGER" />
    </resultMap>
@@ -96,6 +98,7 @@
 	 		t.t_state,
 	 		t.t_like,
 	 		t.t_dislike,
+	 		t.t_publishTime,
 	 		t.t_contentTime,
 	 		t.t_attention,
 	 		t.t_state,
@@ -109,9 +112,10 @@
 	 		a.state,
 	 		a.like,
 	 		a.attention,
-	 		a.publishTime
- 	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  <!-- left join  reply r on
- 	 r.comment_id = a.id  -->where t.thesisId=#{id}  order by thesisId  limit 10
+	 		a.publishTime,
+	 		u.nickname,
+	 		u.Icon
+ 	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  left join user u on a.from_uid = u.id where t.thesisId=#{id}  order by thesisId  limit 10
    </select>
    
    <!-- 增加论点 -->

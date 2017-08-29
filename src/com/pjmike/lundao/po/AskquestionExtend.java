@@ -2,9 +2,21 @@ package com.pjmike.lundao.po;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class AskquestionExtend extends Askquestion{
 	private String nickname ="";
 	private String Icon ="";
+	private ReplyExtend replyextend;
+	public ReplyExtend getReplyextend() {
+		return replyextend;
+	}
+
+	public void setReplyextend(ReplyExtend replyextend) {
+		this.replyextend = replyextend;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -12,7 +24,8 @@ public class AskquestionExtend extends Askquestion{
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-
+	
+	@JsonGetter("Icon")
 	public String getIcon() {
 		return Icon;
 	}
@@ -20,16 +33,9 @@ public class AskquestionExtend extends Askquestion{
 	public void setIcon(String icon) {
 		Icon = icon;
 	}
-	private ReplyExtend extend;
-	public ReplyExtend getExtend() {
-		return extend;
-	}
-
-	public void setExtend(ReplyExtend extend) {
-		this.extend = extend;
-	}
+	@JsonIgnore
 	private List<ReplyExtend> replies;
-
+	
 	public List<ReplyExtend> getReplies() {
 		return replies;
 	}

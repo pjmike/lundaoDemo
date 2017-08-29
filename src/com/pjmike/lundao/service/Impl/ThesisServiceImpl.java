@@ -14,6 +14,7 @@ import com.pjmike.lundao.mapper.ReplyMapper;
 import com.pjmike.lundao.mapper.SupplementMapper;
 import com.pjmike.lundao.mapper.ThesisMapper;
 import com.pjmike.lundao.po.AskquestionExtend;
+import com.pjmike.lundao.po.AskquestionReply;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
@@ -37,37 +38,15 @@ public class ThesisServiceImpl implements ThesisService {
 	SupplementMapper supplementMapper;
 	
 	@Override
-	public ThesisExtend selectBythesisId(int id,User user) throws Exception,ClassCastException{
-		/**
-		 * 定义一个新的thesisExtend然后只包含提问及异议，然后·一列·回复·
-		 */
-		/*ThesisExtend extend = thesisMapper.selectBythesisId(id);
-		List<AskquestionExtend> asks = extend.getAskquestions();		
-		for(AskquestionExtend ask:asks) {
-			List<ReplyExtend> replys = replyMapper.select(ask.getId());
-			ReplyExtend maxLikeReply = findNiceReply(replys);
-			
-		}
-		*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/**
-		 * 以下方法为全部返回所有评论及回复
-		 */
+	public ThesisExtend selectBythesisId(int id,User user) {
 		ThesisExtend thesisextend = thesisMapper.selectBythesisId(id);
+		System.out.println("--------------------------------------");
+		
+		System.out.println(thesisextend);
+		
+		System.out.println("----------------------------------------");
 		//以下为评论列表
 		List<AskquestionExtend> askquestions = thesisextend.getAskquestions();
-		
 		
 		if(askquestions == null || askquestions.size()==0) {
 			askquestions = new ArrayList<>();
@@ -76,6 +55,7 @@ public class ThesisServiceImpl implements ThesisService {
 		//字回复
 		
 		for(AskquestionExtend as:askquestions) {
+			
 			//更新点赞量
 			int like = askquestionMapper.likeNumber(as.getId());
 			if(like>0) {
@@ -88,13 +68,19 @@ public class ThesisServiceImpl implements ThesisService {
 				comvote comvote = new comvote();
 				comvote.setA_comment_id(as.getId());
 				comvote.setA_uid(user.getId());
-				int islike = askquestionMapper.Islike(comvote);
-				if(islike>0) {
-					as.setIslike(true);
-				} 
-				int isAttention = askquestionMapper.IsAttention(user.getId(),as.getId());
-				if(isAttention>0) {
-					as.setAttention2(true);
+				Integer likeInteger = askquestionMapper.Islike(comvote);
+				if (likeInteger!=null) {
+					int islike = likeInteger;
+					if (islike > 0) {
+						as.setIslike(true);
+					} 
+				}
+				Integer attentionInteger = askquestionMapper.IsAttention(user.getId(), as.getId());
+				if (attentionInteger != null) {
+					int isAttention = attentionInteger;
+					if (isAttention > 0) {
+						as.setAttention(true);
+					} 
 				}
 			}
 			
@@ -116,11 +102,15 @@ public class ThesisServiceImpl implements ThesisService {
 					}
 					
 					if (user!=null) {
-						int islike = replyMapper.Islike(user.getId(), r.getReplyId());
-						//判断用户是否对回复点赞
-						if (islike > 0) {
-							r.setIslike(true);
-						} 
+						if(replyMapper.Islike(user.getId(),r.getReplyId())!=null) {
+							int  islike = replyMapper.Islike(user.getId(), r.getReplyId());
+							if(islike>0) {
+								r.setIslike(true);
+							} 
+						} else {
+							r.setIslike(false);
+						}
+						
 					}
 					
 					if (r.getReplyId()==0) {
@@ -147,44 +137,86 @@ public class ThesisServiceImpl implements ThesisService {
 						}
 					}
 					
-					//找出其中获赞数最大的评论
-					//用一个递归方法
-			/*		ReplyExtend maxReply = findNiceReply(rreplylist);
-					List<ReplyExtend> replyList = new ArrayList<>();
-					if(r.getReplyId()==0) {
-						replyList.add(r);
-					}
-					for (ReplyExtend reply : replyList) {
-					if (maxReply.getId() != null && r.getReplyId()>0) {
-						if (maxReply.getId().equals(r.getReplyId())) {
-							if (maxReply.getNextReply() == null) {
-								maxReply.setNextReply(new ArrayList<>());
-							}
-							maxReply.getNextReply().add(r);
-							replyList.add(r);
-							break;
-						}
-					}	
-				}	*/
 					
 					//这里只设置评论，不设置回复，回复内容已经包含在其中
 					as.setReplies(rreplylist); 
-//					as.setExtend(maxReply);
 				}
 			}
 		}
 		
-		
-		
 		List<AskquestionExtend> findMaxlike = findMaxlike(askquestions);
+//		List<AskquestionReply> replyes = new ArrayList<>();
 		
+		for(AskquestionExtend ask:findMaxlike) {
+			ReplyExtend max = new ReplyExtend();
+			
+			if (ask.getReplies()!=null) {
+				if (ask.getReplies().size()>0) {
+					max = findNiceReply(ask.getReplies());
+					if(ask.getReplies().size()>1) { 
+						max.setRightScroll(true);
+					}
+				}
+				System.out.println(max);
+				Callback(max, ask);
+				ask.setReplyextend(max);
+			}
+		}	
+		for(AskquestionExtend ask:findMaxlike) {
+			if (ask.getReplies()!=null) {
+				for (ReplyExtend as : ask.getReplies()) {
+					as.setNextReply(null);
+				} 
+			}
+			ask.setReplies(null);
+		}
 		
 		thesisextend.setAskquestions(findMaxlike);
-	
+		System.out.println(thesisextend);
 		return thesisextend;
 	}
-	
-	
+
+	public void Callback(ReplyExtend reply,AskquestionExtend ask) {
+		if ( reply.getNextReply()!=null ) {
+			
+			reply.setReplyExtend(findFirstReply(reply.getNextReply(),ask,reply));
+			if(reply.getNextReply().size()-1>0) {
+				reply.getReplyExtend().setRightScroll(true);
+			}
+			Callback(reply.getReplyExtend(),ask);
+		}
+	}
+	//找出最先发布的回复
+		public ReplyExtend findFirstReply(List<ReplyExtend> list,AskquestionExtend ask,ReplyExtend re) {
+			for(ReplyExtend reply:list) {
+				if(reply.getFromUid() == re.getToUid()) {
+					return reply;
+				}
+				if(reply.getFromUid() == ask.getFromUid()) {
+					return reply;
+				}
+				
+			}
+			long mintime = Time(list.get(0));
+			ReplyExtend maxReply = list.get(0);
+			for(int i=1;i<list.size();i++) {
+				long temp = Time(list.get(i));
+				if(temp<mintime) {
+					mintime = temp;
+					maxReply = list.get(i);
+				}
+			}
+			return maxReply;
+		}
+		//找出时间差
+		public long Time(ReplyExtend d) {
+			Date s = d.getrPublishtime();
+			Date now = new Date(); 
+			long l1 = now.getTime() - s.getTime();  
+			long day1 = l1 / (24 * 60 * 60 * 1000);  
+			long hour1 = (l1 / (60 * 60 * 1000) - day1 * 24); 
+			return hour1;
+		}
 //	 查询出一个辩题下所有评论
 	 
 	 public void getCommentList(int id) {
@@ -281,7 +313,7 @@ public class ThesisServiceImpl implements ThesisService {
 		ReplyExtend re = null;
 		if (replys.size()>0) {
 			int max = replys.get(0).getrLike();
-			re = new ReplyExtend();
+			re = replys.get(0);
 			for (int i = 1; i < replys.size(); i++) {
 				int temp = replys.get(i).getrLike();
 				if (max < temp) {
@@ -354,6 +386,13 @@ public class ThesisServiceImpl implements ThesisService {
 	@Override
 	public List<Thesis> selectAllCollectionThesis(int id) {
 		return thesisMapper.selectAllThesisAttentioned(id);
+	}
+
+
+	@Override
+	public AskquestionExtend selectReply(ReplyExtend it) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

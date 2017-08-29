@@ -2,6 +2,9 @@ package com.pjmike.lundao.po;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Askquestion {
     private Integer id;
 
@@ -19,7 +22,7 @@ public class Askquestion {
     private Integer view;
 
     private Integer like;
-
+    @JsonIgnore
     private Integer attention;
 
     private Integer dislike;
@@ -33,20 +36,22 @@ public class Askquestion {
     private Date contenttime;
     private boolean islike = false;
     private boolean isAttention = false;
-    public boolean isIslike() {
+    
+    @JsonGetter("isAttention")
+    public boolean Attention() {
+		return isAttention;
+	}
+
+	public void setAttention(boolean isAttention) {
+		this.isAttention = isAttention;
+	}
+
+	public boolean isIslike() {
 		return islike;
 	}
 
 	public void setIslike(boolean islike) {
 		this.islike = islike;
-	}
-
-	public boolean getAttention2() {
-		return isAttention;
-	}
-
-	public void setAttention2(boolean isAttention) {
-		this.isAttention = isAttention;
 	}
 
 	public Integer getId() {
