@@ -34,7 +34,7 @@ public class AskquesController {
 	 * @throws IOException 
 	 */
 	@RequestMapping("/insertAskquestion")
-	public void insertAskquestion(@RequestBody Askquestion askquestion,HttpServletRequest request) throws IOException {
+	public void insertAskquestion(HttpServletRequest request) throws IOException {
 		
 		
 //		String str = URLDecoder.decode(request.getParameter("object"),"UTF-8"); 
@@ -50,7 +50,14 @@ public class AskquesController {
 		ask.setFromUid(fromUid);
 		ask.setDescribtion(describtion);
 		ask.setType(type);
+		askquesServiceImpl.insertaskquestion(ask);
+	}
+	@RequestMapping("/deleteAskquestion")
+	public void deleteAskquestion(HttpServletRequest request) throws IOException {
 		
-		askquesServiceImpl.insertaskquestion(askquestion);
+		JSONObject json = JsonRead.receivePost(request);
+		int userid = json.getInt("id");
+		int askid = json.getInt("askid");
+		askquesServiceImpl.changeIsShow(userid, askid);
 	}
 }

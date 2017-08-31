@@ -21,6 +21,7 @@ import com.pjmike.lundao.po.Reply;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
+import com.pjmike.lundao.po.ThesisCollection;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
@@ -49,7 +50,7 @@ public class ThesisServiceImpl4 implements ThesisService {
 	
 	
 	@Override
-	public AskquestionExtend selectReply(ReplyExtend it){
+	public AskquestionExtend selectReply(ReplyExtend it,User user){
 		
 		
 		List<ReplyExtend> replys = replyMapper.select(it.getCommentId());
@@ -360,14 +361,21 @@ public class ThesisServiceImpl4 implements ThesisService {
 
 
 	@Override
-	public List<Thesis> selectAllCollectionThesis(int id) {
-		return thesisMapper.selectAllThesisAttentioned(id);
-	}
-
-	@Override
 	public ThesisExtend selectBythesisId(int id, User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<ThesisCollection> selectAllCollectionThesis(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateColleThesisIsshow(int id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -18,11 +18,11 @@
     <result column="contentTime" property="contenttime" jdbcType="TIMESTAMP" />
   </resultMap>
   <!-- 返回用户关注的异议及提问 -->
- 	<resultMap type="com.pjmike.lundao.po.Askquestion" id="resultask">
+ 	<resultMap type="com.pjmike.lundao.po.AskquAttention" id="resultask">
  		   <id column="id" property="id" jdbcType="INTEGER" />
  		   <result column="describtion" property="describtion" jdbcType="VARCHAR" />
  		     <result column="content" property="content" jdbcType="VARCHAR" />
- 		      <result column="type" property="type" jdbcType="VARCHAR" />
+ 		      <result column="type" property="type" jdbcType="INTEGER" />
  		      <result column="view" property="view" jdbcType="INTEGER" />
  	</resultMap>
  	
@@ -48,8 +48,7 @@
   </select>
   <!-- 根据askquestion的ID查找所有的提问及异议 -->
   <select id="selecrAllAttentionAskqustion" parameterType="int" resultMap="resultask">
-  	select id,describtion,content,type,view where id in
-  	(select ask_id from askAttention where user_id =#{id})
+  	select id,describtion,content,type,view from askquestion where id in (select ask_id from askquAttention where user_id =#{id})
   </select>
   <!-- 判断一个用户是否具体点赞过某个提问 -->
   <select id="Islike" parameterType="com.pjmike.lundao.po.comvote" resultType="java.lang.Integer">
@@ -70,8 +69,14 @@
   	update comvote set a_status = 0 where a_uid =#{a_uid} and a_comment_id =#{a_comment_id} 
   </update>
   
-  
-  
+  <!-- 更改提问或异议是否显示的状态 -->
+  <insert id="changeIsShow" >
+  	insert into userAskIsShow(userid,askid,askisShow) values(#{userid},#{askid},0)
+  </insert>
+  <!-- 查看用户是否对提问及异议的删除状态 -->
+  <select id="SeeIsShow" resultType="Integer">
+  	select askisShow from userAskIsShow where userid=#{userid} and askid =#{askid}
+  </select>
   <!-- 关注辩题 -->
   <insert id="insertAttention">
   	insert into askquAttention(ask_id,user_id,status) values(#{ask_id},#{user_id},1)
@@ -85,4 +90,5 @@
   <select id="IsAttention" parameterType="com.pjmike.lundao.po.comvote" resultType="java.lang.Integer">
   	select status from  askquAttention where user_id =#{user_id} and ask_id =#{ask_id}
   </select>
+  
 </mapper>

@@ -1,5 +1,6 @@
 package com.pjmike.lundao.mapper;
 
+import com.pjmike.lundao.po.AskquAttention;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.comvote;
@@ -23,7 +24,7 @@ public interface AskquestionMapper {
     AskquestionExtend selectOneAskquestion(int id);
     int updateByPrimaryKey(Askquestion record);
     
-    List<Askquestion> selecrAllAttentionAskqustion(int id);
+    List<AskquAttention> selecrAllAttentionAskqustion(int id);
     
     //返回一个辩题的点赞数
     int likeNumber(int id);
@@ -41,6 +42,10 @@ public interface AskquestionMapper {
     //取消关注
     int deleteAttention(@Param("user_id")int id,@Param("ask_id")int askid);
     
+    //删除提问或异议
+    int changeIsShow(@Param("userid")int id,@Param("askid")int askid);
+    
+    Integer SeeIsShow(@Param("userid")int id,@Param("askid")int askid);
     //关注辩题
     int insertAttention(@Param("user_id")int id,@Param("ask_id")int askId);
 }

@@ -1,5 +1,6 @@
 package com.pjmike.lundao.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pjmike.lundao.connect.ConnectWenxin;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
+import com.pjmike.lundao.service.util.JsonRead;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,10 +29,15 @@ public class ConnectWxinController {
 	@Autowired
 	UserServiceImpl userServiceImpl;
 	/**
+	 * @throws IOException 
 	 * 
 	 */
 	@RequestMapping("/connect")
-	public String connect(HttpServletRequest request) {
+	public String connect(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);/*
+		String nickname = json.getString("username");
+		String imgurl = json.getString("img");
+		String code = json.getString("code");*/
 		//获取用户名和头像路径地址
 		String nickname = request.getParameter("username");
 		try {
@@ -42,6 +49,7 @@ public class ConnectWxinController {
 		}
 		
 //		JSONObject obj = new JSONObject().fromObject("user");
+		
 		
 		String imgurl = request.getParameter("img");
 		String code = request.getParameter("code");

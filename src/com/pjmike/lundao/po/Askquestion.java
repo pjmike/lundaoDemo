@@ -19,20 +19,21 @@ public class Askquestion {
     private int type;
     
     private int state;
+    
     private Integer view;
 
     private Integer like;
     @JsonIgnore
     private Integer attention;
-
+    @JsonIgnore
     private Integer dislike;
-
+    @JsonIgnore
     private Integer reply;
-
+    @JsonIgnore
     private Integer clickcount;
-
+    @JsonIgnore
     private Date publishtime;
-
+    @JsonIgnore
     private Date contenttime;
     private boolean islike = false;
     private boolean isAttention = false;

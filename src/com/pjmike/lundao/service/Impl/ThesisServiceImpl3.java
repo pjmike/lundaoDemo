@@ -21,6 +21,7 @@ import com.pjmike.lundao.po.Reply;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
+import com.pjmike.lundao.po.ThesisCollection;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
@@ -46,9 +47,20 @@ public class ThesisServiceImpl3 implements ThesisService {
 	
 	//向右滑
 	@Override
-	public AskquestionExtend selectReply(ReplyExtend it){
+	public AskquestionExtend selectReply(ReplyExtend it,User user){
 		
 		List<ReplyExtend> replys = replyMapper.select(it.getCommentId());
+		if (user != null) {
+			for (ReplyExtend r : replys) {
+				Integer islike = replyMapper.Islike(user.getId(), r.getId());
+				if(islike != null) {
+					if(islike>0) {
+						r.setIslike(true);
+					}
+				}
+				
+			} 
+		}
 		List<ReplyExtend> creplylist = new ArrayList<ReplyExtend>();
 			
 		List<ReplyExtend> rreplylist = new ArrayList<>();
@@ -82,6 +94,17 @@ public class ThesisServiceImpl3 implements ThesisService {
 			}
 		
 		AskquestionExtend ask = askquestionMapper.selectOneAskquestion(it.getCommentId());
+		if(user != null) {
+			comvote c = new comvote();
+			c.setA_comment_id(ask.getId());
+			c.setA_uid(user.getId());
+			Integer islike = askquestionMapper.Islike(c);
+			if(islike != null) {
+				if(islike >0) {
+					ask.setIslike(true);
+				}
+			}
+		}
 		ask.setReplies(rreplylist);
 		
 			ReplyExtend max = new ReplyExtend();
@@ -359,15 +382,27 @@ public class ThesisServiceImpl3 implements ThesisService {
 	}
 
 
-	@Override
-	public List<Thesis> selectAllCollectionThesis(int id) {
-		return thesisMapper.selectAllThesisAttentioned(id);
-	}
 
 	@Override
 	public ThesisExtend selectBythesisId(int id, User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public List<ThesisCollection> selectAllCollectionThesis(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public int updateColleThesisIsshow(int id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

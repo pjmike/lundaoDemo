@@ -34,6 +34,7 @@
     <result column="r_publishTime" property="rPublishtime" jdbcType="TIMESTAMP" />
     <result column="r_contentTime" property="rContenttime" jdbcType="TIMESTAMP" />
     <result column="nickname" property="nickname" />
+    <result column="r_isShow" property="isShow"/>
 	</resultMap>
 
 	<select id="select" parameterType="int" resultMap="BaseResultMap">
@@ -60,12 +61,13 @@
 	 		r.r_like,
 	 		r.r_publishTime,
 	 		r.r_contentTime, 
+	 		r.r_isShow,
 	 		u.nickname
 	 		from reply r left join user u on r.from_uid = u.id where id =#{id}
 	</select>
  
   <!-- 判断一个用户是否具体点赞过某个回复 -->
-  <select id="Islike"  resultType="int">
+  <select id="Islike"  resultType="Integer">
   	select r_status from  replyvote where r_uid =#{r_uid} and r_replyid =#{r_replyid}
   </select>
   <!-- 返回一个提问的点赞数 -->

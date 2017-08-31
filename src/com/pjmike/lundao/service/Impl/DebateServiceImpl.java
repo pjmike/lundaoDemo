@@ -37,21 +37,27 @@ public class DebateServiceImpl implements DebateService{
 			debatetopicextend.setLike(num);
 		}
 		if (user!= null) {
-			int status = debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid());
-			int attention = debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
-			int attentionNum = debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid());
-			if(attentionNum >0) {
-				debatetopicextend.setAttention(attentionNum);
+			if (debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid())!=null) {
+				int attentionNum = debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid());
+				if (attentionNum > 0) {
+					debatetopicextend.setAttention(attentionNum);
+				} 
 			}
-			if (status>0) {
-				debatetopicextend.setIslike(true);
-			} else {
-				debatetopicextend.setIslike(false);
-			} 
-			if(attention>0) {
-				debatetopicextend.setAttention2(true);
-			} else {
-				debatetopicextend.setAttention2(false);
+			if (debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid()) != null) {
+				int status = debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid());
+				if (status > 0) {
+					debatetopicextend.setIslike(true);
+				} else {
+					debatetopicextend.setIslike(false);
+				} 
+			}
+			if (debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid())!=null) {
+				int attention = debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
+				if (attention > 0) {
+					debatetopicextend.setAttention2(true);
+				} else {
+					debatetopicextend.setAttention2(false);
+				} 
 			}
 		}
 		List<Thesis> thesislist = debatetopicextend.getThesisList();
@@ -61,21 +67,27 @@ public class DebateServiceImpl implements DebateService{
 			 *判断点赞数，关注数，点赞状态和关注状态
 			 */
 			if(user!=null) {
-				int status = thesisMapper.Islike(user.getId(), debatetopicextend.getTopicid());
-				int attention = thesisMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
-				int thesisAttention = thesisMapper.attentionNum(t.getThesisid());
-				if(thesisAttention>0) {
-					t.settAttention(thesisAttention);
+				if (thesisMapper.attentionNum(t.getThesisid())!=null) {
+					Integer thesisAttention = thesisMapper.attentionNum(t.getThesisid());
+					if (thesisAttention > 0) {
+						t.settAttention(thesisAttention);
+					} 
 				}
-				if (status>0) {
-					t.setLike(true);
-				} else {
-					t.setLike(false);
-				} 
-				if(attention>0) {
-					t.setAttention(true);
-				} else {
-					t.setAttention(false);
+				if (thesisMapper.Islike(user.getId(), debatetopicextend.getTopicid()) != null) {
+					Integer status = thesisMapper.Islike(user.getId(), debatetopicextend.getTopicid());
+					if (status > 0) {
+						t.setLike(true);
+					} else {
+						t.setLike(false);
+					} 
+				}
+				if (thesisMapper.IsAttention(user.getId(), debatetopicextend.getTopicid() )!=null) {
+					Integer attention = thesisMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
+					if (attention > 0) {
+						t.setAttention(true);
+					} else {
+						t.setAttention(false);
+					} 
 				}
 			}
 		}
@@ -131,7 +143,6 @@ public class DebateServiceImpl implements DebateService{
 	public List<Debatetopicextend> selectList() {
 		//从数据库查询出来的辩题列表
 		List<Debatetopicextend> debatelist = debatetopicMapper.selectList();
-		
 		//将辩题列表进行排序,冒泡排序
 		for(int i=0;i<debatelist.size()-1;i++) {
 			for (int j = i+1; j <debatelist.size(); j++) {
@@ -163,19 +174,33 @@ public class DebateServiceImpl implements DebateService{
 					if(attentionNum >0) {
 						d.setAttention(attentionNum);
 					}
+					
+					
 					if (user!=null) {
-						int status = debatetopicMapper.Islike(user.getId(), d.getTopicid());
-						int attention = debatetopicMapper.IsAttention(user.getId(), d.getTopicid());
-						if (status>0) {
-							d.setIslike(true);
-						} else {
-							d.setIslike(false);
-						} 
-						if(attention>0) {
-							d.setAttention2(true);
-						} else {
-							d.setAttention2(false);
+						if(debatetopicMapper.IsAttention(user.getId(), d.getTopicid()) != null) {
+							Integer attention = debatetopicMapper.IsAttention(user.getId(), d.getTopicid());
+							if(attention>0) {
+								d.setAttention2(true);
+							} else {
+								d.setAttention2(false);
+							}
 						}
+						
+						if(debatetopicMapper.Islike(user.getId(), d.getTopicid()) != null) {
+							Integer status = debatetopicMapper.Islike(user.getId(), d.getTopicid());
+							if (status>0) {
+								d.setIslike(true);
+							} else {
+								d.setIslike(false);
+							} 
+						}
+					}
+				}
+				for(Debatetopic debate:debatelist) {
+					if(debate.getContent().length() > 40) {
+						debate.setTitle1(debate.getContent().substring(0, 40));
+					} else {
+						debate.setTitle1(debate.getContent());
 					}
 				}
 				//将辩题列表进行排序,冒泡排序

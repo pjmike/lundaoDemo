@@ -50,6 +50,7 @@
     <result column="publishTime" property="publishtime" jdbcType="TIMESTAMP"/>
     <result column="nickname" property="nickname"/>
     <result column="Icon" property="Icon"/>
+    <result column="isShow" property="isShow"/>
     <!-- 
     	<collection property="replies" ofType="com.pjmike.lundao.po.ReplyExtend">
     			    <id column="id" property="id" jdbcType="INTEGER" />
@@ -71,7 +72,13 @@
    	<result column="t_description" property="tdescription"/>
    	<result column="t_state" property="tstate"/>
    </resultMap>
-   <resultMap type="" id=""></resultMap>
+   <resultMap type="com.pjmike.lundao.po.ThesisCollection" id="CollectionHTesis">
+   		<id column="thesisId" property="id"/>
+   	<result column="t_description" property="title"/>
+   	<result column="t_state" property="content"/>
+   	<result column="isZhanKaiTapped" property="isZhanKaiTapped"/>
+   	<result column="isShow" property="isShow"/>
+   </resultMap>
    <resultMap type="com.pjmike.lundao.po.Thesis" id="ResultOne2" extends="ResultOne">
    		<result column="t_view" property="tView" jdbcType="INTEGER" />
    </resultMap>
@@ -113,6 +120,7 @@
 	 		a.like,
 	 		a.attention,
 	 		a.publishTime,
+	 		a.isShow,
 	 		u.nickname,
 	 		u.Icon
  	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  left join user u on a.from_uid = u.id where t.thesisId=#{id}  order by thesisId  limit 10
@@ -138,11 +146,11 @@
  	thesisId in(select thesis_id from thesisAttention where user_id=#{id})
  </select>
   <!-- 判断一个用户是否具体点赞过某个辩题 -->
-  <select id="Islike"  resultType="int">
+  <select id="Islike"  resultType="Integer">
   	select t_status from  thesisvote where t_uid =#{t_uid} and t_thesisid =#{t_thesisid}
   </select>
   <!-- 判断一个用户是否关注某个辩题 -->
-  <select id="IsAttention" resultType="int">
+  <select id="IsAttention" resultType="Integer">
   	select status from  thesisAttention where user_id =#{user_id} and thesis_id =#{thesis_id}
   </select>
   
@@ -171,9 +179,9 @@
   </insert>
   
   <!-- 返回所有收藏的论点 -->
-  <select id="selectAllCollectionThesis" parameterType="int" resultMap="ResultOne">
-  	select t.thesisId,t.t_description,t.t_state from thesis t left join collectionThesis c on c.thesis_id = t.thesisId
-  	where c.userid = #{id}
+  <select id="selectAllCollectionThesis" parameterType="int" resultMap="CollectionHTesis">
+  	select t.thesisId,t.t_description,t.t_state,c.isShow,c.isZhanKaiTapped from thesis t left join collectionThesis c on c.thesis_id = t.thesisId
+  	where c.user_id = #{id}
   </select>
   <!--取消关注辩题 -->
   <update id="deleteAttention">
@@ -181,6 +189,9 @@
   </update>
    
    
-   
+   <!-- 点击收藏页面的小叉 -->
+   <update id="updateColleThesisIsshow" parameterType="int">
+   		update collectionThesis set isShow = 0 where thesis_id = #{id}
+   </update>
    
 </mapper>

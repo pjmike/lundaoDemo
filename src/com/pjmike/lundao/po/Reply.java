@@ -3,11 +3,13 @@ package com.pjmike.lundao.po;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Reply {
     private Integer id;
 
     private Integer commentId;
-
+    
     private Integer replyId;
 
     private Integer fromUid;
@@ -15,19 +17,20 @@ public class Reply {
     private Integer toUid;
 
     private int rType;
-
+    @JsonIgnore
     private Integer rView;
 
     private Integer rLike;
-
+    @JsonIgnore
     private Integer rAttention;
-
+    @JsonIgnore
     private Integer rDislike;
 
     private Date rPublishtime;
-
+    
     private Date rContenttime;
-
+    
+    @JsonIgnore
     private Integer rFloor;
 
     private String rDescribtion;

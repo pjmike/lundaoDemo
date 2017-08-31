@@ -9,10 +9,9 @@ import java.util.List;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,8 +21,6 @@ import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
-import com.pjmike.lundao.util.Producer;
-import com.rabbitmq.tools.json.JSONReader;
 
 import net.sf.json.JSONObject;
 
@@ -36,8 +33,10 @@ public class DebateController {
 	/*
 	 * 按主键查找辩题，返回json辩题
 	 */
+	
 	@RequestMapping("/findbyId")
-	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request) throws IOException {
+	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
 		JSONObject json = JsonRead.receivePost(request);
 		int userid = json.getInt("id");
 		int topicId = json.getInt("topicId");
@@ -46,6 +45,7 @@ public class DebateController {
 		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
 		return debatetopic;
 	}
+	
 	/*
 	 * 
 	 * 获取全部辩题不含论点
@@ -54,23 +54,29 @@ public class DebateController {
 	@RequestMapping("/alldebate")
 	public  @ResponseBody List<Debatetopic> debateby(HttpServletRequest request) throws IOException {
 		User user =null;
-		String idd = request.getParameter("id");
-		int id = 0;
+		BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream)request.getInputStream()
+						,"utf-8"));
+		String line = null;
+		StringBuffer sb = new StringBuffer();
+		while((line = br.readLine()) != null) {
+		sb.append(line);
+		}
 		
-		if (idd !=null) {
-			id = Integer.parseInt(idd);
+	
+		if (sb != null && sb.toString().length()>0) {
+			JSONObject json = JsonRead.receivePost(request);
+			int id = json.getInt("id");
+			if(id>0) {
+				user = new User();
+				user.setId(id);
+			}
 		}
-		if(id>0) {
-			user = new User();
-			user.setId(id);
-		}
+		
 		List<Debatetopic> DebatetopicList = new ArrayList<>();
 		
 		DebatetopicList = debateServiceImpl.selectListby(user);
 		return DebatetopicList;
 	}
-	
-	
 	/*
 	 * 
 	 *点赞操作

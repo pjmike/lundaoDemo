@@ -12,6 +12,17 @@ public class ReplyExtend extends Reply{
 	
 	private boolean isRightScroll=false;
 	
+	private boolean isShow ;
+	
+	@JsonGetter("isShow")
+	public boolean getShow() {
+		return isShow;
+	}
+
+	public void setShow(boolean isShow) {
+		this.isShow = isShow;
+	}
+
 	@JsonGetter("isLeftScroll")
 	public boolean isLeftScroll() {
 		return isLeftScroll;

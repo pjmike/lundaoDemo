@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Thesis {
     private Integer thesisid;
@@ -11,27 +12,30 @@ public class Thesis {
     private Integer tDebateid;
 
     private String tDescription;
-
+    
     private Integer tView;
+    
     private Integer tfromuid;
+    
     private Integer tLike;
 
 	private Integer tAttention;
-
+	@JsonIgnore
     private Integer tDislike;
-
+	@JsonIgnore
     private Integer tAsk;
-
+	@JsonIgnore
     private Integer tQuestion;
-
+	@JsonIgnore
     private Integer tAsklist;
-
+	@JsonIgnore
     private Integer tQuestionlist;
+	@JsonIgnore
     private Date tPublishtime;
+	@JsonIgnore
     private Date tContenttime;
 
     private Integer complete;
-
     
     private Integer uncomplete;
 

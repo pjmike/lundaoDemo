@@ -13,6 +13,7 @@ import com.pjmike.lundao.mapper.AskquestionMapper;
 import com.pjmike.lundao.mapper.ReplyMapper;
 import com.pjmike.lundao.mapper.SupplementMapper;
 import com.pjmike.lundao.mapper.ThesisMapper;
+import com.pjmike.lundao.po.AskquAttention;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
@@ -72,11 +73,22 @@ public class AskquesServiceImpl implements AskquesService{
 	
 	//向右滑的时候
 	@Override
-	public AskquestionExtend findReply(ReplyExtend it, int id) {
+	public AskquestionExtend findReply(ReplyExtend it, User user) {
 
 		List<ReplyExtend> replys = replyMapper.select(it.getCommentId());
+		if (user != null) {
+			for (ReplyExtend r : replys) {
+				Integer islike = replyMapper.Islike(user.getId(), r.getId());
+				if(islike != null) {
+					if(islike>0) {
+						r.setIslike(true);
+					}
+				}
+				
+			} 
+		}
 		List<ReplyExtend> creplylist = new ArrayList<ReplyExtend>();
-			
+		
 		List<ReplyExtend> rreplylist = new ArrayList<>();
 		if (replys!=null) {
 				for (ReplyExtend r : replys) {
@@ -108,6 +120,17 @@ public class AskquesServiceImpl implements AskquesService{
 			}
 		
 		AskquestionExtend ask = askquestionMapper.selectOneAskquestion(it.getCommentId());
+		if(user != null) {
+			comvote c = new comvote();
+			c.setA_comment_id(ask.getId());
+			c.setA_uid(user.getId());
+			Integer islike = askquestionMapper.Islike(c);
+			if(islike != null) {
+				if(islike >0) {
+					ask.setIslike(true);
+				}
+			}
+		}
 		ask.setReplies(rreplylist);
 		List<ReplyExtend> listReplys = replyMapper.selectAleadyClick();
 		System.out.println("-----------------------------");
@@ -320,6 +343,19 @@ public class AskquesServiceImpl implements AskquesService{
 			long day1 = l1 / (24 * 60 * 60 * 1000);  
 			long hour1 = (l1 / (60 * 60 * 1000) - day1 * 24); 
 			return hour1;
+		}
+		@Override
+		public List<AskquAttention> selecrAllAttentionAskqustion(int id) {
+			
+			return askquestionMapper.selecrAllAttentionAskqustion(id);
+		}
+		@Override
+		public int changeIsShow(int id, int askid) {
+			return askquestionMapper.changeIsShow(id, askid);
+		}
+		@Override
+		public Integer SeeIsShow(int id, int askid) {
+			return askquestionMapper.SeeIsShow(id, askid);
 		}
 
 }

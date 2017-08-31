@@ -2,6 +2,7 @@ package com.pjmike.lundao.mapper;
 
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
+import com.pjmike.lundao.po.ThesisCollection;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 
@@ -24,7 +25,7 @@ public interface ThesisMapper {
     ThesisExtend selectBythesisId (int id);
     //返回一个论点的关注数
     
-    int attentionNum(int id);
+    Integer attentionNum(int id);
     //返回一个论点的点赞数、
     int likeNumber(int id);
     //返回一个用户所关注的论点
@@ -32,10 +33,10 @@ public interface ThesisMapper {
 
     int updateByPrimaryKey(Thesis record);
     //判断是否点赞
-    int Islike(@Param("t_uid")int id,@Param("t_thesisid")int thesisid);
+    Integer Islike(@Param("t_uid")int id,@Param("t_thesisid")int thesisid);
     
     //判断是否关注
-    int IsAttention(@Param("user_id")int id,@Param("thesis_id")int t_thesisid);
+    Integer IsAttention(@Param("user_id")int id,@Param("thesis_id")int t_thesisid);
 
     //取消关注
     int deleteAttention(@Param("user_id")int id,@Param("thesis_id")int thesisid);
@@ -48,5 +49,7 @@ public interface ThesisMapper {
     //返回所有的完善版本
     List<ThesisSupplement> selectAllSupplement(Supplement supplement);
     
-    List<Thesis> selectAllCollectionThesis(int id);
+    List<ThesisCollection> selectAllCollectionThesis(int id);
+    
+    int updateColleThesisIsshow(int id);
 }

@@ -18,6 +18,7 @@ import com.pjmike.lundao.po.AskquestionReply;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
+import com.pjmike.lundao.po.ThesisCollection;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
@@ -81,6 +82,13 @@ public class ThesisServiceImpl implements ThesisService {
 					if (isAttention > 0) {
 						as.setAttention(true);
 					} 
+				}
+				Integer isShow = askquestionMapper.SeeIsShow(user.getId(),as.getId());
+				if(isShow != null) {
+					int isshow = isShow;
+					if(isshow == 0) {
+						as.setShow(false);
+					}
 				}
 			}
 			
@@ -384,15 +392,28 @@ public class ThesisServiceImpl implements ThesisService {
 
 
 	@Override
-	public List<Thesis> selectAllCollectionThesis(int id) {
-		return thesisMapper.selectAllThesisAttentioned(id);
+	public List<ThesisCollection> selectAllCollectionThesis(int id) {
+		List<ThesisCollection> list = thesisMapper.selectAllCollectionThesis(id);
+		for(ThesisCollection t:list) {
+			if(t.getContent().length() > 40) {
+				t.setContentSummary(t.getContent().substring(0, 40));
+			} else {
+				t.setContentSummary(t.getContent());
+			}
+		}
+		return list;
 	}
 
 
 	@Override
-	public AskquestionExtend selectReply(ReplyExtend it) {
+	public AskquestionExtend selectReply(ReplyExtend it,User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int updateColleThesisIsshow(int id) {
+		return thesisMapper.updateColleThesisIsshow(id);
 	}
 
 }

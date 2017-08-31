@@ -1,5 +1,8 @@
 package com.pjmike.lundao.service.Impl;
 
+import java.util.List;
+
+import com.pjmike.lundao.po.AskquAttention;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
@@ -28,5 +31,12 @@ public interface AskquesService {
 	    //判断是否关注
 	    int IsAttention(User user,int askid);
 	    
-	    AskquestionExtend findReply(ReplyExtend it,int id);
+	    AskquestionExtend findReply(ReplyExtend it,User user);
+	    
+	    //返回所关注的提问及异议
+	    List<AskquAttention> selecrAllAttentionAskqustion(int id);
+	    
+	    int changeIsShow(int id,int askid);
+	    
+	    Integer SeeIsShow(int id,int askid);
 }

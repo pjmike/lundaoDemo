@@ -3,35 +3,44 @@ package com.pjmike.lundao.po;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Debatetopic {
     private Integer topicid;
 
     private String describtion;
-
+    
     private Integer view;
-
+    
     private Integer like;
-
+    @JsonIgnore
     private Integer attention;
-
+    @JsonIgnore
     private Integer dislike;
-
+    @JsonIgnore
     private Integer clickcount;
-
+    @JsonIgnore
     private String username;
-
+    @JsonIgnore
     private Integer thesis;
-
+    @JsonIgnore
     private Integer debatelist;
-
+    @JsonIgnore
     private Date publishtime;
-
+    @JsonIgnore
     private String label;
-
+    @JsonIgnore
     private Date contenttime;
+    private String title1;
+    public String getTitle1() {
+		return title1;
+	}
 
-    private String content;
+	public void setTitle1(String title1) {
+		this.title1 = title1;
+	}
+
+	private String content;
     private boolean islike = false;
     private boolean isAttention = false;
     private String backgroud;

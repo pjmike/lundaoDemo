@@ -6,6 +6,7 @@ import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
+import com.pjmike.lundao.po.ThesisCollection;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
@@ -33,6 +34,8 @@ public interface ThesisService {
 	 //返回所有的完善版本
     List<ThesisSupplement> selectAllSupplement(Supplement supplement);
     
-    List<Thesis> selectAllCollectionThesis(int id);
-    AskquestionExtend selectReply(ReplyExtend it);
+    List<ThesisCollection> selectAllCollectionThesis(int id);
+    AskquestionExtend selectReply(ReplyExtend it,User user);
+    
+    int updateColleThesisIsshow(int id);
 }

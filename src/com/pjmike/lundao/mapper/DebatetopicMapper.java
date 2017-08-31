@@ -29,12 +29,12 @@ public interface DebatetopicMapper {
     //返回一个辩题的点赞数
     int likeNumber(int id);
     //返回一个辩题的关注量
-    int AttentionNumber(int id);
+    Integer AttentionNumber(int id);
     //判断是否点赞
-    int Islike(@Param("user_id")int id,@Param("debate_id")int topicId);
+    Integer Islike(@Param("user_id")int id,@Param("debate_id")int topicId);
     
     //判断是否关注
-    int IsAttention(@Param("user_id")int id,@Param("debate_id")int topicId);
+    Integer IsAttention(@Param("user_id")int id,@Param("debate_id")int topicId);
     //点赞
     int insetLike(@Param("user_id")int id,@Param("debate_id")int topicId);
     //取消点赞

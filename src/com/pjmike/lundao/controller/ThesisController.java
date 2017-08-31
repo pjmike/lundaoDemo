@@ -29,6 +29,7 @@ import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl2;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl3;
 import com.pjmike.lundao.service.util.JsonRead;
+import com.rabbitmq.tools.json.JSONReader;
 
 import net.sf.json.JSONObject;
 
@@ -58,21 +59,15 @@ public class ThesisController {
 	@RequestMapping("/thesisbyid")
 	@ResponseBody
 	public ThesisExtend selectBythesisId(HttpServletRequest request,HttpServletResponse response) throws Exception,ClassCastException {
-		
-		String thesisid = request.getParameter("thesisId");
-		String userid = request.getParameter("id");
-		
-		int id = Integer.parseInt(thesisid);
-		int uid = 0;
-		if(userid!=null) {
-			uid = Integer.parseInt(userid);
-		}
+		JSONObject json = JsonRead.receivePost(request);
+		int thesisid = json.getInt("thesisId");
+		int userid = json.getInt("id");
 		User user = null;
-		if (uid>0) {
+		if (userid>0) {
 			user = new User();
-			user.setId(uid);
+			user.setId(userid);
 		}
-		ThesisExtend thesis = thesisServiceImpl.selectBythesisId(id,user);
+		ThesisExtend thesis = thesisServiceImpl.selectBythesisId(thesisid,user);
 		return thesis;
 	}
 	@RequestMapping("/replyRightScroll")
@@ -84,7 +79,12 @@ public class ThesisController {
 		int Fromuid = json.getInt("fromUid");
 		int replyid = json.getInt("replyId");
 		int touid = json.getInt("toUid");
-		ReplyExtend it = new ReplyExtend();
+		int userid = json.getInt("userid");
+		User user = null;
+		if(userid >0 ) {
+			user = new User();
+			user.setId(userid);
+		}
 		ReplyExtend reply = new ReplyExtend();
 		reply.setCommentId(CommentId);
 		reply.setFromUid(Fromuid);
@@ -92,13 +92,7 @@ public class ThesisController {
 		reply.setReplyId(replyid);
 		reply.setToUid(touid);
 		
-		it.setCommentId(5);
-		it.setId(28);
-		it.setFromUid(1);
-		it.setReplyId(22);
-		it.setToUid(2);
-		
-		AskquestionExtend ask = thesisServiceImpl3.selectReply(it);
+		AskquestionExtend ask = thesisServiceImpl3.selectReply(reply,user);
 		
 		return ask;
 	}
@@ -111,22 +105,19 @@ public class ThesisController {
 		int Fromuid = json.getInt("fromUid");
 		int replyid = json.getInt("replyId");
 		int touid = json.getInt("toUid");
+		int userid = json.getInt("userid");
+		User user = null;
+		if(userid > 0) {
+			user = new User();
+			user.setId(userid);
+		}
 		ReplyExtend reply = new ReplyExtend();
 		reply.setCommentId(CommentId);
 		reply.setFromUid(Fromuid);
 		reply.setId(id);
 		reply.setReplyId(replyid);
 		reply.setToUid(touid);
-		
-		
-		ReplyExtend it = new ReplyExtend();
-		it.setCommentId(5);
-		it.setId(28);
-		it.setFromUid(1);
-		it.setReplyId(22);
-		it.setToUid(2);
-		
-		AskquestionExtend ask = askquesServiceImpl.findReply(it, id);
+		AskquestionExtend ask = askquesServiceImpl.findReply(reply, user);
 		return ask;
 	}
 	/**
@@ -147,11 +138,20 @@ public class ThesisController {
 	 * 
 	 * @param request
 	 * 做增添论点的功能
+	 * @throws IOException 
 	 */
 	@RequestMapping("/insertthesis")
-	public void insertthesis(@RequestBody Thesis thesis,HttpServletRequest request) {
-		
-		
+	public void insertthesis(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int tDebateid = json.getInt("tDebateid");
+		String tDescription = json.getString("tDescription");
+		int tfromuid = json.getInt("tfromuid");
+		String tState = json.getString("tState");
+		Thesis thesis = new Thesis();
+		thesis.setTfromuid(tfromuid);
+		thesis.settDebateid(tDebateid);
+		thesis.setTdescription(tDescription);
+		thesis.setTstate(tState);
 		thesisServiceImpl.insert(thesis);
 	}
 	/**
@@ -172,10 +172,23 @@ public class ThesisController {
 	
 	/**
 	 * 提交完善版本
+	 * @throws IOException 
 	 */
 	@RequestMapping("/submitSupplement")
-	public void submitSupplement(@RequestBody Supplement supplement) {
-		thesisServiceImpl.insertsupplement(supplement);
+	public void submitSupplement(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int thesisId = json.getInt("thesisId");
+		int userId = json.getInt("userId");
+		String nickname = json.getString("nickname");
+		String Icon = json.getString("Icon");
+		String supplement = json.getString("supplement");
+		Supplement su = new Supplement();
+		su.setIcon(Icon);
+		su.setNickname(nickname);
+		su.setSupplement(supplement);
+		su.setThesisId(thesisId);
+		su.setUserid(userId);
+		thesisServiceImpl.insertsupplement(su);
 	}
 	/**
 	 * 返回所有的完善版本

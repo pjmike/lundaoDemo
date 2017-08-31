@@ -91,11 +91,11 @@
   </select>  --> 
   
   <!-- 返回一个辩题的点赞数 -->
-  <select id="likeNumber" parameterType="int" resultType="int">
+  <select id="likeNumber" parameterType="int" resultType="Integer">
   	select count(*) from debatevote  where debate_id =#{id} and d_status=1 
   </select>
   <!--获取辩题的收藏数 -->
-  <select id="AttentionNumber" parameterType="int" resultType="int">
+  <select id="AttentionNumber" parameterType="int" resultType="Integer">
   	select count(*) from debateAttention where debate_id =#{id} and status=1
   </select>
   	 <!-- 返回用户所关注的辩题 -->
@@ -104,11 +104,11 @@
  	thesisId in(select debate_id from debateAttention where user_id=#{id})
  </select>
   <!-- 判断一个用户是否具体点赞过某个辩题 --> 
-  <select id="Islike"  resultType="int">
+  <select id="Islike"  resultType="Integer">
   	select d_status from  debatevote where user_id =#{user_id} and debate_id =#{debate_id}
   </select>
   <!-- 判断一个用户是否关注某个辩题 -->
-  <select id="IsAttention" resultType="int">
+  <select id="IsAttention" resultType="Integer">
   	select status from  debateAttention where user_id =#{user_id} and debate_id =#{debate_id}
   </select>
   

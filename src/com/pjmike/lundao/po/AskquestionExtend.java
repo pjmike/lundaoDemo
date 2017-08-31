@@ -7,8 +7,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class AskquestionExtend extends Askquestion{
 	private String nickname ="";
+	
 	private String Icon ="";
+	
+	private boolean isShow ;
+	
+	@JsonGetter("isShow")
+	public boolean isShow() {
+		return isShow;
+	}
+
+	public void setShow(boolean isShow) {
+		this.isShow = isShow;
+	}
 	private ReplyExtend replyextend;
+	
 	public ReplyExtend getReplyextend() {
 		return replyextend;
 	}
@@ -20,7 +33,7 @@ public class AskquestionExtend extends Askquestion{
 	public String getNickname() {
 		return nickname;
 	}
-
+	
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
