@@ -55,4 +55,14 @@ public class ReplyServiceImpl implements ReplyService {
 		return replyMapper.reply(reply);
 	}
 
+	@Override
+	public int changereplyIsShow(int id, int replyid) {
+		return replyMapper.changereplyIsShow(id, replyid);
+	}
+
+	@Override
+	public Integer selectIsShow(int id, int replyid) {
+		return replyMapper.selectIsShow(id, replyid);
+	}
+
 }

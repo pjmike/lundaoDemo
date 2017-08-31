@@ -160,9 +160,33 @@ public class AskquesServiceImpl implements AskquesService{
 			Callback(max, ask, it);
 		}
 			ask.setReplies(null);
+			List<ReplyExtend> listreply = new ArrayList<ReplyExtend>();
+			if(ask.getReplyextend() != null) {
+				ReplyExtend maxreply = ask.getReplyextend();
+				listreply.add(maxreply);
+				addlist(maxreply, listreply);
+				ask.setReplylist(listreply);
+				for(ReplyExtend r:listreply) {
+					if(user != null) {
+						Integer isShow = replyMapper.selectIsShow(user.getId(),r.getId());
+						if(isShow != null) {
+							if(isShow == 0) {
+								r.setShow(false);
+							}
+						}
+					}
+				}
+			}
 			return ask;
 			
 	}
+	public void addlist(ReplyExtend reply,List<ReplyExtend> list) {
+			
+			if(reply.getReplyExtend() != null) {
+				list.add(reply.getReplyExtend());
+				addlist(reply.getReplyExtend(),list);
+			}
+		}
 		public void Callback(ReplyExtend reply,AskquestionExtend ask,ReplyExtend it) {
 			List<ReplyExtend> listReplys = replyMapper.selectAleadyClick();
 			if (reply!=null && it!=null) {

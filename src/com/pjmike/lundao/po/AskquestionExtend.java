@@ -12,6 +12,26 @@ public class AskquestionExtend extends Askquestion{
 	
 	private boolean isShow ;
 	
+	private boolean dislike = false;
+	
+	private List<ReplyExtend> replylist;
+	public List<ReplyExtend> getReplylist() {
+		return replylist;
+	}
+
+	public void setReplylist(List<ReplyExtend> replylist) {
+		this.replylist = replylist;
+	}
+
+	@JsonGetter("dislike")
+	public boolean Dislike() {
+		return dislike;
+	}
+	
+	public void setDislike(boolean dislike) {
+		this.dislike = dislike;
+	}
+
 	@JsonGetter("isShow")
 	public boolean isShow() {
 		return isShow;
@@ -20,6 +40,7 @@ public class AskquestionExtend extends Askquestion{
 	public void setShow(boolean isShow) {
 		this.isShow = isShow;
 	}
+	@JsonIgnore
 	private ReplyExtend replyextend;
 	
 	public ReplyExtend getReplyextend() {

@@ -12,8 +12,20 @@ public class ReplyExtend extends Reply{
 	
 	private boolean isRightScroll=false;
 	
-	private boolean isShow ;
+	private boolean isShow = true;
 	
+	private boolean dislike = false;
+	
+
+	@JsonGetter("dislike")
+	public boolean Dislike() {
+		return dislike;
+	}
+
+	public void setDislike(boolean dislike) {
+		this.dislike = dislike;
+	}
+
 	@JsonGetter("isShow")
 	public boolean getShow() {
 		return isShow;
@@ -51,6 +63,7 @@ public class ReplyExtend extends Reply{
 	}
 	@JsonIgnore
 	private List<ReplyExtend> nextReply;
+	@JsonIgnore
 	private ReplyExtend replyExtend;
 	public ReplyExtend getReplyExtend() {
 		return replyExtend;

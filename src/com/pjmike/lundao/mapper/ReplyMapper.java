@@ -48,5 +48,9 @@ public interface ReplyMapper {
     int storeAlreadyClick(ReplyExtend reply);
     
     List<ReplyExtend> selectAleadyClick();
+    //删除不喜欢的回复
+    int changereplyIsShow(@Param("userid")int id,@Param("reply")int replyid);
+    //查看Isshow的状态
+    Integer selectIsShow(@Param("userid")int id,@Param("reply")int replyid);
     
 }

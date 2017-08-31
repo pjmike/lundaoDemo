@@ -165,6 +165,7 @@ public class ThesisServiceImpl implements ThesisService {
 						max.setRightScroll(true);
 					}
 				}
+				ask.getReplies().add(max);
 				System.out.println(max);
 				Callback(max, ask);
 				ask.setReplyextend(max);
@@ -178,16 +179,42 @@ public class ThesisServiceImpl implements ThesisService {
 			}
 			ask.setReplies(null);
 		}
-		
+		for(AskquestionExtend ask:findMaxlike) {
+			List<ReplyExtend> list = new ArrayList<ReplyExtend>();
+			if(ask.getReplyextend() != null) {
+				ReplyExtend max = ask.getReplyextend();
+				list.add(max);
+				addlist(max, list);
+				for(ReplyExtend r:list) {
+					if(user != null) {
+						Integer isShow = replyMapper.selectIsShow(user.getId(),r.getId());
+						if(isShow != null) {
+							if(isShow == 0) {
+								r.setShow(false);
+							}
+						}
+					}
+				}
+				ask.setReplylist(list);
+			}
+		}
 		thesisextend.setAskquestions(findMaxlike);
 		System.out.println(thesisextend);
 		return thesisextend;
 	}
-
+	
+	public void addlist(ReplyExtend reply,List<ReplyExtend> list) {
+		
+		if(reply.getReplyExtend() != null) {
+			list.add(reply.getReplyExtend());
+			addlist(reply.getReplyExtend(),list);
+		}
+	}
 	public void Callback(ReplyExtend reply,AskquestionExtend ask) {
 		if ( reply.getNextReply()!=null ) {
 			
 			reply.setReplyExtend(findFirstReply(reply.getNextReply(),ask,reply));
+			ask.getReplies().add(reply.getReplyExtend());
 			if(reply.getNextReply().size()-1>0) {
 				reply.getReplyExtend().setRightScroll(true);
 			}

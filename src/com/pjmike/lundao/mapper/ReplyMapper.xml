@@ -105,5 +105,12 @@
 	 		r.r_contentTime 
 	 		from reply_copy r
   </select>
-  
+  <!-- 删除不喜欢的回复 -->
+  <insert id="changereplyIsShow" >
+  	insert into userreplyisShow(userid,reply,replyisShow) values(#{userid},#{reply},0)
+  </insert>
+  <!-- 查看isShow的状态 -->
+  <select id="selectIsShow" resultType="Integer">
+  	select replyisShow from userreplyisShow where userid=#{userid} and reply=#{reply}
+  </select>
 </mapper>

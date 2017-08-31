@@ -67,6 +67,15 @@ public class ThesisController {
 			user = new User();
 			user.setId(userid);
 		}
+		/*String thesisid = request.getParameter("thesisId");
+		String userid = request.getParameter("id");
+		int tid = Integer.parseInt(thesisid);
+		int uid = Integer.parseInt(userid);
+		User user = null;
+		if (uid>0) {
+			user = new User();
+			user.setId(uid);
+		}*/
 		ThesisExtend thesis = thesisServiceImpl.selectBythesisId(thesisid,user);
 		return thesis;
 	}
@@ -81,7 +90,7 @@ public class ThesisController {
 		int touid = json.getInt("toUid");
 		int userid = json.getInt("userid");
 		User user = null;
-		if(userid >0 ) {
+		if (userid >0 ) {
 			user = new User();
 			user.setId(userid);
 		}

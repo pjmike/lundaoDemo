@@ -18,4 +18,8 @@ public interface ReplyService {
     int giveupLike(User user,int replyid);
     //发起回复
     int reply(Reply reply);
+    //删除不喜欢的回复
+    int changereplyIsShow(int id,int replyid);
+    
+    Integer selectIsShow(int id,int replyid);
 }
