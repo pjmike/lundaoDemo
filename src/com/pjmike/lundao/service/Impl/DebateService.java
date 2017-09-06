@@ -25,7 +25,7 @@ public interface DebateService {
    public List<Debatetopicextend> selectList();
    
    //获取全部辩题不带论点
-   public List<Debatetopic> selectListby(User user);
+   public List<Debatetopic> selectListByPage(User user,int currPage,int pageSize);
    //获取全部辩题不带论点
    public List<Debatetopic> selectListNoUser();
    
@@ -37,6 +37,22 @@ public interface DebateService {
    public int giveupLike(Integer topicid,int id);
    //关注辩题
    int insertAttention(Integer topicid,int id);
-   //取消点赞
+   //取消关注
    int deleteAttention(Integer topicid,int id);
+   //查看是否存在点赞
+   Integer findIshasLike(Integer topicid,int id);
+   //再次点赞
+   int Likeagain(Integer topicid,int id);
+   
+   //查看是否存在关注
+   Integer findisHasAttention(Integer topicid,int id);
+   //再次关注
+   int Attentionagain(Integer topicid,int id);
+   
+   List<Debatetopic> selectAlldebateAttentioned(int id);
+   //用户是否点赞
+   Integer Islike(Integer topicid,int id);
+   
+   //用户是否关注
+   Integer  IsAttention(Integer topicid,int id);
 }

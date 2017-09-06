@@ -94,7 +94,7 @@ public class Askquestion {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
-
+    @JsonGetter("atype")
     public int getType() {
         return type;
     }

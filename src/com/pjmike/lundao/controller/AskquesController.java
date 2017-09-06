@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.User;
@@ -34,7 +35,7 @@ public class AskquesController {
 	 * @throws IOException 
 	 */
 	@RequestMapping("/insertAskquestion")
-	public void insertAskquestion(HttpServletRequest request) throws IOException {
+	public ModelAndView insertAskquestion(HttpServletRequest request) throws IOException {
 		
 		
 //		String str = URLDecoder.decode(request.getParameter("object"),"UTF-8"); 
@@ -51,13 +52,15 @@ public class AskquesController {
 		ask.setDescribtion(describtion);
 		ask.setType(type);
 		askquesServiceImpl.insertaskquestion(ask);
+		return null;
 	}
 	@RequestMapping("/deleteAskquestion")
-	public void deleteAskquestion(HttpServletRequest request) throws IOException {
+	public ModelAndView deleteAskquestion(HttpServletRequest request) throws IOException {
 		
 		JSONObject json = JsonRead.receivePost(request);
 		int userid = json.getInt("id");
 		int askid = json.getInt("askid");
 		askquesServiceImpl.changeIsShow(userid, askid);
+		return null;
 	}
 }

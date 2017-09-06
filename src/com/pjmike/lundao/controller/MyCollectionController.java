@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisCollection;
@@ -34,12 +35,13 @@ public class MyCollectionController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/collectThesis",method=RequestMethod.GET)
-	public void  collectThesis(HttpServletRequest request) throws IOException {
+	public ModelAndView  collectThesis(HttpServletRequest request) throws IOException {
 		
 		JSONObject json = JsonRead.receivePost(request);
 		int userid = json.getInt("id");
 		int thesisid = json.getInt("thesisId");
 		thesisServiceImpl.collectionThesis(thesisid, userid);
+		return null;
 	}
 	/**
 	 * 打开收藏页面
@@ -47,7 +49,7 @@ public class MyCollectionController {
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping(value="/getCollectThesis",method=RequestMethod.GET)
+	@RequestMapping(value="/getCollectThesis")
 	@ResponseBody
 	public List<ThesisCollection> getCollectThesis(HttpServletRequest request) throws IOException {
 		
@@ -60,9 +62,10 @@ public class MyCollectionController {
 	 * @throws IOException 
 	 */
 	@RequestMapping(value="/deleteCollectThesis",method=RequestMethod.GET)
-	public void deleteCollectThesis(HttpServletRequest request) throws IOException {
+	public ModelAndView deleteCollectThesis(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int id = json.getInt("id");
 		thesisServiceImpl.updateColleThesisIsshow(id);
+		return null;
 	}
 }

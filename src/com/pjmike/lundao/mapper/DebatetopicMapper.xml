@@ -78,8 +78,8 @@
   </select>
   
  <!--  查询全部辩题不带论点 -->
-  <select id="selectListby" resultMap="ResultMapWithBLOBs1" >
-    select * from debateTopic d order by topicId  limit 10
+  <select id="selectListByPage" parameterType="map" resultMap="ResultMapWithBLOBs1" >
+    select * from debateTopic d order by topicId 
   </select>
   <!-- 根据用户点赞状态返回全部辩题 -->
   <select id="selectListby2" resultMap="ResultMapWithBLOBs1"> 
@@ -100,8 +100,7 @@
   </select>
   	 <!-- 返回用户所关注的辩题 -->
  <select id="selectAlldebateAttentioned" parameterType="int" resultMap="ResultOne2">
- 	select topicId,describtion,content,view from debateTopic where
- 	thesisId in(select debate_id from debateAttention where user_id=#{id})
+ 	select topicId,describtion,content,view from debateTopic where topicId in(select debate_id from debateAttention where user_id=#{id})
  </select>
   <!-- 判断一个用户是否具体点赞过某个辩题 --> 
   <select id="Islike"  resultType="Integer">
@@ -116,7 +115,10 @@
   <update id="updateClick" parameterType="com.pjmike.lundao.po.Debatetopic">
   	update debateTopic set clickcount=#{clickcount}
   </update>
-  
+<!-- 查看是否存在 -->  
+  <select id="findIshasLike">
+  	select count(*) from debatevote where debate_id = #{debate_id} and user_id =#{user_id}
+  </select>
   <!--设置点赞-->
   <insert id="insetLike" >
    insert into debatevote(debate_id,user_id,d_status) values(#{debate_id},#{user_id},1)
@@ -125,6 +127,14 @@
   <update id="giveupLike">
   	update debatevote set d_status = 0 where user_id =#{user_id} and debate_id =#{debate_id}
   </update>
+  <!-- 再次点赞 -->
+  <update id="Likeagain">
+  	update debatevote set d_status = 1 where user_id =#{user_id} and debate_id =#{debate_id}
+  </update>
+  <!-- 查看是否存在关注辩题 -->
+  <select id="findisHasAttention">
+  	select count(*) from debateAttention where debate_id = #{debate_id} and user_id =#{user_id}
+  </select>
   <!-- 关注辩题 -->
   <insert id="insertAttention">
   	insert into debateAttention(debate_id,user_id,status) values(#{debate_id},#{user_id},1)
@@ -133,5 +143,8 @@
   <update id="deleteAttention">
   	update debateAttention set status = 0 where user_id =#{user_id} and debate_id =#{debate_id}
   </update>
-  
+  <!--再次关注辩题 -->
+  <update id="Attentionagain">
+  	update debateAttention set status = 1 where user_id =#{user_id} and debate_id =#{debate_id}
+  </update>
 </mapper>

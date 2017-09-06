@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
+import com.pjmike.lundao.mapper.ThesisMapper;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.ReplyExtend;
@@ -62,6 +64,8 @@ public class ThesisController {
 		JSONObject json = JsonRead.receivePost(request);
 		int thesisid = json.getInt("thesisId");
 		int userid = json.getInt("id");
+		int currPage = json.getInt("currPage");
+		int pageSize = json.getInt("pageSize");
 		User user = null;
 		if (userid>0) {
 			user = new User();
@@ -76,7 +80,8 @@ public class ThesisController {
 			user = new User();
 			user.setId(uid);
 		}*/
-		ThesisExtend thesis = thesisServiceImpl.selectBythesisId(thesisid,user);
+		
+		ThesisExtend thesis = thesisServiceImpl.selectBythesisId(thesisid,user,currPage,pageSize);
 		return thesis;
 	}
 	@RequestMapping("/replyRightScroll")
@@ -150,7 +155,7 @@ public class ThesisController {
 	 * @throws IOException 
 	 */
 	@RequestMapping("/insertthesis")
-	public void insertthesis(HttpServletRequest request) throws IOException {
+	public ModelAndView insertthesis(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int tDebateid = json.getInt("tDebateid");
 		String tDescription = json.getString("tDescription");
@@ -162,29 +167,32 @@ public class ThesisController {
 		thesis.setTdescription(tDescription);
 		thesis.setTstate(tState);
 		thesisServiceImpl.insert(thesis);
+		return null;
 	}
 	/**
 	 * 关注与取消论点
 	 * @throws IOException 
 	 */
 	@RequestMapping("/thesisAttention")
-	public void thesisAttention(HttpServletRequest request) throws IOException {
+	public ModelAndView thesisAttention(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int id = json.getInt("id");
 		User user = new User();
 		user.setId(id);
 		int thesisid = json.getInt("thesisId");
+		boolean isAttention = json.getBoolean("isAttention");
+//		Integer status = 
 		if(thesisid >0 && user !=null) {
 			thesisServiceImpl.insertAttention(thesisid, user);
 		}
+		return null;
 	}
-	
 	/**
 	 * 提交完善版本
 	 * @throws IOException 
 	 */
 	@RequestMapping("/submitSupplement")
-	public void submitSupplement(HttpServletRequest request) throws IOException {
+	public ModelAndView submitSupplement(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int thesisId = json.getInt("thesisId");
 		int userId = json.getInt("userId");
@@ -198,6 +206,7 @@ public class ThesisController {
 		su.setThesisId(thesisId);
 		su.setUserid(userId);
 		thesisServiceImpl.insertsupplement(su);
+		return null;
 	}
 	/**
 	 * 返回所有的完善版本

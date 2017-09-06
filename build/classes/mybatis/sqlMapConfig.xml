@@ -3,10 +3,15 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	
 	<typeAliases>
  	<package name="com.pjmike.lundao.po"/>
  </typeAliases>
+	<plugins>
+		<plugin interceptor="com.pjmike.lundao.Intercepts.MyPageInterceptor">
+			<property name="limit" value="10"/>
+			<property name="dbType" value="mysql"/>
+		</plugin>
+	</plugins>
 <!-- <mappers>
   <mapper resource="/lundao/src/com/pjmike/lundao/mapper/UserMapper.xml"/>
 </mappers> -->

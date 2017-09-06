@@ -39,7 +39,13 @@ public class ThesisServiceImpl implements ThesisService {
 	SupplementMapper supplementMapper;
 	
 	@Override
-	public ThesisExtend selectBythesisId(int id,User user) {
+	public ThesisExtend selectBythesisId(int id,User user,int currPage,int pageSize) {
+//      从第几条数据开始
+      int firstIndex = (currPage - 1) * pageSize;
+//      到第几条数据结束
+      int lastIndex = currPage * pageSize;
+      
+      
 		ThesisExtend thesisextend = thesisMapper.selectBythesisId(id);
 		System.out.println("--------------------------------------");
 		
@@ -48,14 +54,22 @@ public class ThesisServiceImpl implements ThesisService {
 		System.out.println("----------------------------------------");
 		//以下为评论列表
 		List<AskquestionExtend> askquestions = thesisextend.getAskquestions();
+		List<AskquestionExtend> asks = null;
+		if(firstIndex <askquestions.size() && lastIndex < askquestions.size()) {
+			
+			 asks = askquestions.subList(firstIndex, lastIndex);
+		}
+		thesisextend.setAskquestions(asks);
 		
 		if(askquestions == null || askquestions.size()==0) {
 			askquestions = new ArrayList<>();
 		}
 		//对评论的回复
 		//字回复
-		
-		for(AskquestionExtend as:askquestions) {
+		if(asks == null || asks.size() == 0) {
+			asks = new ArrayList<>();
+		}
+		for(AskquestionExtend as:asks) {
 			
 			//更新点赞量
 			int like = askquestionMapper.likeNumber(as.getId());
@@ -152,7 +166,7 @@ public class ThesisServiceImpl implements ThesisService {
 			}
 		}
 		
-		List<AskquestionExtend> findMaxlike = findMaxlike(askquestions);
+		List<AskquestionExtend> findMaxlike = findMaxlike(asks);
 //		List<AskquestionReply> replyes = new ArrayList<>();
 		
 		for(AskquestionExtend ask:findMaxlike) {
@@ -441,6 +455,12 @@ public class ThesisServiceImpl implements ThesisService {
 	@Override
 	public int updateColleThesisIsshow(int id) {
 		return thesisMapper.updateColleThesisIsshow(id);
+	}
+
+	@Override
+	public ThesisExtend selectBythesisId(int id, User user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

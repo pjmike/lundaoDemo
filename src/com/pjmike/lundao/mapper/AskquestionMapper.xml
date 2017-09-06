@@ -20,10 +20,10 @@
   <!-- 返回用户关注的异议及提问 -->
  	<resultMap type="com.pjmike.lundao.po.AskquAttention" id="resultask">
  		   <id column="id" property="id" jdbcType="INTEGER" />
- 		   <result column="describtion" property="describtion" jdbcType="VARCHAR" />
- 		     <result column="content" property="content" jdbcType="VARCHAR" />
- 		      <result column="type" property="type" jdbcType="INTEGER" />
- 		      <result column="view" property="view" jdbcType="INTEGER" />
+ 		   <result column="describtion" property="title" jdbcType="VARCHAR" />
+ 		     <result column="content" property="contentSummary" jdbcType="VARCHAR" />
+ 		      <result column="type" property="IdState" jdbcType="INTEGER" />
+ 		      <result column="view" property="viewNum" jdbcType="INTEGER" />
  	</resultMap>
  	
  	<!-- 返回某一个具体的提问及异议 -->

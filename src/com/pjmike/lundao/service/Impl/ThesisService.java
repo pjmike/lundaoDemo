@@ -12,7 +12,7 @@ import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 
 public interface ThesisService {
-	public ThesisExtend selectBythesisId(int id,User user);
+	public ThesisExtend selectBythesisId(int id,User user,int currPage,int pageSize);
 	
 	 //增加论点
     int insert(Thesis record);
@@ -38,4 +38,6 @@ public interface ThesisService {
     AskquestionExtend selectReply(ReplyExtend it,User user);
     
     int updateColleThesisIsshow(int id);
+
+	ThesisExtend selectBythesisId(int id, User user);
 }

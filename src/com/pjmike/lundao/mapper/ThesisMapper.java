@@ -52,4 +52,5 @@ public interface ThesisMapper {
     List<ThesisCollection> selectAllCollectionThesis(int id);
     
     int updateColleThesisIsshow(int id);
+    //返回所关注的论点
 }

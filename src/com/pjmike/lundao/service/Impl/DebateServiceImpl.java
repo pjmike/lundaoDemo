@@ -2,6 +2,7 @@ package com.pjmike.lundao.service.Impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.Markdebate;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.User;
+import com.sun.javafx.collections.MappingChange.Map;
 @Service
 public class DebateServiceImpl implements DebateService{
 	
@@ -160,9 +162,14 @@ public class DebateServiceImpl implements DebateService{
 
 	//查看全部辩题不含论点
 	@Override
-	public List<Debatetopic> selectListby(User user) {
+	public List<Debatetopic> selectListByPage(User user,int currPage,int pageSize) {
+		java.util.Map<String, Object> data = new HashMap<>();
+		data.put("currPage", currPage);
+		data.put("pageSize", pageSize);
+		
+		
 		//从数据库查询出来的辩题列表
-				List<Debatetopic> debatelist = debatetopicMapper.selectListby();
+				List<Debatetopic> debatelist = debatetopicMapper.selectListByPage(data);
 				
 				//设置点赞数
 				for(Debatetopic d:debatelist) {
@@ -296,5 +303,42 @@ public class DebateServiceImpl implements DebateService{
 	@Override
 	public int deleteAttention(Integer topicid, int id) {
 		return debatetopicMapper.deleteAttention(id, topicid);
+	}
+
+	@Override
+	public List<Debatetopic> selectAlldebateAttentioned(int id) {
+		return debatetopicMapper.selectAlldebateAttentioned(id);
+	}
+
+	@Override
+	public Integer findIshasLike(Integer topicid, int id) {
+		return debatetopicMapper.findIshasLike(id, topicid);
+	}
+
+	@Override
+	public int Likeagain(Integer topicid, int id) {
+		return debatetopicMapper.Likeagain(id, topicid);
+	}
+
+	@Override
+	public Integer findisHasAttention(Integer topicid, int id) {
+		return debatetopicMapper.findisHasAttention(id, topicid);
+	}
+
+	@Override
+	public int Attentionagain(Integer topicid, int id) {
+		return debatetopicMapper.Attentionagain(id, topicid);
+	}
+
+	@Override
+	public Integer Islike(Integer topicid, int id) {
+		// TODO Auto-generated method stub
+		return debatetopicMapper.Islike(id, topicid);
+	}
+
+	@Override
+	public Integer IsAttention(Integer topicid, int id) {
+		// TODO Auto-generated method stub
+		return debatetopicMapper.IsAttention(id, topicid);
 	}
 }

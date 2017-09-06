@@ -123,7 +123,7 @@
 	 		a.isShow,
 	 		u.nickname,
 	 		u.Icon
- 	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  left join user u on a.from_uid = u.id where t.thesisId=#{id}  order by thesisId  limit 10
+ 	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  left join user u on a.from_uid = u.id where t.thesisId=#{id}  order by thesisId  
    </select>
    
    <!-- 增加论点 -->
@@ -187,6 +187,7 @@
   <update id="deleteAttention">
   	update thesisAttention set status = 0 where user_id =#{user_id} and thesis_id =#{thesis_id}
   </update>
+   <!--再次关注辩题-->
    
    
    <!-- 点击收藏页面的小叉 -->

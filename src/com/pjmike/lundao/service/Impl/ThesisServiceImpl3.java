@@ -429,5 +429,11 @@ public class ThesisServiceImpl3 implements ThesisService {
 		return 0;
 	}
 
+	@Override
+	public ThesisExtend selectBythesisId(int id, User user, int currPage, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
