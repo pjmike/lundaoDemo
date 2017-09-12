@@ -30,6 +30,7 @@ import com.pjmike.lundao.service.Impl.DebateServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl2;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl3;
+import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
 import com.rabbitmq.tools.json.JSONReader;
 
@@ -54,6 +55,8 @@ public class ThesisController {
 	ThesisServiceImpl3 thesisServiceImpl3;
 	@Autowired
 	AskquesServiceImpl askquesServiceImpl;
+	@Autowired
+	UserServiceImpl userServiceImpl;
 	/**
 	 * 
 	 * @return
@@ -63,13 +66,14 @@ public class ThesisController {
 	public ThesisExtend selectBythesisId(HttpServletRequest request,HttpServletResponse response) throws Exception,ClassCastException {
 		JSONObject json = JsonRead.receivePost(request);
 		int thesisid = json.getInt("thesisId");
-		int userid = json.getInt("id");
+		int id = json.getInt("id");
 		int currPage = json.getInt("currPage");
 		int pageSize = json.getInt("pageSize");
+		
 		User user = null;
-		if (userid>0) {
+		if(id>0) {
 			user = new User();
-			user.setId(userid);
+			user.setId(id);
 		}
 		/*String thesisid = request.getParameter("thesisId");
 		String userid = request.getParameter("id");
@@ -94,8 +98,8 @@ public class ThesisController {
 		int replyid = json.getInt("replyId");
 		int touid = json.getInt("toUid");
 		int userid = json.getInt("userid");
-		User user = null;
-		if (userid >0 ) {
+		User user =null;
+		if(userid >0 ) {
 			user = new User();
 			user.setId(userid);
 		}
@@ -120,8 +124,8 @@ public class ThesisController {
 		int replyid = json.getInt("replyId");
 		int touid = json.getInt("toUid");
 		int userid = json.getInt("userid");
-		User user = null;
-		if(userid > 0) {
+		User user =null;
+		if(userid >0 ) {
 			user = new User();
 			user.setId(userid);
 		}
@@ -176,9 +180,12 @@ public class ThesisController {
 	@RequestMapping("/thesisAttention")
 	public ModelAndView thesisAttention(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int id = json.getInt("id");
-		User user = new User();
-		user.setId(id);
+		int userid = json.getInt("id");
+		User user =null;
+		if(userid >0 ) {
+			user = new User();
+			user.setId(userid);
+		}
 		int thesisid = json.getInt("thesisId");
 		boolean isAttention = json.getBoolean("isAttention");
 //		Integer status = 
@@ -195,7 +202,7 @@ public class ThesisController {
 	public ModelAndView submitSupplement(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int thesisId = json.getInt("thesisId");
-		int userId = json.getInt("userId");
+		int userid = json.getInt("userId");
 		String nickname = json.getString("nickname");
 		String Icon = json.getString("Icon");
 		String supplement = json.getString("supplement");
@@ -204,7 +211,7 @@ public class ThesisController {
 		su.setNickname(nickname);
 		su.setSupplement(supplement);
 		su.setThesisId(thesisId);
-		su.setUserid(userId);
+		su.setUserid(userid);
 		thesisServiceImpl.insertsupplement(su);
 		return null;
 	}

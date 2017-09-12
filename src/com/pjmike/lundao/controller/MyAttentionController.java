@@ -19,9 +19,11 @@ import com.pjmike.lundao.po.DebateAndThesis;
 import com.pjmike.lundao.po.Debatetopic;
 import com.pjmike.lundao.po.MyAttentionData;
 import com.pjmike.lundao.po.Thesis;
+import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
 import com.pjmike.lundao.service.Impl.UserAttentionServiceImpl;
+import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
 
 import net.sf.json.JSONObject;
@@ -33,13 +35,13 @@ public class MyAttentionController {
 	AskquesServiceImpl askquesServiceImpl;
 	@Autowired
 	UserAttentionServiceImpl userAttentionServiceImpl;
+	@Autowired
+	UserServiceImpl userServiceImpl;
 	@RequestMapping(value="/myAttention")
 	@ResponseBody
 	public MyAttentionData AttentionAskquestion(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int id = json.getInt("id");
-		/*String idd= request.getParameter("id");
-		int id = Integer.parseInt(idd);*/
 		List<AskquAttention> asks = askquesServiceImpl.selecrAllAttentionAskqustion(id);
 		MyAttentionData myAttentionData = new MyAttentionData();
 		myAttentionData.setAskquestions(asks);

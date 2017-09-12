@@ -7,4 +7,5 @@
 	<insert id="insertsupplement" parameterType="com.pjmike.lundao.po.Supplement">
 		insert into supplement(thesisId,nickname,Icon,supplement) values(#{thesisId},#{nickname},#{Icon},#{supplement})
 	</insert>
+	
 </mapper>

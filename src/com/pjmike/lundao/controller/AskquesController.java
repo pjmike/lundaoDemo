@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
+import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
 import com.pjmike.lundao.util.Producer;
 
@@ -28,6 +29,8 @@ public class AskquesController {
 	AskquesServiceImpl askquesServiceImpl;
 	@Autowired
 	Producer producer;
+	@Autowired
+	UserServiceImpl userServiceImpl;
 	/**
 	 * 
 	 * @param request
@@ -47,6 +50,7 @@ public class AskquesController {
 		int fromUid = jb.getInt("fromUid");
 		int type = jb.getInt("type");
 		Askquestion ask = new Askquestion();
+		ask.setThesisId(thesisId);
 		ask.setContent(content);
 		ask.setFromUid(fromUid);
 		ask.setDescribtion(describtion);
@@ -58,9 +62,9 @@ public class AskquesController {
 	public ModelAndView deleteAskquestion(HttpServletRequest request) throws IOException {
 		
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("id");
+		int id = json.getInt("id");
 		int askid = json.getInt("askid");
-		askquesServiceImpl.changeIsShow(userid, askid);
+		askquesServiceImpl.changeIsShow(id, askid);
 		return null;
 	}
 }

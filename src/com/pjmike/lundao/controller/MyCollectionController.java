@@ -18,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisCollection;
+import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
+import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
 
 import net.sf.json.JSONObject;
@@ -29,6 +31,8 @@ import net.sf.json.JSONObject;
 public class MyCollectionController {
 	@Autowired
 	ThesisServiceImpl thesisServiceImpl;
+	@Autowired
+	UserServiceImpl userServiceImpl;
 	/**
 	 * 收藏论点
 	 * @param request
@@ -38,9 +42,9 @@ public class MyCollectionController {
 	public ModelAndView  collectThesis(HttpServletRequest request) throws IOException {
 		
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("id");
+		int id = json.getInt("id");
 		int thesisid = json.getInt("thesisId");
-		thesisServiceImpl.collectionThesis(thesisid, userid);
+		thesisServiceImpl.collectionThesis(thesisid, id);
 		return null;
 	}
 	/**

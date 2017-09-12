@@ -18,6 +18,7 @@ import com.pjmike.lundao.po.Debatetopic;
 import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
+import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
 
 import net.sf.json.JSON;
@@ -29,6 +30,8 @@ import net.sf.json.JSONObject;
 public class DebateController {
 	@Autowired
 	private DebateServiceImpl debateServiceImpl;
+	@Autowired
+	private UserServiceImpl userServiceImpl;
 	/*
 	 * 按主键查找辩题，返回json辩题
 	 */
@@ -37,10 +40,13 @@ public class DebateController {
 	public  @ResponseBody Debatetopicextend debateFindbyId(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("id");
+		int id = json.getInt("id");
 		int topicId = json.getInt("topicId");
-		User user = new User();
-		user.setId(userid);
+		User user = null;
+		if(id>0) {
+			user = new User();
+			user.setId(id);
+		}
 		Debatetopicextend debatetopic = debateServiceImpl.selectByPrimaryKey(topicId,user);
 		return debatetopic;
 	}
@@ -53,13 +59,13 @@ public class DebateController {
 	@RequestMapping("/alldebateByPage")
 	public  @ResponseBody List<Debatetopic> debateby(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("id");
 		int currPage = json.getInt("currPage");
 		int pageSize = json.getInt("pageSize");
+		int id = json.getInt("id");
 		User user =null;
-		if(userid >0) {
+		if(id > 0 ) {
 			user = new User();
-			user.setId(userid);
+			user.setId(id);
 		}
 	
 		
@@ -75,24 +81,25 @@ public class DebateController {
 	@RequestMapping("/updateVote")
 	public ModelAndView updateVote(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("id");
 		int topicId = json.getInt("topicId");
 		boolean statusLike = json.getBoolean("islike");
-		Integer islike = debateServiceImpl.Islike(topicId, userid);
+		int id = json.getInt("id");
+	
+		Integer islike = debateServiceImpl.Islike(topicId, id);
 		if(islike != null) {
 			if(statusLike) {
-				debateServiceImpl.Likeagain(topicId, userid);
+				debateServiceImpl.Likeagain(topicId, id);
 				
 			} else {
-				debateServiceImpl.giveupLike(topicId, userid);
+				debateServiceImpl.giveupLike(topicId, id);
 			}
 		} else {
 			
 			if(statusLike) {
-				debateServiceImpl.insetLike(topicId, userid);
+				debateServiceImpl.insetLike(topicId, id);
 				
 			} else {
-				debateServiceImpl.giveupLike(topicId, userid);
+				debateServiceImpl.giveupLike(topicId, id);
 			}
 		}
 		return null;
@@ -108,21 +115,21 @@ public class DebateController {
 	public ModelAndView updateAttention(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		
-		int userid = json.getInt("id");
+		int id = json.getInt("id");
 		int topicId = json.getInt("topicId");
 		boolean isAttention = json.getBoolean("isAttention");
-		Integer Attention = debateServiceImpl.IsAttention(topicId, userid);
+		Integer Attention = debateServiceImpl.IsAttention(topicId, id);
 		if(Attention != null) {
 			if(isAttention) {
-				debateServiceImpl.Attentionagain(topicId, userid);
+				debateServiceImpl.Attentionagain(topicId, id);
 			} else {
-				debateServiceImpl.deleteAttention(topicId, userid);
+				debateServiceImpl.deleteAttention(topicId, id);
 			}
 		} else {
 			if(isAttention) {
-				debateServiceImpl.insertAttention(topicId, userid);
+				debateServiceImpl.insertAttention(topicId, id);
 			} else {
-				debateServiceImpl.deleteAttention(topicId, userid);
+				debateServiceImpl.deleteAttention(topicId, id);
 			}
 		}
 		return null;

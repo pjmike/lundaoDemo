@@ -19,9 +19,11 @@ public interface UserService {
 	public int updateUser(User user) throws Exception;
 		
 		
-	//保存用户的头像与用户名 
+	//保存用户的头像与用户名 和id
 	public int insertUser(User user);
 	
 	//根据用户id查询用户头像与nickname 
 	public User selectNicknameAndIcon(int id);
+	
+	public User selectUser(String openid);
 }

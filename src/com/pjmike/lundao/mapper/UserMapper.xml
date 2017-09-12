@@ -12,17 +12,16 @@
 	<update id="pudateUser" parameterType="com.pjmike.lundao.po.User2">
 	update users set username=#{username}, password=#{password}
 	</update> -->
-
+	
 	<resultMap type="com.pjmike.lundao.po.User" id="ResultOne">
 		<result column="nickname" property="nickname"/>
 		<result column="Icon" property="Icon"/>
 	</resultMap>
 	
 	<!-- 保存用户的头像与用户名 -->
-	<insert id="insertUser" parameterType="com.pjmike.lundao.po.User">
-		insert into user(nickname,Icon) values(#{nickname},#{Icon})
+	<insert id="insertUser" parameterType="com.pjmike.lundao.po.User"  useGeneratedKeys="true" keyProperty="id">
+		insert into user(openid,nickname,Icon) values(#{openid},#{nickname},#{Icon})
 	</insert>
-	
 	<!-- 更新用户的信息 -->
 	<insert id="updateUser" parameterType="com.pjmike.lundao.po.User">
 		update user set nickname=#{nickname} and Icon=#{Icon}
@@ -32,5 +31,8 @@
 	<!-- 根据用户id查询用户头像与nickname -->	
 	<select id="selectNicknameAndIcon" parameterType="int" resultMap="ResultOne">
 		select nickname,Icon from user where id =#{id}
+	</select>
+	<select id="selectUser" parameterType="String" resultType="com.pjmike.lundao.po.User">
+		select * from user where openid = #{value}
 	</select>
 </mapper>

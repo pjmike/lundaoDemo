@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class User {
 	private int id;
+	private String openid;
 	private String mobile;
 	private String password;
 	private String nickname;
@@ -22,6 +23,12 @@ public class User {
 	private Timestamp updated_at;
 	public String getIcon() {
 		return Icon;
+	}
+	public String getOpenid() {
+		return openid;
+	}
+	public void setOpenid(String openid) {
+		this.openid = openid;
 	}
 	public void setIcon(String icon) {
 		Icon = icon;

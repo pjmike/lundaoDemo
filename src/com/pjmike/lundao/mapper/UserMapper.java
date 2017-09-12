@@ -22,5 +22,6 @@ public interface UserMapper {
 	//根据用户id查询用户头像与nickname 
 	public User selectNicknameAndIcon(int id);
 	
+	public User selectUser(String openid);
 	
 }

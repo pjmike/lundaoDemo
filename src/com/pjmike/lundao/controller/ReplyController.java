@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pjmike.lundao.po.Reply;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.ReplyServiceImpl;
+import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
 import com.pjmike.lundao.util.Producer;
 
@@ -23,7 +24,8 @@ import net.sf.json.JSONObject;
 public class ReplyController {
 	@Autowired
 	ReplyServiceImpl replyServiceImpl;
-	
+	@Autowired
+	UserServiceImpl userServiceImpl;
 	@RequestMapping("/insertreply")
 	public ModelAndView reply(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
@@ -44,13 +46,8 @@ public class ReplyController {
 	@RequestMapping("/deleteReply")
 	public ModelAndView deleteReply(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("userid");
 		int replyid = json.getInt("replyid");
-		User user = null;
-		if(userid >0) {
-			user = new User();
-			user.setId(userid);
-		}
+		int userid = json.getInt("userid");
 		replyServiceImpl.changereplyIsShow(userid, replyid);
 		return null;
 	}

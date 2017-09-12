@@ -66,6 +66,11 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectNicknameAndIcon(id);
 	}
 
+	@Override
+	public User selectUser(String openid) {
+		return userMapper.selectUser(openid);
+	}
+
 	
 	
 	

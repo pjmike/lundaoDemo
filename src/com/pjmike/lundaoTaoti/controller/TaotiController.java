@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.pjmike.lundao.service.util.JsonRead;
 import com.pjmike.lundaoTaoti.po.Taoti;
 import com.pjmike.lundaoTaoti.service.Impl.TaotiServiceImpl;
@@ -25,15 +27,20 @@ public class TaotiController {
 	 * 查询出一个淘题信息
 	 * @param id
 	 * @return
+	 * @throws IOException 
 	 */
-	@RequestMapping("returnOneThesis")
+	@RequestMapping("/OneThesis")
 	@ResponseBody
-	public Taoti returnOneThesis(int id) {
+	public Taoti returnOneThesis(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int id = json.getInt("taotiId");
 		return taotiServiceImpl.selectOne(id);
+		
 	}
 	
 	@RequestMapping("/insertTaotiThesis")
-	public void insertTaotiThesis() {
+	public ModelAndView insertTaotiThesis() {
+		return null;
 		
 	}
 	/**
@@ -42,7 +49,7 @@ public class TaotiController {
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping("allTaoti")
+	@RequestMapping("/allTaoti")
 	@ResponseBody
 	public List<Taoti> allTaoti(HttpServletRequest request) throws IOException {
 		JSONObject jsonObject = JsonRead.receivePost(request);
@@ -56,12 +63,20 @@ public class TaotiController {
 	 * @param request
 	 * @throws IOException 
 	 */
-	@RequestMapping("upAndDownCommentNum")
-	public void upAndDownCommentNum(HttpServletRequest request) throws IOException {
+	@RequestMapping("/upAndDownCommentNum")
+	public ModelAndView upAndDownCommentNum(HttpServletRequest request) throws IOException {
 		JSONObject jb = JsonRead.receivePost(request);
-		
+		String nickname = jb.getString("nickname");
+		String Icon = jb.getString("Icon");
+		int taoTiId = jb.getInt("taotiId");
+		boolean commented = jb.getBoolean("commented");
 		Taoti taoti = new Taoti();
+		taoti.setNickname(nickname);
+		taoti.setIcon(Icon);
+		taoti.setCommented(commented);
+		taoti.setTaotiId(taoTiId);
 		taotiServiceImpl.upAndDownCommentNum(taoti);
+		return null;
 	}
 	
 	/**
@@ -69,8 +84,8 @@ public class TaotiController {
 	 * @param request
 	 * @throws IOException 
 	 */
-	@RequestMapping("insertTheis")
-	public void insertTheis(HttpServletRequest request) throws IOException {
+	@RequestMapping("/insertTheis")
+	public ModelAndView insertTheis(HttpServletRequest request) throws IOException {
 		JSONObject jb = JsonRead.receivePost(request);
 		String nickname = jb.getString("nickname");
 		String Icon = jb.getString("Icon");
@@ -91,6 +106,7 @@ public class TaotiController {
 		taoti.setIcon(Icon);
 		
 		taotiServiceImpl.insertTheis(taoti);
+		return null;
 		
 		
 	}

@@ -5,13 +5,16 @@ import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pjmike.lundao.connect.ConnectWenxin;
+import com.pjmike.lundao.po.OpenId;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
@@ -33,44 +36,43 @@ public class ConnectWxinController {
 	 * 
 	 */
 	@RequestMapping("/connect")
-	public String connect(HttpServletRequest request) throws IOException {
-		JSONObject json = JsonRead.receivePost(request);/*
-		String nickname = json.getString("username");
-		String imgurl = json.getString("img");
-		String code = json.getString("code");*/
+	@ResponseBody
+	public OpenId connect(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		/*String nickname = json.getString("nickname");
+		String imgurl = json.getString("Icon");*/
+		String code = json.getString("code");
 		//获取用户名和头像路径地址
-		String nickname = request.getParameter("username");
-		try {
+		/*try {
 			//防止中文乱码
 			String userNameDecode = new String(nickname.getBytes("ISO-8859-1"),"utf-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 //		JSONObject obj = new JSONObject().fromObject("user");
 		
 		
-		String imgurl = request.getParameter("img");
-		String code = request.getParameter("code");
 		
 		//添加用户信息
-		if (nickname != null && imgurl != null) {
+		/*if (nickname != null && imgurl != null) {
 			User user = new User();
 			user.setNickname(nickname);
 			user.setIcon(imgurl);
 			userServiceImpl.insertUser(user);
-		}
+		}*/
 		
 		//appid为小程序ID
-		String appid = null;
+		String appid = "wx729dd86a0f029999";
 		//secret为小程序密钥(AppSecret)
-		String secret= null;
+		String secret= "e89fad08534ea1be4327ef71d6445c33";
 		
 		String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appid+"&secret="+secret+"&js_code="+code+"&grant_type=authorization_code";
 		String openidskey = ConnectWenxin.GET(url);
 		
 		//解析获得的openid+session_key JSON字符串
+	
 		JSONArray jsonArray = new JSONArray();
 		JSONObject obj = new JSONObject().fromObject(openidskey);
 		String openid = null;
@@ -79,16 +81,19 @@ public class ConnectWxinController {
 		 openid = obj.getString("openid");
 		 session_key = obj.getString("session_key");
 		}
+	/*	String open_id = "{\"openid\":"+openid+"}";
+		JSONObject js = new JSONObject().fromObject(open_id);*/
+		OpenId open = new OpenId();
+		open.setOpenid(openid);
 		String uid = UUID.randomUUID().toString();
 		StringBuffer sb = new StringBuffer();
 		sb.append(openid);
 		sb.append(","+session_key);
-		
+		/*
 		HttpSession session = request.getSession();
 		session.setAttribute(uid, sb.toString());
-		session.setMaxInactiveInterval(900);
+		session.setMaxInactiveInterval(900);*/
 		
-		return uid;
-		
+		return open;
 	}
 }
