@@ -24,9 +24,9 @@ public class TaotiServiceImpl implements TaotiService {
 	 * 返回用户的淘题信息
 	 */
 	@Override
-	public List<Taoti> selectAllTaoti(String nickname) {
+	public List<Taoti> selectAllTaoti(int id) {
 		
-		List<Taoti> taotilist = taotiMapper.selectAllTaoti(nickname);
+		List<Taoti> taotilist = taotiMapper.selectAllTaoti(id);
 		for(Taoti taoti:taotilist) {
 			String backgroud = taoti.getBackground();
 			String title1 = "";
@@ -54,7 +54,7 @@ public class TaotiServiceImpl implements TaotiService {
 	 * 返回某一具体辩题信息
 	 */
 	@Override
-	public Taoti selectOne(int id) {
-		return taotiMapper.selectOne(id);
+	public Taoti selectOne(int taotiId,int userid) {
+		return taotiMapper.selectOne(taotiId,userid);
 	}
 }

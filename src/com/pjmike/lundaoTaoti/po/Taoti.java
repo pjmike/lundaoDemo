@@ -2,6 +2,7 @@ package com.pjmike.lundaoTaoti.po;
 
 public class Taoti {
 	private int taotiId;
+	private int userid;
 	private String nickname;
 	private String Icon;
 	private String title;
@@ -78,5 +79,11 @@ public class Taoti {
 	}
 	public void setCommented(boolean commented) {
 		this.commented = commented;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

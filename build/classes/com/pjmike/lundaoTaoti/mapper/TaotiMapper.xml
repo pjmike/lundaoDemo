@@ -19,16 +19,16 @@
 
 	<!-- 增添用户发起的辩题 -->
 	<insert id="insertTheis" parameterType="com.pjmike.lundaoTaoti.po.Taoti">
-		insert into taoTi(nickname,Icon,title,content,backgroud) values(#{nickname},#{Icon},#{title},#{conten},#{backgroud})
+		insert into taoTi(nickname,Icon,title,content,backgroud) values(#{nickname},#{Icon},#{title},#{content},#{backgroud})
 	</insert>
 	
 	<!-- 找出用户所有的淘题 -->
-	<select id="selectAllTaoti" parameterType="String" resultMap="ResultAllTaoti">
-		select taotiId,title,backgroud,commentNum,commented from taoTi where nickname=#{nickname}
+	<select id="selectAllTaoti" parameterType="int" resultMap="ResultAllTaoti">
+		select taotiId,title,backgroud,commentNum,tc.commented from taoTi t left join taoticommented tc on t.userid = tc.taoti_userid where taotiId=#{id}
 	</select>
 	<!-- 返回某一具体淘题的信息 -->
-	<select id="selectOne" parameterType="int" resultMap="ResultAllTaoti2">
-		select title,content,backgroud,commented from taoTi where taotiId = #{id}
+	<select id="selectOne" resultMap="ResultAllTaoti2">
+		select title,content,backgroud,commented from taoTi t left join taoticommented tc where taotiId = #{taotiId} and userid = #{userid}
 	</select>
 	
 	<!-- 增加淘题的期望值 -->
@@ -39,4 +39,7 @@
 	<update id="downCommentNum" parameterType="int">
 		update taoTi set commentNum = commentNum-1 where taotiId = #{id}
 	</update>
+	<insert id="insertCommented" parameterType="com.pjmike.lundaoTaoti.po.Taoti">
+		insert into taoticommented(taoti_userid,taoti_id,commented) values(#{taotiId},#{userid},#{commented})
+	</insert>
 </mapper>

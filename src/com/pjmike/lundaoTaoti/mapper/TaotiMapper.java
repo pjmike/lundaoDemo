@@ -2,6 +2,8 @@ package com.pjmike.lundaoTaoti.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.pjmike.lundaoTaoti.po.Taoti;
 
 public interface TaotiMapper {
@@ -17,14 +19,14 @@ public interface TaotiMapper {
 	 * @param nickname
 	 * @return
 	 */
-	List<Taoti> selectAllTaoti(String nickname);
+	List<Taoti> selectAllTaoti(int id);
 	
 	/**
 	 * 返回一个具体淘题信息
 	 * @param nickname
 	 * @return
 	 */
-	Taoti selectOne(int id);
+	Taoti selectOne(@Param("taotiId")int taotiId,@Param("userid")int userid);
 	
 	/**增加淘题的期望值
 	 * @param id

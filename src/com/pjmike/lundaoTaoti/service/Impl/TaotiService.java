@@ -17,7 +17,7 @@ public interface TaotiService {
 	 * @param nickname
 	 * @return
 	 */
-	List<Taoti> selectAllTaoti(String nickname);
+	List<Taoti> selectAllTaoti(int id);
 	
 	/**增加或减少淘题的期望值
 	 * @param id
@@ -30,6 +30,6 @@ public interface TaotiService {
 	 * @param nickname
 	 * @return
 	 */
-	Taoti selectOne(int id);
+	Taoti selectOne(int taotiId,int userid);
 	
 }

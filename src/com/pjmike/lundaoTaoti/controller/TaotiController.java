@@ -33,14 +33,9 @@ public class TaotiController {
 	@ResponseBody
 	public Taoti returnOneThesis(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int id = json.getInt("taotiId");
-		return taotiServiceImpl.selectOne(id);
-		
-	}
-	
-	@RequestMapping("/insertTaotiThesis")
-	public ModelAndView insertTaotiThesis() {
-		return null;
+		int taotId = json.getInt("taotiId");
+		int userid = json.getInt("userid");
+		return taotiServiceImpl.selectOne(taotId,userid);
 		
 	}
 	/**
@@ -53,9 +48,9 @@ public class TaotiController {
 	@ResponseBody
 	public List<Taoti> allTaoti(HttpServletRequest request) throws IOException {
 		JSONObject jsonObject = JsonRead.receivePost(request);
-		String nickname = jsonObject.getString("nickname");
+		int id = jsonObject.getInt("id");
 		
-		return taotiServiceImpl.selectAllTaoti(nickname);
+		return taotiServiceImpl.selectAllTaoti(id);
 		
 	}
 	/**
@@ -66,15 +61,13 @@ public class TaotiController {
 	@RequestMapping("/upAndDownCommentNum")
 	public ModelAndView upAndDownCommentNum(HttpServletRequest request) throws IOException {
 		JSONObject jb = JsonRead.receivePost(request);
-		String nickname = jb.getString("nickname");
-		String Icon = jb.getString("Icon");
+		int userid = jb.getInt("userid");
 		int taoTiId = jb.getInt("taotiId");
 		boolean commented = jb.getBoolean("commented");
 		Taoti taoti = new Taoti();
-		taoti.setNickname(nickname);
-		taoti.setIcon(Icon);
 		taoti.setCommented(commented);
 		taoti.setTaotiId(taoTiId);
+		taoti.setUserid(userid);
 		taotiServiceImpl.upAndDownCommentNum(taoti);
 		return null;
 	}
@@ -87,13 +80,14 @@ public class TaotiController {
 	@RequestMapping("/insertTheis")
 	public ModelAndView insertTheis(HttpServletRequest request) throws IOException {
 		JSONObject jb = JsonRead.receivePost(request);
+		int userid = jb.getInt("id");
 		String nickname = jb.getString("nickname");
 		String Icon = jb.getString("Icon");
 		String title = jb.getString("describtion");
 		String content = jb.getString("content");
 		String backgroud = jb.getString("backgroud");
 		JSONArray la = jb.getJSONArray("labels");
-		String[] labels = null;
+		String[] labels = null ;
 		for(int i=0;i<la.size();i++) {
 			labels[i] = la.getString(i);
 		}
@@ -104,10 +98,17 @@ public class TaotiController {
 		taoti.setLabels(labels);
 		taoti.setNickname(nickname);
 		taoti.setIcon(Icon);
+		taoti.setUserid(userid);
 		
 		taotiServiceImpl.insertTheis(taoti);
 		return null;
-		
-		
+	}
+	@RequestMapping("/wantCommented")
+	public ModelAndView wantCommented(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int userid = json.getInt("userid");
+		int taotiId = json.getInt("taotiId");
+		boolean commented = json.getBoolean("commented");
+		return null;
 	}
 }
