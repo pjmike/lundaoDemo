@@ -82,9 +82,14 @@
   <update id="giveupLike">
   	update replyvote set r_status = 0 where r_uid =#{r_uid} and r_replyid =#{r_replyid}
   </update>
-  
+   <update id="AgainLike">
+  	update replyvote set r_status = 1 where r_uid =#{r_uid} and r_replyid =#{r_replyid}
+  </update>
+  <select id="selectLike" resultType="int">
+  	select count(*) from replyvote where r_uid =#{r_uid} and r_replyid =#{r_replyid}
+  </select>
   <!-- 发起回复 -->
-  <insert id="reply" parameterType="com.pjmike.lundao.po.Reply">
+  <insert id="reply" parameterType="com.pjmike.lundao.po.Reply" >
   	insert into reply(comment_id,reply_id,from_uid,to_uid,r_describtion) values(#{commentId},#{replyId},#{fromUid},
   	#{toUid},#{rDescribtion})
   </insert>

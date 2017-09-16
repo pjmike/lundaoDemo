@@ -2,6 +2,8 @@ package com.pjmike.lundaoTaoti.service.Impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.pjmike.lundaoTaoti.po.Taoti;
 
 public interface TaotiService {
@@ -31,5 +33,18 @@ public interface TaotiService {
 	 * @return
 	 */
 	Taoti selectOne(int taotiId,int userid);
+	
+	int downCommentNum(int id);
+	
+	int insertCommented(Taoti taoti);
+	
+	int updateCommented(Taoti taoti);
+	
+	int selectTaoticommented(Taoti taoti);
+	
+	int selectTaotiStatus(int taotiId,int userid);
+	int insertlabels(int taotiId,String labels);
+
+
 	
 }

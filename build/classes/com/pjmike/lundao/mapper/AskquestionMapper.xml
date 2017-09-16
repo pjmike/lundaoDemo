@@ -68,7 +68,12 @@
   <update id="giveupLike" parameterType="com.pjmike.lundao.po.comvote">
   	update comvote set a_status = 0 where a_uid =#{a_uid} and a_comment_id =#{a_comment_id} 
   </update>
-  
+    <update id="AaginLike" parameterType="com.pjmike.lundao.po.comvote">
+  	update comvote set a_status = 1 where a_uid =#{a_uid} and a_comment_id =#{a_comment_id} 
+  </update>
+  <select id="selectLike" parameterType="com.pjmike.lundao.po.comvote" resultType="int">
+  	select count(*) from comvote where a_uid =#{a_uid} and a_comment_id =#{a_comment_id} 
+  </select>
   <!-- 更改提问或异议是否显示的状态 -->
   <insert id="changeIsShow" >
   	insert into userAskIsShow(userid,askid,askisShow) values(#{userid},#{askid},0)
@@ -79,13 +84,18 @@
   </select>
   <!-- 关注辩题 -->
   <insert id="insertAttention">
-  	insert into askquAttention(ask_id,user_id,status) values(#{ask_id},#{user_id},1)
+  	insert into askquAttention(user_id,ask_id,status) values(#{user_id},#{ask_id},1)
   </insert>
   <!--取消关注辩题 -->
   <update id="deleteAttention">
   	update askquAttention set status = 0 where user_id =#{user_id} and ask_id =#{ask_id}
   </update>
-	
+  <update id="AaginAttention">
+  	update askquAttention set status = 1 where user_id =#{user_id} and ask_id =#{ask_id}
+  </update>
+ <select id="selectAttention" resultType="int">
+ 	select count(*) from askquAttention where user_id =#{user_id} and ask_id =#{ask_id}
+ </select>
   <!-- 判断一个用户是否关注某个提问 -->
   <select id="IsAttention" parameterType="com.pjmike.lundao.po.comvote" resultType="java.lang.Integer">
   	select status from  askquAttention where user_id =#{user_id} and ask_id =#{ask_id}

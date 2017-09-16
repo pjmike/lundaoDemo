@@ -1,20 +1,16 @@
 package com.pjmike.lundao.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pjmike.lundao.po.Askquestion;
-import com.pjmike.lundao.po.User;
+import com.pjmike.lundao.po.comvote;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
@@ -67,4 +63,46 @@ public class AskquesController {
 		askquesServiceImpl.changeIsShow(id, askid);
 		return null;
 	}
-}
+	@RequestMapping("/AttentionAskquestion")
+	public ModelAndView AttentionAskquestion(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int id = json.getInt("id");
+		int askid = json.getInt("askid");
+		boolean isAttention = json.getBoolean("isAttention");
+		int count = askquesServiceImpl.selectAttention(id, askid);
+		if (count == 0) {
+			askquesServiceImpl.insertAttention(id, askid);
+		} 
+		if (count == 1) {
+			if (isAttention) {
+				askquesServiceImpl.AaginAttention(id, askid);
+			} else {
+				askquesServiceImpl.deleteAttention(id, askid);
+			}
+		} 
+		return null;
+	}
+	@RequestMapping("/likeAskquestion") 
+		public ModelAndView likeAskquestion(HttpServletRequest request) throws IOException {
+			JSONObject json = JsonRead.receivePost(request);
+			int id = json.getInt("id");
+			int askid = json.getInt("askid");
+			boolean islike = json.getBoolean("islike");
+			comvote comvote = new comvote();
+			comvote.setA_uid(id);
+			comvote.setA_comment_id(askid);
+			int count = askquesServiceImpl.selectLike(comvote);
+			if (count == 0) {
+				askquesServiceImpl.insetLike(comvote);
+			}
+			if (count == 1) {
+				if (islike) {
+					askquesServiceImpl.AaginLike(comvote);
+				} else {
+					askquesServiceImpl.giveupLike(comvote);
+				}
+			}
+			return null;
+			
+		}
+	}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mchange.v3.filecache.RelativePathFileCacheKey;
 import com.pjmike.lundao.po.Reply;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.ReplyServiceImpl;
@@ -49,6 +50,25 @@ public class ReplyController {
 		int replyid = json.getInt("replyid");
 		int userid = json.getInt("userid");
 		replyServiceImpl.changereplyIsShow(userid, replyid);
+		return null;
+	}
+	@RequestMapping("/likeReply")
+	public ModelAndView likeReply(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		int replyid = json.getInt("replyid");
+		int userid = json.getInt("userid");
+		boolean islike = json.getBoolean("islike");
+		int count = replyServiceImpl.selectLike(userid, replyid);
+		if (count == 0) {
+			replyServiceImpl.insetLike(userid, replyid);
+		} 
+		if (count == 1) {
+			if (islike) {
+				replyServiceImpl.AgainLike(userid, replyid);
+			} else {
+				replyServiceImpl.giveupLike(userid, replyid);
+			}
+		}
 		return null;
 	}
 	

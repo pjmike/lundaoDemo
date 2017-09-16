@@ -13,9 +13,12 @@ public interface ReplyService {
     //是否点赞
     int Islike(User user,int replyid);
     //点赞
-    int insetLike(User user,int replyid);
+    int insetLike(int userid,int replyid);
     //取消点赞
-    int giveupLike(User user,int replyid);
+    int giveupLike(int userid,int replyid);
+    
+    int AgainLike(int id,int replyid);
+    int selectLike(int id,int replyid);
     //发起回复
     int reply(Reply reply);
     //删除不喜欢的回复

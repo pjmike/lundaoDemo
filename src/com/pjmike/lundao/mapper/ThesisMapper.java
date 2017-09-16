@@ -42,15 +42,18 @@ public interface ThesisMapper {
     int deleteAttention(@Param("user_id")int id,@Param("thesis_id")int thesisid);
     
     //关注辩题
-    int insertAttention(@Param("user_id")int id,@Param("debate_id")int thesisid);
+    int insertAttention(@Param("user_id")int id,@Param("thesis_id")int thesisid);
     
     //收藏论点
-    int collectionThesis(@Param("user_id")int id,@Param("debate_id")int thesisid);
+    int collectionThesis(@Param("user_id")int id,@Param("thesis_id")int thesisid);
     //返回所有的完善版本
     List<ThesisSupplement> selectAllSupplement(Supplement supplement);
     
     List<ThesisCollection> selectAllCollectionThesis(int id);
+    int AaginAttentioned(@Param("user_id")int id,@Param("thesis_id")int thesisid);
     
-    int updateColleThesisIsshow(int id);
+    Integer selectAttentioned(@Param("user_id")int id,@Param("thesis_id")int thesisid);
+    
+    int updateColleThesisIsshow(@Param("user_id")int userid,@Param("thesis_id")int thesisid);
     //返回所关注的论点
 }

@@ -28,7 +28,7 @@ public interface DebatetopicMapper {
      */
     List<Debatetopic> selectAlldebateAttentioned(int id);
     //返回一个辩题的点赞数
-    int likeNumber(int id);
+    Integer likeNumber(int id);
     //返回一个辩题的关注量
     Integer AttentionNumber(int id);
     //判断是否点赞

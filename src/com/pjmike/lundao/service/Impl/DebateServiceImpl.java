@@ -34,19 +34,19 @@ public class DebateServiceImpl implements DebateService{
 	@Override
 	public Debatetopicextend selectByPrimaryKey(Integer topicid,User user) {
 		Debatetopicextend debatetopicextend = debatetopicMapper.selectByPrimaryKey(topicid);
-		int num = debatetopicMapper.likeNumber(debatetopicextend.getTopicid());
-		if(num >0) {
+		Integer num = debatetopicMapper.likeNumber(debatetopicextend.getTopicid());
+		if (num >0) {
 			debatetopicextend.setLike(num);
 		}
 		if (user!= null) {
 			if (debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid())!=null) {
-				int attentionNum = debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid());
+				Integer attentionNum = debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid());
 				if (attentionNum > 0) {
 					debatetopicextend.setAttention(attentionNum);
 				} 
 			}
 			if (debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid()) != null) {
-				int status = debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid());
+				Integer status = debatetopicMapper.Islike(user.getId(), debatetopicextend.getTopicid());
 				if (status > 0) {
 					debatetopicextend.setIslike(true);
 				} else {
@@ -54,7 +54,7 @@ public class DebateServiceImpl implements DebateService{
 				} 
 			}
 			if (debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid())!=null) {
-				int attention = debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
+				Integer attention = debatetopicMapper.IsAttention(user.getId(), debatetopicextend.getTopicid());
 				if (attention > 0) {
 					debatetopicextend.setAttention2(true);
 				} else {
@@ -173,11 +173,11 @@ public class DebateServiceImpl implements DebateService{
 				
 				//设置点赞数
 				for(Debatetopic d:debatelist) {
-					int num = debatetopicMapper.likeNumber(d.getTopicid());
+					Integer num = debatetopicMapper.likeNumber(d.getTopicid());
 					if(num >0) {
 						d.setLike(num);
 					}
-					int attentionNum = debatetopicMapper.AttentionNumber(d.getTopicid());
+					Integer attentionNum = debatetopicMapper.AttentionNumber(d.getTopicid());
 					if(attentionNum >0) {
 						d.setAttention(attentionNum);
 					}

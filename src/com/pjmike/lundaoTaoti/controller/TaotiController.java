@@ -1,6 +1,9 @@
 package com.pjmike.lundaoTaoti.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
 import com.pjmike.lundao.service.util.JsonRead;
 import com.pjmike.lundaoTaoti.po.Taoti;
 import com.pjmike.lundaoTaoti.service.Impl.TaotiServiceImpl;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -48,7 +49,7 @@ public class TaotiController {
 	@ResponseBody
 	public List<Taoti> allTaoti(HttpServletRequest request) throws IOException {
 		JSONObject jsonObject = JsonRead.receivePost(request);
-		int id = jsonObject.getInt("id");
+		int id = jsonObject.getInt("userid");
 		
 		return taotiServiceImpl.selectAllTaoti(id);
 		
@@ -68,6 +69,12 @@ public class TaotiController {
 		taoti.setCommented(commented);
 		taoti.setTaotiId(taoTiId);
 		taoti.setUserid(userid);
+		Integer count = taotiServiceImpl.selectTaoticommented(taoti);
+		if (count == 1) {
+			taotiServiceImpl.updateCommented(taoti);
+		} else {
+			taotiServiceImpl.insertCommented(taoti);
+		}
 		taotiServiceImpl.upAndDownCommentNum(taoti);
 		return null;
 	}
@@ -80,35 +87,29 @@ public class TaotiController {
 	@RequestMapping("/insertTheis")
 	public ModelAndView insertTheis(HttpServletRequest request) throws IOException {
 		JSONObject jb = JsonRead.receivePost(request);
-		int userid = jb.getInt("id");
+		int userid = jb.getInt("userid");
 		String nickname = jb.getString("nickname");
 		String Icon = jb.getString("Icon");
 		String title = jb.getString("describtion");
 		String content = jb.getString("content");
 		String backgroud = jb.getString("backgroud");
-		JSONArray la = jb.getJSONArray("labels");
-		String[] labels = null ;
+		String lebels = jb.getString("labels");
+		System.out.println(lebels);
+	
+		/*String[] labels = null ;
 		for(int i=0;i<la.size();i++) {
 			labels[i] = la.getString(i);
-		}
+		}*/
 		Taoti taoti = new Taoti();
 		taoti.setBackground(backgroud);
 		taoti.setContent(content);
 		taoti.setTitle(title);
-		taoti.setLabels(labels);
+		taoti.setLabels(lebels);
 		taoti.setNickname(nickname);
 		taoti.setIcon(Icon);
 		taoti.setUserid(userid);
 		
 		taotiServiceImpl.insertTheis(taoti);
-		return null;
-	}
-	@RequestMapping("/wantCommented")
-	public ModelAndView wantCommented(HttpServletRequest request) throws IOException {
-		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("userid");
-		int taotiId = json.getInt("taotiId");
-		boolean commented = json.getBoolean("commented");
 		return null;
 	}
 }

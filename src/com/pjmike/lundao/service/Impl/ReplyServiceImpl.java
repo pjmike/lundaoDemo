@@ -23,15 +23,16 @@ public class ReplyServiceImpl implements ReplyService {
 	 * 点赞
 	 */
 	@Override
-	public int insetLike(User user, int replyid) {
-		return replyMapper.insetLike(user.getId(),replyid);
+	public int insetLike(int userid, int replyid) {
+		return replyMapper.insetLike(userid,replyid);
 	}
 	/**
 	 * 取消点赞
 	 */
+	
 	@Override
-	public int giveupLike(User user, int replyid) {
-		return replyMapper.giveupLike(user.getId(), replyid);
+	public int giveupLike(int userid, int replyid) {
+		return replyMapper.giveupLike(userid, replyid);
 	}
 	/**
 	 * 点赞数
@@ -63,6 +64,16 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public Integer selectIsShow(int id, int replyid) {
 		return replyMapper.selectIsShow(id, replyid);
+	}
+
+	@Override
+	public int AgainLike(int id, int replyid) {
+		return replyMapper.AgainLike(id, replyid);
+	}
+
+	@Override
+	public int selectLike(int id, int replyid) {
+		return replyMapper.selectLike(id, replyid);
 	}
 
 }

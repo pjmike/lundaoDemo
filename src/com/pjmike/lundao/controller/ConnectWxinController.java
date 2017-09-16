@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.pjmike.lundao.connect.ConnectWenxin;
 import com.pjmike.lundao.po.OpenId;
@@ -36,12 +37,16 @@ public class ConnectWxinController {
 	 * 
 	 */
 	@RequestMapping("/connect")
-	@ResponseBody
-	public OpenId connect(HttpServletRequest request,HttpServletResponse response) throws IOException {
+	public ModelAndView connect(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		/*String nickname = json.getString("nickname");
 		String imgurl = json.getString("Icon");*/
+		
 		String code = json.getString("code");
+		String nickname = json.getString("nickname");
+		String Icon = json.getString("Icon");
+		System.out.println(code);
+		System.out.println("\n");
 		//获取用户名和头像路径地址
 		/*try {
 			//防止中文乱码
@@ -94,6 +99,22 @@ public class ConnectWxinController {
 		session.setAttribute(uid, sb.toString());
 		session.setMaxInactiveInterval(900);*/
 		
-		return open;
+		User userdemo = userServiceImpl.selectUser(openid);
+		if (userdemo != null) {
+			String id = "{\"id\":"+userdemo.getId()+"}";
+			JSONObject jb = new JSONObject().fromObject(id);
+			response.getWriter().print(jb);
+			return null;
+		} else {			
+			User user = new User();
+			user.setOpenid(openid);
+			user.setNickname(nickname);
+			user.setIcon(Icon);
+			userServiceImpl.insertUser(user);
+			String id = "{\"id\":"+user.getId()+"}";
+			JSONObject jb = new JSONObject().fromObject(id);
+			response.getWriter().print(jb);
+		}
+		return null;
 	}
 }

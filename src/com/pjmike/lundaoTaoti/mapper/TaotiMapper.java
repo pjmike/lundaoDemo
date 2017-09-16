@@ -39,4 +39,13 @@ public interface TaotiMapper {
 	 * @return
 	 */
 	int downCommentNum(int id);
+	
+	int insertCommented(Taoti taoti);
+	
+	int updateCommented(Taoti taoti);
+	
+	int selectTaoticommented(Taoti taoti);
+	
+	Boolean selectTaotiStatus(@Param("taotiId")int taotiId,@Param("userid")int userid);
+	int insertlabels(@Param("taotiId")int taotiId,@Param("value")String labels);
 }

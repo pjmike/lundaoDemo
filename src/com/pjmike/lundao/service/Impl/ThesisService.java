@@ -37,7 +37,7 @@ public interface ThesisService {
     List<ThesisCollection> selectAllCollectionThesis(int id);
     AskquestionExtend selectReply(ReplyExtend it,User user);
     
-    int updateColleThesisIsshow(int id);
+    int updateColleThesisIsshow(int userid,int thesisId);
 
 	ThesisExtend selectBythesisId(int id, User user);
 }

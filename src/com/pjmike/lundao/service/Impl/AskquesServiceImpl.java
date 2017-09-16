@@ -59,12 +59,12 @@ public class AskquesServiceImpl implements AskquesService{
 		return askquestionMapper.giveupLike(comvote);
 	}
 	@Override
-	public int deleteAttention(User user, int askid) {
-		return askquestionMapper.deleteAttention(user.getId(), askid);
+	public int deleteAttention(int id, int askid) {
+		return askquestionMapper.deleteAttention(id, askid);
 	}
 	@Override
-	public int insertAttention(User user, int askid) {
-		return askquestionMapper.insertAttention(user.getId(), askid);
+	public int insertAttention(int id, int askid) {
+		return askquestionMapper.insertAttention(id, askid);
 	}
 	@Override
 	public int IsAttention(User user, int askid) {
@@ -380,6 +380,22 @@ public class AskquesServiceImpl implements AskquesService{
 		@Override
 		public Integer SeeIsShow(int id, int askid) {
 			return askquestionMapper.SeeIsShow(id, askid);
+		}
+		@Override
+		public int AaginLike(comvote comvote) {
+			return askquestionMapper.AaginLike(comvote);
+		}
+		@Override
+		public int selectLike(comvote comvote) {
+			return askquestionMapper.selectLike(comvote);
+		}
+		@Override
+		public int AaginAttention(int id, int askid) {
+			return askquestionMapper.AaginAttention(id, askid);
+		}
+		@Override
+		public int selectAttention(int id, int askid) {
+			return askquestionMapper.selectAttention(id, askid);
 		}
 
 }

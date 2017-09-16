@@ -69,7 +69,8 @@ public class MyCollectionController {
 	public ModelAndView deleteCollectThesis(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
 		int id = json.getInt("id");
-		thesisServiceImpl.updateColleThesisIsshow(id);
+		int thesisId = json.getInt("thesisId");
+		thesisServiceImpl.updateColleThesisIsshow(id,thesisId);
 		return null;
 	}
 }

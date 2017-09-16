@@ -165,8 +165,13 @@ public class ThesisServiceImpl implements ThesisService {
 				}
 			}
 		}
+		List<AskquestionExtend> findMaxlike = new ArrayList<>();
 		
-		List<AskquestionExtend> findMaxlike = findMaxlike(asks);
+		findMaxlike = findMaxlike(asks);
+		if (findMaxlike == null) {
+			return thesisextend;
+		}
+		
 //		List<AskquestionReply> replyes = new ArrayList<>();
 		
 		for(AskquestionExtend ask:findMaxlike) {
@@ -326,7 +331,13 @@ public class ThesisServiceImpl implements ThesisService {
 	}
 	//按点赞数排序
 	public  List<AskquestionExtend> findMaxlike(List<AskquestionExtend> askquestions) {
-				for(int i=0;i<askquestions.size()-1;i++) {
+			if (askquestions.size() == 0) {
+				return null;
+			}
+			if (askquestions.size() == 1) {	
+				return askquestions;
+			} 
+			for(int i=0;i<askquestions.size()-1;i++) {
 					for (int j = i+1; j <askquestions.size(); j++) {
 						long count =askquestions.get(i).getLike();
 						long count1 = askquestions.get(j).getLike();
@@ -453,8 +464,8 @@ public class ThesisServiceImpl implements ThesisService {
 	}
 
 	@Override
-	public int updateColleThesisIsshow(int id) {
-		return thesisMapper.updateColleThesisIsshow(id);
+	public int updateColleThesisIsshow(int userid,int thesisId) {
+		return thesisMapper.updateColleThesisIsshow(userid,thesisId);
 	}
 
 	@Override

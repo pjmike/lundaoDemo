@@ -38,10 +38,13 @@ public interface AskquestionMapper {
     int insetLike(comvote comvote);
     //取消点赞
     int giveupLike(comvote comvote);
-
+    int AaginLike(comvote comvote);
+    int selectLike(comvote comvote);
     //取消关注
     int deleteAttention(@Param("user_id")int id,@Param("ask_id")int askid);
+    int AaginAttention(@Param("user_id")int id,@Param("ask_id")int askid);
     
+    int selectAttention(@Param("user_id")int id,@Param("ask_id")int askid);
     //删除提问或异议
     int changeIsShow(@Param("userid")int id,@Param("askid")int askid);
     

@@ -169,10 +169,7 @@
   <update id="giveupLike">
   	update thesisvote set t_status = 0 where t_uid =#{t_uid} and t_thesisid =#{t_thesisid}
   </update>
-  <!-- 关注论点 -->
-  <insert id="insertAttention">
-  	insert into thesisAttention(thesis_id,user_id,status) values(#{thesis_id},#{user_id},1)
-  </insert>
+ 
   <!-- 收藏论点 -->
   <insert id="collectionThesis">
   	insert into collectionThesis(thesis_id,user_id,status) values(#{thesis_id},#{user_id},1)
@@ -183,16 +180,26 @@
   	select t.thesisId,t.t_description,t.t_state,c.isShow,c.isZhanKaiTapped from thesis t left join collectionThesis c on c.thesis_id = t.thesisId
   	where c.user_id = #{id}
   </select>
+   <!-- 关注论点 -->
+  <insert id="insertAttention">
+  	insert into thesisAttention(thesis_id,user_id,status) values(#{thesis_id},#{user_id},1)
+  </insert>
   <!--取消关注辩题 -->
   <update id="deleteAttention">
   	update thesisAttention set status = 0 where user_id =#{user_id} and thesis_id =#{thesis_id}
   </update>
+  <update id="AaginAttentioned">
+  	update thesisAttention set status = 1 where user_id =#{user_id} and thesis_id =#{thesis_id}
+  </update>
+  <select id="selectAttentioned" resultType="Integer">
+  	select count(*) from thesisAttention where user_id =#{user_id} and thesis_id =#{thesis_id}
+  </select>
    <!--再次关注辩题-->
    
    
    <!-- 点击收藏页面的小叉 -->
    <update id="updateColleThesisIsshow" parameterType="int">
-   		update collectionThesis set isShow = 0 where thesis_id = #{id}
+   		update collectionThesis set isShow = 0 where thesis_id = #{id} and user_id =#{userid}
    </update>
    
 </mapper>

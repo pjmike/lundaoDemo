@@ -423,16 +423,17 @@ public class ThesisServiceImpl3 implements ThesisService {
 
 
 
-	@Override
-	public int updateColleThesisIsshow(int id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public ThesisExtend selectBythesisId(int id, User user, int currPage, int pageSize) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int updateColleThesisIsshow(int userid, int thesisId) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

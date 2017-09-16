@@ -1,31 +1,50 @@
 package com.pjmike.lundaoTaoti.po;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Taoti {
 	private int taotiId;
 	private int userid;
+	@JsonIgnore
 	private String nickname;
-	private String Icon;
 	private String title;
 	private String title1;
 	private String content;
 	private String backgroud;
 	private int commentNum;
+	@JsonIgnore
 	private int comment;
-	private String[] labels;
 	
-	public String[] getLabels() {
+	@JsonIgnore
+	private String labels;
+	
+	@JsonIgnore
+	private String Icon;
+	public String getLabels() {
+		return labels;
+	}
+	public void setLabels(String labels) {
+		this.labels = labels;
+	}
+	private boolean commented = false;
+	public String getIcon() {
+		return Icon;
+	}
+	public void setIcon(String icon) {
+		Icon = icon;
+	}
+	/*public String[] getLabels() {
 		return labels;
 	}
 	public void setLabels(String[] labels) {
 		this.labels = labels;
-	}
+	}*/
 	public int getComment() {
 		return comment;
 	}
 	public void setComment(int comment) {
 		this.comment = comment;
 	}
-	private boolean commented;
 	public int getTaotiId() {
 		return taotiId;
 	}
@@ -38,12 +57,7 @@ public class Taoti {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getIcon() {
-		return Icon;
-	}
-	public void setIcon(String icon) {
-		Icon = icon;
-	}
+	
 	public String getTitle() {
 		return title;
 	}

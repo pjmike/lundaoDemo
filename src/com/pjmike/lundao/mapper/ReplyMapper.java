@@ -30,7 +30,9 @@ public interface ReplyMapper {
     //取消点赞
     int giveupLike(@Param("r_uid")int id,@Param("r_replyid")int replyid);
 
+    int AgainLike(@Param("r_uid")int id,@Param("r_replyid")int replyid);
     
+    int selectLike(@Param("r_uid")int id,@Param("r_replyid")int replyid);
     List<ReplyExtend> select(Integer id);
 
     ReplyExtend selectbyReplyid(Integer id);

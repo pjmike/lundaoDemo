@@ -44,6 +44,5 @@ public class CreateUser {
 			response.getWriter().print(jb);
 		}
 		return null;
-		
 	}
 }

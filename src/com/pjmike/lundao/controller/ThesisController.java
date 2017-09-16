@@ -27,6 +27,7 @@ import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
+import com.pjmike.lundao.service.Impl.TheisAttentionSerivceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl2;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl3;
@@ -57,6 +58,9 @@ public class ThesisController {
 	AskquesServiceImpl askquesServiceImpl;
 	@Autowired
 	UserServiceImpl userServiceImpl;
+	
+	@Autowired 
+	TheisAttentionSerivceImpl theisAttentionSerivceImpl;
 	/**
 	 * 
 	 * @return
@@ -180,7 +184,7 @@ public class ThesisController {
 	@RequestMapping("/thesisAttention")
 	public ModelAndView thesisAttention(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("id");
+		int userid = json.getInt("userid");
 		User user =null;
 		if(userid >0 ) {
 			user = new User();
@@ -188,9 +192,15 @@ public class ThesisController {
 		}
 		int thesisid = json.getInt("thesisId");
 		boolean isAttention = json.getBoolean("isAttention");
-//		Integer status = 
-		if(thesisid >0 && user !=null) {
-			thesisServiceImpl.insertAttention(thesisid, user);
+		Integer count = theisAttentionSerivceImpl.selectAttentioned(userid, thesisid);
+		if (count == 1) {
+			if (isAttention) {
+				theisAttentionSerivceImpl.AaginAttentioned(userid, thesisid);
+			} else {
+				theisAttentionSerivceImpl.deleteAttention(userid, thesisid);
+			}
+		} else {
+			theisAttentionSerivceImpl.insertAttention(userid, thesisid);
 		}
 		return null;
 	}
