@@ -4,6 +4,7 @@ package com.pjmike.lundao.service.Impl;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -120,16 +121,30 @@ public class ThesisServiceImpl3 implements ThesisService {
 				}
 			}
 			
-			
+			//不能使用List循环过程中 
 			if (it.getReplyId() == 0) {
-				for(int i=0;i<rreplylist.size();i++) {
-					for (int j = 0; j < list.size(); j++) {
-						if (rreplylist.get(i).getId() == list.get(j).getId()) {
-							rreplylist.remove(i);
-						} 
+				if (rreplylist.size() > 1) {
+					Iterator<ReplyExtend> iterator = rreplylist.iterator();
+					
+					while (iterator.hasNext()) {
+						Iterator<ReplyExtend> listIteartor = list.iterator();
+						ReplyExtend reply = iterator.next();
+						while (listIteartor.hasNext()) {
+							ReplyExtend lists = listIteartor.next();
+							if(reply.getId() == lists.getId()) {
+								iterator.remove();
+								break;
+							}
+						}
 					}
+				/*	for (int i = 0; i < rreplylist.size(); i++) {
+						for (int j = 0; j < list.size(); j++) {
+							if (rreplylist.get(i).getId() == list.get(j).getId()) {
+								rreplylist.remove(i);
+							}
+						}
+					} */
 				}
-				
 				max = findNiceReply(rreplylist);
 				max.setLeftScroll(true);
 				if(rreplylist.size()>0) {
@@ -142,14 +157,32 @@ public class ThesisServiceImpl3 implements ThesisService {
 				ask.setReplyextend(max);
 				
 			} else {
-						for(int i=0;i<rreplylist.size();i++) {
-							for (int j = 0; j < list.size(); j++) {
-								if (rreplylist.get(i).getId() == list.get(j).getId()) {
-									rreplylist.remove(i);
-								} 
+						/*if (rreplylist.size() > 1) {
+							for (int i = 0; i < rreplylist.size(); i++) {
+								if (list.size() > 0 ) {
+									for (int j = 0; j < list.size(); j++) {
+										if (rreplylist.get(i).getId() == list.get(j).getId()) {
+											rreplylist.remove(i);
+										}
+									} 
+								}
+							} 
+						}*/
+				if (rreplylist.size() > 1) {
+					Iterator<ReplyExtend> iterator = rreplylist.iterator();
+					
+					while (iterator.hasNext()) {
+						Iterator<ReplyExtend> listIteartor = list.iterator();
+						ReplyExtend reply = iterator.next();
+						while (listIteartor.hasNext()) {
+							ReplyExtend lists = listIteartor.next();
+							if(reply.getId() == lists.getId()) {
+								iterator.remove();
+								break;
 							}
 						}
-						
+					}
+				}
 						max = findNiceReply(rreplylist);
 						max.setLeftScroll(true);
 						/*if ((rreplylist.size() - listId.size()) > 0) {
@@ -194,14 +227,28 @@ public class ThesisServiceImpl3 implements ThesisService {
 		List<ReplyExtend> list = replyMapper.selectAleadyClick();
 		if ( reply.getNextReply()!=null ) {
 			List<ReplyExtend> replytemp = reply.getNextReply();
-			for(int i=0;i<replytemp.size();i++) {
+			/*for(int i=0;i<replytemp.size();i++) {
 				for (int j = 0; j < list.size(); j++) {
 					if (replytemp.get(0).getId() == list.get(j).getId()) {
 						replytemp.remove(i);
 					} 
 				}
+			}*/
+			if (replytemp.size() > 1) {
+				Iterator<ReplyExtend> iterator = replytemp.iterator();
+				
+				while (iterator.hasNext()) {
+					Iterator<ReplyExtend> listIteartor = list.iterator();
+					ReplyExtend replyss = iterator.next();
+					while (listIteartor.hasNext()) {
+						ReplyExtend lists = listIteartor.next();
+						if(replyss.getId() == lists.getId()) {
+							iterator.remove();
+							break;
+						}
+					}
+				}
 			}
-			
 			reply.setReplyExtend(findFirstReply(reply.getNextReply(),ask,reply));
 			if (reply.getReplyId() == 0) {
 				if (reply.getNextReply().size() > 1) {

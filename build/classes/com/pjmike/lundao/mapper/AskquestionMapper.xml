@@ -40,10 +40,10 @@
  	
 <!-- 发起提问或者异议 -->
 	<insert id="insertaskquestion" parameterType="com.pjmike.lundao.po.Askquestion">
-		insert into askquestion(thesis_id,from_uid,describtion,content,type) values(#{thesis_id},#{from_uid},#{describtion},#{content},#{type})
+		insert into askquestion(thesis_id,from_uid,describtion,content,type) values(#{thesisId},#{fromUid},#{describtion},#{content},#{type})
 	</insert> 	
 	  <!-- 返回一个提问的点赞数 -->
-  <select id="likeNumber" parameterType="int" resultType="int">
+  <select id="likeNumber" parameterType="int" resultType="Integer">
   	select count(*) from comvote  where a_comment_id =#{id} and a_status=1 
   </select>
   <!-- 根据askquestion的ID查找所有的提问及异议 -->

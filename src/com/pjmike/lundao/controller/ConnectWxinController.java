@@ -69,9 +69,9 @@ public class ConnectWxinController {
 		}*/
 		
 		//appid为小程序ID
-		String appid = "wx729dd86a0f029999";
+		String appid = "wx1922abfe23bbb928";
 		//secret为小程序密钥(AppSecret)
-		String secret= "e89fad08534ea1be4327ef71d6445c33";
+		String secret= "21dd3a63e6e13e73bffb472493968a0e";
 		
 		String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appid+"&secret="+secret+"&js_code="+code+"&grant_type=authorization_code";
 		String openidskey = ConnectWenxin.GET(url);

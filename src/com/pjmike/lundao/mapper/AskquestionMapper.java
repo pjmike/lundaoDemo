@@ -27,7 +27,7 @@ public interface AskquestionMapper {
     List<AskquAttention> selecrAllAttentionAskqustion(int id);
     
     //返回一个辩题的点赞数
-    int likeNumber(int id);
+    Integer likeNumber(int id);
     
     //判断是否点赞
     Integer Islike(comvote comvote);

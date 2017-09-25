@@ -29,6 +29,5 @@ public class AddStatusController {
 		int userid = json.getInt("id");
 //		int topicId = json.getInt(")
 		return null;
-		
 	}
 }

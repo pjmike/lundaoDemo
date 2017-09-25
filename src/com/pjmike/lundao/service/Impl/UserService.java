@@ -26,4 +26,6 @@ public interface UserService {
 	public User selectNicknameAndIcon(int id);
 	
 	public User selectUser(String openid);
+	//验证用户
+	public User findUserByname(String nickname);
 }

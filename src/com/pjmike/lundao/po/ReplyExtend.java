@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ReplyExtend extends Reply{
 	private String nickname ="";
 	
-	private boolean isLeftScroll=false;
+	private boolean isLeftScroll=true;
 	
-	private boolean isRightScroll=false;
+	private boolean isRightScroll=true;
 	
 	private boolean isShow = true;
 	

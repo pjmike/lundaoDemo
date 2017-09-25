@@ -35,7 +35,7 @@
     <result column="complete" property="complete" jdbcType="INTEGER" />
     <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
     <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
-
+	<result column="nickname" property="nickname"/>
     
     <!-- 对论点的评论 -->
    <collection property="askquestions" ofType="com.pjmike.lundao.po.AskquestionExtend">
@@ -71,6 +71,9 @@
    	<id column="thesisId" property="thesisid"/>
    	<result column="t_description" property="tdescription"/>
    	<result column="t_state" property="tstate"/>
+   	<result column="t_debateId" property="tDebateid"/>
+   	<result column="t_from_uid" property="tfromuid"/>
+   	<result column="nickname" property="nickname"/>
    </resultMap>
    <resultMap type="com.pjmike.lundao.po.ThesisCollection" id="CollectionHTesis">
    		<id column="thesisId" property="id"/>
@@ -90,7 +93,7 @@
    </resultMap>
    
    <select id="selectOne" parameterType="int" resultMap="ResultOne">
-   		select thesisId,t_description,t_state from thesis where thesisId=#{id}
+   		select thesisId,t_description,t_state,t_debateId,t_from_uid,nickname from thesis where thesisId=#{id}
    </select>
  <!-- 一对多查询 -->
   <select id="selectBykey" resultMap="ResultMapWithBLOBs">
@@ -111,6 +114,7 @@
 	 		t.t_state,
 	 		t.complete,
 	 		t.uncomplete,
+	 		t.nickname,
 	 		a.id,
 	 		a.thesis_id,
 	 		a.describtion,
@@ -128,7 +132,7 @@
    
    <!-- 增加论点 -->
    <insert id="insert" parameterType="com.pjmike.lundao.po.Thesis">
-   		insert into thesis(t_description,t_state,t_from_uid) values (#{tDescription},#{tState},#{tfromuid})
+   		insert into thesis(t_debateId,t_description,t_state,t_from_uid,nickname) values (#{tDebateid},#{tDescription},#{tState},#{tfromuid},#{nickname})
    </insert>
    
    

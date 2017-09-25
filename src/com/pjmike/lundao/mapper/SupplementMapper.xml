@@ -5,7 +5,7 @@
 <mapper namespace="com.pjmike.lundao.mapper.SupplementMapper">
 	<!-- 提交完善版本 -->
 	<insert id="insertsupplement" parameterType="com.pjmike.lundao.po.Supplement">
-		insert into supplement(thesisId,nickname,Icon,supplement) values(#{thesisId},#{nickname},#{Icon},#{supplement})
+		insert into supplement(thesisId,nickname,Icon,supplement,userid) values(#{thesisId},#{nickname},#{Icon},#{supplement},#{userid})
 	</insert>
 	
 </mapper>

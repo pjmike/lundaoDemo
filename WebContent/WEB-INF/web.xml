@@ -9,7 +9,7 @@
   <!-- 上下文配置信息 -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
-  	<param-value>/WEB-INF/applicationContext.xml<!-- ,classpath:rabbitmq.xml --></param-value>
+  	<param-value>/WEB-INF/applicationContext.*.xml<!-- ,classpath:rabbitmq.xml --></param-value>
   </context-param>
   <servlet>
   	<servlet-name>spring</servlet-name>
@@ -18,7 +18,10 @@
   		<param-name>contextConfigLocation</param-name>
   		<param-value>/WEB-INF/springmvc.xml</param-value>
   	</init-param>
-  
+  	<multipart-config>
+  		<max-file-size>2097152</max-file-size>
+  		<max-request-size>4194304</max-request-size>
+  	</multipart-config>
   </servlet>
   <servlet-mapping>
   	<servlet-name>spring</servlet-name>

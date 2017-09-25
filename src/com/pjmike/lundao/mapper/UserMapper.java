@@ -24,4 +24,6 @@ public interface UserMapper {
 	
 	public User selectUser(String openid);
 	
+	public User findUserByname(String nickname);
+	
 }

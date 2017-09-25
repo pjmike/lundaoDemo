@@ -69,6 +69,7 @@ public class ThesisController {
 	@ResponseBody
 	public ThesisExtend selectBythesisId(HttpServletRequest request,HttpServletResponse response) throws Exception,ClassCastException {
 		JSONObject json = JsonRead.receivePost(request);
+		
 		int thesisid = json.getInt("thesisId");
 		int id = json.getInt("id");
 		int currPage = json.getInt("currPage");
@@ -79,6 +80,7 @@ public class ThesisController {
 			user = new User();
 			user.setId(id);
 		}
+		
 		/*String thesisid = request.getParameter("thesisId");
 		String userid = request.getParameter("id");
 		int tid = Integer.parseInt(thesisid);
@@ -168,9 +170,12 @@ public class ThesisController {
 		int tDebateid = json.getInt("tDebateid");
 		String tDescription = json.getString("tDescription");
 		int tfromuid = json.getInt("tfromuid");
+		String nickname = json.getString("nickname");
+
 		String tState = json.getString("tState");
 		Thesis thesis = new Thesis();
 		thesis.setTfromuid(tfromuid);
+		thesis.setNickname(nickname);
 		thesis.settDebateid(tDebateid);
 		thesis.setTdescription(tDescription);
 		thesis.setTstate(tState);

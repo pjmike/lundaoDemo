@@ -35,4 +35,7 @@
 	<select id="selectUser" parameterType="String" resultType="com.pjmike.lundao.po.User">
 		select * from user where openid = #{value}
 	</select>
+	<select id="findUserByname" parameterType="String" resultType="com.pjmike.lundao.po.User">
+		select * from user where nickname=#{value}
+	</select>
 </mapper>

@@ -34,9 +34,13 @@ public class DebateServiceImpl implements DebateService{
 	@Override
 	public Debatetopicextend selectByPrimaryKey(Integer topicid,User user) {
 		Debatetopicextend debatetopicextend = debatetopicMapper.selectByPrimaryKey(topicid);
-		Integer num = debatetopicMapper.likeNumber(debatetopicextend.getTopicid());
-		if (num >0) {
-			debatetopicextend.setLike(num);
+		if (debatetopicextend == null)
+			return debatetopicextend;
+		if (debatetopicextend != null && debatetopicextend.getTopicid() > 0) {
+			Integer num = debatetopicMapper.likeNumber(debatetopicextend.getTopicid());
+			if (num > 0) {
+				debatetopicextend.setLike(num);
+			} 
 		}
 		if (user!= null) {
 			if (debatetopicMapper.AttentionNumber(debatetopicextend.getTopicid())!=null) {
@@ -164,6 +168,7 @@ public class DebateServiceImpl implements DebateService{
 	@Override
 	public List<Debatetopic> selectListByPage(User user,int currPage,int pageSize) {
 		java.util.Map<String, Object> data = new HashMap<>();
+		
 		data.put("currPage", currPage);
 		data.put("pageSize", pageSize);
 		

@@ -1,6 +1,16 @@
 package com.pjmike.lundao.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +19,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.druid.util.StringUtils;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
+import com.pjmike.lundao.service.util.JsonRead;
+
+import net.sf.json.JSONObject;
 @Controller
 public class UserController {
 	@Autowired
@@ -82,49 +97,45 @@ public class UserController {
 	}*/
 	@RequestMapping("/index")
 	public String index() {
+		
 		return "index";
 	}
 	@RequestMapping("/signin")
-	public String signin() {
-		return "signin";
-	}
-	
-	/*//用户注册
-	@RequestMapping(value="/user/adduser",method={RequestMethod.POST})
-	 public @ResponseBody User loginupJson(Model model,User user) throws Exception {
-		 //@responseBody将user转成json输出
-		int result = userServiceImpl.addUser(user);
-		if(result > 0) {
-			model.addAttribute("msg", "恭喜你注册成功"+user.getMobile());
-		} else {
-			model.addAttribute("服务器失败，注册失败");
-		}
-		user = userServiceImpl.findUserBymobile(user.getMobile());
-		return user;
-	 }
-	
-	//用户登录信息
-	@RequestMapping(value="/user/signin",method={RequestMethod.POST})
-	 public @ResponseBody User signInJson(HttpSession session,Model model,User user) throws Exception {
-		 //@responseBody将user转成json输出
-		//设置session
-		session.setAttribute("user", user);
+	public ModelAndView signin(HttpServletRequest request) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		String nickname = json.getString("nickname");
+		int password = json.getInt("password");
 		
-		user = userServiceImpl.findUserBymobile(user.getMobile());
-		return user;
-	 }
-	
-	//获取用户信息
-	@RequestMapping(value="/user",method={RequestMethod.GET})
-	public @ResponseBody User findUserById(Model model,User user,int id) throws Exception { 
-		user = userServiceImpl.findUserById(id);
-		return user;
+		User user = userServiceImpl.findUserByname(nickname);
+		if (user == null || user.getPassword().equals(password)) {
+			return null;
+		} 
+		
+		
+		return null;
 	}
 	
-	//更新用户信息
-	@RequestMapping(value="/user/id",method={RequestMethod.GET})
-	public @ResponseBody User updateUserById(Model model,User user) throws Exception { 
-		user = userServiceImpl.updateUserById(user);
-		return user;
-	}*/
+	
+	@RequestMapping(value="/photoupLoad",method=RequestMethod.POST)
+	public ModelAndView photoupLoad(MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException {
+		//获取项目的webroot
+		String pathroot = request.getSession().getServletContext().getRealPath("");
+		String path = "";
+		String originalfilename = file.getOriginalFilename();
+		//存储图片
+		if (file != null && originalfilename != null && originalfilename.length() >0 ) {
+			//新的图片名称
+			String newFilename = UUID.randomUUID() + originalfilename.substring(originalfilename.lastIndexOf("."));
+			path = "/img"+newFilename;
+			File picfile = new File(pathroot+path);
+			//将文件写入
+			file.transferTo(picfile);
+			//将图片新名称写入数据库
+			User user = new User();
+			user.setIcon(newFilename);
+		}
+		return null;
+	
+	}
+	
 }

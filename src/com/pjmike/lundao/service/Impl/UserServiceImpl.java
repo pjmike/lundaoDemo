@@ -71,6 +71,12 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectUser(openid);
 	}
 
+	@Override
+	public User findUserByname(String nickname) {
+		User user = userMapper.findUserByname(nickname);
+		return user;
+	}
+
 	
 	
 	

@@ -63,19 +63,21 @@ public class ThesisServiceImpl implements ThesisService {
 		
 		if(askquestions == null || askquestions.size()==0) {
 			askquestions = new ArrayList<>();
+			return thesisextend;
 		}
 		//对评论的回复
 		//字回复
 		if(asks == null || asks.size() == 0) {
 			asks = new ArrayList<>();
+			return thesisextend;
 		}
 		for(AskquestionExtend as:asks) {
 			
 			//更新点赞量
-			int like = askquestionMapper.likeNumber(as.getId());
+			/*int like = askquestionMapper.likeNumber(as.getId());
 			if(like>0) {
 				as.setLike(like);
-			}
+			}*/
 			/**
 			 * 判断是否点赞与是否关注
 			 */

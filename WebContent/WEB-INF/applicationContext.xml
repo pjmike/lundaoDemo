@@ -28,8 +28,9 @@
         <context:component-scan base-package="com.pjmike.lundaoTaoti.service.Impl"></context:component-scan>
         <context:component-scan base-package="com.pjmike.lundao.service.Impl"></context:component-scan>
         <context:component-scan base-package="com.pjmike.lundao.util"></context:component-scan>
-        
+        	
          <context:property-placeholder location="classpath:db.properties" /> 
+
          <!-- 数据源1 -->
          <!-- 数据源，使用c3p0 --><bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
          		 <property name="driverClass" value="${jdbc.driver}" /> 

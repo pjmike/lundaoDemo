@@ -95,21 +95,21 @@ public class TaotiController {
 		String backgroud = jb.getString("backgroud");
 		String lebels = jb.getString("labels");
 		System.out.println(lebels);
-	
-		/*String[] labels = null ;
-		for(int i=0;i<la.size();i++) {
-			labels[i] = la.getString(i);
-		}*/
-		Taoti taoti = new Taoti();
-		taoti.setBackground(backgroud);
-		taoti.setContent(content);
-		taoti.setTitle(title);
-		taoti.setLabels(lebels);
-		taoti.setNickname(nickname);
-		taoti.setIcon(Icon);
-		taoti.setUserid(userid);
+		System.out.println(content);
+		if (title !=null && title.length() >0 && content !=null &&content.length()>0&&
+				backgroud !=null&&backgroud.length()>0 && lebels != null&&lebels.length()>0) {
+			
+			Taoti taoti = new Taoti();
+			taoti.setBackground(backgroud);
+			taoti.setContent(content);
+			taoti.setTitle(title);
+			taoti.setLabels(lebels);
+			taoti.setNickname(nickname);
+			taoti.setIcon(Icon);
+			taoti.setUserid(userid);
+			taotiServiceImpl.insertTheis(taoti);
+		}
 		
-		taotiServiceImpl.insertTheis(taoti);
 		return null;
 	}
 }
