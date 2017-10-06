@@ -28,6 +28,10 @@ import com.pjmike.lundao.service.util.JsonRead;
 
 import net.sf.json.JSONObject;
 
+/**
+ * @author pjmike
+ *
+ */
 @Controller
 @RequestMapping("/user")
 public class MyAttentionController {
@@ -37,6 +41,12 @@ public class MyAttentionController {
 	UserAttentionServiceImpl userAttentionServiceImpl;
 	@Autowired
 	UserServiceImpl userServiceImpl;
+	/**
+	 * 用户的关注页面
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value="/myAttention")
 	@ResponseBody
 	public MyAttentionData AttentionAskquestion(HttpServletRequest request) throws IOException {
@@ -49,6 +59,7 @@ public class MyAttentionController {
 		
 		List<Debatetopic> debates = userAttentionServiceImpl.selectAlldebateAttentioned(id);
 		List<Thesis> thesises = userAttentionServiceImpl.selectAllThesisAttentioned(id);
+		List<User> myAttentionUsers = userServiceImpl.selectMyUserFormotion(id);
 		for(Debatetopic d:debates) {
 			DebateAndThesis deb = new DebateAndThesis();
 			deb.setBtState(0);
@@ -68,6 +79,8 @@ public class MyAttentionController {
 			debateandthesis.add(deb);
 		}
 		myAttentionData.setDebateAndThesis(debateandthesis);
+		myAttentionData.setAttentionPeople(myAttentionUsers);
+		
 		return myAttentionData;
 	}
 }

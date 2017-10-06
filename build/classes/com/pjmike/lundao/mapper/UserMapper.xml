@@ -17,17 +17,34 @@
 		<result column="nickname" property="nickname"/>
 		<result column="Icon" property="Icon"/>
 	</resultMap>
-	
+	<resultMap type="com.pjmike.lundao.po.User" id="oneUser">
+		<result column="nickname" property="nickname"/>
+		<result column="Icon" property="Icon"/>
+		<result column="signature" property="userSignature"/>
+	</resultMap>
+	<resultMap type="com.pjmike.lundao.po.UserCustom" id="result">
+		<id column="id" property="id"/>
+		<result column="nickname" property="nickname"/>
+		<result column="Icon" property="Icon"/>
+		<result column="gender" property="gender"/>
+		<result column="signature" property="userSignature"/>
+		<result column="age" property="age"/>
+		<result column="locations" property="locations"/>
+		<result column="educations" property="educations"/>
+	</resultMap>
 	<!-- 保存用户的头像与用户名 -->
 	<insert id="insertUser" parameterType="com.pjmike.lundao.po.User"  useGeneratedKeys="true" keyProperty="id">
 		insert into user(openid,nickname,Icon) values(#{openid},#{nickname},#{Icon})
 	</insert>
 	<!-- 更新用户的信息 -->
-	<insert id="updateUser" parameterType="com.pjmike.lundao.po.User">
-		update user set nickname=#{nickname} and Icon=#{Icon}
+	
+	<insert id="insertUserbyMobile" parameterType="com.pjmike.lundao.po.User" useGeneratedKeys="true" keyProperty="id">
+		insert into user(mobile,password) values(#{mobile},#{password})
 	</insert>
 	
-	
+	<update id="updateUserInformation" parameterType="com.pjmike.lundao.po.User" >
+		update user set nickname=#{nickname},gender=#{gender},emailNumber=#{emailNumber},locations=#{locations},educations=#{educations},signature=#{userSignature} where id=#{id}
+	</update>
 	<!-- 根据用户id查询用户头像与nickname -->	
 	<select id="selectNicknameAndIcon" parameterType="int" resultMap="ResultOne">
 		select nickname,Icon from user where id =#{id}
@@ -35,7 +52,51 @@
 	<select id="selectUser" parameterType="String" resultType="com.pjmike.lundao.po.User">
 		select * from user where openid = #{value}
 	</select>
-	<select id="findUserByname" parameterType="String" resultType="com.pjmike.lundao.po.User">
-		select * from user where nickname=#{value}
+	<select id="findUserBymobile" parameterType="int" resultType="com.pjmike.lundao.po.User">
+		select * from user where mobile=#{value}
+	</select>
+	<select id="findUserById" parameterType="int" resultType="com.pjmike.lundao.po.UserCustom">
+		select * from user where id=#{value}
+	</select>
+	<select id="findUser" parameterType="int" resultMap="result">
+		select id,nickname,Icon,gender,signature,age,locations,educations from user where id=#{id}
+	</select>
+	<!--查询出一个用户所关注的辩题数 -->
+	<select id="findAttentionDebateNumber" parameterType="int" resultType="Integer">
+		select count(*) from debateAttention where user_id=#{id} and status = 1
+	</select>
+	
+	<select id="findAttentionThesisNumber" parameterType="int" resultType="Integer">
+		select count(*) from thesisAttention where user_id=#{id} and status = 1
+	</select>
+	
+	<select id="findAskquestionNumber" parameterType="int" resultType="Integer">
+		select count(*) from askquestion where from_uid=#{id} 
+	</select>
+	
+	<select id="findReplyNumber" parameterType="int" resultType="Integer">
+		select count(*) from reply where from_uid=#{id}
+	</select>
+	
+	
+	<select id="AttentionedOtherPeople" parameterType="int" resultType="Integer">
+		select count(*) from AttentionOther where from_uid=#{id}
+	</select>
+	<select id="AttentionedPeople" parameterType="int" resultType="Integer">
+		select count(*) from AttentionOther where from_uid=#{id} and to_uid=#{id}
+	</select>
+	<select id="myFans" parameterType="int" resultType="Integer">
+		select count(*) from AttentionOther where to_uid=#{id}
+	</select>
+	<insert id="AttentionOther">
+		insert AttentionOther(from_uid,to_uid) values(#{from_uid},#{to_uid})
+	</insert>
+	<update id="updateAttentionPeopleStatus" parameterType="com.pjmike.lundao.po.AttentionOther">
+		update AttentionOther(from_uid,to_uid,status) values(#{from_uid},#{to_uid},#{status})
+	</update>
+	
+	
+	<select id="selectMyUserFormotion" parameterType="int" resultMap="oneUser">
+		select nickname,Icon,signature from user where id in(select to_uid from AttentionOther where from_uid=#{id}) 
 	</select>
 </mapper>

@@ -1,6 +1,10 @@
 package com.pjmike.lundao.service.Impl;
 
+import java.util.List;
+
+import com.pjmike.lundao.po.AttentionOther;
 import com.pjmike.lundao.po.User;
+import com.pjmike.lundao.po.UserCustom;
 
 public interface UserService {
 	/*public int addUser(User2 user) throws Exception ;
@@ -17,6 +21,8 @@ public interface UserService {
 	
 	//更新用户信息
 	public int updateUser(User user) throws Exception;
+	//保存用户的手机号和密码
+	public int insertUserbyMobile(User user);
 		
 		
 	//保存用户的头像与用户名 和id
@@ -27,5 +33,23 @@ public interface UserService {
 	
 	public User selectUser(String openid);
 	//验证用户
-	public User findUserByname(String nickname);
+	public User findUserBymobile(int mobile);
+	//根据用户id查找
+	public User findUserById(int id);
+	
+	public int updateUserInformation(User user);
+	
+	public UserCustom findUser(int id);
+	
+	public int AttentionOther(int fromUid,int toUid);
+	
+	public Integer AttentionedOtherPeople(int id);
+	
+	public Integer myFans(int id);
+	
+	public int updateAttentionPeopleStatus(AttentionOther user);
+	
+	public int AttentionedPeople(int fromUid,int toUid);
+	
+	public List<User> selectMyUserFormotion(int id);
 }

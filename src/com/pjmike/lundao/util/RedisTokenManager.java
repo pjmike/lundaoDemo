@@ -1,22 +1,41 @@
 package com.pjmike.lundao.util;
 
+import java.util.UUID;
+
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
+
 /**通过redis存储和验证Token
  * @author pjmike
  *
  */
+@Component
 public class RedisTokenManager implements TokenManager {
 	
-
+	@SuppressWarnings("rawtypes")
+	private RedisTemplate redisTemplate; 
+	public void setRedisTemplate(@SuppressWarnings("rawtypes") RedisTemplate redisTemplate) {
+		this.redisTemplate = redisTemplate;
+	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public TokenModel createToken(int userid) {
-		// TODO Auto-generated method stub
-		return null;
+		String token = UUID.randomUUID().toString().replaceAll("-", "");
+		TokenModel tokenmodel = new TokenModel(userid, token);
+		redisTemplate.opsForValue().set(userid, token);
+		return tokenmodel;
 	}
 
 	@Override
 	public boolean checkToken(TokenModel model) {
-		// TODO Auto-generated method stub
-		return false;
+		if (model == null) {
+			return false;
+		}
+		String token = (String) redisTemplate.opsForValue().get(model.getUserid());
+		if (token == null || !token.equals(model.getToken())) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -27,7 +46,7 @@ public class RedisTokenManager implements TokenManager {
 
 	@Override
 	public void deleteToken(int userid) {
-		// TODO Auto-generated method stub
+		redisTemplate.delete(userid);
 
 	}
 

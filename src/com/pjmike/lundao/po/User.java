@@ -6,12 +6,14 @@ import java.util.Date;
 public class User {
 	private int id;
 	private String openid;
-	private String mobile;
+	private int mobile;
+	private String userSignature;
 	private String password;
 	private String nickname;
 	private String gender;
 	private String Icon;
 	private int age;
+	private String emailNumber;
 	private String school;
 	private String experience;
 	private String educations;
@@ -21,6 +23,18 @@ public class User {
 	private String auth_token;
 	private Timestamp created_at;
 	private Timestamp updated_at;
+	public String getUserSignature() {
+		return userSignature;
+	}
+	public void setUserSignature(String userSignature) {
+		this.userSignature = userSignature;
+	}
+	public String getEmailNumber() {
+		return emailNumber;
+	}
+	public void setEmailNumber(String emailNumber) {
+		this.emailNumber = emailNumber;
+	}
 	public String getIcon() {
 		return Icon;
 	}
@@ -57,10 +71,10 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getMobile() {
+	public int getMobile() {
 		return mobile;
 	}
-	public void setMobile(String mobile) {
+	public void setMobile(int mobile) {
 		this.mobile = mobile;
 	}
 	public String getPassword() {

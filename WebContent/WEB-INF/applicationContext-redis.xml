@@ -29,8 +29,7 @@
         <context:component-scan base-package="com.pjmike.lundao.service.Impl"></context:component-scan>
         <context:component-scan base-package="com.pjmike.lundao.util"></context:component-scan>
         
-         <context:property-placeholder location="classpath:db.properties" /> 
-         <context:property-placeholder location="classpath:redis.properties"/>
+         <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
          
          <!-- jedis配置 -->
          <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
@@ -47,10 +46,14 @@
           <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="keySerializer">
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
-        </property>
-        <property name="valueSerializer">
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
         </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        
+    </bean>
+    <bean id="redisTokenManager" class="com.pjmike.lundao.util.RedisTokenManager">
+    	<property name="redisTemplate" ref="redisTemplate"></property>
     </bean>
 </beans>

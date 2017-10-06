@@ -3,7 +3,6 @@ package com.pjmike.lundao.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -11,14 +10,19 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,94 +31,62 @@ import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
+import com.pjmike.lundao.util.Error;
+import com.pjmike.lundao.util.Md5Util;
+import com.pjmike.lundao.util.RedisTokenManager;
+import com.pjmike.lundao.util.TokenManager;
+import com.pjmike.lundao.util.TokenModel;
+import com.pjmike.lundao.util.UserNotFoundException;
 
 import net.sf.json.JSONObject;
+/**用户注册与登录实现
+ * @author pjmike
+ *
+ */
 @Controller
 public class UserController {
 	@Autowired
 	private UserServiceImpl userServiceImpl;
-	/*@RequestMapping("/user/adduser")
-	public String addUser(Model model,User user) throws Exception {
-
-		
-		System.out.println("用户注册："+user.getUsername()+user.getPassword());
-		
-		//验证用户登录
-		user = userServiceImpl.checkLogin(user.getUsername(), user.getPassword());
-		if(user!=null) {
-			model.addAttribute("msg","恭喜你登录成功");
-		} else {
-			
-			int result = userServiceImpl.addUser(user);
-			if(result > 0) {
-				model.addAttribute("msg", "恭喜你注册成功"+user.getUsername());
-			} else {
-				model.addAttribute("服务器失败，注册失败");
-			}
-		}
-		
-		
-		//注册页面
-		
-		int result = userServiceImpl.addUser(user);
-		if(result > 0) {
-			model.addAttribute("msg", "恭喜你注册成功"+user.getUsername());
-		} else {
-			model.addAttribute("服务器失败，注册失败");
-		}
-		return "msg";
-		
-		//验证登录
-		user = userServiceImpl.checkLogin(user.getUsername(), user.getPassword());
-		if(user!=null) {
-			model.addAttribute("user",user);
-			return "success";	
-		}       
-		return "fail";
-		
-		
-		
-		 * 
-		 * StringUtils是什么？？？？？
-		 
-		if(StringUtils.isEmpty(user.getMobile()) ||StringUtils.isEmpty(user.getPassword())){
-			model.addAttribute("msg","注册表为空，注册失败");
-			return "msg";
-		}
 	
-		if(null != userServiceImpl.checkLogin(user.getMobile(),user.getPassword())) {
-			model.addAttribute("msg","你已经注册过了，请勿重新注册");
-			return "msg";
-		} else {
-			int result = userServiceImpl.addUser(user);
-			if(result > 0) {
-				model.addAttribute("msg", "恭喜你注册成功"+user.getMobile());
-			} else {
-				model.addAttribute("服务器失败，注册失败");
-			}
-			return "msg";
-		}
-	}*/
+	@Autowired
+	private RedisTokenManager tokenManager;
+	
 	@RequestMapping("/index")
 	public String index() {
 		
 		return "index";
 	}
-	@RequestMapping("/signin")
-	public ModelAndView signin(HttpServletRequest request) throws IOException {
+	@RequestMapping("/signup")
+	public ModelAndView signup(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		String nickname = json.getString("nickname");
-		int password = json.getInt("password");
+		int mobile = json.getInt("mobile");
+		String password = json.getString("password");
+		User user = new User();
+		String md5password = Md5Util.generateMD5(password);
+		user.setMobile(mobile);
+		user.setPassword(md5password);
+		userServiceImpl.insertUserbyMobile(user);
+		return null;
 		
-		User user = userServiceImpl.findUserByname(nickname);
-		if (user == null || user.getPassword().equals(password)) {
-			return null;
+	}
+	@RequestMapping("/signin")
+	public ModelAndView signin(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		JSONObject json = JsonRead.receivePost(request);
+		int mobile = json.getInt("mobile");
+		String password = json.getString("password");
+		String md5password = Md5Util.generateMD5(password);
+		User user = userServiceImpl.findUserBymobile(mobile);
+		System.out.println(user);
+		System.out.println(user.getNickname());
+		if (user == null || !user.getPassword().equals(md5password)) {
+			throw new UserNotFoundException(mobile);
 		} 
-		
-		
+		TokenModel tokenmodel = tokenManager.createToken(user.getId());
+		String userNote = "{\"id\":"+user.getId()+",\"nickname\":"+user.getNickname()+",\"token\":"+tokenmodel.getToken()+"}";
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().println(userNote);
 		return null;
 	}
-	
 	
 	@RequestMapping(value="/photoupLoad",method=RequestMethod.POST)
 	public ModelAndView photoupLoad(MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException {
@@ -138,4 +110,10 @@ public class UserController {
 	
 	}
 	
+	@ExceptionHandler(UserNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public @ResponseBody Error UserNotFound(UserNotFoundException e) {
+		long userid = e.getMobile();
+		return new Error(4, "User ["+userid+"] not Found");
+	}
 }

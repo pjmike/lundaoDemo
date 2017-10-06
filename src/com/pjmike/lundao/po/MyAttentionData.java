@@ -5,6 +5,13 @@ import java.util.List;
 public class MyAttentionData {
 	List<AskquAttention> askquestions ;
 	List<DebateAndThesis> debateAndThesis;
+	List<User> AttentionPeople;
+	public List<User> getAttentionPeople() {
+		return AttentionPeople;
+	}
+	public void setAttentionPeople(List<User> attentionPeople) {
+		AttentionPeople = attentionPeople;
+	}
 	public List<AskquAttention> getAskquestions() {
 		return askquestions;
 	}
