@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pjmike.lundao.mapper.UserMapper;
+import com.pjmike.lundao.po.AskquestionExtend;
+import com.pjmike.lundao.po.Debatetopic;
+import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
 
@@ -38,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findUserBymobile(int mobile) {
+	public User findUserBymobile(long mobile) {
 		User user = userMapper.findUserBymobile(mobile);
 		return user;
 	}
@@ -102,6 +105,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> selectMyUserFormotion(int id) {
 		return userMapper.selectMyUserFormotion(id);
+	}
+
+	@Override
+	public List<AskquestionExtend> selectMyReplyes(int id) {
+		return userMapper.selectMyReplyes(id);
+	}
+
+	@Override
+	public List<Thesis> selectMyThesis(int id) {
+		return userMapper.selectMyThesis(id);
+	}
+
+	@Override
+	public List<Debatetopic> selectMyDebate(int id) {
+		return userMapper.selectMyDebate(id);
 	}
 
 	

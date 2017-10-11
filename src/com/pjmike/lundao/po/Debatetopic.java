@@ -20,7 +20,7 @@ public class Debatetopic {
     @JsonIgnore
     private Integer clickcount;
     @JsonIgnore
-    private String username;
+    private String nickname;
     @JsonIgnore
     private Integer thesis;
     @JsonIgnore
@@ -126,11 +126,11 @@ public class Debatetopic {
     }
 
     public String getUsername() {
-        return username;
+        return nickname;
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.nickname = username == null ? null : username.trim();
     }
 
     public Integer getThesis() {

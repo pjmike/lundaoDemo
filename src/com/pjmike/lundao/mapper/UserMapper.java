@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.AttentionOther;
+import com.pjmike.lundao.po.Debatetopic;
+import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.User2;
 import com.pjmike.lundao.po.UserCustom;
@@ -30,7 +33,7 @@ public interface UserMapper {
 	
 	public User selectUser(String openid);
 	
-	public User findUserBymobile(int mobile);
+	public User findUserBymobile(long mobile);
 	//保存用户的手机号和密码
 	public int insertUserbyMobile(User user);
 	
@@ -58,4 +61,10 @@ public interface UserMapper {
 	public int updateAttentionPeopleStatus(AttentionOther user);
 	
 	public List<User> selectMyUserFormotion(int id);
+	
+	public List<AskquestionExtend> selectMyReplyes(int id);
+	
+	public List<Thesis> selectMyThesis(int id);
+	
+	public List<Debatetopic> selectMyDebate(int id);
 }

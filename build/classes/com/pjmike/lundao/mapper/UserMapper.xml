@@ -52,7 +52,7 @@
 	<select id="selectUser" parameterType="String" resultType="com.pjmike.lundao.po.User">
 		select * from user where openid = #{value}
 	</select>
-	<select id="findUserBymobile" parameterType="int" resultType="com.pjmike.lundao.po.User">
+	<select id="findUserBymobile" parameterType="java.lang.Long" resultType="com.pjmike.lundao.po.User">
 		select * from user where mobile=#{value}
 	</select>
 	<select id="findUserById" parameterType="int" resultType="com.pjmike.lundao.po.UserCustom">
@@ -98,5 +98,14 @@
 	
 	<select id="selectMyUserFormotion" parameterType="int" resultMap="oneUser">
 		select nickname,Icon,signature from user where id in(select to_uid from AttentionOther where from_uid=#{id}) 
+	</select>
+	<select id="selectMyReplyes" parameterType="int" resultType="com.pjmike.lundao.po.AskquestionExtend">
+		select * from askquestion where from_uid=#{id}
+	</select>
+	<select id="selectMyThesis" parameterType="int" resultType="com.pjmike.lundao.po.Thesis">
+		select * from thesis where t_from_uid=#{id}
+	</select>
+	<select id="selectMyDebate" parameterType="int" resultType="com.pjmike.lundao.po.Debatetopic">
+		select * from debateTopic where userid=#{id}
 	</select>
 </mapper>

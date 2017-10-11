@@ -2,7 +2,10 @@ package com.pjmike.lundao.service.Impl;
 
 import java.util.List;
 
+import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.AttentionOther;
+import com.pjmike.lundao.po.Debatetopic;
+import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
 
@@ -33,7 +36,7 @@ public interface UserService {
 	
 	public User selectUser(String openid);
 	//验证用户
-	public User findUserBymobile(int mobile);
+	public User findUserBymobile(long mobile);
 	//根据用户id查找
 	public User findUserById(int id);
 	
@@ -52,4 +55,9 @@ public interface UserService {
 	public int AttentionedPeople(int fromUid,int toUid);
 	
 	public List<User> selectMyUserFormotion(int id);
+	public List<AskquestionExtend> selectMyReplyes(int id);
+	
+	public List<Thesis> selectMyThesis(int id);
+	
+	public List<Debatetopic> selectMyDebate(int id);
 }

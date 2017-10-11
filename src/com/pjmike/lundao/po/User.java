@@ -6,7 +6,7 @@ import java.util.Date;
 public class User {
 	private int id;
 	private String openid;
-	private int mobile;
+	private long mobile;
 	private String userSignature;
 	private String password;
 	private String nickname;
@@ -71,10 +71,10 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getMobile() {
+	public long getMobile() {
 		return mobile;
 	}
-	public void setMobile(int mobile) {
+	public void setMobile(long mobile) {
 		this.mobile = mobile;
 	}
 	public String getPassword() {

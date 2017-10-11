@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,40 +52,53 @@ public class UserController {
 	@Autowired
 	private RedisTokenManager tokenManager;
 	
+	/**
+	 * @return
+	 */
 	@RequestMapping("/index")
 	public String index() {
-		
 		return "index";
 	}
-	@RequestMapping("/signup")
-	public ModelAndView signup(HttpServletRequest request) throws IOException {
-		JSONObject json = JsonRead.receivePost(request);
-		int mobile = json.getInt("mobile");
+	/**用户注册
+	 * @param user
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping("/signin")
+	public ModelAndView signin(@RequestBody User user) throws IOException {
+		/*JSONObject json = JsonRead.receivePost(request);
+		long mobile = json.get
 		String password = json.getString("password");
-		User user = new User();
-		String md5password = Md5Util.generateMD5(password);
-		user.setMobile(mobile);
+		User user = new User();*/
+		String md5password = Md5Util.generateMD5(user.getPassword());
+		user.setMobile(user.getMobile());
 		user.setPassword(md5password);
 		userServiceImpl.insertUserbyMobile(user);
 		return null;
-		
 	}
-	@RequestMapping("/signin")
-	public ModelAndView signin(HttpServletRequest request,HttpServletResponse response) throws Exception {
-		JSONObject json = JsonRead.receivePost(request);
+	/**用户登录
+	 * @param user
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/signup")
+	public ModelAndView signup(@RequestBody User user,HttpServletResponse response) throws Exception {
+		/*JSONObject json = JsonRead.receivePost(request);
 		int mobile = json.getInt("mobile");
 		String password = json.getString("password");
-		String md5password = Md5Util.generateMD5(password);
-		User user = userServiceImpl.findUserBymobile(mobile);
-		System.out.println(user);
-		System.out.println(user.getNickname());
-		if (user == null || !user.getPassword().equals(md5password)) {
+		String md5password = Md5Util.generateMD5(password);*/
+		long mobile = user.getMobile();
+		String md5password = Md5Util.generateMD5(user.getPassword());
+		User user1 = userServiceImpl.findUserBymobile(mobile);
+		
+		if (user1 == null || !user1.getPassword().equals(md5password)) {
 			throw new UserNotFoundException(mobile);
 		} 
-		TokenModel tokenmodel = tokenManager.createToken(user.getId());
+	/*	TokenModel tokenmodel = tokenManager.createToken(user.getId());
 		String userNote = "{\"id\":"+user.getId()+",\"nickname\":"+user.getNickname()+",\"token\":"+tokenmodel.getToken()+"}";
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().println(userNote);
+		response.getWriter().println(userNote);*/
 		return null;
 	}
 	
