@@ -3,6 +3,7 @@ package com.pjmike.lundao.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -64,8 +65,8 @@ public class UserController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping("/signin")
-	public ModelAndView signin(@RequestBody User user) throws IOException {
+	@RequestMapping("/signup")
+	public ModelAndView signup(@RequestBody User user,HttpServletResponse response) throws IOException {
 		/*JSONObject json = JsonRead.receivePost(request);
 		long mobile = json.get
 		String password = json.getString("password");
@@ -73,7 +74,15 @@ public class UserController {
 		String md5password = Md5Util.generateMD5(user.getPassword());
 		user.setMobile(user.getMobile());
 		user.setPassword(md5password);
-		userServiceImpl.insertUserbyMobile(user);
+        User user1 = userServiceImpl.findUserBymobile(user.getMobile());
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter p = response.getWriter();
+		if (user1 != null) {
+			p.write("error");
+		} else {
+			userServiceImpl.insertUserbyMobile(user);
+			p.write("signUpSuccess");
+		}
 		return null;
 	}
 	/**用户登录
@@ -82,8 +91,8 @@ public class UserController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/signup")
-	public ModelAndView signup(@RequestBody User user,HttpServletResponse response) throws Exception {
+	@RequestMapping("/signin")
+	public ModelAndView signin(@RequestBody User user,HttpServletResponse response) throws Exception {
 		/*JSONObject json = JsonRead.receivePost(request);
 		int mobile = json.getInt("mobile");
 		String password = json.getString("password");
@@ -95,10 +104,11 @@ public class UserController {
 		if (user1 == null || !user1.getPassword().equals(md5password)) {
 			throw new UserNotFoundException(mobile);
 		} 
-	/*	TokenModel tokenmodel = tokenManager.createToken(user.getId());
-		String userNote = "{\"id\":"+user.getId()+",\"nickname\":"+user.getNickname()+",\"token\":"+tokenmodel.getToken()+"}";
+		//生成Token
+		TokenModel tokenmodel = tokenManager.createToken(user.getId());
+		String userNote = "{\"id\":"+user1.getId()+",\"auth_token\":"+tokenmodel.getToken()+"}";
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().println(userNote);*/
+		response.getWriter().println(userNote);
 		return null;
 	}
 	
@@ -121,13 +131,12 @@ public class UserController {
 			user.setIcon(newFilename);
 		}
 		return null;
-	
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public @ResponseBody Error UserNotFound(UserNotFoundException e) {
 		long userid = e.getMobile();
-		return new Error(4, "User ["+userid+"] not Found");
+		return new Error(404, "User ["+userid+"] not Found");
 	}
 }
