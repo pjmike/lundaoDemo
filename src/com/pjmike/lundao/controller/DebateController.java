@@ -18,8 +18,11 @@ import com.pjmike.lundao.po.Debatetopic;
 import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
+import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
+import com.pjmike.lundao.util.Action;
+import com.pjmike.lundao.util.TargetType;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
@@ -32,6 +35,8 @@ public class DebateController {
 	private DebateServiceImpl debateServiceImpl;
 	@Autowired
 	private UserServiceImpl userServiceImpl;
+	@Autowired
+	private NotifyServiceImpl notifyServiceImpl;
 	/*
 	 * 按主键查找辩题，返回json辩题
 	 */
@@ -128,7 +133,8 @@ public class DebateController {
 		} else {
 			if(isAttention) {
 				debateServiceImpl.insertAttention(topicId, id);
-			} else {
+				notifyServiceImpl.subscribe(id, topicId,TargetType.DEBATETOPIC, Action.ATTENTION);
+			} else {	
 				debateServiceImpl.deleteAttention(topicId, id);
 			}
 		}

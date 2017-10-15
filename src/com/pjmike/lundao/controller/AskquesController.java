@@ -9,12 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pjmike.lundao.enums.targetType;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.comvote;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
+import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
+import com.pjmike.lundao.util.Action;
 import com.pjmike.lundao.util.Producer;
+import com.pjmike.lundao.util.TargetType;
 
 import net.sf.json.JSONObject;
 
@@ -27,8 +31,9 @@ public class AskquesController {
 	Producer producer;
 	@Autowired
 	UserServiceImpl userServiceImpl;
+	@Autowired
+	NotifyServiceImpl notifyServiceImpl;
 	/**
-	 * 
 	 * @param request
 	 * 发起提问及异议
 	 * @throws IOException 
@@ -52,6 +57,12 @@ public class AskquesController {
 		ask.setDescribtion(describtion);
 		ask.setType(type);
 		askquesServiceImpl.insertaskquestion(ask);
+		if (type == 0) {
+			notifyServiceImpl.createRemind(thesisId, TargetType.THESIS,Action.ASK,fromUid,describtion);
+		}
+		if (type == 1) {
+			notifyServiceImpl.createRemind(thesisId, TargetType.THESIS,Action.QUESTION,fromUid,describtion);
+		}
 		return null;
 	}
 	@RequestMapping("/deleteAskquestion")
@@ -63,6 +74,12 @@ public class AskquesController {
 		askquesServiceImpl.changeIsShow(id, askid);
 		return null;
 	}
+	/**
+	 * 关注提问或异议
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/AttentionAskquestion")
 	public ModelAndView AttentionAskquestion(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
@@ -72,6 +89,8 @@ public class AskquesController {
 		int count = askquesServiceImpl.selectAttention(id, askid);
 		if (count == 0) {
 			askquesServiceImpl.insertAttention(id, askid);
+			//订阅一个提问或异议
+			notifyServiceImpl.subscribe(id,askid, TargetType.AKSQUESTION, Action.ATTENTION);
 		} 
 		if (count == 1) {
 			if (isAttention) {
@@ -82,6 +101,12 @@ public class AskquesController {
 		} 
 		return null;
 	}
+	/**
+	 * 对异议和提问进行点赞
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/likeAskquestion") 
 		public ModelAndView likeAskquestion(HttpServletRequest request) throws IOException {
 			JSONObject json = JsonRead.receivePost(request);
@@ -94,6 +119,7 @@ public class AskquesController {
 			int count = askquesServiceImpl.selectLike(comvote);
 			if (count == 0) {
 				askquesServiceImpl.insetLike(comvote);
+				notifyServiceImpl.createInformation(askid, TargetType.AKSQUESTION, Action.LIKE, id);
 			}
 			if (count == 1) {
 				if (islike) {

@@ -13,13 +13,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mchange.v3.filecache.RelativePathFileCacheKey;
 import com.pjmike.lundao.po.Reply;
 import com.pjmike.lundao.po.User;
+import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.ReplyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
+import com.pjmike.lundao.util.Action;
 import com.pjmike.lundao.util.Producer;
+import com.pjmike.lundao.util.TargetType;
 
 import net.sf.json.JSONObject;
 
+/**回复的controller
+ * @author pjmike
+ *	
+ */
 @Controller
 @RequestMapping("/reply")
 public class ReplyController {
@@ -27,6 +34,14 @@ public class ReplyController {
 	ReplyServiceImpl replyServiceImpl;
 	@Autowired
 	UserServiceImpl userServiceImpl;
+	@Autowired
+	NotifyServiceImpl notifyServiceImpl;
+	/**
+	 * 回复
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/insertreply")
 	public ModelAndView reply(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
@@ -42,8 +57,17 @@ public class ReplyController {
 		reply.setToUid(toUid);
 		reply.setReplyId(replyId);
 		replyServiceImpl.reply(reply);
+		//向某个提问或异议添加回复提醒
+		notifyServiceImpl.createRemind(commentId, TargetType.AKSQUESTION, Action.COMMENT, fromUid,rDescribtion);
+		
 		return null;
 	}
+	/**
+	 * 删除回复
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/deleteReply")
 	public ModelAndView deleteReply(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
@@ -52,6 +76,12 @@ public class ReplyController {
 		replyServiceImpl.changereplyIsShow(userid, replyid);
 		return null;
 	}
+	/**
+	 * 点赞某个回复
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/likeReply")
 	public ModelAndView likeReply(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
@@ -61,6 +91,7 @@ public class ReplyController {
 		int count = replyServiceImpl.selectLike(userid, replyid);
 		if (count == 0) {
 			replyServiceImpl.insetLike(userid, replyid);
+			notifyServiceImpl.createInformation(replyid, TargetType.REPLY, Action.LIKE, userid);
 		} 
 		if (count == 1) {
 			if (islike) {

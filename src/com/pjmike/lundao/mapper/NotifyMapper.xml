@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pjmike.lundao.mapper.NotifyMapper" >
+	<insert id="insertNotify" parameterType="com.pjmike.lundao.po.Notify">
+		INSERT INTO Notify(target,targetType,sender,action) VALUES (#{target},#{targetType},#{sender},#{action})
+	</insert>
+	<insert id="createRemind" parameterType="com.pjmike.lundao.po.Notify">
+		INSERT INTO Notify(target,targetType,sender,action,content) VALUES (#{target},#{targetType},#{sender},#{action},#{content})
+	</insert>
+	<insert id="createInformation" parameterType="com.pjmike.lundao.po.Notify" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Notify(target,targetType,sender,action,receiver) VALUES (#{target},#{targetType},#{sender},#{action})
+	</insert>
+	<select id="findNotify" parameterType="int" resultType="com.pjmike.lundao.po.Notify">
+		SELECT * FROM Notify WHERE sender=#{int}
+	</select>
+	<select id="findNotifyRecord" parameterType="com.pjmike.lundao.po.Subscription" resultType="Integer">
+		SELECT id FROM Notify WHERE target=#{target} AND targetType=#{targetType} 
+	</select>
+</mapper>

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
+import com.pjmike.lundao.enums.action;
+import com.pjmike.lundao.enums.targetType;
 import com.pjmike.lundao.mapper.ThesisMapper;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.AskquestionExtend;
@@ -27,12 +29,15 @@ import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
 import com.pjmike.lundao.service.Impl.DebateServiceImpl;
+import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.TheisAttentionSerivceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl2;
 import com.pjmike.lundao.service.Impl.ThesisServiceImpl3;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
+import com.pjmike.lundao.util.Action;
+import com.pjmike.lundao.util.TargetType;
 import com.rabbitmq.tools.json.JSONReader;
 
 import net.sf.json.JSONObject;
@@ -61,6 +66,7 @@ public class ThesisController {
 	
 	@Autowired 
 	TheisAttentionSerivceImpl theisAttentionSerivceImpl;
+	private NotifyServiceImpl notifyServiceImpl = new NotifyServiceImpl();
 	/**
 	 * 
 	 * @return
@@ -180,6 +186,8 @@ public class ThesisController {
 		thesis.setTdescription(tDescription);
 		thesis.setTstate(tState);
 		thesisServiceImpl.insert(thesis);
+		//添加一个消息提醒
+		notifyServiceImpl.createRemind(tDebateid, TargetType.DEBATETOPIC, Action.CREAETDEBATE, tfromuid,tState);
 		return null;
 	}
 	/**
@@ -206,6 +214,7 @@ public class ThesisController {
 			}
 		} else {
 			theisAttentionSerivceImpl.insertAttention(userid, thesisid);
+			notifyServiceImpl.subscribe(userid, thesisid,TargetType.THESIS, Action.ATTENTION);
 		}
 		return null;
 	}

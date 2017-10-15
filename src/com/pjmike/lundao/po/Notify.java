@@ -16,6 +16,20 @@ public class Notify {
 	private int target;
 	//提醒信息的动作类型
 	private String action;
+	private String targetType;
+	private int receiver;
+	public int getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(int receiver) {
+		this.receiver = receiver;
+	}
+	public String getTargetType() {
+		return targetType;
+	}
+	public void setTargetType(String targetType) {
+		this.targetType = targetType;
+	}
 	//发送者id
 	private int sender;
 	private Date createdAt;

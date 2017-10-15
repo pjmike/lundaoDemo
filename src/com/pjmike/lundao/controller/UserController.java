@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.druid.util.StringUtils;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
+import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
 import com.pjmike.lundao.util.Error;
@@ -52,6 +53,9 @@ public class UserController {
 	
 	@Autowired
 	private RedisTokenManager tokenManager;
+	
+	@Autowired
+	private NotifyServiceImpl notifyServiceImpl;
 	
 	/**
 	 * @return
@@ -109,6 +113,7 @@ public class UserController {
 		String userNote = "{\"id\":"+user1.getId()+",\"auth_token\":"+tokenmodel.getToken()+"}";
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().println(userNote);
+		notifyServiceImpl.pullRemind(user1);
 		return null;
 	}
 	

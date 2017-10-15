@@ -14,8 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
+import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
+import com.pjmike.lundao.util.Action;
+import com.pjmike.lundao.util.TargetType;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.AttentionOther;
@@ -34,6 +37,8 @@ import net.sf.json.JSONObject;
 public class UserCenterController {
 	@Autowired
 	UserServiceImpl userServiceImpl;
+	@Autowired
+	NotifyServiceImpl notifyServiceImpl;
 	
 	/**
 	 * 编辑用户的个人资料
@@ -95,6 +100,7 @@ public class UserCenterController {
 			userServiceImpl.updateAttentionPeopleStatus(atttentionOther);
 		} else {
 			userServiceImpl.AttentionOther(id, toUid);
+			notifyServiceImpl.subscribe(id, toUid, TargetType.USER, Action.ATTENTION);
 		}
 		return null;
 	}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pjmike.lundao.mapper.UserNotifyMapper" >
+	<insert id="createUserNotify" >
+		INSERT INTO UserNotify(user,notify) VALUES (#{user},#{notify})
+	</insert>
+	<select id="findUserNotify" parameterType="int" resultType="com.pjmike.lundao.po.NotifyExtend">
+		SELECT Notify.*,user.nickname FROM Notify LEFT JOIN user ON Notify.sender 
+		= user.id WHERE Notify.id IN (SELECT notify FROM UserNotify WHERE user=#{int})
+	</select>
+</mapper>
