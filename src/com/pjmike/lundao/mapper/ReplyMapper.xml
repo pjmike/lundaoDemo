@@ -74,6 +74,9 @@
   <select id="likeNumber" parameterType="int" resultType="java.lang.Integer">
   	select count(*) from replyvote  where r_replyid =#{id} and r_status=1 
   </select>
+   <select id="selectUseridOfReply" parameterType="int" resultType="java.lang.Integer">
+    select from_uid from reply where id=#{int}
+  </select>
   <!--设置点赞-->
   <insert id="insetLike">
    insert into replyvote(r_replyid,r_uid,r_status) values(#{r_replyid},#{r_uid},1)

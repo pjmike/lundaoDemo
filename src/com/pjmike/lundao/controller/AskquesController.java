@@ -13,6 +13,7 @@ import com.pjmike.lundao.enums.targetType;
 import com.pjmike.lundao.po.Askquestion;
 import com.pjmike.lundao.po.comvote;
 import com.pjmike.lundao.service.Impl.AskquesServiceImpl;
+import com.pjmike.lundao.service.Impl.GetUseridServiceImpl;
 import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
@@ -33,6 +34,8 @@ public class AskquesController {
 	UserServiceImpl userServiceImpl;
 	@Autowired
 	NotifyServiceImpl notifyServiceImpl;
+	@Autowired
+	GetUseridServiceImpl getUseridServiceImpl;
 	/**
 	 * @param request
 	 * 发起提问及异议
@@ -87,10 +90,13 @@ public class AskquesController {
 		int askid = json.getInt("askid");
 		boolean isAttention = json.getBoolean("isAttention");
 		int count = askquesServiceImpl.selectAttention(id, askid);
+		int fromUid = getUseridServiceImpl.getUserIdOfASkquestion(askid);
 		if (count == 0) {
 			askquesServiceImpl.insertAttention(id, askid);
 			//订阅一个提问或异议
 			notifyServiceImpl.subscribe(id,askid, TargetType.AKSQUESTION, Action.ATTENTION);
+			//创建一个信息表
+			notifyServiceImpl.createInformation(askid, TargetType.AKSQUESTION,Action.ATTENTION,id,fromUid);
 		} 
 		if (count == 1) {
 			if (isAttention) {
@@ -117,9 +123,11 @@ public class AskquesController {
 			comvote.setA_uid(id);
 			comvote.setA_comment_id(askid);
 			int count = askquesServiceImpl.selectLike(comvote);
+			int fromUid = getUseridServiceImpl.getUserIdOfASkquestion(askid);
 			if (count == 0) {
 				askquesServiceImpl.insetLike(comvote);
-				notifyServiceImpl.createInformation(askid, TargetType.AKSQUESTION, Action.LIKE, id);
+				//点赞
+				notifyServiceImpl.createInformation(askid, TargetType.AKSQUESTION, Action.LIKE, id,fromUid);
 			}
 			if (count == 1) {
 				if (islike) {

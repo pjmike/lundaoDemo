@@ -18,8 +18,9 @@ public interface ThesisMapper {
     int insertSelective(Thesis record);
     
     List<Thesis> selectBykey();
+    //查询一个论点的所属者
+    int selectUseridOfThesis(int id);
     
-
     //查询某一个辩题
     Thesis selectOne(int id);
     ThesisExtend selectBythesisId (int id);

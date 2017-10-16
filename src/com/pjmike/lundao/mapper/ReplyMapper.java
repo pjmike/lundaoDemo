@@ -19,7 +19,8 @@ public interface ReplyMapper {
 
     //添加回复
     int insert(User user,Reply reply);
-    
+    //查询回复内容的所属者
+    int selectUseridOfReply(int id);
     
   //返回一个辩题的点赞数
     int likeNumber(int id);

@@ -47,7 +47,8 @@ public interface AskquestionMapper {
     int selectAttention(@Param("user_id")int id,@Param("ask_id")int askid);
     //删除提问或异议
     int changeIsShow(@Param("userid")int id,@Param("askid")int askid);
-    
+    //查询提问或异议所属的user
+    int selectUserIdOfAskquestion(int id);
     Integer SeeIsShow(@Param("userid")int id,@Param("askid")int askid);
     //关注辩题
     int insertAttention(@Param("user_id")int id,@Param("ask_id")int askId);

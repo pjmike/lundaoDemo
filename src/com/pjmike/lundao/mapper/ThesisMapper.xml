@@ -130,6 +130,9 @@
  	 from thesis t left join askquestion a on a.thesis_id = t.thesisId  left join user u on a.from_uid = u.id where t.thesisId=#{id}  order by thesisId  
    </select>
    
+   <select id="selectUseridOfThesis" parameterType="int" resultType="int">
+   		select t_from_uid from thesis where thesisId = #{int}
+  </select>
    <!-- 增加论点 -->
    <insert id="insert" parameterType="com.pjmike.lundao.po.Thesis">
    		insert into thesis(t_debateId,t_description,t_state,t_from_uid,nickname) values (#{tDebateid},#{tDescription},#{tState},#{tfromuid},#{nickname})

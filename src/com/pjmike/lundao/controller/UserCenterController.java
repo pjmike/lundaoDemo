@@ -101,6 +101,7 @@ public class UserCenterController {
 		} else {
 			userServiceImpl.AttentionOther(id, toUid);
 			notifyServiceImpl.subscribe(id, toUid, TargetType.USER, Action.ATTENTION);
+			notifyServiceImpl.createInformation(toUid, TargetType.USER, Action.ATTENTION, id, toUid);
 		}
 		return null;
 	}

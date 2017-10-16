@@ -9,6 +9,7 @@ import com.pjmike.lundao.po.Subscription;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserNotify;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * Created by DELL on 2017/10/14.
  * @author pjmike
  */
+@Service
 public class NotifyServiceImpl implements NotifyService{
     @Autowired
     NotifyMapper notifyMapper;
@@ -136,7 +138,7 @@ public class NotifyServiceImpl implements NotifyService{
     }
 
     /**
-     * 获取用户的消息队列
+     * 获取用户的
      *
      * @param userid
      * @return
@@ -157,15 +159,14 @@ public class NotifyServiceImpl implements NotifyService{
      * @return
      */
 	@Override
-	public int createInformation(int target, String targetType, String action, int sender) {
+	public int createInformation(int target, String targetType, String action, int sender,int fromUid) {
 		Notify notify = new Notify();
 		notify.setAction(action);
 		notify.setSender(sender);
 		notify.setTarget(target);
 		notify.setTargetType(targetType);
 		notifyMapper.createInformation(notify);
-		userNotifyMapper.createUserNotify(sender, notify.getId());
+		userNotifyMapper.createUserNotify(fromUid, notify.getId());
 		return 0;
-		
 	}
 }

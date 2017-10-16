@@ -67,7 +67,7 @@ public interface NotifyService {
      * @param recevier
      * @return
      */
-    int createInformation(int target,String targetType,String action,int sender);
+    int createInformation(int target,String targetType,String action,int sender,int fromUid);
 
     /**
      * 通过reason，查询NotifyConfig，获取对应的动作组:actions

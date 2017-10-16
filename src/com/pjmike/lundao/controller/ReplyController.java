@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mchange.v3.filecache.RelativePathFileCacheKey;
 import com.pjmike.lundao.po.Reply;
 import com.pjmike.lundao.po.User;
+import com.pjmike.lundao.service.Impl.GetUseridServiceImpl;
 import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.ReplyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
@@ -36,6 +37,8 @@ public class ReplyController {
 	UserServiceImpl userServiceImpl;
 	@Autowired
 	NotifyServiceImpl notifyServiceImpl;
+	@Autowired
+	GetUseridServiceImpl getUseridServiceImpl;
 	/**
 	 * 回复
 	 * @param request
@@ -89,9 +92,11 @@ public class ReplyController {
 		int userid = json.getInt("userid");
 		boolean islike = json.getBoolean("islike");
 		int count = replyServiceImpl.selectLike(userid, replyid);
+		int fromUid = getUseridServiceImpl.getUserIdOfReply(replyid);
 		if (count == 0) {
 			replyServiceImpl.insetLike(userid, replyid);
-			notifyServiceImpl.createInformation(replyid, TargetType.REPLY, Action.LIKE, userid);
+			//创建点赞信息表
+			notifyServiceImpl.createInformation(replyid, TargetType.REPLY, Action.LIKE, userid,fromUid);
 		} 
 		if (count == 1) {
 			if (islike) {

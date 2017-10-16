@@ -50,10 +50,14 @@
   <select id="selecrAllAttentionAskqustion" parameterType="int" resultMap="resultask">
   	select id,describtion,content,type,view from askquestion where id in (select ask_id from askquAttention where user_id =#{id})
   </select>
+  <select id="selectUserIdOfAskquestion" parameterType="int" resultType="Integer">
+  	select from_uid from askquestion where id=#{int}
+  </select>
   <!-- 判断一个用户是否具体点赞过某个提问 -->
   <select id="Islike" parameterType="com.pjmike.lundao.po.comvote" resultType="java.lang.Integer">
   	select a_status from  comvote where a_uid =#{a_uid} and a_comment_id =#{a_comment_id}
   </select>
+  
   <!-- 查找某一具体提问或者异议 -->
   <select id="selectOneAskquestion" parameterType="int" resultMap="OneAskqyestion">
   	select a.id,a.type,a.state,a.publishTime,a.describtion,a.content,u.nickname,u.Icon
