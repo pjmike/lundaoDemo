@@ -76,11 +76,10 @@ public class ThesisController {
 	public ThesisExtend selectBythesisId(HttpServletRequest request,HttpServletResponse response) throws Exception,ClassCastException {
 		JSONObject json = JsonRead.receivePost(request);
 		
-		int thesisid = json.getInt("thesisId");
-		int id = json.getInt("id");
-		int currPage = json.getInt("currPage");
-		int pageSize = json.getInt("pageSize");
-		
+		int thesisid = (int) json.get("thesisId");
+		int id = (int) json.get("id");
+		int currPage = (int) json.get("currPage");
+		int pageSize = (int) json.get("pageSize");
 		User user = null;
 		if(id>0) {
 			user = new User();
@@ -115,6 +114,7 @@ public class ThesisController {
 			user = new User();
 			user.setId(userid);
 		}
+		
 		ReplyExtend reply = new ReplyExtend();
 		reply.setCommentId(CommentId);
 		reply.setFromUid(Fromuid);

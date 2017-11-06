@@ -106,7 +106,7 @@ public class AskquesServiceImpl implements AskquesService{
 								if (reply.getId() != null && r.getReplyId()>0) {
 									if (reply.getId().equals(r.getReplyId())) {
 										if (reply.getNextReply() == null) {
-											reply.setNextReply(new ArrayList<>());
+											reply.setNextReply(new ArrayList<ReplyExtend>());
 										}
 										reply.getNextReply().add(r);
 										creplylist.add(r);
@@ -159,13 +159,13 @@ public class AskquesServiceImpl implements AskquesService{
 			
 			Callback(max, ask, it);
 		}
-			ask.setReplies(null);
+//			ask.setReplies(null);
 			List<ReplyExtend> listreply = new ArrayList<ReplyExtend>();
 			if(ask.getReplyextend() != null) {
 				ReplyExtend maxreply = ask.getReplyextend();
 				listreply.add(maxreply);
 				addlist(maxreply, listreply);
-				ask.setReplylist(listreply);
+//				ask.setReplylist(listreply);
 				for(ReplyExtend r:listreply) {
 					if(user != null) {
 						Integer isShow = replyMapper.selectIsShow(user.getId(),r.getId());
@@ -396,6 +396,10 @@ public class AskquesServiceImpl implements AskquesService{
 		@Override
 		public int selectAttention(int id, int askid) {
 			return askquestionMapper.selectAttention(id, askid);
+		}
+		@Override
+		public String selectContent(int id) {
+			return askquestionMapper.selectContent(id);
 		}
 
 }

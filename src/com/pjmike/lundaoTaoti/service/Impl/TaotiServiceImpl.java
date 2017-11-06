@@ -12,6 +12,7 @@ import com.pjmike.lundaoTaoti.po.Taoti;
 
 @Service
 public class TaotiServiceImpl implements TaotiService {
+	
 	@Autowired
 	TaotiMapper taotiMapper;
 	/**
@@ -116,5 +117,9 @@ public class TaotiServiceImpl implements TaotiService {
 	@Override
 	public int insertlabels(int taotiId, String labels) {
 		return taotiMapper.insertlabels(taotiId, labels);
+	}
+	@Override
+	public List<Taoti> selectTaoti(String name) {
+		return taotiMapper.selectTaoti(name);
 	}
 }

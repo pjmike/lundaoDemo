@@ -37,13 +37,14 @@ public interface ReplyMapper {
     List<ReplyExtend> select(Integer id);
 
     ReplyExtend selectbyReplyid(Integer id);
-
+    
     int updateByPrimaryKeySelective(Reply record);
 
     int updateByPrimaryKeyWithBLOBs(Reply record);
 
     int updateByPrimaryKey(Reply record);
-    
+    //查询回复内容
+    String selectContent(int id);
     //发起回复
     int reply(Reply reply);
     

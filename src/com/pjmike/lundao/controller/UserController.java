@@ -70,15 +70,16 @@ public class UserController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/signup")
-	public ModelAndView signup(@RequestBody User user,HttpServletResponse response) throws IOException {
-		/*JSONObject json = JsonRead.receivePost(request);
-		long mobile = json.get
-		String password = json.getString("password");
-		User user = new User();*/
-		String md5password = Md5Util.generateMD5(user.getPassword());
-		user.setMobile(user.getMobile());
+	public ModelAndView signup(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		JSONObject json = JsonRead.receivePost(request);
+		long mobile = (long) json.get("mobile");
+		String password = (String) json.get("password");
+		User user = new User();
+		String md5password = Md5Util.generateMD5(password);
+		user.setMobile(mobile);
+		
 		user.setPassword(md5password);
-        User user1 = userServiceImpl.findUserBymobile(user.getMobile());
+        User user1 = userServiceImpl.findUserBymobile(mobile);
         response.setCharacterEncoding("UTF-8");
         PrintWriter p = response.getWriter();
 		if (user1 != null) {
@@ -96,20 +97,20 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/signin")
-	public ModelAndView signin(@RequestBody User user,HttpServletResponse response) throws Exception {
-		/*JSONObject json = JsonRead.receivePost(request);
-		int mobile = json.getInt("mobile");
-		String password = json.getString("password");
-		String md5password = Md5Util.generateMD5(password);*/
-		long mobile = user.getMobile();
-		String md5password = Md5Util.generateMD5(user.getPassword());
+	public ModelAndView signin(HttpServletRequest request,HttpServletResponse response) throws Exception {
+		JSONObject json = JsonRead.receivePost(request);
+		long mobile = (long) json.get("mobile");
+		String password = (String) json.get("password");
+		String md5password = Md5Util.generateMD5(password);
+//		long mobile = user.getMobile();
+//		String md5password = Md5Util.generateMD5(user.getPassword());
 		User user1 = userServiceImpl.findUserBymobile(mobile);
 		
 		if (user1 == null || !user1.getPassword().equals(md5password)) {
 			throw new UserNotFoundException(mobile);
 		} 
 		//生成Token
-		TokenModel tokenmodel = tokenManager.createToken(user.getId());
+		TokenModel tokenmodel = tokenManager.createToken(user1.getId());
 		String userNote = "{\"id\":"+user1.getId()+",\"auth_token\":"+tokenmodel.getToken()+"}";
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().println(userNote);
@@ -118,7 +119,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/photoupLoad",method=RequestMethod.POST)
-	public ModelAndView photoupLoad(MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException {
+	public ModelAndView photoupLoad(@RequestBody User user,MultipartFile file,HttpServletRequest request) throws IllegalStateException, IOException {
 		//获取项目的webroot
 		String pathroot = request.getSession().getServletContext().getRealPath("");
 		String path = "";
@@ -131,9 +132,11 @@ public class UserController {
 			File picfile = new File(pathroot+path);
 			//将文件写入
 			file.transferTo(picfile);
-			//将图片新名称写入数据库
-			User user = new User();
-			user.setIcon(newFilename);
+			
+			//将图片新名称写入数据库,更新用户的提交信息
+			userServiceImpl.updateUserIcon(newFilename, user.getId());
+			/*User user = new User();
+			user.setIcon(newFilename);*/
 		}
 		return null;
 	}

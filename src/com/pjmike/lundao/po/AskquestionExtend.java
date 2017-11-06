@@ -14,14 +14,14 @@ public class AskquestionExtend extends Askquestion{
 	
 	private boolean dislike = false;
 	
-	private List<ReplyExtend> replylist;
+/*	private List<ReplyExtend> replylist;
 	public List<ReplyExtend> getReplylist() {
 		return replylist;
 	}
 
 	public void setReplylist(List<ReplyExtend> replylist) {
 		this.replylist = replylist;
-	}
+	}*/
 
 	@JsonGetter("dislike")
 	public boolean Dislike() {
@@ -33,7 +33,7 @@ public class AskquestionExtend extends Askquestion{
 	}
 
 	@JsonGetter("isShow")
-	public boolean isShow() {
+	public boolean getShow() {
 		return isShow;
 	}
 
@@ -67,7 +67,6 @@ public class AskquestionExtend extends Askquestion{
 	public void setIcon(String icon) {
 		Icon = icon;
 	}
-	@JsonIgnore
 	private List<ReplyExtend> replies;
 	
 	public List<ReplyExtend> getReplies() {

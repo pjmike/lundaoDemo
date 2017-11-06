@@ -75,6 +75,13 @@
    	<result column="t_from_uid" property="tfromuid"/>
    	<result column="nickname" property="nickname"/>
    </resultMap>
+     <resultMap type="com.pjmike.lundao.po.ThesisSimple" id="thesisSimple">
+   	<id column="thesisId" property="thesisid"/>
+   	<result column="t_description" property="tdescription"/>
+   	 <result column="t_like" property="tLike" jdbcType="INTEGER" />
+    <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
+    <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
+   </resultMap>
    <resultMap type="com.pjmike.lundao.po.ThesisCollection" id="CollectionHTesis">
    		<id column="thesisId" property="id"/>
    	<result column="t_description" property="title"/>
@@ -92,6 +99,12 @@
     <result column="supplement" property="supplement"/>
    </resultMap>
    
+   <resultMap type="com.pjmike.lundao.po.ThesisCustom" id="selectThesisCustom">
+   		<id column="thesisId" property="thesisid"/>
+   	<result column="t_description" property="title"/>
+   	<result column="t_state" property="content"/>
+   	<result column="complete" property="complete"/>
+   </resultMap>
    <select id="selectOne" parameterType="int" resultMap="ResultOne">
    		select thesisId,t_description,t_state,t_debateId,t_from_uid,nickname from thesis where thesisId=#{id}
    </select>
@@ -148,8 +161,8 @@
   	select count(*) from thesisAttention where thesis_id = #{id} and status=1
   </select>
  <!-- 返回用户所关注的论点 -->
- <select id="selectAllThesisAttentioned" parameterType="int" resultMap="ResultOne2">
- 	select thesisId,t_description,t_state,t_view from thesis where
+ <select id="selectAllThesisAttentioned" parameterType="int" resultMap="thesisSimple">
+ 	select thesisId,t_description,t_like,t_attention,t_publishTime from thesis where
  	thesisId in(select thesis_id from thesisAttention where user_id=#{id})
  </select>
   <!-- 判断一个用户是否具体点赞过某个辩题 -->
@@ -161,7 +174,11 @@
   	select status from  thesisAttention where user_id =#{user_id} and thesis_id =#{thesis_id}
   </select>
   
-  
+  <!--模糊查询论点-->
+  <select id="selectThesisCustom" parameterType="String" resultMap="selectThesisCustom">
+  	select thesisId,t_description,t_state,complete from thesis where true 
+		<if test="value != null"> and t_description like concat('%',#{value},'%') </if>
+  </select>
   <!-- 返回论点的所有完善版本 -->
   <select id="selectAllSupplement" parameterType="com.pjmike.lundao.po.Supplement" resultMap="ResultSupplement">
   	select t.t_description,t.t_state,s.nickname,s.supplement from thesis t left join supplement s on s.thesisId = t.thesisId 

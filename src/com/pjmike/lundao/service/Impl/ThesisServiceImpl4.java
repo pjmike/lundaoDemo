@@ -22,6 +22,7 @@ import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisCollection;
+import com.pjmike.lundao.po.ThesisCustom;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
@@ -383,6 +384,12 @@ public class ThesisServiceImpl4 implements ThesisService {
 	public int updateColleThesisIsshow(int userid, int thesisId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<ThesisCustom> selectThesisCustom(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

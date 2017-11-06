@@ -34,6 +34,13 @@ public interface TaotiService {
 	 */
 	Taoti selectOne(int taotiId,int userid);
 	
+	/**
+	 * 模糊查询淘题
+	 * @param name
+	 * @return
+	 */
+	List<Taoti> selectTaoti(String name);
+	
 	int downCommentNum(int id);
 	
 	int insertCommented(Taoti taoti);

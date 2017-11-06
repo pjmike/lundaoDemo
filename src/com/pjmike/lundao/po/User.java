@@ -1,28 +1,61 @@
 package com.pjmike.lundao.po;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+/**
+ * 用户类
+ * @author pjmike
+ *
+ */
+public class User implements Serializable{
+	public interface WithoutPasswordView {};
+	
 	private int id;
+	@JsonIgnore
 	private String openid;
+	@JsonIgnore
 	private long mobile;
 	private String userSignature;
+	@JsonIgnore
 	private String password;
 	private String nickname;
 	private String gender;
 	private String Icon;
+	private int level;
+	private  String honors;
 	private int age;
 	private String emailNumber;
-	private String school;
+	private String schoolName;
 	private String experience;
 	private String educations;
 	private String locations;
 	private Date birthday;
+	@JsonIgnore
 	private int attentioned;
+	@JsonIgnore
 	private String auth_token;
+	@JsonIgnore
 	private Timestamp created_at;
+	@JsonIgnore
 	private Timestamp updated_at;
+	@JsonView(WithoutPasswordView.class)
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public String getHonors() {
+		return honors;
+	}
+	public void setHonors(String honors) {
+		this.honors = honors;
+	}
 	public String getUserSignature() {
 		return userSignature;
 	}
@@ -35,6 +68,7 @@ public class User {
 	public void setEmailNumber(String emailNumber) {
 		this.emailNumber = emailNumber;
 	}
+	@JsonGetter("userPortraitImageUrl")
 	public String getIcon() {
 		return Icon;
 	}
@@ -53,11 +87,12 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public String getSchool() {
-		return school;
+	
+	public String getSchoolName() {
+		return schoolName;
 	}
-	public void setSchool(String school) {
-		this.school = school;
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
 	}
 	public int getAttentioned() {
 		return attentioned;
@@ -137,12 +172,5 @@ public class User {
 	public void setUpdated_at(Timestamp updated_at) {
 		this.updated_at = updated_at;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", mobile=" + mobile + ", password=" + password + ", nickname=" + nickname
-				+ ", gender=" + gender + ", age=" + age + ", school=" + school + ", experience=" + experience
-				+ ", educations=" + educations + ", locations=" + locations + ", birthday=" + birthday
-				+ ", attentioned=" + attentioned + ", auth_token=" + auth_token + ", created_at=" + created_at
-				+ ", updated_at=" + updated_at + "]";
-	}
+
 }

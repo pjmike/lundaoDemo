@@ -61,7 +61,6 @@ public class ReplyExtend extends Reply{
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	@JsonIgnore
 	private List<ReplyExtend> nextReply;
 	@JsonIgnore
 	private ReplyExtend replyExtend;

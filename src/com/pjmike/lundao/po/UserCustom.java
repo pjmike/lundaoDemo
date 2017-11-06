@@ -1,54 +1,86 @@
 package com.pjmike.lundao.po;
 
-//User的扩展类
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonGetter;
+
+/**
+ * User的扩展类
+ * @author pjmike
+ *
+ */
 public class UserCustom extends User{
-	private int likeNumber;
-	private int attentionNumber;
-	private int fans;
-	private int myDebates;
-	private int myThesis;
-	private int myReplys;
-	private int myAttention;
-	public int getLikeNumber() {
-		return likeNumber;
+	private boolean isAttention = false;
+	@JsonGetter("Attentioned")
+	public boolean Attention() {
+		return isAttention;
 	}
-	public int getMyAttention() {
-		return myAttention;
+	public void setAttention(boolean isAttention) {
+		this.isAttention = isAttention;
 	}
-	public void setMyAttention(int myAttention) {
-		this.myAttention = myAttention;
+	private List<PeriodicalItemList> periodicalItemList = new ArrayList<PeriodicalItemList>();
+	public List<PeriodicalItemList> getPeriodicalItemList() {
+		return periodicalItemList;
 	}
-	public void setLikeNumber(int likeNumber) {
-		this.likeNumber = likeNumber;
+	public void setPeriodicalItemList(List<PeriodicalItemList> periodicalItemList) {
+		this.periodicalItemList = periodicalItemList;
 	}
-	public int getAttentionNumber() {
-		return attentionNumber;
+	private String backgroundImageUrl;
+	private String constellation;
+	private int like;
+	private int attention;
+	private int fansAmounts;
+	private int debateTopic;
+	private int thesis;
+	private int presentations;
+	public String getBackgroundImageUrl() {
+		return backgroundImageUrl;
 	}
-	public void setAttentionNumber(int attentionNumber) {
-		this.attentionNumber = attentionNumber;
+	public void setBackgroundImageUrl(String backgroundImageUrl) {
+		this.backgroundImageUrl = backgroundImageUrl;
 	}
-	public int getFans() {
-		return fans;
+	public String getConstellation() {
+		return constellation;
 	}
-	public void setFans(int fans) {
-		this.fans = fans;
+	public void setConstellation(String constellation) {
+		this.constellation = constellation;
 	}
-	public int getMyDebates() {
-		return myDebates;
+	public int getLike() {
+		return like;
 	}
-	public void setMyDebates(int myDebates) {
-		this.myDebates = myDebates;
+	public void setLike(int like) {
+		this.like = like;
 	}
-	public int getMyThesis() {
-		return myThesis;
+	public int getAttention() {
+		return attention;
 	}
-	public void setMyThesis(int myThesis) {
-		this.myThesis = myThesis;
+	public void setAttention(int attention) {
+		this.attention = attention;
 	}
-	public int getMyReplys() {
-		return myReplys;
+	public int getFansAmounts() {
+		return fansAmounts;
 	}
-	public void setMyReplys(int myReplys) {
-		this.myReplys = myReplys;
+	public void setFansAmounts(int fansAmounts) {
+		this.fansAmounts = fansAmounts;
 	}
+	public int getDebateTopic() {
+		return debateTopic;
+	}
+	public void setDebateTopic(int debateTopic) {
+		this.debateTopic = debateTopic;
+	}
+	public int getThesis() {
+		return thesis;
+	}
+	public void setThesis(int thesis) {
+		this.thesis = thesis;
+	}
+	public int getPresentations() {
+		return presentations;
+	}
+	public void setPresentations(int presentations) {
+		this.presentations = presentations;
+	}
+	
 }

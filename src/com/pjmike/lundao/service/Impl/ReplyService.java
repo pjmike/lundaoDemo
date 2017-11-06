@@ -25,4 +25,6 @@ public interface ReplyService {
     int changereplyIsShow(int id,int replyid);
     
     Integer selectIsShow(int id,int replyid);
+    //查询回复内容
+    String selectContent(int id);
 }

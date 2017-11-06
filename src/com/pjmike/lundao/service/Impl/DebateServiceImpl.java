@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.pjmike.lundao.mapper.DebatetopicMapper;
 import com.pjmike.lundao.mapper.MarkdebateMapper;
 import com.pjmike.lundao.mapper.ThesisMapper;
+import com.pjmike.lundao.po.DebateTopicCustom;
+import com.pjmike.lundao.po.DebateTopicSimple;
 import com.pjmike.lundao.po.Debatetopic;
+import com.pjmike.lundao.po.DebatetopicExample;
 import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.Markdebate;
 import com.pjmike.lundao.po.Thesis;
@@ -311,7 +314,7 @@ public class DebateServiceImpl implements DebateService{
 	}
 
 	@Override
-	public List<Debatetopic> selectAlldebateAttentioned(int id) {
+	public List<DebateTopicSimple> selectAlldebateAttentioned(int id) {
 		return debatetopicMapper.selectAlldebateAttentioned(id);
 	}
 
@@ -345,5 +348,11 @@ public class DebateServiceImpl implements DebateService{
 	public Integer IsAttention(Integer topicid, int id) {
 		// TODO Auto-generated method stub
 		return debatetopicMapper.IsAttention(id, topicid);
+	}
+
+	@Override
+	public List<DebateTopicCustom> selectDebateTopic(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

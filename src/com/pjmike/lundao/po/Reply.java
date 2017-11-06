@@ -15,7 +15,7 @@ public class Reply {
     private Integer fromUid;
 
     private Integer toUid;
-
+    @JsonIgnore
     private int rType;
     @JsonIgnore
     private Integer rView;

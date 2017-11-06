@@ -64,11 +64,21 @@
   
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
- <resultMap type="com.pjmike.lundao.po.Debatetopic" id="ResultOne2">
- 	 <id column="topicId" property="topicid" jdbcType="INTEGER" />
+ <resultMap type="com.pjmike.lundao.po.DebateTopicSimple" id="ResultOne2">
+ 	 <id column="topicId" property="topicId" jdbcType="INTEGER" />
     <result column="describtion" property="describtion" jdbcType="VARCHAR" />
-    <result column="view" property="view" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
+     <result column="publishTime" property="publishTime" jdbcType="TIMESTAMP" />
+     <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="attention" property="attention" jdbcType="INTEGER" />
+ </resultMap>
+ 
+ <resultMap type="com.pjmike.lundao.po.DebateTopicCustom" id="selectDebateTopic">
+ 	 <id column="topicId" property="topicId" jdbcType="INTEGER" />
+    <result column="describtion" property="describtion" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+     <result column="like" property="like" jdbcType="INTEGER" />
+    <result column="view" property="view" jdbcType="INTEGER" />
  </resultMap>
   
   <!-- 根据id查询辩题并返回该论点下所有的论点 -->
@@ -100,7 +110,7 @@
   </select>
   	 <!-- 返回用户所关注的辩题 -->
  <select id="selectAlldebateAttentioned" parameterType="int" resultMap="ResultOne2">
- 	select topicId,describtion,content,view from debateTopic where topicId in(select debate_id from debateAttention where user_id=#{id})
+ 	select d.topicId,d.describtion,d.content,d.like,d.attention,d.publishTime from debateTopic d where topicId in(select debate_id from debateAttention where user_id=#{id})
  </select>
   <!-- 判断一个用户是否具体点赞过某个辩题 --> 
   <select id="Islike"  resultType="Integer">
@@ -132,9 +142,16 @@
   	update debatevote set d_status = 1 where user_id =#{user_id} and debate_id =#{debate_id}
   </update>
   <!-- 查看是否存在关注辩题 -->
-  <select id="findisHasAttention">
+  <select id="findisHasAttention" resultType="Integer">
   	select count(*) from debateAttention where debate_id = #{debate_id} and user_id =#{user_id}
   </select>
+  
+  <!--模糊搜索辩题信息-->
+  <select id="selectDebateTopic" parameterType="String" resultMap="selectDebateTopic">
+  	select d.topicId,d.describtion,d.content,d.like,d.view from debateTopic d
+    where true <if test="value != null"> and d.describtion like concat('%',#{value},'%') </if>
+  </select>
+  
   <!-- 关注辩题 -->
   <insert id="insertAttention">
   	insert into debateAttention(debate_id,user_id,status) values(#{debate_id},#{user_id},1)

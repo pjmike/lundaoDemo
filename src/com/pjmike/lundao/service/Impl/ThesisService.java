@@ -7,6 +7,7 @@ import com.pjmike.lundao.po.ReplyExtend;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisCollection;
+import com.pjmike.lundao.po.ThesisCustom;
 import com.pjmike.lundao.po.ThesisExtend;
 import com.pjmike.lundao.po.ThesisSupplement;
 import com.pjmike.lundao.po.User;
@@ -40,4 +41,6 @@ public interface ThesisService {
     int updateColleThesisIsshow(int userid,int thesisId);
 
 	ThesisExtend selectBythesisId(int id, User user);
+	//模糊查询论点
+    List<ThesisCustom> selectThesisCustom(String name);
 }

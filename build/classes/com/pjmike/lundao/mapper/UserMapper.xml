@@ -13,11 +13,29 @@
 	update users set username=#{username}, password=#{password}
 	</update> -->
 	
+	<resultMap type="com.pjmike.lundao.po.UserFans" id="userFans">
+		<id column="id" property="id" />
+		<result column="nickname" property="nickname"/>
+		<result column="Icon" property="Icon"/>
+		<result column="signature" property="userSignature"/>
+		<result column="level" property="level"/>
+		<result column="honors" property="honors"/>
+		<result column="status" property="isAttention"/>
+	</resultMap>
+	<resultMap type="com.pjmike.lundao.po.UserSelected" id="selectUsersByString">
+		<id column="id" property="id" />
+		<result column="nickname" property="nickname"/>
+		<result column="Icon" property="Icon"/>
+		<result column="signature" property="userSignature"/>
+		<result column="honors" property="honors"/>
+	</resultMap>
+	
 	<resultMap type="com.pjmike.lundao.po.User" id="ResultOne">
 		<result column="nickname" property="nickname"/>
 		<result column="Icon" property="Icon"/>
 	</resultMap>
 	<resultMap type="com.pjmike.lundao.po.User" id="oneUser">
+		<id column="id" property="id" />
 		<result column="nickname" property="nickname"/>
 		<result column="Icon" property="Icon"/>
 		<result column="signature" property="userSignature"/>
@@ -31,7 +49,20 @@
 		<result column="age" property="age"/>
 		<result column="locations" property="locations"/>
 		<result column="educations" property="educations"/>
+		<result column="status" property="isAttention"/>
 	</resultMap>
+	<resultMap id="BaseResultMap" type="com.pjmike.lundao.po.Thesis" >
+    <id column="thesisId" property="thesisid" jdbcType="INTEGER" />
+    <result column="t_debateId" property="tDebateid" jdbcType="INTEGER" />
+    <result column="t_description" property="tDescription" jdbcType="VARCHAR" />
+    <result column="t_view" property="tView" jdbcType="INTEGER" />
+    <result column="t_like" property="tLike" jdbcType="INTEGER" />
+    <result column="t_attention" property="tAttention" jdbcType="INTEGER" />
+    <result column="t_publishTime" property="tPublishtime" jdbcType="TIMESTAMP" />
+    <result column="complete" property="complete" jdbcType="INTEGER" />
+    <result column="uncomplete" property="uncomplete" jdbcType="INTEGER" />
+    <result column="t_state" property="tState" jdbcType="LONGVARCHAR" />
+  </resultMap>
 	<!-- 保存用户的头像与用户名 -->
 	<insert id="insertUser" parameterType="com.pjmike.lundao.po.User"  useGeneratedKeys="true" keyProperty="id">
 		insert into user(openid,nickname,Icon) values(#{openid},#{nickname},#{Icon})
@@ -44,6 +75,10 @@
 	
 	<update id="updateUserInformation" parameterType="com.pjmike.lundao.po.User" >
 		update user set nickname=#{nickname},gender=#{gender},emailNumber=#{emailNumber},locations=#{locations},educations=#{educations},signature=#{userSignature} where id=#{id}
+	</update>
+	<!-- 上传本地图片 -->
+	<update id="updateUserIcon">
+		update user set Icon=#{Icon} where id=#{id}
 	</update>
 	<!-- 根据用户id查询用户头像与nickname -->	
 	<select id="selectNicknameAndIcon" parameterType="int" resultMap="ResultOne">
@@ -58,8 +93,9 @@
 	<select id="findUserById" parameterType="int" resultType="com.pjmike.lundao.po.UserCustom">
 		select * from user where id=#{value}
 	</select>
-	<select id="findUser" parameterType="int" resultMap="result">
-		select id,nickname,Icon,gender,signature,age,locations,educations from user where id=#{id}
+	<select id="findUser" parameterType="com.pjmike.lundao.po.AttentionOther" resultMap="result">
+		select u.id,nickname,Icon,gender,signature,age,locations,educations,A.status from user u left join AttentionOther 
+		A on from_uid =#{from_uid} and to_Uid =#{to_uid} where u.id=#{to_uid}
 	</select>
 	<!--查询出一个用户所关注的辩题数 -->
 	<select id="findAttentionDebateNumber" parameterType="int" resultType="Integer">
@@ -69,7 +105,11 @@
 	<select id="findAttentionThesisNumber" parameterType="int" resultType="Integer">
 		select count(*) from thesisAttention where user_id=#{id} and status = 1
 	</select>
-	
+	<!--模糊查询 -->
+	<select id="selectUsersByString" parameterType="String" resultMap="selectUsersByString">
+		select id,Icon,nicname,honors from user where true 
+		<if test="value != null"> and nickname like concat('%',#{value},'%') </if>
+	</select>
 	<select id="findAskquestionNumber" parameterType="int" resultType="Integer">
 		select count(*) from askquestion where from_uid=#{id} 
 	</select>
@@ -77,16 +117,25 @@
 	<select id="findReplyNumber" parameterType="int" resultType="Integer">
 		select count(*) from reply where from_uid=#{id}
 	</select>
-	
-	
 	<select id="AttentionedOtherPeople" parameterType="int" resultType="Integer">
 		select count(*) from AttentionOther where from_uid=#{id}
 	</select>
-	<select id="AttentionedPeople" parameterType="int" resultType="Integer">
-		select count(*) from AttentionOther where from_uid=#{id} and to_uid=#{id}
+	<select id="AttentionedPeople"  resultType="Integer">
+		select count(*) from AttentionOther where from_uid=#{from_uid} and to_uid=#{to_uid}
+	</select>
+	<!-- <select id="AttentionedPeopleStatus"   parameterType="int" resultType="boolean">
+		select status from AttentionOther where from_uid = #{from_uid}
+	</select> -->
+	
+	<select id="findUserStatus"  resultType="boolean">
+		select status from AttentionOther where fromuid=#{fromUid} and to_uid=#{toUid}
 	</select>
 	<select id="myFans" parameterType="int" resultType="Integer">
 		select count(*) from AttentionOther where to_uid=#{id}
+	</select>
+	<select id="findmyFansInformation" parameterType="int" resultMap="userFans">
+		select u.id,u.Icon,u.nickname,u.signature,u.level,u.honors, a.status from AttentionOther a left join 
+		user u on a.from_uid = u.id where a.to_uid =#{int}
 	</select>
 	<insert id="AttentionOther">
 		insert AttentionOther(from_uid,to_uid) values(#{from_uid},#{to_uid})
@@ -97,12 +146,12 @@
 	
 	
 	<select id="selectMyUserFormotion" parameterType="int" resultMap="oneUser">
-		select nickname,Icon,signature from user where id in(select to_uid from AttentionOther where from_uid=#{id}) 
+		select id,nickname,Icon,signature from user where id in(select to_uid from AttentionOther where from_uid=#{id}) 
 	</select>
 	<select id="selectMyReplyes" parameterType="int" resultType="com.pjmike.lundao.po.AskquestionExtend">
 		select * from askquestion where from_uid=#{id}
 	</select>
-	<select id="selectMyThesis" parameterType="int" resultType="com.pjmike.lundao.po.Thesis">
+	<select id="selectMyThesis" parameterType="int" resultMap="BaseResultMap">
 		select * from thesis where t_from_uid=#{id}
 	</select>
 	<select id="selectMyDebate" parameterType="int" resultType="com.pjmike.lundao.po.Debatetopic">

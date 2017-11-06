@@ -2,10 +2,12 @@ package com.pjmike.lundao.util;
 
 import java.util.UUID;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-/**通过redis存储和验证Token
+/**
+ * 通过redis存储和验证Token
  * @author pjmike
  *
  */
@@ -18,11 +20,13 @@ public class RedisTokenManager implements TokenManager {
 		this.redisTemplate = redisTemplate;
 	}
 	@SuppressWarnings("unchecked")
+	@Cacheable(value="tokenCache",key="#result.token")
 	@Override
 	public TokenModel createToken(int userid) {
 		String token = UUID.randomUUID().toString().replaceAll("-", "");
+		System.out.println(token);
 		TokenModel tokenmodel = new TokenModel(userid, token);
-		redisTemplate.opsForValue().set(userid, token);
+//		redisTemplate.opsForValue().set(userid, token);
 		return tokenmodel;
 	}
 
@@ -47,7 +51,5 @@ public class RedisTokenManager implements TokenManager {
 	@Override
 	public void deleteToken(int userid) {
 		redisTemplate.delete(userid);
-
 	}
-
 }

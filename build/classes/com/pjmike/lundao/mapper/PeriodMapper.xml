@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pjmike.lundao.mapper.PeriodMapper">
+	<!--期刊集锦内容-->
+	<resultMap type="com.pjmike.lundao.po.PeriodCal" id="PeriodicalResultMap">
+		  <id column="periodicalId" property="id"  />
+    <result column="periodicalCoverUrl" property="periodicalCoverUrl"  />
+    <result column="periodicalTitle" property="periodicalTitle"  />
+    <result column="periodicalBrief" property="periodicalBrief"  />
+    <result column="periodicalRead" property="periodicalRead"  />
+    <result column="periodicalRecommend" property="periodicalRecommend"  />
+    </resultMap>
+
+	<!--期刊主页面-->
+    	<resultMap type="com.pjmike.lundao.po.PeriodicalCustom" id="selectPeriodiCalAndCatalog">
+		  <id column="periodicalId" property="id"  />
+    <result column="periodicalCoverUrl" property="periodicalCoverUrl"  />
+    <result column="periodicalTitle" property="periodicalTitle"  />
+    <result column="periodicalBrief" property="periodicalBrief"  />
+    <result column="periodicalRead" property="periodicalRead"  />
+    <result column="periodicalRecommend" property="periodicalRecommend"  />
+			<!--级联periodicalCatalogs-->
+    <collection property="periodicalCatalogs" ofType="com.pjmike.lundao.po.PeriodicalCatalog">
+   	   <id column="chapterId" property="chapterId" jdbcType="INTEGER" />
+		<result column="cperiodId" property="cperiodId"/>
+   	   <result column="chapterContent" property="chapterContent"  />
+		<result column="chapterTitle" property="chapterTitle"/>
+		<result column="chapterState" property="chapterState"/>
+   	</collection>
+			<!--级联periodicalComments-->
+   	<collection property="periodicalComments" ofType="com.pjmike.lundao.po.PeriodicalComment">
+   	   <id column="periodicalCommentId" property="pCommentId" jdbcType="INTEGER" />
+		<result column="pPeriodical" property="pPeriodical"/>
+		<result column="plCommentUserId" property="periodicalCommentUserId"/>
+		<result column="pCommentUserIcon" property="periodicalCommentUserPortraitUrl"/>
+		<result column="pCommentTime" property="periodicalCommentTime"/>
+		<result column="pCommentLike" property="periodicalCommentLike"/>
+		<result column="pCommentContent" property="periodicalCommentContent"/>
+   	</collection>
+
+    </resultMap>
+    <!--期刊主页面-->
+	<select id="selectPeriodical" resultMap="PeriodicalResultMap">
+		select periodicalId,periodicalCoverUrl,periodicalTitle,periodicalBrief,
+		periodicalRead,periodicalRecommend from periodical
+	</select>
+	<!--期刊包含评论部分-->
+	<select id="selectPeriodiCalAndCatalog" parameterType="int" resultMap="selectPeriodiCalAndCatalog">
+		select p.*,pc.*,pCo.* from periodical p 
+		left join periodicalCatalog pc on pc.cperiodId = p.periodicalId
+		left join pComment pCo on pCo.pPeriodical = p.periodicalId
+		where p.periodicalId = #{int}
+	</select>
+	<!--查看章节内容-->
+	<select id="seeChapterContent" parameterType="int" resultType="String">
+		SELECT chapterContent FROM periodicalCatalog WHERE chapterId = #{int}
+	</select>
+	<!--查看免费内容-->
+	<select id="seeFreeChapterContent" parameterType="int" resultType="String">
+		SELECT chapterContent FROM periodicalCatalog WHERE chapterId = #{int} and chapterState = 1
+	</select>
+	<!--发表评论-->
+	<insert id="insertComment" parameterType="com.pjmike.lundao.po.PeriodicalComment" >
+		INSERT INTO pComment(pPeriodical,plCommentUserId,pCommentUserIcon) VALUES (#{pPeriodical},#{periodicalCommentUserId},#{periodicalCommentUserPortraitUrl})
+	</insert>
+	<!--对期刊进行收藏-->
+	<insert id="CollectionPeriodical" parameterType="com.pjmike.lundao.po.PeriodicalAttention">
+		INSERT INTO PeriodicalAttention(userid,periodicalId,is_Attention) VALUES
+		(#{userid},#{periodicalId},#{is_Attention})
+	</insert>
+	<!--取消对期刊的收藏-->
+	<update id="giveUpCollectionPeriodical" parameterType="com.pjmike.lundao.po.PeriodicalAttention">
+		UPDATE PeriodicalAttention SET is_Attention = #{is_Attention} WHERE userid=#{userid} AND periodicalId=#{periodicalId}
+	</update>
+	<!--对评论进行点赞-->
+	<insert id="insertCommentLike" parameterType="com.pjmike.lundao.po.PCommentlike">
+		INSERT INTO pCommentlike(userid,pCommentid,is_like) VALUES (#{userid},#{pCommentid},#{is_like})
+	</insert>
+	<!--取消评论点赞-->
+	<update id="giveUpCommentLike" parameterType="com.pjmike.lundao.po.PCommentlike">
+		UPDATE pCommentlike SET is_like =#{is_like} WHERE userid=#{userid} AND
+		pCommentid = #{pCommentid}
+	</update>
+	<!--增加推荐数-->
+	<update id="addperiodicalRecommend" parameterType="int">
+		UPDATE periodical SET periodicalRecommend = periodicalRecommend +1 WHERE
+		periodicalId =#{int}
+	</update>
+	<!--减少推荐数-->
+	<update id="reducePeriodicalRecommend" parameterType="int">
+		UPDATE periodical SET periodicalRecommend = periodicalRecommend-1 WHERE
+		periodicalId =#{int}
+	</update>
+	<!--增加期刊阅读数-->
+	<update id="addPeriodicalRead" parameterType="int">
+		UPDATE periodical SET periodicalRead = periodicalRead +1 WHERE
+		periodicalId =#{int}
+	</update>
+	<!--增加期刊粉丝数-->
+	<update id="addperiodicalFocus" parameterType="int">
+		UPDATE periodical SET periodicalFocus = periodicalFocus +1 WHERE
+		periodicalId =#{int}
+	</update>
+	<!--减少期刊粉丝数-->
+	<update id="reduceperiodicalFocus" parameterType="int">
+		UPDATE periodical SET periodicalFocus = periodicalFocus -1 WHERE
+		periodicalId =#{int}
+	</update>
+ </mapper>

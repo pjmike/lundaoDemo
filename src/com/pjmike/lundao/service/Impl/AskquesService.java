@@ -39,5 +39,8 @@ public interface AskquesService {
 	int changeIsShow(int id, int askid);
 
 	Integer SeeIsShow(int id, int askid);
+	
+    //查询提问及异议的内容
+    String selectContent(int id);
 
 }

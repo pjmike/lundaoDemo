@@ -53,6 +53,9 @@
   <select id="selectUserIdOfAskquestion" parameterType="int" resultType="Integer">
   	select from_uid from askquestion where id=#{int}
   </select>
+   <select id="selectContent" parameterType="int" resultType="String">
+  	select describtion from askquestion where id=#{int}
+  </select>
   <!-- 判断一个用户是否具体点赞过某个提问 -->
   <select id="Islike" parameterType="com.pjmike.lundao.po.comvote" resultType="java.lang.Integer">
   	select a_status from  comvote where a_uid =#{a_uid} and a_comment_id =#{a_comment_id}

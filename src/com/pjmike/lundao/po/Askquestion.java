@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Askquestion {
     private Integer id;
-
     private Integer thesisId;
 
     private Integer fromUid;
@@ -31,7 +30,7 @@ public class Askquestion {
     private Integer reply;
     @JsonIgnore
     private Integer clickcount;
-    @JsonIgnore
+    
     private Date publishtime;
     @JsonIgnore
     private Date contenttime;
@@ -94,7 +93,7 @@ public class Askquestion {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
-    @JsonGetter("atype")
+//    @JsonGetter("atype")
     public int getType() {
         return type;
     }

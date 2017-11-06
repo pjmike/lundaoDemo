@@ -13,7 +13,6 @@ public class Debatetopic {
     private Integer view;
     
     private Integer like;
-    @JsonIgnore
     private Integer attention;
     @JsonIgnore
     private Integer dislike;
@@ -25,7 +24,7 @@ public class Debatetopic {
     private Integer thesis;
     @JsonIgnore
     private Integer debatelist;
-    @JsonIgnore
+    
     private Date publishtime;
     @JsonIgnore
     private String label;

@@ -91,6 +91,9 @@
   <select id="selectLike" resultType="int">
   	select count(*) from replyvote where r_uid =#{r_uid} and r_replyid =#{r_replyid}
   </select>
+  <select id="selectContent"  parameterType="int" resultType="String">
+  	select r_describtion from reply where id=#{id}
+  </select>
   <!-- 发起回复 -->
   <insert id="reply" parameterType="com.pjmike.lundao.po.Reply" >
   	insert into reply(comment_id,reply_id,from_uid,to_uid,r_describtion) values(#{commentId},#{replyId},#{fromUid},

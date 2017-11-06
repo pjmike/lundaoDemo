@@ -7,7 +7,7 @@
 		INSERT INTO UserNotify(user,notify) VALUES (#{user},#{notify})
 	</insert>
 	<select id="findUserNotify" parameterType="int" resultType="com.pjmike.lundao.po.NotifyExtend">
-		SELECT Notify.*,user.nickname FROM Notify LEFT JOIN user ON Notify.sender 
+		SELECT Notify.*,user.nickname,user.Icon FROM Notify LEFT JOIN user ON Notify.sender 
 		= user.id WHERE Notify.id IN (SELECT notify FROM UserNotify WHERE user=#{int})
 	</select>
 </mapper>

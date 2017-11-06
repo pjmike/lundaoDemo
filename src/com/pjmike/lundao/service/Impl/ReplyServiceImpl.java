@@ -76,4 +76,9 @@ public class ReplyServiceImpl implements ReplyService {
 		return replyMapper.selectLike(id, replyid);
 	}
 
+	@Override
+	public String selectContent(int id) {
+		return replyMapper.selectContent(id);
+	}
+
 }

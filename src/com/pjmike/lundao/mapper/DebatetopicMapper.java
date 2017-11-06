@@ -1,5 +1,7 @@
 package com.pjmike.lundao.mapper;
 
+import com.pjmike.lundao.po.DebateTopicCustom;
+import com.pjmike.lundao.po.DebateTopicSimple;
 import com.pjmike.lundao.po.Debatetopic;
 import com.pjmike.lundao.po.Debatetopicextend;
 
@@ -16,17 +18,16 @@ public interface DebatetopicMapper {
     int insert(Debatetopic record);
 
     int insertSelective(Debatetopic record);
-
-
     
     List<Debatetopicextend> selectList();
+    
     List<Debatetopic> selectListByPage(Map<String, Object> data);
     
     /**返回用户关注的辩题
      * @param id
      * @return
      */
-    List<Debatetopic> selectAlldebateAttentioned(int id);
+    List<DebateTopicSimple> selectAlldebateAttentioned(int id);
     //返回一个辩题的点赞数
     Integer likeNumber(int id);
     //返回一个辩题的关注量
@@ -41,7 +42,7 @@ public interface DebatetopicMapper {
     //点赞
     int insetLike(@Param("user_id")int id,@Param("debate_id")int topicId);
     //取消点赞
-    int giveupLike(@Param("user_id")int id,@Param("debate_id")int topicId);
+    int giveupLike(@Param("user_id")int id,@Param("deba*te_id")int topicId);
     //再次点赞
     int Likeagain(@Param("user_id")int id,@Param("debate_id")int topicId);
     //查找一个辩题下所有论点
@@ -55,10 +56,10 @@ public interface DebatetopicMapper {
     int insertAttention(@Param("user_id")int id,@Param("debate_id")int topicId);
     //再次关注
     int Attentionagain(@Param("user_id")int id,@Param("debate_id")int topicId);
-    
-    
-    
+    //模糊搜索辩题信息
+    List<DebateTopicCustom> selectDebateTopic(String name);
     int updateByPrimaryKeySelective(Debatetopic record);
+    
     int updateByPrimaryKeyWithLike(Debatetopic record);
 
     int updateByPrimaryKey(Debatetopic record);

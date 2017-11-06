@@ -1,23 +1,35 @@
 package com.pjmike.lundao.service.Impl;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.pjmike.lundao.mapper.UserMapper;
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.Debatetopic;
+import com.pjmike.lundao.po.PeriodicalItemList;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
+import com.pjmike.lundao.po.UserFans;
+import com.pjmike.lundao.po.UserSelected;
+import com.pjmike.lundao.util.SerializeUtil;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+	private Jedis jedis = new Jedis("47.94.89.241", 6379);
 	
 	@Autowired
 	UserMapper userMapper;
+	@Autowired
+	JedisPool jedisPool;
 	@Override
 	public int updateUser(User user) throws Exception {
 		
@@ -40,6 +52,7 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectUser(openid);
 	}
 
+	@Cacheable("userCache")
 	@Override
 	public User findUserBymobile(long mobile) {
 		User user = userMapper.findUserBymobile(mobile);
@@ -50,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	public int insertUserbyMobile(User user) {
 		return userMapper.insertUserbyMobile(user);
 	}
-
+	@Cacheable("userCache")
 	@Override
 	public User findUserById(int id) {
 		return userMapper.findUserById(id);
@@ -60,19 +73,58 @@ public class UserServiceImpl implements UserService {
 	public int updateUserInformation(User user) {
 		return userMapper.updateUserInformation(user);
 	}
-	
+	/**
+	 * fromUid为登录者id,toUid为获取用户信息的Id
+	 */
 	@Override
-	public UserCustom findUser(int id) {
-		UserCustom userCustom = userMapper.findUser(id);
-		Integer myAttentionDebates = userMapper.findAttentionDebateNumber(id);
-		Integer myAttentionThesis = userMapper.findAttentionThesisNumber(id);
-		Integer myReplys = userMapper.findAskquestionNumber(id);
-		Integer fans = userMapper.AttentionedOtherPeople(id);
-		userCustom.setMyDebates(myAttentionDebates);
-		userCustom.setMyThesis(myAttentionThesis);
-		userCustom.setMyReplys(myReplys);
-		userCustom.setFans(fans);
-		userCustom.setMyAttention(myAttentionThesis+myAttentionDebates);
+	public UserCustom findUser(int fromUid,int toUid) {
+		com.pjmike.lundao.po.AttentionOther user = new com.pjmike.lundao.po.AttentionOther();
+		user.setFrom_uid(fromUid);
+		user.setTo_uid(toUid);
+//		UserCustom userCustom = userMapper.findUser(id);
+		UserCustom userCustom = null;
+		//使用jedis实现用户信息的redis缓存
+		Jedis jedis = jedisPool.getResource();
+		String userRedisKey = "user:"+toUid;
+		String value = jedis.get(userRedisKey);
+		if (value != null) {
+			userCustom = (UserCustom) SerializeUtil.deserialize(value);
+		} else {
+		  userCustom = userMapper.findUser(user);
+		  if (userCustom != null) {
+			  jedis.setex(userRedisKey, 3000, SerializeUtil.serialize(userCustom));
+		  }
+		}
+//		 userCustom = userMapper.findUser(user);
+/*		if (userMapper.findUserStatus(fromUid, toUid)) {
+			
+		}*/
+//		boolean status = userMapper.findUserStatus(fromUid, toUid);
+		
+		Integer myAttentionDebates = userMapper.findAttentionDebateNumber(toUid);
+		if (myAttentionDebates != null) {
+			userCustom.setDebateTopic(myAttentionDebates);
+		}
+		Integer myAttentionThesis = userMapper.findAttentionThesisNumber(toUid);
+		if (myAttentionThesis != null) {
+			userCustom.setThesis(myAttentionThesis);
+		}
+		
+		Integer myReplys = userMapper.findAskquestionNumber(toUid);
+		if (myReplys != null) {
+			userCustom.setPresentations(myReplys);
+		}
+		Integer fans = userMapper.AttentionedOtherPeople(toUid);
+		if (fans != null) {
+			userCustom.setFansAmounts(fans);
+		}
+		List<PeriodicalItemList> list = new ArrayList<PeriodicalItemList>();
+		PeriodicalItemList p = new PeriodicalItemList();
+		p.setId(1);
+		p.setUrl("http://osvtz719h.bkt.clouddn.com/springmvc%E4%B9%8Bservlet.png");
+		p.setTextContent("spring to serlvet");
+		list.add(p);
+		userCustom.setPeriodicalItemList(list);
 		return userCustom;
 	}
 
@@ -122,5 +174,22 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectMyDebate(id);
 	}
 
-	
+	@Override
+	public List<UserFans> findmyFansInformation(int id) {
+		return userMapper.findmyFansInformation(id);
+	}
+	/**
+	 * 上传本地图片
+	 */
+	@Override
+	public int updateUserIcon(String Icon, int id) {
+		return userMapper.updateUserIcon(Icon, id);
+	}
+	/**
+	 * 模糊查询用户
+	 */
+	@Override
+	public List<UserSelected> selectUsersByString(String value) {
+		return userMapper.selectUsersByString(value);
+	}
 }

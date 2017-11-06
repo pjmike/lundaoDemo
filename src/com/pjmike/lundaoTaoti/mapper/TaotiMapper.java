@@ -41,7 +41,12 @@ public interface TaotiMapper {
 	int downCommentNum(int id);
 	
 	int insertCommented(Taoti taoti);
-	
+	/**
+	 * 模糊查询淘题
+	 * @param name
+	 * @return
+	 */
+	List<Taoti> selectTaoti(String name);
 	int updateCommented(Taoti taoti);
 	
 	int selectTaoticommented(Taoti taoti);

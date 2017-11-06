@@ -2,6 +2,8 @@ package com.pjmike.lundao.service.Impl;
 
 import java.util.List;
 
+import com.pjmike.lundao.po.DebateTopicCustom;
+import com.pjmike.lundao.po.DebateTopicSimple;
 import com.pjmike.lundao.po.Debatetopic;
 import com.pjmike.lundao.po.Debatetopicextend;
 import com.pjmike.lundao.po.Thesis;
@@ -49,10 +51,13 @@ public interface DebateService {
    //再次关注
    int Attentionagain(Integer topicid,int id);
    
-   List<Debatetopic> selectAlldebateAttentioned(int id);
+   List<DebateTopicSimple> selectAlldebateAttentioned(int id);
    //用户是否点赞
    Integer Islike(Integer topicid,int id);
    
    //用户是否关注
    Integer  IsAttention(Integer topicid,int id);
+   
+   //模糊搜索辩题信息
+   List<DebateTopicCustom> selectDebateTopic(String name);
 }

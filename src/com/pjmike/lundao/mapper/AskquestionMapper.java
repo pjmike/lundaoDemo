@@ -52,4 +52,7 @@ public interface AskquestionMapper {
     Integer SeeIsShow(@Param("userid")int id,@Param("askid")int askid);
     //关注辩题
     int insertAttention(@Param("user_id")int id,@Param("ask_id")int askId);
+    
+    //查询提问及异议的内容
+    String selectContent(int id);
 }

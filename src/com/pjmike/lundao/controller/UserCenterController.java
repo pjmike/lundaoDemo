@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
+import com.pjmike.lundao.po.UserFans;
 import com.pjmike.lundao.service.Impl.NotifyServiceImpl;
 import com.pjmike.lundao.service.Impl.UserServiceImpl;
 import com.pjmike.lundao.service.util.JsonRead;
@@ -33,7 +36,8 @@ import net.sf.json.JSONObject;
  * @author pjmike
  *
  */
-@Controller
+@RestController
+@RequestMapping("/user")
 public class UserCenterController {
 	@Autowired
 	UserServiceImpl userServiceImpl;
@@ -49,13 +53,13 @@ public class UserCenterController {
 	@RequestMapping("/editUser")
 	public ModelAndView editUser(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int userid = json.getInt("userid");
-		String userName = json.getString("nickname");
-		String gender = json.getString("gender");
-		String emailNumber = json.getString("emailNumber");
-		String locations = json.getString("locations");
-		String educations = json.getString("educations");
-		String userSignature = json.getString("userSignature");
+		int userid = (int) json.get("userid");
+		String userName = (String) json.get("nickname");
+		String gender = (String) json.get("gender");
+		String emailNumber = (String) json.get("emailNumber");
+		String locations = (String) json.get("locations");
+		String educations = (String) json.get("educations");
+		String userSignature = (String) json.get("userSignature");
 		User user = userServiceImpl.findUserById(userid);
 		user.setNickname(userName);
 		user.setGender(gender);
@@ -72,11 +76,13 @@ public class UserCenterController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping("/getUser")
-	public UserCustom getUser(HttpServletRequest request) throws IOException {
-		JSONObject json = JsonRead.receivePost(request);
-		int id = json.getInt("userid");
-		UserCustom user = userServiceImpl.findUser(id);
+	@RequestMapping("/getUser/{fromUid}/{toUid}")
+	public UserCustom getUser(HttpServletRequest request,@PathVariable("fromUid")int fromUid,@PathVariable("toUid")int toUid) throws IOException {
+	/*	String useidd = request.getParameter("userid");
+		String touid = request.getParameter(")
+	/*	JSONObject json = JsonRead.receivePost(request);
+		int id = json.getInt("userid");*/
+		UserCustom user = userServiceImpl.findUser(fromUid,toUid);
 		return user;
 	}
 	/**
@@ -88,20 +94,20 @@ public class UserCenterController {
 	@RequestMapping("/AttentionOther")
 	public ModelAndView AttentionOther(HttpServletRequest request) throws IOException {
 		JSONObject json = JsonRead.receivePost(request);
-		int id = json.getInt("userid");
-		int toUid = json.getInt("otherId");
-		boolean status = json.getBoolean("isAttention");
+		int id = (int) json.get("userid");
+		int toUid = (int) json.get("otherid");
+		boolean status = (boolean) json.get("isAttention");
 		Integer count = userServiceImpl.AttentionedPeople(id, toUid);
 		if (count > 0) {
 			AttentionOther atttentionOther = new AttentionOther();
 			atttentionOther.setFrom_uid(id);
 			atttentionOther.setTo_uid(toUid);
 			atttentionOther.setStatus(status);
-			userServiceImpl.updateAttentionPeopleStatus(atttentionOther);
+//			userServiceImpl.updateAttentionPeopleStaus(atttentionOther);
 		} else {
 			userServiceImpl.AttentionOther(id, toUid);
-			notifyServiceImpl.subscribe(id, toUid, TargetType.USER, Action.ATTENTION);
-			notifyServiceImpl.createInformation(toUid, TargetType.USER, Action.ATTENTION, id, toUid);
+//			notifyServiceImpl.subscribe(id, toUid, TargetType.USER, Action.ATTENTION);
+//			notifyServiceImpl.createInformation(toUid, TargetType.USER, Action.ATTENTION, id, toUid);
 		}
 		return null;
 	}
@@ -110,11 +116,11 @@ public class UserCenterController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping("/myReplyes")
-	public List<AskquestionExtend> myReplyes(HttpServletRequest request) throws IOException {
-		JSONObject json = JsonRead.receivePost(request);
-		int id = json.getInt("userid");
-		List<AskquestionExtend> asks = userServiceImpl.selectMyReplyes(id);
+	@RequestMapping("/myReplyes/{userid}")
+	public List<AskquestionExtend> myReplyes(@PathVariable("userid")int userid,HttpServletRequest request) throws IOException {
+		/*JSONObject json = JsonRead.receivePost(request);
+		int id = (int) json.get("userid");*/
+		List<AskquestionExtend> asks = userServiceImpl.selectMyReplyes(userid);
 		return asks;
 	}
 	/**用户的论点
@@ -122,11 +128,11 @@ public class UserCenterController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping("/userThesis")
-	public List<Thesis> userThesis(HttpServletRequest request) throws IOException {
-		JSONObject json = JsonRead.receivePost(request);
-		int id = json.getInt("userid");
-		List<Thesis> thesises = userServiceImpl.selectMyThesis(id);
+	@RequestMapping("/userThesis/{userid}")
+	public List<Thesis> userThesis(@PathVariable("userid")int userid,HttpServletRequest request) throws IOException {
+		/*JSONObject json = JsonRead.receivePost(request);
+		int id = json.getInt("userid");*/
+		List<Thesis> thesises = userServiceImpl.selectMyThesis(userid);
 		return thesises;
 	}
 	/**
@@ -135,8 +141,8 @@ public class UserCenterController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping("/userDebateTopic")
-	public List<Debatetopic> userDebateTopic(@RequestBody User user) throws IOException {
+	@RequestMapping("/userDebateTopic/{userid}")
+	public List<Debatetopic> userDebateTopic(@PathVariable("userid")int userid) throws IOException {
 		/*JSONObject json = JsonRead.receivePost(request);
 		int id = json.getInt("userid");*/
 		/*if (map.containsKey("userid")) {
@@ -144,10 +150,20 @@ public class UserCenterController {
 			List<Debatetopic> debates = userServiceImpl.selectMyDebate(id);
 			return debates;
 		}*/
-		if (user.getId() > 0) {
-			List<Debatetopic> debates = userServiceImpl.selectMyDebate(user.getId());
+		if (userid> 0) {
+			List<Debatetopic> debates = userServiceImpl.selectMyDebate(userid);
 			return debates;
 		}
 		return null;
+	}
+	/**
+	 * 我的粉丝信息
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/myFans/{userid}")
+	public List<UserFans> myFans(@PathVariable("userid")int userid) {
+		List<UserFans> myfans = userServiceImpl.findmyFansInformation(userid);
+		return myfans;
 	}
 }

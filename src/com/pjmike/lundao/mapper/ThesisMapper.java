@@ -3,7 +3,9 @@ package com.pjmike.lundao.mapper;
 import com.pjmike.lundao.po.Supplement;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.ThesisCollection;
+import com.pjmike.lundao.po.ThesisCustom;
 import com.pjmike.lundao.po.ThesisExtend;
+import com.pjmike.lundao.po.ThesisSimple;
 import com.pjmike.lundao.po.ThesisSupplement;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public interface ThesisMapper {
     //返回一个论点的点赞数、
     int likeNumber(int id);
     //返回一个用户所关注的论点
-    List<Thesis> selectAllThesisAttentioned(int id);
+    List<ThesisSimple> selectAllThesisAttentioned(int id);
 
     int updateByPrimaryKey(Thesis record);
     //判断是否点赞
@@ -57,4 +59,7 @@ public interface ThesisMapper {
     
     int updateColleThesisIsshow(@Param("user_id")int userid,@Param("thesis_id")int thesisid);
     //返回所关注的论点
+    
+    //模糊查询论点
+    List<ThesisCustom> selectThesisCustom(String name);
 }

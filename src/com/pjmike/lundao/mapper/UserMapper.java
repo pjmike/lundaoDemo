@@ -12,6 +12,8 @@ import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.User2;
 import com.pjmike.lundao.po.UserCustom;
+import com.pjmike.lundao.po.UserFans;
+import com.pjmike.lundao.po.UserSelected;
 
 /**
  * UserMapper接口，结合UserMapper.xml文件对数据库进行操作
@@ -48,14 +50,14 @@ public interface UserMapper {
 	
 	public Integer findReplyNumber(int id);
 	
-	public UserCustom findUser(int id);
+	public UserCustom findUser(AttentionOther user);
 	
 	public int AttentionOther(@Param("from_uid")int fromUid,@Param("to_uid")int toUid);
 	
 	public int AttentionedPeople(@Param("from_uid")int fromUid,@Param("to_uid")int toUid);
 	
 	public Integer AttentionedOtherPeople(int id);
-	
+	//查看用户的关注量或者粉丝数
 	public Integer myFans(int id);
 	
 	public int updateAttentionPeopleStatus(AttentionOther user);
@@ -67,4 +69,13 @@ public interface UserMapper {
 	public List<Thesis> selectMyThesis(int id);
 	
 	public List<Debatetopic> selectMyDebate(int id);
+	//返回我的粉丝的信息
+	public List<UserFans> findmyFansInformation(int id);
+	//上传本地图片
+	public int updateUserIcon(@Param("Icon")String Icon,@Param("id")int id);
+	//查看用户关注的状态
+	public boolean findUserStatus(@Param("fromUid")int fromUid,@Param("toUid")int toUid);
+	//模糊查询用户
+	public List<UserSelected> selectUsersByString(String value);
+	
 }

@@ -10,8 +10,6 @@ public class Notify {
 	private int id;
 	private String content;
 
-	//消息的类型1.公告2.提醒3.信息
-	private int type;
 	//目标id
 	private int target;
 	//提醒信息的动作类型
@@ -45,12 +43,7 @@ public class Notify {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
+
 	public int getTarget() {
 		return target;
 	}

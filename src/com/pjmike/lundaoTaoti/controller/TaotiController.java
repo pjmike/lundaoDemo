@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -80,6 +81,16 @@ public class TaotiController {
 	}
 	
 	/**
+	 * 搜索淘题
+	 * @param name
+	 * @return
+	 */
+	@RequestMapping("/select/taoti/{string")
+	public List<Taoti> selectTaoti(@PathVariable("string")String name) {
+		List<Taoti> taotis = taotiServiceImpl.selectTaoti(name);
+		return taotis;
+	}
+	/**
 	 * 发起一个辩题
 	 * @param request
 	 * @throws IOException 
@@ -98,7 +109,6 @@ public class TaotiController {
 		System.out.println(content);
 		if (title !=null && title.length() >0 && content !=null &&content.length()>0&&
 				backgroud !=null&&backgroud.length()>0 && lebels != null&&lebels.length()>0) {
-			
 			Taoti taoti = new Taoti();
 			taoti.setBackground(backgroud);
 			taoti.setContent(content);
@@ -109,7 +119,6 @@ public class TaotiController {
 			taoti.setUserid(userid);
 			taotiServiceImpl.insertTheis(taoti);
 		}
-		
 		return null;
 	}
 }

@@ -2,12 +2,17 @@ package com.pjmike.lundao.service.Impl;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.cache.annotation.Cacheable;
+
 import com.pjmike.lundao.po.AskquestionExtend;
 import com.pjmike.lundao.po.AttentionOther;
 import com.pjmike.lundao.po.Debatetopic;
 import com.pjmike.lundao.po.Thesis;
 import com.pjmike.lundao.po.User;
 import com.pjmike.lundao.po.UserCustom;
+import com.pjmike.lundao.po.UserFans;
+import com.pjmike.lundao.po.UserSelected;
 
 public interface UserService {
 	/*public int addUser(User2 user) throws Exception ;
@@ -42,7 +47,8 @@ public interface UserService {
 	
 	public int updateUserInformation(User user);
 	
-	public UserCustom findUser(int id);
+//	@Cacheable()
+	public UserCustom findUser(int fromUid,int toUid);
 	
 	public int AttentionOther(int fromUid,int toUid);
 	
@@ -60,4 +66,11 @@ public interface UserService {
 	public List<Thesis> selectMyThesis(int id);
 	
 	public List<Debatetopic> selectMyDebate(int id);
+	//返回我的粉丝的信息
+	public List<UserFans> findmyFansInformation(int id);
+	//上传本地图片
+	public int updateUserIcon(@Param("Icon")String Icon,@Param("id")int id);
+	//模糊查询用户
+	public List<UserSelected> selectUsersByString(String value);
+		
 }

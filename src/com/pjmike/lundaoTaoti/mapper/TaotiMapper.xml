@@ -51,10 +51,15 @@
 	<select id="selectTaoticommented" parameterType="com.pjmike.lundaoTaoti.po.Taoti" resultType="Integer">
 		select count(*) from taoticommented where  taoti_userid = #{userid} and taoti_id=#{taotiId}
 	</select>
+	<select id="selectTaoti" parameterType="String" resultType="com.pjmike.lundaoTaoti.po.Taoti">
+		select * from taoTi  where true 
+		<if test="value != null"> and title like concat('%',#{value},'%') </if>
+	</select>
 	<select id="selectTaotiStatus" resultType="boolean">
 		select commented from taoticommented where taoti_userid = #{userid} and taoti_id=#{taotiId}
 	</select>
 	<insert id="insertlabels" >
 		insert labels(taotiId,value) values(#{taotiId},#{value})
 	</insert>
+	
 </mapper>

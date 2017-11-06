@@ -2,11 +2,11 @@ package com.pjmike.lundao.service.Impl;
 
 import java.util.List;
 
-import com.pjmike.lundao.po.Debatetopic;
-import com.pjmike.lundao.po.Thesis;
+import com.pjmike.lundao.po.DebateTopicSimple;
+import com.pjmike.lundao.po.ThesisSimple;
 
 public interface UserAttentionService {
 	//返回一个用户所关注的论点
-    List<Thesis> selectAllThesisAttentioned(int id);
-    List<Debatetopic> selectAlldebateAttentioned(int id);
+    List<ThesisSimple> selectAllThesisAttentioned(int id);
+    List<DebateTopicSimple> selectAlldebateAttentioned(int id);
 }
